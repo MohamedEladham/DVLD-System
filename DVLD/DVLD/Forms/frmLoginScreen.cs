@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DVLD_System_Solution
+namespace DVLD_System_Solution.Forms
 {
-    public partial class Form1 : Form
+    public partial class frmLoginScreen : Form
     {
-        public Form1()
+        public frmLoginScreen()
         {
             InitializeComponent();
         }

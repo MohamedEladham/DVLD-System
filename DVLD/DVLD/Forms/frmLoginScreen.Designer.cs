@@ -1,6 +1,6 @@
-﻿namespace DVLD_System_Solution
+﻿namespace DVLD_System_Solution.Forms
 {
-    partial class Form1
+    partial class frmLoginScreen
     {
         /// <summary>
         /// Required designer variable.
@@ -30,14 +30,13 @@
         {
             this.SuspendLayout();
             // 
-            // Form1
+            // frmLoginScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(801, 641);
-            this.Name = "Form1";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(857, 640);
+            this.Name = "frmLoginScreen";
+            this.Text = "frmLoginScreen";
             this.ResumeLayout(false);
 
         }
@@ -45,4 +44,3 @@
         #endregion
     }
 }
-
