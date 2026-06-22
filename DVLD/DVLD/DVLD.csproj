@@ -50,30 +50,49 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\frmLoginScreen.cs">
+    <Compile Include="Forms\001_Login_Screen\frmLoginScreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmLoginScreen.Designer.cs">
+    <Compile Include="Forms\001_Login_Screen\frmLoginScreen.Designer.cs">
       <DependentUpon>frmLoginScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\002_Main_Screen\frmMainScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\002_Main_Screen\frmMainScreen.Designer.cs">
+      <DependentUpon>frmMainScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\003_Manage_People\frmManagePersons.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\003_Manage_People\frmManagePersons.Designer.cs">
+      <DependentUpon>frmManagePersons.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\frmLoginScreen.resx">
+    <EmbeddedResource Include="Forms\001_Login_Screen\frmLoginScreen.resx">
       <DependentUpon>frmLoginScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\002_Main_Screen\frmMainScreen.resx">
+      <DependentUpon>frmMainScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\003_Manage_People\frmManagePersons.resx">
+      <DependentUpon>frmManagePersons.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -84,7 +103,52 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\" />
+    <None Include="Resources\Close1_28.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Person_Details_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Edit_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Delete_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Send_Email_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Person_Document1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Drivers_64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Users1_64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DVLD_Logo2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DVLD_BackGround1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Group_Persons1_80.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Account_Settings 64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Group_Persons2_560.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Add_Person 40.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Add_Person 32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Phone_Call 32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
