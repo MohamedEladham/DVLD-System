@@ -36,8 +36,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmManagePersons));
             this.dataGridView_ShowPersonsInfos = new System.Windows.Forms.DataGridView();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem_ShowDetalis = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem_AddNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem_Edit = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem_Delete = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem_SendEmail = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem_PhoneCall = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -52,11 +57,6 @@
             this.btn_OpenfrmAddUpdatePersonInfo = new System.Windows.Forms.Button();
             this.btn_Close = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.toolStripMenuItem_ShowDetalis = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem_AddNew = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem_Edit = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem_Delete = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem_SendEmail = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_ShowPersonsInfos)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -131,15 +131,55 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(196, 244);
             // 
+            // toolStripMenuItem_ShowDetalis
+            // 
+            this.toolStripMenuItem_ShowDetalis.Image = global::DVLD_System_Solution.Properties.Resources.Person_Details_32;
+            this.toolStripMenuItem_ShowDetalis.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItem_ShowDetalis.Name = "toolStripMenuItem_ShowDetalis";
+            this.toolStripMenuItem_ShowDetalis.Size = new System.Drawing.Size(195, 38);
+            this.toolStripMenuItem_ShowDetalis.Text = "Show Details";
+            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(192, 6);
             // 
+            // toolStripMenuItem_AddNew
+            // 
+            this.toolStripMenuItem_AddNew.Image = global::DVLD_System_Solution.Properties.Resources.Add_Person_32;
+            this.toolStripMenuItem_AddNew.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItem_AddNew.Name = "toolStripMenuItem_AddNew";
+            this.toolStripMenuItem_AddNew.Size = new System.Drawing.Size(195, 38);
+            this.toolStripMenuItem_AddNew.Text = "Add New Person";
+            // 
+            // toolStripMenuItem_Edit
+            // 
+            this.toolStripMenuItem_Edit.Image = global::DVLD_System_Solution.Properties.Resources.Edit_32;
+            this.toolStripMenuItem_Edit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItem_Edit.Name = "toolStripMenuItem_Edit";
+            this.toolStripMenuItem_Edit.Size = new System.Drawing.Size(195, 38);
+            this.toolStripMenuItem_Edit.Text = "Edit";
+            // 
+            // toolStripMenuItem_Delete
+            // 
+            this.toolStripMenuItem_Delete.Image = global::DVLD_System_Solution.Properties.Resources.Delete_32;
+            this.toolStripMenuItem_Delete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItem_Delete.Name = "toolStripMenuItem_Delete";
+            this.toolStripMenuItem_Delete.Size = new System.Drawing.Size(195, 38);
+            this.toolStripMenuItem_Delete.Text = "Delete";
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(192, 6);
+            // 
+            // toolStripMenuItem_SendEmail
+            // 
+            this.toolStripMenuItem_SendEmail.Image = global::DVLD_System_Solution.Properties.Resources.Send_Email_32;
+            this.toolStripMenuItem_SendEmail.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItem_SendEmail.Name = "toolStripMenuItem_SendEmail";
+            this.toolStripMenuItem_SendEmail.Size = new System.Drawing.Size(195, 38);
+            this.toolStripMenuItem_SendEmail.Text = "Send Email";
             // 
             // toolStripMenuItem_PhoneCall
             // 
@@ -182,6 +222,7 @@
             this.comBox_FilterItems.Name = "comBox_FilterItems";
             this.comBox_FilterItems.Size = new System.Drawing.Size(201, 24);
             this.comBox_FilterItems.TabIndex = 5;
+            this.comBox_FilterItems.SelectedIndexChanged += new System.EventHandler(this.comBox_FilterItems_SelectedIndexChanged);
             // 
             // txt_SearchValue
             // 
@@ -190,6 +231,7 @@
             this.txt_SearchValue.Name = "txt_SearchValue";
             this.txt_SearchValue.Size = new System.Drawing.Size(242, 24);
             this.txt_SearchValue.TabIndex = 9;
+            this.txt_SearchValue.TextChanged += new System.EventHandler(this.txt_SearchValue_TextChanged);
             // 
             // lab_PersonIDToText
             // 
@@ -294,46 +336,6 @@
             this.pictureBox2.TabIndex = 2;
             this.pictureBox2.TabStop = false;
             // 
-            // toolStripMenuItem_ShowDetalis
-            // 
-            this.toolStripMenuItem_ShowDetalis.Image = global::DVLD_System_Solution.Properties.Resources.Person_Details_32;
-            this.toolStripMenuItem_ShowDetalis.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripMenuItem_ShowDetalis.Name = "toolStripMenuItem_ShowDetalis";
-            this.toolStripMenuItem_ShowDetalis.Size = new System.Drawing.Size(195, 38);
-            this.toolStripMenuItem_ShowDetalis.Text = "Show Details";
-            // 
-            // toolStripMenuItem_AddNew
-            // 
-            this.toolStripMenuItem_AddNew.Image = global::DVLD_System_Solution.Properties.Resources.Add_Person_32;
-            this.toolStripMenuItem_AddNew.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripMenuItem_AddNew.Name = "toolStripMenuItem_AddNew";
-            this.toolStripMenuItem_AddNew.Size = new System.Drawing.Size(195, 38);
-            this.toolStripMenuItem_AddNew.Text = "Add New Person";
-            // 
-            // toolStripMenuItem_Edit
-            // 
-            this.toolStripMenuItem_Edit.Image = global::DVLD_System_Solution.Properties.Resources.Edit_32;
-            this.toolStripMenuItem_Edit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripMenuItem_Edit.Name = "toolStripMenuItem_Edit";
-            this.toolStripMenuItem_Edit.Size = new System.Drawing.Size(195, 38);
-            this.toolStripMenuItem_Edit.Text = "Edit";
-            // 
-            // toolStripMenuItem_Delete
-            // 
-            this.toolStripMenuItem_Delete.Image = global::DVLD_System_Solution.Properties.Resources.Delete_32;
-            this.toolStripMenuItem_Delete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripMenuItem_Delete.Name = "toolStripMenuItem_Delete";
-            this.toolStripMenuItem_Delete.Size = new System.Drawing.Size(195, 38);
-            this.toolStripMenuItem_Delete.Text = "Delete";
-            // 
-            // toolStripMenuItem_SendEmail
-            // 
-            this.toolStripMenuItem_SendEmail.Image = global::DVLD_System_Solution.Properties.Resources.Send_Email_32;
-            this.toolStripMenuItem_SendEmail.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripMenuItem_SendEmail.Name = "toolStripMenuItem_SendEmail";
-            this.toolStripMenuItem_SendEmail.Size = new System.Drawing.Size(195, 38);
-            this.toolStripMenuItem_SendEmail.Text = "Send Email";
-            // 
             // pictureBox1
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -370,7 +372,8 @@
             this.MinimumSize = new System.Drawing.Size(1347, 796);
             this.Name = "frmManagePersons";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Person Managements Screen";
+            this.Text = "Persons Management Screen";
+            this.Load += new System.EventHandler(this.frmManagePersons_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_ShowPersonsInfos)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();

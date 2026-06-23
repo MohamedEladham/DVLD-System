@@ -33,9 +33,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DVLD.BL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\DVLD.BL\bin\Debug\DVLD.BL.dll</HintPath>
+    <Reference Include="DVLD_BL">
+      <HintPath>..\DVLD_BL\bin\Debug\DVLD_BL.dll</HintPath>
+    </Reference>
+    <Reference Include="DVLD_Models">
+      <HintPath>..\DVLD_Models\bin\Debug\DVLD_Models.dll</HintPath>
+    </Reference>
+    <Reference Include="DVLD_Shared">
+      <HintPath>..\DVLD_Shared\bin\Debug\DVLD_Shared.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

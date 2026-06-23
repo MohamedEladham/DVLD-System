@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{039C43E3-E9D1-4CAC-803A-126B5B69B2B2}</ProjectGuid>
+    <ProjectGuid>{73D80A84-8162-4EBF-98CA-EFE269CDC2D7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DVLD.DAL</RootNamespace>
-    <AssemblyName>DVLD.DAL</AssemblyName>
+    <RootNamespace>DVLD_Shared</RootNamespace>
+    <AssemblyName>DVLD_Shared</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Person MSGs\clsValidationsMSGAddUpdatePersonsInfos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
