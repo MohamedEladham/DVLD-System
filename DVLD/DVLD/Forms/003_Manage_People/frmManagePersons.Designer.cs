@@ -115,6 +115,7 @@
             this.dataGridView_ShowPersonsInfos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridView_ShowPersonsInfos.Size = new System.Drawing.Size(1307, 409);
             this.dataGridView_ShowPersonsInfos.TabIndex = 1;
+            this.dataGridView_ShowPersonsInfos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_ShowPersonsInfos_CellClick);
             // 
             // contextMenuStrip1
             // 
@@ -151,6 +152,7 @@
             this.toolStripMenuItem_AddNew.Name = "toolStripMenuItem_AddNew";
             this.toolStripMenuItem_AddNew.Size = new System.Drawing.Size(195, 38);
             this.toolStripMenuItem_AddNew.Text = "Add New Person";
+            this.toolStripMenuItem_AddNew.Click += new System.EventHandler(this.toolStripMenuItem_AddNew_Click);
             // 
             // toolStripMenuItem_Edit
             // 
@@ -159,6 +161,7 @@
             this.toolStripMenuItem_Edit.Name = "toolStripMenuItem_Edit";
             this.toolStripMenuItem_Edit.Size = new System.Drawing.Size(195, 38);
             this.toolStripMenuItem_Edit.Text = "Edit";
+            this.toolStripMenuItem_Edit.Click += new System.EventHandler(this.toolStripMenuItem_Edit_Click);
             // 
             // toolStripMenuItem_Delete
             // 
@@ -309,6 +312,7 @@
             this.btn_OpenfrmAddUpdatePersonInfo.TabIndex = 7;
             this.btn_OpenfrmAddUpdatePersonInfo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btn_OpenfrmAddUpdatePersonInfo.UseVisualStyleBackColor = false;
+            this.btn_OpenfrmAddUpdatePersonInfo.Click += new System.EventHandler(this.btn_OpenfrmAddUpdatePersonInfo_Click);
             // 
             // btn_Close
             // 
@@ -323,6 +327,7 @@
             this.btn_Close.Text = " Close";
             this.btn_Close.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btn_Close.UseVisualStyleBackColor = false;
+            this.btn_Close.Click += new System.EventHandler(this.btn_Close_Click);
             // 
             // pictureBox2
             // 

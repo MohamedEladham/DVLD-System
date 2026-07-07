@@ -1,23 +1,18 @@
-﻿using DVLD_DAL;
+﻿using System;
+using DVLD_DAL;
 using DVLD_Models;
-using System;
-using System.Collections.Generic;
+using DVLD_Shared;
 using System.Linq;
+using DVLD_Shared.Validation_Messages;
+using DVLD_Shared.Operations_Result;
+using System.Collections.Generic;
+using static DVLD_Shared.Operations_Result.clsOperationResult;
+using DVLD_BL.Validations;
 
 namespace DVLD_BL
 {
     public class clsPersonBL
     {
-        public static bool ContainsPersonID(int personID, string outValue)
-        {
-            if (int.TryParse(outValue, out int id))
-                return personID == id;
-
-            return false;
-        }
-
-        // >>
-
         private static int _CalculateAge(DateTime birthDate)
         {
             int age = DateTime.Now.Year - birthDate.Year;
@@ -27,8 +22,8 @@ namespace DVLD_BL
 
             return age;
         }
-        
-        private static string _GetCountryName(int? countryID, Dictionary<int, clsCountryInfo> countriesCache)
+
+        private static string _GetCountryName(int? countryID, Dictionary<int, clsCountry> countriesCache)
         {
             if (countriesCache == null)
                 return "N/A";
@@ -52,15 +47,13 @@ namespace DVLD_BL
             return address;
         }
 
-        public static List<clsPersonInfoGridViewDto> GetPersonsForGridView()
+        public static List<clsPersonInfoGridViewDto> GetPersonsForGridView(List<clsPerson> personInfos,
+            Dictionary<int, clsCountry> countriesCache)
         {
             List<clsPersonInfoGridViewDto> personsGridViewDto = null;
-            List<clsPersonInfo> personInfos = clsPersonDAL.GetAllPersonsInfo();
 
             if (personInfos != null && personInfos.Count > 0)
             {
-                Dictionary<int, clsCountryInfo> countriesCache = clsCountryBL.LoadCountriesToDictionary();
-                
                 personsGridViewDto = personInfos.Select(P => new clsPersonInfoGridViewDto
                 {
                     PersonID = P.PersonID,
@@ -81,6 +74,82 @@ namespace DVLD_BL
             }
 
             return personsGridViewDto;
+        }
+       
+        public static (clsOperationResult, clsPerson) GetPersonByID(int personID)
+        {
+            if (personID <= 0)
+                return (new clsOperationResult { Status = enOperationStatus.Failed,
+                    Message = clsPersonValidationMessages.InvalidPersonIDMessage }, null);
+
+            try
+            {
+                clsPerson person = clsPersonDAL.GetPersonByID(personID);
+
+                if(person != null)
+                    return (new clsOperationResult { Status = enOperationStatus.Success }, person);
+                else
+                    return (new clsOperationResult { Status = enOperationStatus.Failed,
+                        Message = clsPersonValidationMessages.PersonNotFoundMessage } , null);
+            }
+            catch (Exception)
+            {
+                return (new clsOperationResult { Status = enOperationStatus.Exception,
+                    Message = clsGeneralValidationMessages.DatabaseOperationExceptionMessage } , null);
+            }
+        }
+
+        public static List<clsPerson> GetAllPersonsInfo()
+        {
+            return clsPersonDAL.GetAllPersonsInfo();
+        }
+
+        public static clsOperationResult AddNewPerson(clsPerson person)
+        {
+            if (person == null) 
+                return new clsOperationResult { Status = enOperationStatus.Failed,
+                    Message = clsPersonValidationMessages.PersonInfoRequiredMessage };
+
+            try
+            {
+                bool isAdded = clsPersonDAL.AddNewPersonAndGetNewID(person, out int newID);
+
+                if (isAdded)
+                    return new clsOperationResult { Status = enOperationStatus.Success,
+                        Message = clsPersonValidationMessages.PersonAddedSuccessfullyMessage, CreatedID = newID };
+                else
+                    return new clsOperationResult{ Status = enOperationStatus.Failed,
+                        Message = clsPersonValidationMessages.PersonAddFailedMessage};
+            }
+            catch (Exception)
+            {
+                return new clsOperationResult { Status = enOperationStatus.Exception,
+                    Message = clsGeneralValidationMessages.DatabaseOperationExceptionMessage };
+            }
+        }
+
+        public static clsOperationResult UpdatePersonInfo(clsPerson person)
+        {
+            if (person == null)
+                return new clsOperationResult { Status = enOperationStatus.Failed,
+                    Message = clsPersonValidationMessages.PersonInfoRequiredMessage };
+
+            try
+            {
+                bool isUpdated = clsPersonDAL.UpdatePersonInfo(person);
+
+                if (isUpdated)
+                    return new clsOperationResult{ Status = enOperationStatus.Success,
+                        Message = clsPersonValidationMessages.PersonUpdatedSuccessfullyMessage };
+                else
+                    return new clsOperationResult { Status = enOperationStatus.Failed,
+                        Message = clsPersonValidationMessages.PersonUpdatedFailedMessage };
+            }
+            catch (Exception)
+            {
+                return new clsOperationResult { Status = enOperationStatus.Exception,
+                    Message = clsGeneralValidationMessages.DatabaseOperationExceptionMessage };
+            }
         }
     }
 }

@@ -34,11 +34,12 @@
     <Reference Include="DVLD_DAL">
       <HintPath>..\DVLD_DAL\bin\Debug\DVLD_DAL.dll</HintPath>
     </Reference>
-    <Reference Include="DVLD_Helpers">
-      <HintPath>..\DVLD_Helpers\bin\Debug\DVLD_Helpers.dll</HintPath>
-    </Reference>
     <Reference Include="DVLD_Models">
       <HintPath>..\DVLD_Models\bin\Debug\DVLD_Models.dll</HintPath>
+    </Reference>
+    <Reference Include="DVLD_Shared, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DVLD_Shared\bin\Debug\DVLD_Shared.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -51,9 +52,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clsCountryBL.cs" />
-    <Compile Include="clsPersonFilterService.cs" />
     <Compile Include="clsPersonBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\clsPersonFilterService.cs" />
+    <Compile Include="Validations\clsPersonValidations.cs" />
+    <Compile Include="Validations\clsValidationResult.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

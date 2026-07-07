@@ -8,9 +8,9 @@ namespace DVLD_DAL
 {
     public class clsCountryDAL
     {
-        private static clsCountryInfo MapReaderToCountry(SqlDataReader reader)
+        private static clsCountry MapReaderToCountry(SqlDataReader reader)
         {
-            return new clsCountryInfo
+            return new clsCountry
             {
                 CountryID = Convert.ToInt32(reader["CountryID"]),
                 CountryName = Convert.ToString(reader["CountryName"]),
@@ -18,29 +18,29 @@ namespace DVLD_DAL
             };
         }
 
-        public static List<clsCountryInfo> GetAllCountries()
+        public static List<clsCountry> GetAllCountries()
         {
-            List<clsCountryInfo> countryInfos = new List<clsCountryInfo>();
+            List<clsCountry> countries = new List<clsCountry>();
 
-            string query_GetAllCountriesInfo = @"Select 
-                                                        [CountryID],
-                                                        [CountryName],
-                                                        [CountryCode]
-                                                From Countries";
+            string query = @"Select 
+                                    [CountryID],
+                                    [CountryName],
+                                    [CountryCode]
+                            From Countries";
 
             using (SqlConnection connection = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
-            using (SqlCommand command = new SqlCommand(query_GetAllCountriesInfo, connection))
+            using (SqlCommand command = new SqlCommand(query, connection))
             {
                 connection.Open();
 
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
-                        countryInfos.Add(MapReaderToCountry(reader));
+                        countries.Add(MapReaderToCountry(reader));
                 }
             }
 
-            return countryInfos;
+            return countries;
         }
     }
 }

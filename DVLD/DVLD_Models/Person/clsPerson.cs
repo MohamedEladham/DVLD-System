@@ -2,7 +2,7 @@
 
 namespace DVLD_Models
 {
-    public class clsPersonInfo
+    public class clsPerson
     {
         public int PersonID { set; get; }
 

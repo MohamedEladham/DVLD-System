@@ -1,7 +1,7 @@
 ﻿
 namespace DVLD_Models
 {
-    public class clsCountryInfo
+    public class clsCountry
     {
         public int CountryID { set; get; }
         public string CountryName { set; get; }

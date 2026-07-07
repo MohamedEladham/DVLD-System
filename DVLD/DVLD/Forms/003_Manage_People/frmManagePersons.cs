@@ -1,8 +1,11 @@
 ﻿using System;
 using DVLD_BL;
 using DVLD_Models;
+using DVLD_Shared;
+using DVLD_BL.Services;
 using System.Windows.Forms;
 using DVLD_Models.UI_Models;
+using Main_Screen.Forms.Persons;
 using System.Collections.Generic;
 
 namespace Main_Screen.Froms.Persons_Screen
@@ -61,6 +64,28 @@ namespace Main_Screen.Froms.Persons_Screen
         }
 
         // >>
+        
+        private int _GetCurrentPersonID()
+        {
+            if (dataGridView_ShowPersonsInfos.CurrentRow != null)
+            {
+                var personIDSelected = dataGridView_ShowPersonsInfos.CurrentRow.Cells["PersonID"].Value;
+
+                if (personIDSelected != null && personIDSelected != DBNull.Value)
+                {
+                    if (int.TryParse(personIDSelected.ToString(), out int personID))
+                        return personID;
+                }
+            }
+
+            return -1;
+        }
+
+        private void dataGridView_ShowPersonsInfos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            lab_PersonIDToText.Text = dataGridView_ShowPersonsInfos.CurrentRow.Cells["PersonID"].Value.ToString();
+            lab_NationalNoToText.Text = dataGridView_ShowPersonsInfos.CurrentRow.Cells["NationalNO"].Value.ToString();
+        }
 
         private Dictionary<string, Func<clsPersonInfoGridViewDto, string, bool>> _filters;
         private void _SetupPersonFilter()
@@ -73,10 +98,30 @@ namespace Main_Screen.Froms.Persons_Screen
         List<clsPersonInfoGridViewDto> _personsGridViewDto = null;
         private void _LoadPersonInfoToDataGridView()
         {
-            _personsGridViewDto = clsPersonBL.GetPersonsForGridView();
+            try
+            {
+                List<clsPerson> personInfos = clsPersonBL.GetAllPersonsInfo();
 
-            if(_personsGridViewDto != null && _personsGridViewDto.Count > 0)
-                _BindData(_personsGridViewDto);
+                if(personInfos != null && personInfos.Count > 0)
+                {
+                    Dictionary<int, clsCountry> countriesCache = clsCountryBL.LoadCountriesToDictionary();
+
+                    _personsGridViewDto = clsPersonBL.GetPersonsForGridView(personInfos, countriesCache);
+
+                    _BindData(_personsGridViewDto);
+                }
+            }
+            catch
+            {
+                MessageBox.Show(clsGeneralValidationMessages.DatabaseOperationExceptionMessage, "Has Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private DialogResult _isAddOrUpdatePersonDialogResult = DialogResult.No;
+        
+        private void _GetIsAddOrUpdatePersonDialogResult(object sender, DialogResult dialogResult)
+        {
+            _isAddOrUpdatePersonDialogResult = dialogResult;
         }
 
         private void _LoadData()
@@ -84,6 +129,7 @@ namespace Main_Screen.Froms.Persons_Screen
             _SetupComboBoxFilterItems();
             _SetupPersonFilter();
             _LoadPersonInfoToDataGridView();
+            frmAddUpdatePersons.AddOrUpdatePersonDialogResultReceived += _GetIsAddOrUpdatePersonDialogResult;
         }
 
         private void frmManagePersons_Load(object sender, EventArgs e)
@@ -105,7 +151,7 @@ namespace Main_Screen.Froms.Persons_Screen
 
             if (_filters.ContainsKey(filterSelected))
             {
-                List<clsPersonInfoGridViewDto> result = clsPersonFilterService.FilterPersonToGridView(_personsGridViewDto, _filters, filterSelected, searchValue);
+                List<clsPersonInfoGridViewDto> result = clsPersonFilterService.FilterPersons(_personsGridViewDto, _filters, filterSelected, searchValue);
                 _BindData(result);
             }
         }
@@ -121,6 +167,43 @@ namespace Main_Screen.Froms.Persons_Screen
             else txt_SearchValue.Visible = true;
             txt_SearchValue.Clear();
             txt_SearchValue.Select();
+        }
+
+        // >>>>
+        private void _OpenAddUpdatePersonForm(int modeValue, int personID = -1)
+        {
+            frmAddUpdatePersons frm = new frmAddUpdatePersons(modeValue, personID);
+            frm.ShowDialog();
+
+            if (_isAddOrUpdatePersonDialogResult == DialogResult.OK)
+            {
+                _LoadPersonInfoToDataGridView();
+                _isAddOrUpdatePersonDialogResult = DialogResult.No;
+            }
+        }
+        
+        private void btn_OpenfrmAddUpdatePersonInfo_Click(object sender, EventArgs e)
+        {
+            const short modeValue = 1;
+            _OpenAddUpdatePersonForm(modeValue);
+        }
+
+        private void toolStripMenuItem_AddNew_Click(object sender, EventArgs e)
+        {
+            const short modeValue = 1;
+            _OpenAddUpdatePersonForm(modeValue);
+        }
+
+        private void toolStripMenuItem_Edit_Click(object sender, EventArgs e)
+        {
+            const short modeValue = 2;
+            int personID = _GetCurrentPersonID();
+            _OpenAddUpdatePersonForm(modeValue, personID);
+        }
+
+        private void btn_Close_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

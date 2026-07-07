@@ -41,8 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Countries\clsCountryInfo.cs" />
-    <Compile Include="Person\clsPersonInfo.cs" />
+    <Compile Include="Countries\clsCountry.cs" />
+    <Compile Include="Person\clsPerson.cs" />
     <Compile Include="Person\clsPersonInfoGridViewDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI Models\clsComboBoxFilterItem.cs" />

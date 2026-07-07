@@ -1,5 +1,6 @@
 ﻿using DVLD_System_Solution.Forms;
 using Main_Screen;
+using Main_Screen.Forms.Persons;
 using Main_Screen.Froms.Persons_Screen;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace DVLD_System_Solution
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmMainScreen());
+            Application.Run(new frmManagePersons());
         }
     }
 }
