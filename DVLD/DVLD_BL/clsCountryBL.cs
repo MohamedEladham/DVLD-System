@@ -3,6 +3,7 @@ using DVLD_Models;
 using DVLD_Shared;
 using DVLD_Shared.Operations_Result;
 using DVLD_Shared.Validation_Messages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -20,6 +21,30 @@ namespace DVLD_BL
                 countriesCache = countries.ToDictionary(c => c.CountryID, c => c);
 
             return countriesCache;
+        }
+
+        public static (clsOperationResult, string) GetCountryNameByCountryID(int countryID)
+        {
+            if (countryID <= 0)
+                return (new clsOperationResult { Status = clsOperationResult.enOperationStatus.Failed, 
+                    Message = clsCountryValidationMessages.InvalidCountryIdMessage }, string.Empty);
+
+            try
+            {
+                string countryName = clsCountryDAL.GetCountryNameByCountryID(countryID);
+
+                if(!string.IsNullOrEmpty(countryName))
+                    return (new clsOperationResult{ Status = clsOperationResult.enOperationStatus.Success }, countryName);
+                else
+                    return (new clsOperationResult{ Status = clsOperationResult.enOperationStatus.Failed,
+                        Message = clsCountryValidationMessages.FailedToRetrieveCountriesMessage
+                    }, string.Empty);
+            }
+            catch(Exception)
+            {
+                return (new clsOperationResult { Status = clsOperationResult.enOperationStatus.Exception, 
+                    Message = clsGeneralValidationMessages.DatabaseOperationExceptionMessage }, string.Empty);
+            }
         }
 
         public static (clsOperationResult, List<clsCountry>) GetAllCountries()

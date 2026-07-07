@@ -101,7 +101,6 @@ namespace DVLD_DAL
             return isExists;
         }
 
-
         // >>
 
         private static clsPerson _MapReaderToPerson(SqlDataReader reader)

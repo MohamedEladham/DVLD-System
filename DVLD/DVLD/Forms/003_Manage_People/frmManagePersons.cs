@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using DVLD_Models.UI_Models;
 using Main_Screen.Forms.Persons;
 using System.Collections.Generic;
+using DVLD_System_Solution.Forms._003_Manage_People;
 
 namespace Main_Screen.Froms.Persons_Screen
 {
@@ -199,6 +200,19 @@ namespace Main_Screen.Froms.Persons_Screen
             const short modeValue = 2;
             int personID = _GetCurrentPersonID();
             _OpenAddUpdatePersonForm(modeValue, personID);
+        }
+
+        private void toolStripMenuItem_ShowDetails_Click(object sender, EventArgs e)
+        {
+            int personID = _GetCurrentPersonID();
+            frmShowPersonInfo frm = new frmShowPersonInfo(personID);
+            frm.ShowDialog();
+
+            if (_isAddOrUpdatePersonDialogResult == DialogResult.OK)
+            {
+                _LoadPersonInfoToDataGridView();
+                _isAddOrUpdatePersonDialogResult = DialogResult.No;
+            }
         }
 
         private void btn_Close_Click(object sender, EventArgs e)

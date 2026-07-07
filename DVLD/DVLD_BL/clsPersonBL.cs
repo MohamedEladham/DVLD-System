@@ -7,7 +7,6 @@ using DVLD_Shared.Validation_Messages;
 using DVLD_Shared.Operations_Result;
 using System.Collections.Generic;
 using static DVLD_Shared.Operations_Result.clsOperationResult;
-using DVLD_BL.Validations;
 
 namespace DVLD_BL
 {
@@ -79,23 +78,32 @@ namespace DVLD_BL
         public static (clsOperationResult, clsPerson) GetPersonByID(int personID)
         {
             if (personID <= 0)
-                return (new clsOperationResult { Status = enOperationStatus.Failed,
-                    Message = clsPersonValidationMessages.InvalidPersonIDMessage }, null);
+                return (new clsOperationResult
+                {
+                    Status = enOperationStatus.Failed,
+                    Message = clsPersonValidationMessages.InvalidPersonIDMessage
+                }, null);
 
             try
             {
                 clsPerson person = clsPersonDAL.GetPersonByID(personID);
 
-                if(person != null)
+                if (person != null)
                     return (new clsOperationResult { Status = enOperationStatus.Success }, person);
                 else
-                    return (new clsOperationResult { Status = enOperationStatus.Failed,
-                        Message = clsPersonValidationMessages.PersonNotFoundMessage } , null);
+                    return (new clsOperationResult
+                    {
+                        Status = enOperationStatus.Failed,
+                        Message = clsPersonValidationMessages.PersonNotFoundMessage
+                    }, null);
             }
             catch (Exception)
             {
-                return (new clsOperationResult { Status = enOperationStatus.Exception,
-                    Message = clsGeneralValidationMessages.DatabaseOperationExceptionMessage } , null);
+                return (new clsOperationResult
+                {
+                    Status = enOperationStatus.Exception,
+                    Message = clsGeneralValidationMessages.DatabaseOperationExceptionMessage
+                }, null);
             }
         }
 

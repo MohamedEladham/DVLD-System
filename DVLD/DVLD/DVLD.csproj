@@ -67,6 +67,12 @@
     <Compile Include="Forms\002_Main_Screen\frmMainScreen.Designer.cs">
       <DependentUpon>frmMainScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\003_Manage_People\Controls\uconShowPersonInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\003_Manage_People\Controls\uconShowPersonInfo.Designer.cs">
+      <DependentUpon>uconShowPersonInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\003_Manage_People\frmAddUpdatePersons.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -79,6 +85,12 @@
     <Compile Include="Forms\003_Manage_People\frmManagePersons.Designer.cs">
       <DependentUpon>frmManagePersons.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\003_Manage_People\frmShowPersonInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\003_Manage_People\frmShowPersonInfo.Designer.cs">
+      <DependentUpon>frmShowPersonInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\001_Login_Screen\frmLoginScreen.resx">
@@ -87,11 +99,17 @@
     <EmbeddedResource Include="Forms\002_Main_Screen\frmMainScreen.resx">
       <DependentUpon>frmMainScreen.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\003_Manage_People\Controls\uconShowPersonInfo.resx">
+      <DependentUpon>uconShowPersonInfo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\003_Manage_People\frmAddUpdatePersons.resx">
       <DependentUpon>frmAddUpdatePersons.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\003_Manage_People\frmManagePersons.resx">
       <DependentUpon>frmManagePersons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\003_Manage_People\frmShowPersonInfo.resx">
+      <DependentUpon>frmShowPersonInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -193,6 +211,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Save1_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Male_512.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

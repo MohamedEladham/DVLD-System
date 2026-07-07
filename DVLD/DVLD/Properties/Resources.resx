@@ -121,8 +121,8 @@
   <data name="DVLD_Logo2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DVLD_Logo2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Country_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Country_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Account_Settings 64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Account_Settings 64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Man_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Man_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -148,14 +148,14 @@
   <data name="Person_Document1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Person_Document1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Phone_Call 32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Phone_Call 32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Send_Email_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Send_Email_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Add_Person 32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Add_Person 32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Group_Persons2_560" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Group_Persons2_560.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Calendar_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Calendar_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -163,8 +163,8 @@
   <data name="Close1_28" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Close1_28.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Address_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Address_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Country_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Country_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Delete_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Delete_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -178,22 +178,25 @@
   <data name="Person_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Person_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Group_Persons2_560" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Group_Persons2_560.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DVLD_BackGround1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DVLD_BackGround1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Address_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Address_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Group_Persons1_80" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Group_Persons1_80.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Account_Settings 64" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Account_Settings 64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Save1_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Save1_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Phone_Call 32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Phone_Call 32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DVLD_BackGround1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DVLD_BackGround1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Phone_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Phone_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Save1_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Save1_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Male_512" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Male_512.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

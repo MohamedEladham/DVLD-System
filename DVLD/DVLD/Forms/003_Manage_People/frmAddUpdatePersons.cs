@@ -274,8 +274,6 @@ namespace Main_Screen.Forms.Persons
         }
 
 
-        // >>
-
         // Link Label Load Image To Picture Box
         private bool _LoadImageToPictureBox(string imagePath)
         {
@@ -389,6 +387,7 @@ namespace Main_Screen.Forms.Persons
         {
             _RemoveImageFromPicBox();
         }
+        
         
         // Verification Person Info
         private bool ValidateName(Control control, string label)
@@ -518,11 +517,12 @@ namespace Main_Screen.Forms.Persons
             return true;
         }
 
+        
         // Save Data To Database
-
         public delegate void AddOrUpdatePersonDialogResultEventHandler(object sender, DialogResult dialogResult);
         public static  event AddOrUpdatePersonDialogResultEventHandler AddOrUpdatePersonDialogResultReceived;
 
+        
         // Bulid Person Info
         private char _GetGender()
         {
@@ -697,8 +697,8 @@ namespace Main_Screen.Forms.Persons
             }
         }
 
-        // Save Person Info
 
+        // Save Person Info
         private void _DeleteCopiedImageIfNeeded()
         {
             string oldImagePath = Path.Combine(_imagesFolderToSavePersonsImages, _UniqueImageName);
@@ -778,8 +778,8 @@ namespace Main_Screen.Forms.Persons
             _Save();
         }
 
-
         // >>
+
         private void txt_Phone_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Allow control keys (Backspace, Delete, etc.)

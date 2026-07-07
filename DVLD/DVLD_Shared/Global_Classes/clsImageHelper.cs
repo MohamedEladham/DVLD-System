@@ -3,7 +3,7 @@ using System.IO;
 using System.Drawing;
 using DVLD_Shared.Operations_Result;
 using DVLD_Shared.Validation_Messages;
-using static DVLD_Shared.Operations_Result.clsOperationResult;
+
 
 namespace DVLD_Shared.Global_Classes
 {

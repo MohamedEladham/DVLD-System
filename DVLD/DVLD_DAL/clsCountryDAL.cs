@@ -18,6 +18,27 @@ namespace DVLD_DAL
             };
         }
 
+        public static string GetCountryNameByCountryID(int countryID)
+        {
+            string countryName = string.Empty;
+
+            string query_GetCountryByCountryID = @"Select [CountryName] From Countries Where CountryID = @CountryID";
+
+            using (SqlConnection connection = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
+            using (SqlCommand command = new SqlCommand(query_GetCountryByCountryID, connection))
+            {
+                command.Parameters.Add("@CountryID", System.Data.SqlDbType.Int).Value = countryID;
+                connection.Open();
+
+                var result = command.ExecuteScalar();
+
+                if (result != null && result != DBNull.Value)
+                    countryName = (string)result;
+            }
+
+            return countryName;
+        }
+
         public static List<clsCountry> GetAllCountries()
         {
             List<clsCountry> countries = new List<clsCountry>();
