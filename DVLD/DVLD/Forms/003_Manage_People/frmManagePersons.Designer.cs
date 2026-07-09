@@ -45,7 +45,7 @@ namespace Main_Screen.Froms.Persons_Screen
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem_AddNew = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem_Edit = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem_Delete = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem_SoftDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem_SendEmail = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem_PhoneCall = new System.Windows.Forms.ToolStripMenuItem();
@@ -130,7 +130,7 @@ namespace Main_Screen.Froms.Persons_Screen
             this.toolStripSeparator2,
             this.toolStripMenuItem_AddNew,
             this.toolStripMenuItem_Edit,
-            this.toolStripMenuItem_Delete,
+            this.toolStripMenuItem_SoftDelete,
             this.toolStripSeparator1,
             this.toolStripMenuItem_SendEmail,
             this.toolStripMenuItem_PhoneCall});
@@ -169,13 +169,14 @@ namespace Main_Screen.Froms.Persons_Screen
             this.toolStripMenuItem_Edit.Text = "Edit";
             this.toolStripMenuItem_Edit.Click += new System.EventHandler(this.toolStripMenuItem_Edit_Click);
             // 
-            // toolStripMenuItem_Delete
+            // toolStripMenuItem_SoftDelete
             // 
-            this.toolStripMenuItem_Delete.Image = global::DVLD_System_Solution.Properties.Resources.Delete_32;
-            this.toolStripMenuItem_Delete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripMenuItem_Delete.Name = "toolStripMenuItem_Delete";
-            this.toolStripMenuItem_Delete.Size = new System.Drawing.Size(196, 38);
-            this.toolStripMenuItem_Delete.Text = "Delete";
+            this.toolStripMenuItem_SoftDelete.Image = global::DVLD_System_Solution.Properties.Resources.Delete_32;
+            this.toolStripMenuItem_SoftDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItem_SoftDelete.Name = "toolStripMenuItem_SoftDelete";
+            this.toolStripMenuItem_SoftDelete.Size = new System.Drawing.Size(196, 38);
+            this.toolStripMenuItem_SoftDelete.Text = "Delete";
+            this.toolStripMenuItem_SoftDelete.Click += new System.EventHandler(this.toolStripMenuItem_SoftDelete_Click);
             // 
             // toolStripSeparator1
             // 
@@ -409,7 +410,7 @@ namespace Main_Screen.Froms.Persons_Screen
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_AddNew;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_Edit;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_Delete;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_SoftDelete;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_SendEmail;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_PhoneCall;

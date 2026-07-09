@@ -336,5 +336,28 @@ namespace DVLD_DAL
 
             return isUpdate;
         }
+
+        public static bool SoftDeletePerson(int personID)
+        {
+            bool isDeleted = false;
+
+            string query = @"Update Persons 
+                                        Set 
+		                                IsDeleted = 1,
+		                                DeletedAt = GETDATE()
+		                                Where PersonID = @PersonID AND IsDeleted = 0";
+
+            using (SqlConnection connection = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.Add("@PersonID", System.Data.SqlDbType.Int).Value = personID;
+
+                connection.Open();
+
+                isDeleted = (command.ExecuteNonQuery() > 0);
+            }
+
+            return isDeleted;
+        }
     }
 }

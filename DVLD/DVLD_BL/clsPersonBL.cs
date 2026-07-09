@@ -159,5 +159,29 @@ namespace DVLD_BL
                     Message = clsGeneralValidationMessages.DatabaseOperationExceptionMessage };
             }
         }
+
+        public static clsOperationResult SoftDeletePerson(int personID)
+        {
+            if (personID <= 0)
+                return new clsOperationResult {Status = enOperationStatus.Failed, 
+                    Message = clsPersonValidationMessages.InvalidPersonIDMessage};
+
+            try
+            {
+                bool isDelete = clsPersonDAL.SoftDeletePerson(personID);
+
+                if(isDelete)
+                    return new clsOperationResult {Status = enOperationStatus.Success, 
+                        Message = clsPersonValidationMessages.PersonDeletedSuccessfullyMessage};
+                else
+                    return new clsOperationResult {Status = enOperationStatus.Failed,
+                        Message = clsPersonValidationMessages.PersonDeletedFailedMessage};
+            }
+            catch (Exception)
+            {
+                return new clsOperationResult {Status = enOperationStatus.Exception, 
+                    Message = clsGeneralValidationMessages.DatabaseOperationExceptionMessage};
+            }
+        }
     }
 }

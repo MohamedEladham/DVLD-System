@@ -8,6 +8,8 @@ using DVLD_Models.UI_Models;
 using Main_Screen.Forms.Persons;
 using System.Collections.Generic;
 using DVLD_System_Solution.Forms._003_Manage_People;
+using DVLD_Shared.Operations_Result;
+using static DVLD_Shared.Operations_Result.clsOperationResult;
 
 namespace Main_Screen.Froms.Persons_Screen
 {
@@ -82,10 +84,15 @@ namespace Main_Screen.Froms.Persons_Screen
             return -1;
         }
 
-        private void dataGridView_ShowPersonsInfos_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void _UpdatePersonIDAndNationalNoLabels()
         {
             lab_PersonIDToText.Text = dataGridView_ShowPersonsInfos.CurrentRow.Cells["PersonID"].Value.ToString();
             lab_NationalNoToText.Text = dataGridView_ShowPersonsInfos.CurrentRow.Cells["NationalNO"].Value.ToString();
+        }
+
+        private void dataGridView_ShowPersonsInfos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            _UpdatePersonIDAndNationalNoLabels();
         }
 
         private Dictionary<string, Func<clsPersonInfoGridViewDto, string, bool>> _filters;
@@ -110,6 +117,7 @@ namespace Main_Screen.Froms.Persons_Screen
                     _personsGridViewDto = clsPersonBL.GetPersonsForGridView(personInfos, countriesCache);
 
                     _BindData(_personsGridViewDto);
+                    _UpdatePersonIDAndNationalNoLabels();
                 }
             }
             catch
@@ -213,6 +221,45 @@ namespace Main_Screen.Froms.Persons_Screen
                 _LoadPersonInfoToDataGridView();
                 _isAddOrUpdatePersonDialogResult = DialogResult.No;
             }
+        }
+
+
+        private bool _SoftDeletePerson(int personID)
+        {
+            clsOperationResult result = clsPersonBL.SoftDeletePerson(personID);
+
+            switch (result.Status)
+            {
+                case enOperationStatus.Success:
+                    MessageBox.Show(result.Message, "Operation Succeeded", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return true;
+
+                case enOperationStatus.Failed:
+                    MessageBox.Show(result.Message, "Operation Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+
+                case enOperationStatus.Exception:
+                    MessageBox.Show(result.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+
+                default:
+                    return false;
+            }
+        }
+
+        private void toolStripMenuItem_SoftDelete_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = 
+                MessageBox.Show("Are you sure you want to delete this person?", "Delete Person", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (dialogResult != DialogResult.Yes)
+                return;
+
+            int personID = _GetCurrentPersonID();
+            bool isDeleted = _SoftDeletePerson(personID);
+
+            if(isDeleted)
+                _LoadPersonInfoToDataGridView();
         }
 
         private void btn_Close_Click(object sender, EventArgs e)

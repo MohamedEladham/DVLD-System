@@ -8,12 +8,20 @@ namespace DVLD_Shared.Validation_Messages
 
         public static string PersonInfoRequiredMessage = "Person information is required."; 
         
+
+
+        // Persons Added Messages
         public static string PersonAddedSuccessfullyMessage = "Person added successfully.";
         public static string PersonAddFailedMessage = "Failed to add person.";
-        
+
+        // Persons Updated Messages
         public static string PersonUpdatedSuccessfullyMessage = "Person Updated successfully.";
         public static string PersonUpdatedFailedMessage = "Failed to Update person.";
-        
+
+        // Persons Deleted Messages
+        public static string PersonDeletedSuccessfullyMessage = "Person Deleted successfully.";
+        public static string PersonDeletedFailedMessage = "Failed to Deleted person.";
+
 
         // Name Messages
 
