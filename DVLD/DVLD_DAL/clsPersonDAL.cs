@@ -124,6 +124,29 @@ namespace DVLD_DAL
             };
         }
 
+
+        private static clsPerson _MapReaderToDeletedPerson(SqlDataReader reader)
+        {
+            return new clsPerson
+            {
+                PersonID = (int)reader["PersonID"],
+                NationalNO = Convert.ToString(reader["NationalNO"]),
+                FirstName = Convert.ToString(reader["FirstName"]),
+                SecondName = Convert.ToString(reader["SecondName"]),
+                ThirdName = Convert.ToString(reader["ThirdName"]),
+                LastName = Convert.ToString(reader["LastName"]),
+                Gender = Convert.ToChar(reader["Gender"]),
+                DateOfBirth = (DateTime)reader["DateOfBirth"],
+                Email = Convert.ToString(reader["Email"]),
+                Phone = Convert.ToString(reader["Phone"]),
+                Address = Convert.ToString(reader["Address"]),
+                NationalityCountryID = reader.IsDBNull(reader.GetOrdinal("NationalityCountryID")) ? null : (int?)reader["NationalityCountryID"],
+                ImageName = Convert.ToString(reader["ImageName"]),
+                IsDeleted = (bool)reader["IsDeleted"],
+                DeletedAt = reader.IsDBNull(reader.GetOrdinal("DeletedAt")) ? null : (DateTime?)reader["DeletedAt"]
+            };
+        }
+
         public static clsPerson GetPersonByID(int personID)
         {
             clsPerson personInfo = null;
@@ -144,7 +167,7 @@ namespace DVLD_DAL
                                     [ImageName],
                                     [IsDeleted]
                                 From Persons
-                                Where PersonID = @PersonID AND IsDeleted = 0";
+                                Where PersonID = @PersonID";
 
             using (SqlConnection connection = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
             using (SqlCommand command = new SqlCommand(query, connection))
@@ -192,6 +215,45 @@ namespace DVLD_DAL
                     while (reader.Read())
                     {
                         clsPerson person = _MapReaderToPerson(reader);
+                        persons.Add(person);
+                    }
+                }
+            }
+
+            return persons;
+        }
+
+        public static List<clsPerson> GetAllDeletedPersonsInfo()
+        {
+            List<clsPerson> persons = new List<clsPerson>();
+
+            string query = @"Select 
+                                    [PersonID], 
+                                    [NationalNO], 
+                                    [FirstName], 
+                                    [SecondName], 
+                                    [ThirdName], 
+                                    [LastName], 
+                                    [Gender], 
+                                    [DateOfBirth], 
+                                    [Email], 
+                                    [Phone], 
+                                    [Address], 
+                                    [NationalityCountryID], 
+                                    [ImageName], 
+                                    [IsDeleted],
+                                    [DeletedAt]
+                                From Persons WHERE IsDeleted = 1";
+
+            using (SqlConnection connection = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                connection.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        clsPerson person = _MapReaderToDeletedPerson(reader);
                         persons.Add(person);
                     }
                 }
@@ -358,6 +420,29 @@ namespace DVLD_DAL
             }
 
             return isDeleted;
+        }
+
+        public static bool RestoreDeletedPerson(int personID)
+        {
+            bool isRestored = false;
+
+            string query = @"Update Persons 
+                                        Set 
+		                                IsDeleted = 0,
+		                                DeletedAt = null
+		                                Where PersonID = @PersonID AND IsDeleted = 1";
+
+            using (SqlConnection connection = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.Add("@PersonID", System.Data.SqlDbType.Int).Value = personID;
+
+                connection.Open();
+
+                isRestored = (command.ExecuteNonQuery() > 0);
+            }
+
+            return isRestored;
         }
     }
 }

@@ -4,10 +4,11 @@ using System.IO;
 using DVLD_Models;
 using System.Drawing;
 using System.Windows.Forms;
+using Main_Screen.Forms.Persons;
 using DVLD_Shared.Global_Classes;
 using DVLD_Shared.Operations_Result;
+using static DVLD_Shared.Global_Enums.clsEnumHelpers;
 using static DVLD_Shared.Operations_Result.clsOperationResult;
-using Main_Screen.Forms.Persons;
 
 namespace DVLD_System_Solution.Forms._003_Manage_People.Controls
 {
@@ -32,6 +33,13 @@ namespace DVLD_System_Solution.Forms._003_Manage_People.Controls
         }
 
         // >>
+
+        public void SetLinkLabelEditPerson(enPersonStatus personStatus)
+        {
+            linkLabel_EditPerson.Visible = (personStatus == enPersonStatus.Active);
+        }
+
+        // >> 
 
         private string _GetGenderName(char gender)
         {
@@ -143,7 +151,7 @@ namespace DVLD_System_Solution.Forms._003_Manage_People.Controls
             if (_personID <= 0) 
                 return;
             
-            frmAddUpdatePersons frm = new frmAddUpdatePersons(2, _personID);
+            frmAddUpdatePersons frm = new frmAddUpdatePersons(_personID, enAddUpdateMode.UpdateInfo);
             frm.ShowDialog();
 
             if(_isAddOrUpdatePersonDialogResult == DialogResult.OK)

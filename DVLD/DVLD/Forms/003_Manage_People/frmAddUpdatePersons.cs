@@ -9,13 +9,13 @@ using System.Collections.Generic;
 using DVLD_Shared.Global_Classes;
 using DVLD_Shared.Operations_Result;
 using static DVLD_Shared.Operations_Result.clsOperationResult;
+using static DVLD_Shared.Global_Enums.clsEnumHelpers;
 
 namespace Main_Screen.Forms.Persons
 {
     public partial class frmAddUpdatePersons : Form
     {
-        enum enFormMode { AddNewInfo = 1, UpdateInfo = 2 };
-        enFormMode _FormMode = enFormMode.AddNewInfo;
+        enAddUpdateMode _addUpdateMode;
 
         private int _PersonID = -1;
         
@@ -28,26 +28,24 @@ namespace Main_Screen.Forms.Persons
 
 
         // Costructor
-        public frmAddUpdatePersons(int modeValue, int personID = -1)
+        public frmAddUpdatePersons(int personID = -1, enAddUpdateMode addUpdateMode = enAddUpdateMode.AddNewInfo)
         {
             InitializeComponent();
 
-            if (modeValue == 1) _FormMode = enFormMode.AddNewInfo;
-            if (modeValue == 2) _FormMode = enFormMode.UpdateInfo;
-            
-            _PersonID = personID;
+             _PersonID = personID;
+            _addUpdateMode = addUpdateMode;
         }
 
         // >> 
-        private void _UpdateModeStatusLabel(enFormMode mode)
+        private void _UpdateModeStatusLabel()
         {
-            switch (mode)
+            switch (_addUpdateMode)
             {
-                case enFormMode.AddNewInfo:
+                case enAddUpdateMode.AddNewInfo:
                     lab_ModeStatue.Text = "Add New Person";
                     break;
 
-                case enFormMode.UpdateInfo:
+                case enAddUpdateMode.UpdateInfo:
                     lab_ModeStatue.Location = new Point(220, 36);
                     lab_ModeStatue.Text = "Update Person Info";
                     break;
@@ -243,16 +241,16 @@ namespace Main_Screen.Forms.Persons
 
         private void _PrepareFormForCurrentMode()
         {
-            switch (_FormMode)
+            switch (_addUpdateMode)
             {
-                case enFormMode.AddNewInfo:
+                case enAddUpdateMode.AddNewInfo:
                     {
                         _SetDefaultPersonImage();
                         _UniqueImageName = "";
                         break;
                     }
 
-                case enFormMode.UpdateInfo:
+                case enAddUpdateMode.UpdateInfo:
                     {
                         _GetPersonByID(_PersonID);
                         break;
@@ -266,7 +264,7 @@ namespace Main_Screen.Forms.Persons
         // Load Form
         private void frmAddUpdatePersonsInfo_Load(object sender, EventArgs e)
         {
-            _UpdateModeStatusLabel(_FormMode);
+            _UpdateModeStatusLabel();
             _SetAllowedBirthDateRange(18, 50);
             _GetAllCountries();
             _AttachTextBoxEvents(this);
@@ -309,13 +307,13 @@ namespace Main_Screen.Forms.Persons
 
                     if(loadImage)
                     {
-                        if(_FormMode == enFormMode.AddNewInfo)
+                        if(_addUpdateMode == enAddUpdateMode.AddNewInfo)
                         {
                             _ImageState = enImageState.Add;
                             return;
                         }
 
-                        if(_FormMode == enFormMode.UpdateInfo)
+                        if(_addUpdateMode == enAddUpdateMode.UpdateInfo)
                         {
                             if (string.IsNullOrWhiteSpace(_UniqueImageName))
                             {
@@ -357,7 +355,7 @@ namespace Main_Screen.Forms.Persons
 
             _SetDefaultPersonImage();
 
-            if (_FormMode == enFormMode.AddNewInfo)
+            if (_addUpdateMode == enAddUpdateMode.AddNewInfo)
             {
                 _ImageState = enImageState.None;
 
@@ -368,7 +366,7 @@ namespace Main_Screen.Forms.Persons
                 return;
             }
 
-            if (_FormMode == enFormMode.UpdateInfo)
+            if (_addUpdateMode == enAddUpdateMode.UpdateInfo)
             {
                 if (string.IsNullOrWhiteSpace(_UniqueImageName))
                 {
@@ -415,7 +413,7 @@ namespace Main_Screen.Forms.Persons
 
         private bool ValidateNationalNumber()
         {
-            if (_FormMode == enFormMode.UpdateInfo) return true;
+            if (_addUpdateMode == enAddUpdateMode.UpdateInfo) return true;
 
             string nationalNumber = txt_NationalNo.Text.Trim();
 
@@ -439,7 +437,7 @@ namespace Main_Screen.Forms.Persons
 
             int maxLength = 500;
 
-            clsValidationResult result = (_FormMode == enFormMode.AddNewInfo) ? 
+            clsValidationResult result = (_addUpdateMode == enAddUpdateMode.AddNewInfo) ? 
                 clsPersonValidations.ValidateEmail(email, maxLength) :
                 clsPersonValidations.ValidateEmail(email, maxLength, _PersonID);
 
@@ -475,7 +473,7 @@ namespace Main_Screen.Forms.Persons
         {
             string phoneNumber = txt_Phone.Text.Trim();
 
-            clsValidationResult result = (_FormMode == enFormMode.AddNewInfo) ? 
+            clsValidationResult result = (_addUpdateMode == enAddUpdateMode.AddNewInfo) ? 
                 clsPersonValidations.ValidatePhone(phoneNumber) :
                 clsPersonValidations.ValidatePhone(phoneNumber, _PersonID);
 
@@ -666,9 +664,9 @@ namespace Main_Screen.Forms.Persons
             
             lab_PersonIDToText.ForeColor = Color.LimeGreen;
 
-            _FormMode = enFormMode.UpdateInfo;
+            _addUpdateMode = enAddUpdateMode.UpdateInfo;
             
-            _UpdateModeStatusLabel(_FormMode);
+            _UpdateModeStatusLabel();
          
             txt_NationalNo.Enabled = false;
         }
@@ -718,9 +716,9 @@ namespace Main_Screen.Forms.Persons
             if (_PersonImageSaveResult == enPersonImageSaveResult.Failed)
                 return;
 
-            switch (_FormMode)
+            switch (_addUpdateMode)
             {
-                case enFormMode.AddNewInfo:
+                case enAddUpdateMode.AddNewInfo:
                     {
                         bool isAdded = _AddNewPersonAndGetNewID(person);
                         
@@ -737,7 +735,7 @@ namespace Main_Screen.Forms.Persons
                         break;
                     }
 
-                case enFormMode.UpdateInfo:
+                case enAddUpdateMode.UpdateInfo:
                     {
                         bool isUpdated = _UpdatePersonInfo(person);
                         

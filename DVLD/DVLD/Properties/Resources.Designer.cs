@@ -293,6 +293,16 @@ namespace DVLD_System_Solution.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Restore_24 {
+            get {
+                object obj = ResourceManager.GetObject("Restore_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Save1_32 {
             get {
                 object obj = ResourceManager.GetObject("Save1_32", resourceCulture);

@@ -45,6 +45,7 @@
     <Compile Include="Global_Classes\clsHashHelper.cs" />
     <Compile Include="Global_Classes\clsImageHelper.cs" />
     <Compile Include="Global_Classes\clsValidationHelper.cs" />
+    <Compile Include="Global_Enums\clsEnumHelpers.cs" />
     <Compile Include="Validation_Messages\clsCountryValidationMessages.cs" />
     <Compile Include="Validation_Messages\clsGeneralValidationMessages.cs" />
     <Compile Include="Validation_Messages\clsImageValidationMessage.cs" />

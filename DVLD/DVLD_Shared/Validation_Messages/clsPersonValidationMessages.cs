@@ -7,8 +7,6 @@ namespace DVLD_Shared.Validation_Messages
         public const string PersonNotFoundMessage = "No person was found with the specified ID.";
 
         public static string PersonInfoRequiredMessage = "Person information is required."; 
-        
-
 
         // Persons Added Messages
         public static string PersonAddedSuccessfullyMessage = "Person added successfully.";
@@ -20,7 +18,11 @@ namespace DVLD_Shared.Validation_Messages
 
         // Persons Deleted Messages
         public static string PersonDeletedSuccessfullyMessage = "Person Deleted successfully.";
-        public static string PersonDeletedFailedMessage = "Failed to Deleted person.";
+        public static string PersonDeletedFailedMessage = "Failed to Delete person.";
+
+        // Persons Restored Messages
+        public static string PersonRestoredSuccessfullyMessage = "Person Restored successfully.";
+        public static string PersonRestoredFailedMessage = "Failed to restore the person. The person may not exist or is already active.";
 
 
         // Name Messages

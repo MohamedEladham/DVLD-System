@@ -7,6 +7,7 @@ using DVLD_Shared.Validation_Messages;
 using DVLD_Shared.Operations_Result;
 using System.Collections.Generic;
 using static DVLD_Shared.Operations_Result.clsOperationResult;
+using DVLD_Models.Person;
 
 namespace DVLD_BL
 {
@@ -74,7 +75,37 @@ namespace DVLD_BL
 
             return personsGridViewDto;
         }
-       
+
+        public static List<clsDeletedPersonInfoGridViewDto> GetDeletedPersonsForGridView(List<clsPerson> personInfos, 
+            Dictionary<int, clsCountry> countriesCache)
+        {
+            List<clsDeletedPersonInfoGridViewDto> personsGridViewDto = null;
+
+            if (personInfos != null && personInfos.Count > 0)
+            {
+                personsGridViewDto = personInfos.Select(P => new clsDeletedPersonInfoGridViewDto
+                {
+                    PersonID = P.PersonID,
+                    NationalNO = P.NationalNO,
+                    FirstName = P.FirstName,
+                    SecondName = P.SecondName,
+                    ThirdName = P.ThirdName,
+                    LastName = P.LastName,
+                    Gender = P.Gender,
+                    Age = _CalculateAge(P.DateOfBirth),
+                    CountryName = _GetCountryName(P.NationalityCountryID, countriesCache),
+                    Email = _GetEmail(P.Email),
+                    Phone = P.Phone,
+                    Address = _GetAddress(P.Address),
+                    IsDeleted = P.IsDeleted,
+                    DeletedAt = P.DeletedAt
+
+                }).ToList();
+            }
+
+            return personsGridViewDto;
+        }
+
         public static (clsOperationResult, clsPerson) GetPersonByID(int personID)
         {
             if (personID <= 0)
@@ -110,6 +141,11 @@ namespace DVLD_BL
         public static List<clsPerson> GetAllPersonsInfo()
         {
             return clsPersonDAL.GetAllPersonsInfo();
+        }
+
+        public static List<clsPerson> GetAllDeletedPersonsInfo()
+        {
+            return clsPersonDAL.GetAllDeletedPersonsInfo();
         }
 
         public static clsOperationResult AddNewPerson(clsPerson person)
@@ -181,6 +217,42 @@ namespace DVLD_BL
             {
                 return new clsOperationResult {Status = enOperationStatus.Exception, 
                     Message = clsGeneralValidationMessages.DatabaseOperationExceptionMessage};
+            }
+        }
+
+        public static clsOperationResult RestoreDeletedPerson(int personID)
+        {
+            if (personID <= 0)
+                return new clsOperationResult
+                {
+                    Status = enOperationStatus.Failed,
+                    Message = clsPersonValidationMessages.InvalidPersonIDMessage
+                };
+
+            try
+            {
+                bool isRestore = clsPersonDAL.RestoreDeletedPerson(personID);
+
+                if (isRestore)
+                    return new clsOperationResult
+                    {
+                        Status = enOperationStatus.Success,
+                        Message = clsPersonValidationMessages.PersonRestoredSuccessfullyMessage
+                    };
+                else
+                    return new clsOperationResult
+                    {
+                        Status = enOperationStatus.Failed,
+                        Message = clsPersonValidationMessages.PersonRestoredFailedMessage
+                    };
+            }
+            catch (Exception)
+            {
+                return new clsOperationResult
+                {
+                    Status = enOperationStatus.Exception,
+                    Message = clsGeneralValidationMessages.DatabaseOperationExceptionMessage
+                };
             }
         }
     }
