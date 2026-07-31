@@ -25,53 +25,64 @@ namespace Main_Screen.Froms.Persons_Screen
         // >>  UI Configuration
         private void _BindData(List<clsPersonInfoGridViewDto> data)
         {
-            if (data != null)
-            {
-                dataGridView_ShowPersonsInfos.DataSource = data;
-                //dataGridView_ShowPersonsInfos.Columns["PersonID"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                //dataGridView_ShowPersonsInfos.Columns["NationalNO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                //dataGridView_ShowPersonsInfos.Columns["FirstName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                //dataGridView_ShowPersonsInfos.Columns["SecondName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                //dataGridView_ShowPersonsInfos.Columns["ThirdName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                //dataGridView_ShowPersonsInfos.Columns["LastName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                //dataGridView_ShowPersonsInfos.Columns["Gender"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                //dataGridView_ShowPersonsInfos.Columns["Age"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                //dataGridView_ShowPersonsInfos.Columns["CountryName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                ////dataGridView_ShowPersonsInfos.Columns["Email"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                //dataGridView_ShowPersonsInfos.Columns["Phone"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                //dataGridView_ShowPersonsInfos.Columns["Address"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                //dataGridView_ShowPersonsInfos.Columns["IsDeleted"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            
+            dataGridView_ShowPersonsInfos.DataSource = data;
+            //dataGridView_ShowPersonsInfos.Columns["PersonID"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            //dataGridView_ShowPersonsInfos.Columns["NationalNO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            //dataGridView_ShowPersonsInfos.Columns["FirstName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            //dataGridView_ShowPersonsInfos.Columns["SecondName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            //dataGridView_ShowPersonsInfos.Columns["ThirdName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            //dataGridView_ShowPersonsInfos.Columns["LastName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            //dataGridView_ShowPersonsInfos.Columns["Gender"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            //dataGridView_ShowPersonsInfos.Columns["Age"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            //dataGridView_ShowPersonsInfos.Columns["CountryName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            ////dataGridView_ShowPersonsInfos.Columns["Email"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            //dataGridView_ShowPersonsInfos.Columns["Phone"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            //dataGridView_ShowPersonsInfos.Columns["Address"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            //dataGridView_ShowPersonsInfos.Columns["IsDeleted"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
-                lab_RecordsCount.Text = data.Count.ToString();
-            }
+            lab_RecordsCount.Text = data == null ? "0" : data.Count.ToString();
         }
 
         private void _BindData(List<clsDeletedPersonInfoGridViewDto> data)
         {
-            if (data != null)
-            {
-                dataGridView_ShowPersonsInfos.DataSource = data;
-                //dataGridView_ShowPersonsInfos.Columns["PersonID"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                //dataGridView_ShowPersonsInfos.Columns["NationalNO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                //dataGridView_ShowPersonsInfos.Columns["FirstName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                //dataGridView_ShowPersonsInfos.Columns["SecondName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                //dataGridView_ShowPersonsInfos.Columns["ThirdName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                //dataGridView_ShowPersonsInfos.Columns["LastName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                //dataGridView_ShowPersonsInfos.Columns["Gender"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                //dataGridView_ShowPersonsInfos.Columns["Age"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                //dataGridView_ShowPersonsInfos.Columns["CountryName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                //dataGridView_ShowPersonsInfos.Columns["Email"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                //dataGridView_ShowPersonsInfos.Columns["Phone"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                //dataGridView_ShowPersonsInfos.Columns["Address"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                //dataGridView_ShowPersonsInfos.Columns["IsDeleted"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                //dataGridView_ShowPersonsInfos.Columns["DeletedAt"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+           
+            dataGridView_ShowPersonsInfos.DataSource = data;
+            //dataGridView_ShowPersonsInfos.Columns["PersonID"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            //dataGridView_ShowPersonsInfos.Columns["NationalNO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            //dataGridView_ShowPersonsInfos.Columns["FirstName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            //dataGridView_ShowPersonsInfos.Columns["SecondName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            //dataGridView_ShowPersonsInfos.Columns["ThirdName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            //dataGridView_ShowPersonsInfos.Columns["LastName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            //dataGridView_ShowPersonsInfos.Columns["Gender"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            //dataGridView_ShowPersonsInfos.Columns["Age"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            //dataGridView_ShowPersonsInfos.Columns["CountryName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            //dataGridView_ShowPersonsInfos.Columns["Email"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            //dataGridView_ShowPersonsInfos.Columns["Phone"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            //dataGridView_ShowPersonsInfos.Columns["Address"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            //dataGridView_ShowPersonsInfos.Columns["IsDeleted"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            //dataGridView_ShowPersonsInfos.Columns["DeletedAt"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
-                lab_RecordsCount.Text = data.Count.ToString();
-            }
+            lab_RecordsCount.Text = data == null ? "0" : data.Count.ToString();
         }
+
+
+        private void _UpdateComboBoxFilterItems()
+        {
+            if (dataGridView_ShowPersonsInfos.DataSource == null)
+            {
+                comBox_FilterItems.SelectedValue = "None";
+                comBox_FilterItems.Enabled = false;
+            }
+            else
+                comBox_FilterItems.Enabled = true;
+        }
+
 
         private void _SetupComboBoxFilterItems()
         {
+           
+
             List<clsComboBoxFilterItem> comboBoxFiltersItems = new List<clsComboBoxFilterItem>
             {
                 new clsComboBoxFilterItem { Display = "None"       , Value = "None" },
@@ -126,13 +137,42 @@ namespace Main_Screen.Froms.Persons_Screen
 
         private void _UpdatePersonIDAndNationalNoLabels()
         {
-            lab_PersonIDToText.Text = dataGridView_ShowPersonsInfos.CurrentRow.Cells["PersonID"].Value.ToString();
-            lab_NationalNoToText.Text = dataGridView_ShowPersonsInfos.CurrentRow.Cells["NationalNO"].Value.ToString();
+            if(dataGridView_ShowPersonsInfos.CurrentRow != null)
+            {
+                lab_PersonIDToText.Text = dataGridView_ShowPersonsInfos.CurrentRow.Cells["PersonID"].Value.ToString();
+                lab_NationalNoToText.Text = dataGridView_ShowPersonsInfos.CurrentRow.Cells["NationalNO"].Value.ToString();
+            }
+            else
+            {
+                lab_PersonIDToText.Text   = "???";
+                lab_NationalNoToText.Text = "???";
+            }
         }
 
         private void dataGridView_ShowPersonsInfos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             _UpdatePersonIDAndNationalNoLabels();
+        }
+
+        private void _UpdateContextMenues()
+        {
+            if (dataGridView_ShowPersonsInfos.DataSource == null)
+            {
+                contextMenuStrip_ActivePersons.Enabled = false;
+                contextMenuStrip_DeletedPersons.Enabled = false;
+
+            }
+            else
+            {
+                contextMenuStrip_ActivePersons.Enabled = true;
+                contextMenuStrip_DeletedPersons.Enabled = true;
+            }
+        }
+
+        private void dataGridView_ShowPersonsInfos_MouseDown(object sender, MouseEventArgs e)
+        {
+            _UpdateContextMenues();
+         
         }
 
         private Dictionary<string, Func<clsPersonInfoGridViewDto, string, bool>> _filtersForActivePersons;
@@ -153,17 +193,21 @@ namespace Main_Screen.Froms.Persons_Screen
         {
             try
             {
-                List<clsPerson> personInfos = clsPersonBL.GetAllPersonsInfo();
+                List<clsPerson> persons = clsPersonBL.GetAllPersonsInfo();
 
-                if(personInfos != null && personInfos.Count > 0)
+                if (persons == null)
                 {
-                    Dictionary<int, clsCountry> countriesCache = clsCountryBL.LoadCountriesToDictionary();
-
-                    _personsGridViewDto = clsPersonBL.GetPersonsForGridView(personInfos, countriesCache);
-
-                    _BindData(_personsGridViewDto);
-                    _UpdatePersonIDAndNationalNoLabels();
+                    _BindData((List<clsPersonInfoGridViewDto>)null);
+                    return;
                 }
+
+                Dictionary<int, clsCountry> countriesCache = clsCountryBL.LoadCountriesToDictionary();
+
+                _personsGridViewDto = clsPersonBL.GetPersonsForGridView(persons, countriesCache);
+
+                _BindData(_personsGridViewDto);
+                _UpdatePersonIDAndNationalNoLabels();
+                
             }
             catch
             {
@@ -177,15 +221,20 @@ namespace Main_Screen.Froms.Persons_Screen
             {
                 List<clsPerson> persons = clsPersonBL.GetAllDeletedPersonsInfo();
 
-                if (persons != null && persons.Count > 0)
+                if (persons == null)
                 {
-                    Dictionary<int, clsCountry> countriesCache = clsCountryBL.LoadCountriesToDictionary();
+                    _BindData((List<clsDeletedPersonInfoGridViewDto>)null);
 
-                    _deletedPersonsGridViewDto = clsPersonBL.GetDeletedPersonsForGridView(persons, countriesCache);
-
-                    _BindData(_deletedPersonsGridViewDto);
-                    _UpdatePersonIDAndNationalNoLabels();
+                    return;
                 }
+                
+                Dictionary<int, clsCountry> countriesCache = clsCountryBL.LoadCountriesToDictionary();
+                
+                _deletedPersonsGridViewDto = clsPersonBL.GetDeletedPersonsForGridView(persons, countriesCache);
+
+                _BindData(_deletedPersonsGridViewDto);
+                _UpdatePersonIDAndNationalNoLabels();
+                
             }
             catch
             {
@@ -208,6 +257,7 @@ namespace Main_Screen.Froms.Persons_Screen
             _SetupComboBoxFilterItems();
             _SetupPersonFilters();
             _LoadPersonInfoToDataGridView();
+            _UpdateComboBoxFilterItems();
             frmAddUpdatePersons.AddOrUpdatePersonDialogResultReceived += _GetIsAddOrUpdatePersonDialogResult;
         }
 
@@ -266,6 +316,7 @@ namespace Main_Screen.Froms.Persons_Screen
         private void txt_SearchValue_TextChanged(object sender, EventArgs e)
         {
             _ApplyFilter();
+            _UpdatePersonIDAndNationalNoLabels();
         }
 
         private void comBox_FilterItems_SelectedIndexChanged(object sender, EventArgs e)
@@ -278,6 +329,8 @@ namespace Main_Screen.Froms.Persons_Screen
 
         private void comBox_PersonStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
+            
+
             if (comBox_PersonStatus.SelectedValue.ToString() == "Active")
             {
                 btn_OpenfrmAddUpdatePersonInfo.Visible = true;
@@ -293,6 +346,7 @@ namespace Main_Screen.Froms.Persons_Screen
             }
 
             comBox_FilterItems.SelectedValue = "None";
+            _UpdateComboBoxFilterItems();
         }
 
         // >>>>
@@ -327,7 +381,7 @@ namespace Main_Screen.Froms.Persons_Screen
             _OpenAddUpdatePersonForm(personID, enAddUpdateMode.UpdateInfo);
         }
 
-        private void toolStripMenuItem_ShowDetails_Click(object sender, EventArgs e)
+        private void _OpenFormShowDetails()
         {
             int personID = _GetCurrentPersonID();
             frmShowPersonInfo frm = new frmShowPersonInfo(personID, enPersonStatus.Active);
@@ -338,6 +392,36 @@ namespace Main_Screen.Froms.Persons_Screen
                 _LoadPersonInfoToDataGridView();
                 _isAddOrUpdatePersonDialogResult = DialogResult.No;
             }
+        }
+
+        private void toolStripMenuItem_ShowDetails_Click(object sender, EventArgs e)
+        {
+            _OpenFormShowDetails();
+        }
+
+        private void dataGridView_ShowPersonsInfos_DoubleClick(object sender, EventArgs e)
+        {
+            if (dataGridView_ShowPersonsInfos.CurrentRow == null)
+                return;
+
+            if(comBox_PersonStatus.SelectedValue.ToString() == "Active")
+                _OpenFormShowDetails();
+            else
+                _OpenFormShowDeletedDetails();
+        }
+
+        private void _OpenFormShowDeletedDetails()
+        {
+            int personID = _GetCurrentPersonID();
+
+            frmShowPersonInfo frm = new frmShowPersonInfo(personID, enPersonStatus.NotActive);
+            frm.ShowDialog();
+        }
+
+
+        private void toolStripMenuItem_ShowDeletedDetails_Click(object sender, EventArgs e)
+        {
+            _OpenFormShowDeletedDetails();
         }
 
         private bool _SoftDeletePerson(int personID)
@@ -366,7 +450,7 @@ namespace Main_Screen.Froms.Persons_Screen
         private void toolStripMenuItem_SoftDelete_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = 
-                MessageBox.Show("Are you sure you want to delete this person?", "Delete Person", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                MessageBox.Show("Are you sure you want to delete this persons?", "Delete Person", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (dialogResult != DialogResult.Yes)
                 return;
@@ -376,6 +460,8 @@ namespace Main_Screen.Froms.Persons_Screen
 
             if(isDeleted)
                 _LoadPersonInfoToDataGridView();
+
+            _UpdateComboBoxFilterItems();
         }
 
 
@@ -405,7 +491,7 @@ namespace Main_Screen.Froms.Persons_Screen
         private void toolStripMenuItem_RestoreDeletedPerson_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult =
-               MessageBox.Show("Are you sure you want to Restore this person?", "Restore Person", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+               MessageBox.Show("Are you sure you want to Restore this persons?", "Restore Person", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (dialogResult != DialogResult.Yes)
                 return;
@@ -416,15 +502,8 @@ namespace Main_Screen.Froms.Persons_Screen
 
             if (isRestored)
                 _LoadDeletedPersonInfoToDataGridView();
-        }
 
-
-        private void toolStripMenuItem_ShowDeletedDetails_Click(object sender, EventArgs e)
-        {
-            int personID = _GetCurrentPersonID();
-
-            frmShowPersonInfo frm = new frmShowPersonInfo(personID, enPersonStatus.NotActive);
-            frm.ShowDialog();
+            _UpdateComboBoxFilterItems();
         }
 
         private void btn_Close_Click(object sender, EventArgs e)

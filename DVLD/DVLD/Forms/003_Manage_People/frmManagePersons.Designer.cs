@@ -125,9 +125,11 @@ namespace Main_Screen.Froms.Persons_Screen
             this.dataGridView_ShowPersonsInfos.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView_ShowPersonsInfos.RowHeadersWidth = 35;
             this.dataGridView_ShowPersonsInfos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dataGridView_ShowPersonsInfos.Size = new System.Drawing.Size(1307, 409);
+            this.dataGridView_ShowPersonsInfos.Size = new System.Drawing.Size(1307, 398);
             this.dataGridView_ShowPersonsInfos.TabIndex = 1;
             this.dataGridView_ShowPersonsInfos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_ShowPersonsInfos_CellClick);
+            this.dataGridView_ShowPersonsInfos.DoubleClick += new System.EventHandler(this.dataGridView_ShowPersonsInfos_DoubleClick);
+            this.dataGridView_ShowPersonsInfos.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dataGridView_ShowPersonsInfos_MouseDown);
             // 
             // contextMenuStrip_ActivePersons
             // 
@@ -279,9 +281,9 @@ namespace Main_Screen.Froms.Persons_Screen
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label4.Location = new System.Drawing.Point(14, 150);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(64, 20);
+            this.label4.Size = new System.Drawing.Size(83, 20);
             this.label4.TabIndex = 220;
-            this.label4.Text = "UserID:";
+            this.label4.Text = "Person ID:";
             // 
             // label5
             // 
@@ -308,7 +310,7 @@ namespace Main_Screen.Froms.Persons_Screen
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lab_RecordsCount.Font = new System.Drawing.Font("Tahoma", 14F, System.Drawing.FontStyle.Bold);
             this.lab_RecordsCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lab_RecordsCount.Location = new System.Drawing.Point(533, 721);
+            this.lab_RecordsCount.Location = new System.Drawing.Point(533, 710);
             this.lab_RecordsCount.Name = "lab_RecordsCount";
             this.lab_RecordsCount.Size = new System.Drawing.Size(189, 33);
             this.lab_RecordsCount.TabIndex = 223;
@@ -334,7 +336,7 @@ namespace Main_Screen.Froms.Persons_Screen
             this.btn_Close.Font = new System.Drawing.Font("Segoe UI Semibold", 13F, System.Drawing.FontStyle.Bold);
             this.btn_Close.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btn_Close.Image = global::DVLD_System_Solution.Properties.Resources.Close1_28;
-            this.btn_Close.Location = new System.Drawing.Point(12, 718);
+            this.btn_Close.Location = new System.Drawing.Point(12, 707);
             this.btn_Close.Name = "btn_Close";
             this.btn_Close.Size = new System.Drawing.Size(110, 38);
             this.btn_Close.TabIndex = 6;
@@ -426,7 +428,7 @@ namespace Main_Screen.Froms.Persons_Screen
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(1331, 768);
+            this.ClientSize = new System.Drawing.Size(1331, 757);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.comBox_PersonStatus);
             this.Controls.Add(this.lab_RecordsCount);

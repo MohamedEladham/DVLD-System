@@ -30,12 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMainScreen));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.toolStripMenuItem_AccountSetting = new System.Windows.Forms.ToolStripMenuItem();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.toolStripMenuItem_Applicatios = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem_Persons = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem_Drivers = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem_Users = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem_AccountSetting = new System.Windows.Forms.ToolStripMenuItem();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -54,6 +54,27 @@
             this.menuStrip1.Size = new System.Drawing.Size(1203, 88);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // toolStripMenuItem_AccountSetting
+            // 
+            this.toolStripMenuItem_AccountSetting.Image = global::DVLD_System_Solution.Properties.Resources.Account_Settings_64;
+            this.toolStripMenuItem_AccountSetting.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItem_AccountSetting.Name = "toolStripMenuItem_AccountSetting";
+            this.toolStripMenuItem_AccountSetting.Size = new System.Drawing.Size(313, 84);
+            this.toolStripMenuItem_AccountSetting.Text = "Account Setting";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.Image = global::DVLD_System_Solution.Properties.Resources.DVLD_BackGround1;
+            this.pictureBox1.Location = new System.Drawing.Point(324, 237);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(539, 323);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
             // 
             // toolStripMenuItem_Applicatios
             // 
@@ -82,32 +103,12 @@
             // 
             // toolStripMenuItem_Users
             // 
-            this.toolStripMenuItem_Users.Image = global::DVLD_System_Solution.Properties.Resources.Users1_64;
+            this.toolStripMenuItem_Users.Image = global::DVLD_System_Solution.Properties.Resources.Users2_64;
             this.toolStripMenuItem_Users.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripMenuItem_Users.Name = "toolStripMenuItem_Users";
             this.toolStripMenuItem_Users.Size = new System.Drawing.Size(168, 84);
             this.toolStripMenuItem_Users.Text = "Users";
-            // 
-            // toolStripMenuItem_AccountSetting
-            // 
-            this.toolStripMenuItem_AccountSetting.Image = global::DVLD_System_Solution.Properties.Resources.Account_Settings_64;
-            this.toolStripMenuItem_AccountSetting.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripMenuItem_AccountSetting.Name = "toolStripMenuItem_AccountSetting";
-            this.toolStripMenuItem_AccountSetting.Size = new System.Drawing.Size(313, 84);
-            this.toolStripMenuItem_AccountSetting.Text = "Account Setting";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.Image = global::DVLD_System_Solution.Properties.Resources.DVLD_BackGround1;
-            this.pictureBox1.Location = new System.Drawing.Point(324, 237);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(539, 323);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.toolStripMenuItem_Users.Click += new System.EventHandler(this.toolStripMenuItem_Users_Click);
             // 
             // frmMainScreen
             // 

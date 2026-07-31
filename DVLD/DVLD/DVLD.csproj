@@ -91,6 +91,12 @@
     <Compile Include="Forms\003_Manage_People\frmShowPersonInfo.Designer.cs">
       <DependentUpon>frmShowPersonInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\004_Manage_Users\frmManageUsers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\004_Manage_Users\frmManageUsers.Designer.cs">
+      <DependentUpon>frmManageUsers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\001_Login_Screen\frmLoginScreen.resx">
@@ -110,6 +116,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\003_Manage_People\frmShowPersonInfo.resx">
       <DependentUpon>frmShowPersonInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\004_Manage_Users\frmManageUsers.resx">
+      <DependentUpon>frmManageUsers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -154,9 +163,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Drivers_64.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Users1_64.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\DVLD_Logo2.png" />
@@ -217,6 +223,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Restore_24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Users2_64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Users2_400.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Add_New_User 32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

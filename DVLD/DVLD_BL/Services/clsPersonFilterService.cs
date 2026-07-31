@@ -15,7 +15,7 @@ namespace DVLD_BL.Services
 
             personFilter = new Dictionary<string, Func<clsPersonInfoGridViewDto, string, bool>>
             {
-                ["PersonID"] = (p, val) => clsValidationHelper.IsMatchingPersonID(p.PersonID, val),
+                ["PersonID"] = (p, val) => clsValidationHelper.IsMatchingID(p.PersonID, val),
                 ["NationalNO"] = (p, val) => clsValidationHelper.ContainsIgnoreCase(p.NationalNO, val),
                 ["FirstName"] = (p, val) => clsValidationHelper.ContainsIgnoreCase(p.FirstName, val),
                 ["SecondName"] = (p, val) => clsValidationHelper.ContainsIgnoreCase(p.SecondName, val),
@@ -32,6 +32,8 @@ namespace DVLD_BL.Services
         public static List<clsPersonInfoGridViewDto> FilterPersons(List<clsPersonInfoGridViewDto> personsGridViewDto,
             Dictionary<string, Func<clsPersonInfoGridViewDto, string, bool>> personFilter, string filterSelected, string searchValue)
         {
+            if (personsGridViewDto == null) return null;
+
             return personsGridViewDto.Where(p => personFilter[filterSelected](p, searchValue)).ToList(); 
         }
 
@@ -41,7 +43,7 @@ namespace DVLD_BL.Services
 
             personFilter = new Dictionary<string, Func<clsDeletedPersonInfoGridViewDto, string, bool>>
             {
-                ["PersonID"] = (p, val) => clsValidationHelper.IsMatchingPersonID(p.PersonID, val),
+                ["PersonID"] = (p, val) => clsValidationHelper.IsMatchingID(p.PersonID, val),
                 ["NationalNO"] = (p, val) => clsValidationHelper.ContainsIgnoreCase(p.NationalNO, val),
                 ["FirstName"] = (p, val) => clsValidationHelper.ContainsIgnoreCase(p.FirstName, val),
                 ["SecondName"] = (p, val) => clsValidationHelper.ContainsIgnoreCase(p.SecondName, val),
@@ -58,6 +60,8 @@ namespace DVLD_BL.Services
         public static List<clsDeletedPersonInfoGridViewDto> FilterDeletedPersons(List<clsDeletedPersonInfoGridViewDto> personsGridViewDto, 
             Dictionary<string, Func<clsDeletedPersonInfoGridViewDto, string, bool>> personFilter, string filterSelected, string searchValue)
         {
+            if (personsGridViewDto == null) return null;
+
             return personsGridViewDto.Where(p => personFilter[filterSelected](p, searchValue)).ToList(); 
         }
     }

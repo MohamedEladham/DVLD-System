@@ -98,8 +98,8 @@ namespace DVLD_BL.Validations
             if (string.IsNullOrWhiteSpace(phoneNumber))
                 return new clsValidationResult { IsValid = false, Message = clsPersonValidationMessages.PhoneNumberRequiredMessage };
 
-            //if (!clsValidationHelper.IsValidPhoneNumber(phoneNumber))
-            //    return new clsValidationResult { IsValid = false, Message = clsPersonValidationMessages.InvalidPhoneNumberMessage };
+            if (!clsValidationHelper.IsValidPhoneNumber(phoneNumber))
+                return new clsValidationResult { IsValid = false, Message = clsPersonValidationMessages.InvalidPhoneNumberMessage };
 
             try
             {

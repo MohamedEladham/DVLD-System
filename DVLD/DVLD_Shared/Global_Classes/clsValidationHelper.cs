@@ -12,13 +12,10 @@ namespace DVLD_Shared.Global_Classes
         // Enter Noly Number
         //if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar)) e.Handled = true; // امنع الإدخال
 
-
-       
-
-        public static bool IsMatchingPersonID(int personID, string outValue)
+        public static bool IsMatchingID(int outID, string outValue)
         {
             if (int.TryParse(outValue, out int id))
-                return personID == id;
+                return outID == id;
 
             return false;
         }
@@ -27,7 +24,6 @@ namespace DVLD_Shared.Global_Classes
         {
             return !string.IsNullOrEmpty(source) && source.IndexOf(value, StringComparison.OrdinalIgnoreCase) >= 0;
         }
-
 
         // >>
 
@@ -116,7 +112,5 @@ namespace DVLD_Shared.Global_Classes
 
             return true;
         }
-
-       
     }
 }

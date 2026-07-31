@@ -42,11 +42,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lab_ModeStatue.Font = new System.Drawing.Font("Sitka Small", 33F, System.Drawing.FontStyle.Bold);
             this.lab_ModeStatue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lab_ModeStatue.Location = new System.Drawing.Point(140, 57);
+            this.lab_ModeStatue.Location = new System.Drawing.Point(228, 37);
             this.lab_ModeStatue.Name = "lab_ModeStatue";
-            this.lab_ModeStatue.Size = new System.Drawing.Size(632, 65);
+            this.lab_ModeStatue.Size = new System.Drawing.Size(404, 65);
             this.lab_ModeStatue.TabIndex = 219;
-            this.lab_ModeStatue.Text = "PERSON INFORMATIONS";
+            this.lab_ModeStatue.Text = "Person Details";
             this.lab_ModeStatue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btn_Close
@@ -56,7 +56,6 @@
             this.btn_Close.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.btn_Close.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             this.btn_Close.ForeColor = System.Drawing.Color.DimGray;
-            this.btn_Close.Image = global::DVLD_System_Solution.Properties.Resources.Close1_28;
             this.btn_Close.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.btn_Close.Location = new System.Drawing.Point(12, 492);
             this.btn_Close.Name = "btn_Close";
@@ -70,7 +69,6 @@
             // pictureBox11
             // 
             this.pictureBox11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox11.Image = global::DVLD_System_Solution.Properties.Resources.DVLD_Logo2;
             this.pictureBox11.Location = new System.Drawing.Point(778, 12);
             this.pictureBox11.Name = "pictureBox11";
             this.pictureBox11.Size = new System.Drawing.Size(116, 110);
@@ -103,7 +101,7 @@
             this.MinimumSize = new System.Drawing.Size(906, 582);
             this.Name = "frmShowPersonInfo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Show Person Info";
+            this.Text = "Person Details";
             this.Load += new System.EventHandler(this.frmShowPersonInfo_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             this.ResumeLayout(false);

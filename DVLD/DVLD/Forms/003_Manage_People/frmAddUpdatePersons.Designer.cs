@@ -195,6 +195,7 @@
             // picB_PersonImage
             // 
             this.picB_PersonImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.picB_PersonImage.Image = global::DVLD_System_Solution.Properties.Resources.Male_512;
             this.picB_PersonImage.Location = new System.Drawing.Point(706, 108);
             this.picB_PersonImage.Name = "picB_PersonImage";
             this.picB_PersonImage.Size = new System.Drawing.Size(163, 200);

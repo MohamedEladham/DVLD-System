@@ -124,7 +124,6 @@ namespace DVLD_DAL
             };
         }
 
-
         private static clsPerson _MapReaderToDeletedPerson(SqlDataReader reader)
         {
             return new clsPerson

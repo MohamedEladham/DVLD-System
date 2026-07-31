@@ -73,6 +73,16 @@ namespace DVLD_System_Solution.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Add_New_User_32 {
+            get {
+                object obj = ResourceManager.GetObject("Add_New_User 32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Add_Person_32 {
             get {
                 object obj = ResourceManager.GetObject("Add_Person 32", resourceCulture);
@@ -323,9 +333,19 @@ namespace DVLD_System_Solution.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Users1_64 {
+        internal static System.Drawing.Bitmap Users2_400 {
             get {
-                object obj = ResourceManager.GetObject("Users1_64", resourceCulture);
+                object obj = ResourceManager.GetObject("Users2_400", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Users2_64 {
+            get {
+                object obj = ResourceManager.GetObject("Users2_64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

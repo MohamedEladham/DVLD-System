@@ -3,11 +3,11 @@ using DVLD_DAL;
 using DVLD_Models;
 using DVLD_Shared;
 using System.Linq;
-using DVLD_Shared.Validation_Messages;
-using DVLD_Shared.Operations_Result;
-using System.Collections.Generic;
-using static DVLD_Shared.Operations_Result.clsOperationResult;
 using DVLD_Models.Person;
+using System.Collections.Generic;
+using DVLD_Shared.Operations_Result;
+using DVLD_Shared.Validation_Messages;
+using static DVLD_Shared.Operations_Result.clsOperationResult;
 
 namespace DVLD_BL
 {

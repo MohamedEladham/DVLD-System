@@ -211,6 +211,8 @@ namespace Main_Screen.Forms.Persons
 
             comB_Countries.SelectedValue = nationaltyCountryID;
 
+            txt_NationalNo.Enabled = false;
+
             _UniqueImageName = person.ImageName;
 
             if (string.IsNullOrWhiteSpace(_UniqueImageName))

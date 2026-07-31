@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="clsCountryDAL.cs" />
     <Compile Include="clsPersonDAL.cs" />
+    <Compile Include="clsUserDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
