@@ -53,6 +53,7 @@
     <Compile Include="Validation_Messages\clsNameValidationMessages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Operations_Result\clsOperationResult.cs" />
+    <Compile Include="Validation_Messages\clsUserValidationMessages.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

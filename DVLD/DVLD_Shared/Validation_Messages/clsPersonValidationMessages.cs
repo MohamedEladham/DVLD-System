@@ -3,9 +3,12 @@ namespace DVLD_Shared.Validation_Messages
 {
     public class clsPersonValidationMessages
     {
-        public const string InvalidPersonIDMessage = "Invalid Person ID. Person ID must be greater than zero.";
+        public const string InvalidPersonIDMessage = "Invalid ID Number, Enter A Valid Number.";
+        public const string PersonIDMustBeGreaterThanZeroMessage = "Invalid Person ID. Person ID must be greater than zero.";
         public const string PersonNotFoundMessage = "No person was found with the specified ID.";
+        public const string PersonNotFoundByNationalNOMessage = "No person was found with the specified National No.";
 
+        public static string PersonIDRequiredMessage = "Person ID is required."; 
         public static string PersonInfoRequiredMessage = "Person information is required."; 
 
         // Persons Added Messages

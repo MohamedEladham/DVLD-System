@@ -66,7 +66,6 @@ namespace Main_Screen.Froms.Persons_Screen
             lab_RecordsCount.Text = data == null ? "0" : data.Count.ToString();
         }
 
-
         private void _UpdateComboBoxFilterItems()
         {
             if (dataGridView_ShowPersonsInfos.DataSource == null)
@@ -78,11 +77,8 @@ namespace Main_Screen.Froms.Persons_Screen
                 comBox_FilterItems.Enabled = true;
         }
 
-
         private void _SetupComboBoxFilterItems()
         {
-           
-
             List<clsComboBoxFilterItem> comboBoxFiltersItems = new List<clsComboBoxFilterItem>
             {
                 new clsComboBoxFilterItem { Display = "None"       , Value = "None" },

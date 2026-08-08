@@ -32,6 +32,11 @@ namespace DVLD_Shared.Global_Classes
             return DateTime.Today;
         }
 
+        public static bool IsInteger(string value)
+        {
+            return true;
+        }
+
         public static bool IsAdult(DateTime dateOfBirth)
         {
             const int minimumAge = 18;

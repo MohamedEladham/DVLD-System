@@ -2,6 +2,7 @@
 using DVLD_DAL;
 using DVLD_Shared;
 using DVLD_Shared.Global_Classes;
+using DVLD_Shared.Operations_Result;
 using DVLD_Shared.Validation_Messages;
 using System;
 
@@ -10,6 +11,20 @@ namespace DVLD_BL.Validations
 {
     public class clsPersonValidations
     {
+        public static clsValidationResult ValidatePersonID(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+                return new clsValidationResult { IsValid = false, Message = clsPersonValidationMessages.PersonIDRequiredMessage };
+
+            if (!int.TryParse(value, out int personID))
+                return new clsValidationResult { IsValid = false, Message = clsPersonValidationMessages.InvalidPersonIDMessage };
+
+            if (personID <= 0)
+                return new clsValidationResult { IsValid = false, Message = clsPersonValidationMessages.PersonIDMustBeGreaterThanZeroMessage };
+
+            return new clsValidationResult { IsValid = true, ID = personID};
+        }
+
         public static clsValidationResult ValidateName(string name, int minLength, int maxLength)
         {
             if (string.IsNullOrEmpty(name))
@@ -27,7 +42,24 @@ namespace DVLD_BL.Validations
             return new clsValidationResult { IsValid = true };
         }
 
-        public static clsValidationResult ValidateNationalNumber(string nationalNumber, int minLength, int maxLength)
+        public static clsValidationResult ValidateNationalNumber(string nationalNumber, int minLength = 2, int maxLength = 50)
+        {
+            if (string.IsNullOrWhiteSpace(nationalNumber))
+                return new clsValidationResult { IsValid = false, Message = clsPersonValidationMessages.NationalNumberRequiredMessage };
+
+            if (!clsValidationHelper.IsAlphaNumeric(nationalNumber))
+                return new clsValidationResult { IsValid = false, Message = clsPersonValidationMessages.NationalNumberInvalidFormatMessage };
+
+            if (nationalNumber.Length < minLength)
+                return new clsValidationResult { IsValid = false, Message = clsPersonValidationMessages.NationalNumberTooShortMessage };
+
+            if (nationalNumber.Length > maxLength)
+                return new clsValidationResult { IsValid = false, Message = clsPersonValidationMessages.NationalNumberOutOfLengthMessage };
+
+            return new clsValidationResult { IsValid = true };
+        }
+
+        public static clsValidationResult ValidateNationalNumberAndCheckIsExists(string nationalNumber, int minLength = 2, int maxLength = 50)
         {
             if (string.IsNullOrWhiteSpace(nationalNumber))
                 return new clsValidationResult { IsValid = false, Message = clsPersonValidationMessages.NationalNumberRequiredMessage };
@@ -48,7 +80,7 @@ namespace DVLD_BL.Validations
                 if (exists)
                     return new clsValidationResult { IsValid = false, Message = clsPersonValidationMessages.NationalNumberAlreadyExistsMessage };
                 else
-                    return new clsValidationResult { IsValid = true, Message = "" };
+                    return new clsValidationResult { IsValid = true};
             }
             catch
             {

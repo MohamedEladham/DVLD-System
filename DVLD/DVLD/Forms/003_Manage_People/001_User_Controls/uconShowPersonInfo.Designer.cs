@@ -34,18 +34,8 @@ namespace DVLD_System_Solution.Forms._003_Manage_People.Controls
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.linkLabel_EditPerson = new System.Windows.Forms.LinkLabel();
-            this.picB_PersonImage = new System.Windows.Forms.PictureBox();
-            this.pictureBox9 = new System.Windows.Forms.PictureBox();
-            this.pictureBox8 = new System.Windows.Forms.PictureBox();
-            this.pictureBox7 = new System.Windows.Forms.PictureBox();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -62,6 +52,16 @@ namespace DVLD_System_Solution.Forms._003_Manage_People.Controls
             this.lab_Gendor = new System.Windows.Forms.Label();
             this.lab_NationalNO = new System.Windows.Forms.Label();
             this.lab_Name = new System.Windows.Forms.Label();
+            this.picB_PersonImage = new System.Windows.Forms.PictureBox();
+            this.pictureBox9 = new System.Windows.Forms.PictureBox();
+            this.pictureBox8 = new System.Windows.Forms.PictureBox();
+            this.pictureBox7 = new System.Windows.Forms.PictureBox();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picB_PersonImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
@@ -109,7 +109,7 @@ namespace DVLD_System_Solution.Forms._003_Manage_People.Controls
             this.groupBox1.Controls.Add(this.lab_Name);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Font = new System.Drawing.Font("Sitka Small", 12F, System.Drawing.FontStyle.Bold);
-            this.groupBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.groupBox1.ForeColor = System.Drawing.Color.Brown;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(865, 316);
@@ -130,100 +130,6 @@ namespace DVLD_System_Solution.Forms._003_Manage_People.Controls
             this.linkLabel_EditPerson.TabStop = true;
             this.linkLabel_EditPerson.Text = "Edit Person";
             this.linkLabel_EditPerson.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_EditPerson_LinkClicked);
-            // 
-            // picB_PersonImage
-            // 
-            this.picB_PersonImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.picB_PersonImage.Image = global::DVLD_System_Solution.Properties.Resources.Male_512;
-            this.picB_PersonImage.Location = new System.Drawing.Point(694, 68);
-            this.picB_PersonImage.Name = "picB_PersonImage";
-            this.picB_PersonImage.Size = new System.Drawing.Size(163, 200);
-            this.picB_PersonImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picB_PersonImage.TabIndex = 240;
-            this.picB_PersonImage.TabStop = false;
-            // 
-            // pictureBox9
-            // 
-            this.pictureBox9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox9.Image = global::DVLD_System_Solution.Properties.Resources.Country_32;
-            this.pictureBox9.Location = new System.Drawing.Point(463, 180);
-            this.pictureBox9.Name = "pictureBox9";
-            this.pictureBox9.Size = new System.Drawing.Size(23, 24);
-            this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox9.TabIndex = 235;
-            this.pictureBox9.TabStop = false;
-            // 
-            // pictureBox8
-            // 
-            this.pictureBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox8.Image = global::DVLD_System_Solution.Properties.Resources.Address_32;
-            this.pictureBox8.Location = new System.Drawing.Point(463, 224);
-            this.pictureBox8.Name = "pictureBox8";
-            this.pictureBox8.Size = new System.Drawing.Size(23, 24);
-            this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox8.TabIndex = 234;
-            this.pictureBox8.TabStop = false;
-            // 
-            // pictureBox7
-            // 
-            this.pictureBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox7.Image = global::DVLD_System_Solution.Properties.Resources.Phone_32;
-            this.pictureBox7.Location = new System.Drawing.Point(463, 138);
-            this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(23, 24);
-            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox7.TabIndex = 233;
-            this.pictureBox7.TabStop = false;
-            // 
-            // pictureBox6
-            // 
-            this.pictureBox6.Image = global::DVLD_System_Solution.Properties.Resources.Email_32;
-            this.pictureBox6.Location = new System.Drawing.Point(138, 268);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(23, 24);
-            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox6.TabIndex = 232;
-            this.pictureBox6.TabStop = false;
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Image = global::DVLD_System_Solution.Properties.Resources.Calendar_32;
-            this.pictureBox5.Location = new System.Drawing.Point(138, 224);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(23, 24);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox5.TabIndex = 231;
-            this.pictureBox5.TabStop = false;
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Image = global::DVLD_System_Solution.Properties.Resources.Man_32;
-            this.pictureBox4.Location = new System.Drawing.Point(138, 180);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(23, 24);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox4.TabIndex = 230;
-            this.pictureBox4.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Image = global::DVLD_System_Solution.Properties.Resources.Number_32;
-            this.pictureBox3.Location = new System.Drawing.Point(138, 138);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(23, 24);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 229;
-            this.pictureBox3.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::DVLD_System_Solution.Properties.Resources.Person_32;
-            this.pictureBox2.Location = new System.Drawing.Point(138, 98);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(23, 24);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 228;
-            this.pictureBox2.TabStop = false;
             // 
             // label9
             // 
@@ -248,16 +154,6 @@ namespace DVLD_System_Solution.Forms._003_Manage_People.Controls
             this.label8.Size = new System.Drawing.Size(86, 24);
             this.label8.TabIndex = 226;
             this.label8.Text = "Address:";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::DVLD_System_Solution.Properties.Resources.Number_32;
-            this.pictureBox1.Location = new System.Drawing.Point(138, 58);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(23, 24);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 207;
-            this.pictureBox1.TabStop = false;
             // 
             // label7
             // 
@@ -448,6 +344,110 @@ namespace DVLD_System_Solution.Forms._003_Manage_People.Controls
             this.lab_Name.Size = new System.Drawing.Size(521, 17);
             this.lab_Name.TabIndex = 215;
             this.lab_Name.Text = "[???]";
+            // 
+            // picB_PersonImage
+            // 
+            this.picB_PersonImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.picB_PersonImage.Image = global::DVLD_System_Solution.Properties.Resources.Male_512;
+            this.picB_PersonImage.Location = new System.Drawing.Point(694, 68);
+            this.picB_PersonImage.Name = "picB_PersonImage";
+            this.picB_PersonImage.Size = new System.Drawing.Size(163, 200);
+            this.picB_PersonImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picB_PersonImage.TabIndex = 240;
+            this.picB_PersonImage.TabStop = false;
+            // 
+            // pictureBox9
+            // 
+            this.pictureBox9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox9.Image = global::DVLD_System_Solution.Properties.Resources.Country_32;
+            this.pictureBox9.Location = new System.Drawing.Point(463, 180);
+            this.pictureBox9.Name = "pictureBox9";
+            this.pictureBox9.Size = new System.Drawing.Size(23, 24);
+            this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox9.TabIndex = 235;
+            this.pictureBox9.TabStop = false;
+            // 
+            // pictureBox8
+            // 
+            this.pictureBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox8.Image = global::DVLD_System_Solution.Properties.Resources.Address_32;
+            this.pictureBox8.Location = new System.Drawing.Point(463, 224);
+            this.pictureBox8.Name = "pictureBox8";
+            this.pictureBox8.Size = new System.Drawing.Size(23, 24);
+            this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox8.TabIndex = 234;
+            this.pictureBox8.TabStop = false;
+            // 
+            // pictureBox7
+            // 
+            this.pictureBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox7.Image = global::DVLD_System_Solution.Properties.Resources.Phone_32;
+            this.pictureBox7.Location = new System.Drawing.Point(463, 138);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(23, 24);
+            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox7.TabIndex = 233;
+            this.pictureBox7.TabStop = false;
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.Image = global::DVLD_System_Solution.Properties.Resources.Email_32;
+            this.pictureBox6.Location = new System.Drawing.Point(138, 268);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(23, 24);
+            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox6.TabIndex = 232;
+            this.pictureBox6.TabStop = false;
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Image = global::DVLD_System_Solution.Properties.Resources.Calendar_32;
+            this.pictureBox5.Location = new System.Drawing.Point(138, 224);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(23, 24);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox5.TabIndex = 231;
+            this.pictureBox5.TabStop = false;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = global::DVLD_System_Solution.Properties.Resources.Man_32;
+            this.pictureBox4.Location = new System.Drawing.Point(138, 180);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(23, 24);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox4.TabIndex = 230;
+            this.pictureBox4.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = global::DVLD_System_Solution.Properties.Resources.Number_32;
+            this.pictureBox3.Location = new System.Drawing.Point(138, 138);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(23, 24);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox3.TabIndex = 229;
+            this.pictureBox3.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::DVLD_System_Solution.Properties.Resources.Person_32;
+            this.pictureBox2.Location = new System.Drawing.Point(138, 98);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(23, 24);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 228;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::DVLD_System_Solution.Properties.Resources.Number_32;
+            this.pictureBox1.Location = new System.Drawing.Point(138, 58);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(23, 24);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 207;
+            this.pictureBox1.TabStop = false;
             // 
             // uconShowPersonInfo
             // 

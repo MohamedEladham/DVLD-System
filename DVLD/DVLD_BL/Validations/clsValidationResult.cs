@@ -8,6 +8,7 @@ namespace DVLD_BL.Validations
 {
     public class clsValidationResult
     {
+        public int ID { get; set; }
         public bool IsValid { get; set; }
         public string Message { get; set; }
     }

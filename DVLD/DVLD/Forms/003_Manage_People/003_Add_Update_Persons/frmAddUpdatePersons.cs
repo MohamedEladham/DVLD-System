@@ -15,9 +15,9 @@ namespace Main_Screen.Forms.Persons
 {
     public partial class frmAddUpdatePersons : Form
     {
+        private int _PersonID = -1;
         enAddUpdateMode _addUpdateMode;
 
-        private int _PersonID = -1;
         
         private string _UniqueImageName = "";
         
@@ -421,7 +421,7 @@ namespace Main_Screen.Forms.Persons
 
             int minLength = 2, maxLength = 50;
 
-            clsValidationResult result = clsPersonValidations.ValidateNationalNumber(nationalNumber, minLength, maxLength);
+            clsValidationResult result = clsPersonValidations.ValidateNationalNumberAndCheckIsExists(nationalNumber, minLength, maxLength);
            
             if (!result.IsValid)
             {
@@ -520,7 +520,7 @@ namespace Main_Screen.Forms.Persons
         
         // Save Data To Database
         public delegate void AddOrUpdatePersonDialogResultEventHandler(object sender, DialogResult dialogResult);
-        public static  event AddOrUpdatePersonDialogResultEventHandler AddOrUpdatePersonDialogResultReceived;
+        public static event AddOrUpdatePersonDialogResultEventHandler AddOrUpdatePersonDialogResultReceived;
 
         
         // Bulid Person Info

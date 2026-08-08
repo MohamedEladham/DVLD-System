@@ -77,5 +77,15 @@ namespace DVLD_Shared.Global_Classes
 
             return folderPath;
         }
+
+        public static string GetOrCreateResourcesImageFolderPath()
+        {
+            string folderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", "Resources");
+
+            if (!Directory.Exists(folderPath))
+                Directory.CreateDirectory(folderPath);
+
+            return folderPath;
+        }
     }
 }

@@ -1,11 +1,12 @@
 ﻿using System;
+using DVLD_BL;
+using DVLD_Shared;
+using DVLD_BL.Services;
+using DVLD_Models.User;
 using System.Windows.Forms;
 using DVLD_Models.UI_Models;
 using System.Collections.Generic;
-using DVLD_BL;
-using DVLD_Shared;
-using DVLD_Models.User;
-using DVLD_BL.Services;
+using Main_Screen.Forms.Persons;
 
 namespace DVLD_System_Solution.Forms._004_Manage_Users
 {
@@ -102,18 +103,93 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             }
         }
 
+        private bool _createdLoginIngo = false;
+
+        private void _GetCreatedLoginInfo(object sender, bool isCreated)
+        {
+            _createdLoginIngo = isCreated;
+        }
+
+        private DialogResult _isAddOrUpdatePersonDialogResult = DialogResult.No;
+
+        private void _GetIsAddOrUpdatePersonDialogResult(object sender, DialogResult dialogResult)
+        {
+            _isAddOrUpdatePersonDialogResult = dialogResult;
+        }
+
+        private bool _isUpdateLoginInfo = false;
+
+        private void _GetIsUpdateLoginInfo(object sender, bool status)
+        {
+            _isUpdateLoginInfo = status;
+        }
+
         private void _LoadData()
         {
             _SetupComboBoxUsersStatusItems();
             _SetupComboBoxFilterItems();
             _SetupUserFilters();
             _LoadUsersInfoToDataGridView();
+            frmCreateLoginInfo.CreatedLoginInfo += _GetCreatedLoginInfo;
+            frmUpdateLoginInfo.UpdateLoginInfo += _GetIsUpdateLoginInfo;
+            frmAddUpdatePersons.AddOrUpdatePersonDialogResultReceived += _GetIsAddOrUpdatePersonDialogResult;
         }
 
         private void frmManageUsers_Load(object sender, EventArgs e)
         {
             _LoadData();
         }
+
+        // >>
+
+        private void _OpenFormAddNewUser()
+        {
+            frmAddNewUser frm = new frmAddNewUser(); 
+            frm.ShowDialog();
+
+            if (_createdLoginIngo || _isAddOrUpdatePersonDialogResult == DialogResult.OK)
+            {
+                _LoadUsersInfoToDataGridView();
+                _createdLoginIngo = false;
+                _isAddOrUpdatePersonDialogResult = DialogResult.No;
+            }
+        }
+
+        private void btn_OpenfrmAddUpdatePersonInfo_Click(object sender, EventArgs e)
+        {
+            _OpenFormAddNewUser();
+        }
+
+        private void toolStripMenuItem_AddNewUser_Click(object sender, EventArgs e)
+        {
+            _OpenFormAddNewUser();
+        }
+
+        private int _GetID(string message)
+        {
+            var id = dataGridView_ShowUsersInfos.CurrentRow.Cells[message].Value;
+            return id != null ? Convert.ToInt32(id) : -1;
+        }
+
+        private void toolStripMenuItem_UpdateUserInfo_Click(object sender, EventArgs e)
+        {
+            int personID = _GetID("PersonID");
+            int UserID = _GetID("UserID");
+
+            frmUpdateUserInfo frm = new frmUpdateUserInfo(personID, UserID);
+            frm.ShowDialog();
+
+            if (_isUpdateLoginInfo || _isAddOrUpdatePersonDialogResult == DialogResult.OK)
+            {
+                _LoadUsersInfoToDataGridView();
+                _isUpdateLoginInfo = false;
+                _isAddOrUpdatePersonDialogResult = DialogResult.No;
+            }
+        }
+
+        
+        // >>
+
 
         private void comBox_FilterItems_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -159,7 +235,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
         {
             _UpdateUserIDAndPersonIDLabels();
         }
-
+        
         private void btn_Close_Click(object sender, EventArgs e)
         {
             this.Close();

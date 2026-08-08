@@ -138,6 +138,63 @@ namespace DVLD_BL
             }
         }
 
+        public static (clsOperationResult, clsPerson) GetActivePersonByID(int personID)
+        {
+            if (personID <= 0)
+                return (new clsOperationResult
+                {
+                    Status = enOperationStatus.Failed,
+                    Message = clsPersonValidationMessages.InvalidPersonIDMessage
+                }, null);
+
+            try
+            {
+                clsPerson person = clsPersonDAL.GetActivePersonByID(personID);
+
+                if (person != null)
+                    return (new clsOperationResult { Status = enOperationStatus.Success }, person);
+                else
+                    return (new clsOperationResult
+                    {
+                        Status = enOperationStatus.Failed,
+                        Message = clsPersonValidationMessages.PersonNotFoundMessage
+                    }, null);
+            }
+            catch (Exception)
+            {
+                return (new clsOperationResult
+                {
+                    Status = enOperationStatus.Exception,
+                    Message = clsGeneralValidationMessages.DatabaseOperationExceptionMessage
+                }, null);
+            }
+        }
+
+        public static (clsOperationResult, clsPerson) GetActivePersonByNationalNO(string nationalNo)
+        {
+            try
+            {
+                clsPerson person = clsPersonDAL.GetActivePersonByNationalNO(nationalNo);
+
+                if (person != null)
+                    return (new clsOperationResult { Status = enOperationStatus.Success }, person);
+                else
+                    return (new clsOperationResult
+                    {
+                        Status = enOperationStatus.Failed,
+                        Message = clsPersonValidationMessages.PersonNotFoundByNationalNOMessage
+                    }, null);
+            }
+            catch (Exception)
+            {
+                return (new clsOperationResult
+                {
+                    Status = enOperationStatus.Exception,
+                    Message = clsGeneralValidationMessages.DatabaseOperationExceptionMessage
+                }, null);
+            }
+        }
+
         public static List<clsPerson> GetAllPersonsInfo()
         {
             return clsPersonDAL.GetAllPersonsInfo();

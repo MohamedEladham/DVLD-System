@@ -1,4 +1,6 @@
-﻿namespace DVLD_System_Solution.Forms._004_Manage_Users
+﻿using Main_Screen.Forms.Persons;
+
+namespace DVLD_System_Solution.Forms._004_Manage_Users
 {
     partial class frmManageUsers
     {
@@ -13,6 +15,10 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
+            frmCreateLoginInfo.CreatedLoginInfo -= _GetCreatedLoginInfo;
+            frmUpdateLoginInfo.UpdateLoginInfo -= _GetIsUpdateLoginInfo;
+            frmAddUpdatePersons.AddOrUpdatePersonDialogResultReceived -= _GetIsAddOrUpdatePersonDialogResult;
+
             if (disposing && (components != null))
             {
                 components.Dispose();
@@ -28,6 +34,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -46,12 +53,21 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView_ShowUsersInfos = new System.Windows.Forms.DataGridView();
-            this.btn_OpenfrmAddUpdatePersonInfo = new System.Windows.Forms.Button();
+            this.btn_AddNewUser = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.contextMenuStrip_ActiveUsers = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem_ShowUserDetails = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem_AddNewUser = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem_UpdateUserInfo = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem_SoftDeleteUser = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.changeLoginInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_ShowUsersInfos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.contextMenuStrip_ActiveUsers.SuspendLayout();
             this.SuspendLayout();
             // 
             // label3
@@ -216,6 +232,7 @@
             this.dataGridView_ShowUsersInfos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView_ShowUsersInfos.ColumnHeadersHeight = 30;
             this.dataGridView_ShowUsersInfos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dataGridView_ShowUsersInfos.ContextMenuStrip = this.contextMenuStrip_ActiveUsers;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Tahoma", 12F);
@@ -243,17 +260,18 @@
             this.dataGridView_ShowUsersInfos.TabIndex = 228;
             this.dataGridView_ShowUsersInfos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_ShowUsersInfos_CellClick);
             // 
-            // btn_OpenfrmAddUpdatePersonInfo
+            // btn_AddNewUser
             // 
-            this.btn_OpenfrmAddUpdatePersonInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_OpenfrmAddUpdatePersonInfo.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
-            this.btn_OpenfrmAddUpdatePersonInfo.Image = global::DVLD_System_Solution.Properties.Resources.Add_New_User_32;
-            this.btn_OpenfrmAddUpdatePersonInfo.Location = new System.Drawing.Point(1085, 279);
-            this.btn_OpenfrmAddUpdatePersonInfo.Name = "btn_OpenfrmAddUpdatePersonInfo";
-            this.btn_OpenfrmAddUpdatePersonInfo.Size = new System.Drawing.Size(63, 56);
-            this.btn_OpenfrmAddUpdatePersonInfo.TabIndex = 234;
-            this.btn_OpenfrmAddUpdatePersonInfo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btn_OpenfrmAddUpdatePersonInfo.UseVisualStyleBackColor = false;
+            this.btn_AddNewUser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_AddNewUser.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
+            this.btn_AddNewUser.Image = global::DVLD_System_Solution.Properties.Resources.Add_New_User_32;
+            this.btn_AddNewUser.Location = new System.Drawing.Point(1085, 279);
+            this.btn_AddNewUser.Name = "btn_AddNewUser";
+            this.btn_AddNewUser.Size = new System.Drawing.Size(63, 56);
+            this.btn_AddNewUser.TabIndex = 234;
+            this.btn_AddNewUser.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_AddNewUser.UseVisualStyleBackColor = false;
+            this.btn_AddNewUser.Click += new System.EventHandler(this.btn_OpenfrmAddUpdatePersonInfo_Click);
             // 
             // pictureBox2
             // 
@@ -278,6 +296,72 @@
             this.pictureBox1.TabIndex = 227;
             this.pictureBox1.TabStop = false;
             // 
+            // contextMenuStrip_ActiveUsers
+            // 
+            this.contextMenuStrip_ActiveUsers.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.contextMenuStrip_ActiveUsers.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem_ShowUserDetails,
+            this.toolStripSeparator2,
+            this.toolStripMenuItem_AddNewUser,
+            this.toolStripMenuItem_UpdateUserInfo,
+            this.toolStripMenuItem_SoftDeleteUser,
+            this.toolStripSeparator1,
+            this.changeLoginInfoToolStripMenuItem});
+            this.contextMenuStrip_ActiveUsers.Name = "contextMenuStrip1";
+            this.contextMenuStrip_ActiveUsers.Size = new System.Drawing.Size(208, 228);
+            // 
+            // toolStripMenuItem_ShowUserDetails
+            // 
+            this.toolStripMenuItem_ShowUserDetails.Image = global::DVLD_System_Solution.Properties.Resources.Person_Details_32;
+            this.toolStripMenuItem_ShowUserDetails.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItem_ShowUserDetails.Name = "toolStripMenuItem_ShowUserDetails";
+            this.toolStripMenuItem_ShowUserDetails.Size = new System.Drawing.Size(207, 38);
+            this.toolStripMenuItem_ShowUserDetails.Text = "Show User Details";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(204, 6);
+            // 
+            // toolStripMenuItem_AddNewUser
+            // 
+            this.toolStripMenuItem_AddNewUser.Image = global::DVLD_System_Solution.Properties.Resources.Add_New_User_32;
+            this.toolStripMenuItem_AddNewUser.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItem_AddNewUser.Name = "toolStripMenuItem_AddNewUser";
+            this.toolStripMenuItem_AddNewUser.Size = new System.Drawing.Size(207, 38);
+            this.toolStripMenuItem_AddNewUser.Text = "Add New User";
+            this.toolStripMenuItem_AddNewUser.Click += new System.EventHandler(this.toolStripMenuItem_AddNewUser_Click);
+            // 
+            // toolStripMenuItem_UpdateUserInfo
+            // 
+            this.toolStripMenuItem_UpdateUserInfo.Image = global::DVLD_System_Solution.Properties.Resources.Edit_32;
+            this.toolStripMenuItem_UpdateUserInfo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItem_UpdateUserInfo.Name = "toolStripMenuItem_UpdateUserInfo";
+            this.toolStripMenuItem_UpdateUserInfo.Size = new System.Drawing.Size(207, 38);
+            this.toolStripMenuItem_UpdateUserInfo.Text = "Update User Info";
+            this.toolStripMenuItem_UpdateUserInfo.Click += new System.EventHandler(this.toolStripMenuItem_UpdateUserInfo_Click);
+            // 
+            // toolStripMenuItem_SoftDeleteUser
+            // 
+            this.toolStripMenuItem_SoftDeleteUser.Image = global::DVLD_System_Solution.Properties.Resources.Delete_32;
+            this.toolStripMenuItem_SoftDeleteUser.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItem_SoftDeleteUser.Name = "toolStripMenuItem_SoftDeleteUser";
+            this.toolStripMenuItem_SoftDeleteUser.Size = new System.Drawing.Size(207, 38);
+            this.toolStripMenuItem_SoftDeleteUser.Text = "Delete User";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(204, 6);
+            // 
+            // changeLoginInfoToolStripMenuItem
+            // 
+            this.changeLoginInfoToolStripMenuItem.Image = global::DVLD_System_Solution.Properties.Resources.User_Access_32;
+            this.changeLoginInfoToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.changeLoginInfoToolStripMenuItem.Name = "changeLoginInfoToolStripMenuItem";
+            this.changeLoginInfoToolStripMenuItem.Size = new System.Drawing.Size(207, 38);
+            this.changeLoginInfoToolStripMenuItem.Text = "Change Login Info";
+            // 
             // frmManageUsers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -291,7 +375,7 @@
             this.Controls.Add(this.lab_UserIDToText);
             this.Controls.Add(this.lab_PersonIDToText);
             this.Controls.Add(this.txt_SearchValue);
-            this.Controls.Add(this.btn_OpenfrmAddUpdatePersonInfo);
+            this.Controls.Add(this.btn_AddNewUser);
             this.Controls.Add(this.btn_Close);
             this.Controls.Add(this.comBox_FilterItems);
             this.Controls.Add(this.label2);
@@ -303,11 +387,13 @@
             this.MinimumSize = new System.Drawing.Size(1176, 812);
             this.Name = "frmManageUsers";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Users Manahements Screen";
+            this.Text = "Users Managements Screen";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmManageUsers_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_ShowUsersInfos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.contextMenuStrip_ActiveUsers.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -323,7 +409,7 @@
         private System.Windows.Forms.Label lab_UserIDToText;
         private System.Windows.Forms.Label lab_PersonIDToText;
         private System.Windows.Forms.TextBox txt_SearchValue;
-        private System.Windows.Forms.Button btn_OpenfrmAddUpdatePersonInfo;
+        private System.Windows.Forms.Button btn_AddNewUser;
         private System.Windows.Forms.Button btn_Close;
         private System.Windows.Forms.ComboBox comBox_FilterItems;
         private System.Windows.Forms.Label label2;
@@ -331,5 +417,13 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.DataGridView dataGridView_ShowUsersInfos;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip_ActiveUsers;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_ShowUserDetails;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_AddNewUser;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_UpdateUserInfo;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_SoftDeleteUser;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem changeLoginInfoToolStripMenuItem;
     }
 }

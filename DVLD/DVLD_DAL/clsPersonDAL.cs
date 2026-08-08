@@ -184,6 +184,82 @@ namespace DVLD_DAL
             return personInfo;
         }
 
+        public static clsPerson GetActivePersonByID(int personID)
+        {
+            clsPerson personInfo = null;
+
+            string query = @"Select 
+                                    [PersonID], 
+                                    [NationalNO], 
+                                    [FirstName], 
+                                    [SecondName], 
+                                    [ThirdName], 
+                                    [LastName], 
+                                    [Gender], 
+                                    [DateOfBirth], 
+                                    [Email], 
+                                    [Phone], 
+                                    [Address], 
+                                    [NationalityCountryID], 
+                                    [ImageName],
+                                    [IsDeleted]
+                                From Persons
+                                Where PersonID = @PersonID AND IsDeleted = 0";
+
+            using (SqlConnection connection = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.Add("@PersonID", System.Data.SqlDbType.Int).Value = personID;
+                connection.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                        personInfo = _MapReaderToPerson(reader);
+                }
+            }
+
+            return personInfo;
+        }
+
+        public static clsPerson GetActivePersonByNationalNO(string nationalNo)
+        {
+            clsPerson personInfo = null;
+
+            string query = @"Select 
+                                    [PersonID], 
+                                    [NationalNO], 
+                                    [FirstName], 
+                                    [SecondName], 
+                                    [ThirdName], 
+                                    [LastName], 
+                                    [Gender], 
+                                    [DateOfBirth], 
+                                    [Email], 
+                                    [Phone], 
+                                    [Address], 
+                                    [NationalityCountryID], 
+                                    [ImageName],
+                                    [IsDeleted]
+                                From Persons
+                                Where NationalNO = @NationalNO AND IsDeleted = 0";
+
+            using (SqlConnection connection = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.Add("@NationalNO", System.Data.SqlDbType.VarChar, 250).Value = nationalNo;
+                connection.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                        personInfo = _MapReaderToPerson(reader);
+                }
+            }
+
+            return personInfo;
+        }
+
         public static List<clsPerson> GetAllPersonsInfo()
         {
             List<clsPerson> persons = new List<clsPerson>();

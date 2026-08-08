@@ -105,9 +105,13 @@ namespace DVLD_System_Solution.Forms._003_Manage_People.Controls
                 _SetPersonImage(imageName);
         }
 
+        public delegate void SendPersonEventHandler(object sender, int personID);
+        public static event SendPersonEventHandler SendPersonID;
+
         private void _FillUserControlByPersonInfo(clsPerson personInfo)
         {
             _personID = personInfo.PersonID;
+            SendPersonID?.Invoke(this, _personID);
             lab_PersonID.Text = personInfo.PersonID.ToString();
             lab_Name.Text = personInfo.FirstName + " - " + personInfo.SecondName + " - " + personInfo.ThirdName + " - " + personInfo.LastName;
             lab_NationalNO.Text = personInfo.NationalNO;
@@ -123,6 +127,58 @@ namespace DVLD_System_Solution.Forms._003_Manage_People.Controls
         public void LoadPersonByID(int personID)
         {
             (clsOperationResult result, clsPerson person) = clsPersonBL.GetPersonByID(personID);
+
+            switch (result.Status)
+            {
+                case enOperationStatus.Success:
+                    if (person != null)
+                    {
+                        _FillUserControlByPersonInfo(person);
+                        linkLabel_EditPerson.Enabled = true;
+                    }
+                    break;
+
+                case enOperationStatus.Failed:
+                    MessageBox.Show(result.Message, "Failed Operation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    linkLabel_EditPerson.Enabled = false;
+                    break;
+
+                case enOperationStatus.Exception:
+                    MessageBox.Show(result.Message, "Database Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    linkLabel_EditPerson.Enabled = false;
+                    break;
+            }
+        }
+
+        public void LoadActivePersonByID(int personID)
+        {
+            (clsOperationResult result, clsPerson person) = clsPersonBL.GetActivePersonByID(personID);
+
+            switch (result.Status)
+            {
+                case enOperationStatus.Success:
+                    if (person != null)
+                    {
+                        _FillUserControlByPersonInfo(person);
+                        linkLabel_EditPerson.Enabled = true;
+                    }
+                    break;
+
+                case enOperationStatus.Failed:
+                    MessageBox.Show(result.Message, "Failed Operation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    linkLabel_EditPerson.Enabled = false;
+                    break;
+
+                case enOperationStatus.Exception:
+                    MessageBox.Show(result.Message, "Database Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    linkLabel_EditPerson.Enabled = false;
+                    break;
+            }
+        }
+
+        public void LoadActivePersonByNationalNO(string NationalNo)
+        {
+            (clsOperationResult result, clsPerson person) = clsPersonBL.GetActivePersonByNationalNO(NationalNo);
 
             switch (result.Status)
             {
