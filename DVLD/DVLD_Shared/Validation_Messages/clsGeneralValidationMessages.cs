@@ -8,6 +8,7 @@ namespace DVLD_Shared
 {
     public class clsGeneralValidationMessages
     {
+        public static string NoDataInDataGridMessage = "No data available in the data grid.";
         public static string DatabaseOperationExceptionMessage = "An error occurred while processing the database operation.";
     }
 }

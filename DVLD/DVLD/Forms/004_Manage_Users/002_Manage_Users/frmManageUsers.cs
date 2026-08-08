@@ -117,7 +117,6 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
 
                 _BindData(_activeUsersGridViewDto);
                 _UpdateUserIDAndPersonIDLabels();
-
             }
             catch
             {
@@ -135,7 +134,6 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
 
                 _BindData(_notActiveUsersGridViewDto);
                 _UpdateUserIDAndPersonIDLabels();
-
             }
             catch
             {
@@ -172,6 +170,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             _SetupComboBoxFilterItems();
             _SetupUserFilters();
             _LoadActiveUsersInfoToDataGridView();
+            _UpdateFilterItems();
             frmCreateLoginInfo.CreatedLoginInfo += _GetCreatedLoginInfo;
             frmUpdateLoginInfo.UpdateLoginInfo += _GetIsUpdateLoginInfo;
             frmAddUpdatePersons.AddOrUpdatePersonDialogResultReceived += _GetIsAddOrUpdatePersonDialogResult;
@@ -215,6 +214,12 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
 
         private void toolStripMenuItem_UpdateUserInfo_Click(object sender, EventArgs e)
         {
+            if (dataGridView_ShowUsersInfos.CurrentRow == null)
+            {
+                MessageBox.Show(clsGeneralValidationMessages.NoDataInDataGridMessage, "No Data", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             int personID = _GetID("PersonID");
             int UserID = _GetID("UserID");
 
@@ -232,15 +237,50 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
 
         // >>
 
+        private void _UpdateFilterItems()
+        {
+            if (dataGridView_ShowUsersInfos.DataSource == null)
+                comBox_FilterItems.Enabled = false;
+            else
+                comBox_FilterItems.Enabled = true;
+        }
+
+        private void _UpdateContextMenues()
+        {
+            if (dataGridView_ShowUsersInfos.DataSource == null)
+            {
+                contextMenuStrip_ActiveUsers.Enabled = false;
+                contextMenuStrip_NotActiveUsers.Enabled = false;
+            }
+            else
+            {
+                contextMenuStrip_ActiveUsers.Enabled = true;
+                contextMenuStrip_NotActiveUsers.Enabled = true;
+            }
+        }
+       
+        private void dataGridView_ShowUsersInfos_MouseDown(object sender, MouseEventArgs e)
+        {
+            _UpdateContextMenues();
+        }
+
         private void comBox_UserStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
             comBox_FilterItems.SelectedValue = "None";
 
             if(comBox_UserStatus.SelectedValue.ToString() == "Active")
+            {
                 _LoadActiveUsersInfoToDataGridView();
+                dataGridView_ShowUsersInfos.ContextMenuStrip = contextMenuStrip_ActiveUsers;
+            }
 
             if (comBox_UserStatus.SelectedValue.ToString() == "NotActive")
+            {
                 _LoadNotActiveUsersInfoToDataGridView();
+                dataGridView_ShowUsersInfos.ContextMenuStrip = contextMenuStrip_NotActiveUsers;
+            }
+
+            _UpdateFilterItems();
         }
 
         private void comBox_FilterItems_SelectedIndexChanged(object sender, EventArgs e)
@@ -314,5 +354,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
         {
             this.Close();
         }
+
+       
     }
 }

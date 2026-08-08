@@ -2,7 +2,7 @@
 
 namespace DVLD_System_Solution.Forms._004_Manage_Users.Controls
 {
-    partial class uconPersonCardWithUserFilter
+    partial class uconPersonCardWithIsUserFilter
     {
         /// <summary> 
         /// Required designer variable.

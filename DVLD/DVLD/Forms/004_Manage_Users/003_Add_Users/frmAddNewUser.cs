@@ -29,7 +29,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
         {
             uconShowPersonInfo.SendPersonID += _GetPersonID;
             frmCreateLoginInfo.CreatedLoginInfo += _UpdateButtonModeCreateLoginInfo;
-            uconPersonCardWithUserFilter.SendIsUser += _UpdateButtonModeCreateLoginInfo;
+            uconPersonCardWithIsUserFilter.SendIsUser += _UpdateButtonModeCreateLoginInfo;
         }
         
         private void btn_CreateLoginInfo_Click(object sender, EventArgs e)

@@ -64,10 +64,15 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             this.btn_AddNewUser = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.contextMenuStrip_NotActiveUsers = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem_RestoreNotActiveUser = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem_ShowNotActiveUserDetails = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_ShowUsersInfos)).BeginInit();
             this.contextMenuStrip_ActiveUsers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.contextMenuStrip_NotActiveUsers.SuspendLayout();
             this.SuspendLayout();
             // 
             // label3
@@ -260,6 +265,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             this.dataGridView_ShowUsersInfos.Size = new System.Drawing.Size(1136, 376);
             this.dataGridView_ShowUsersInfos.TabIndex = 228;
             this.dataGridView_ShowUsersInfos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_ShowUsersInfos_CellClick);
+            this.dataGridView_ShowUsersInfos.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dataGridView_ShowUsersInfos_MouseDown);
             // 
             // contextMenuStrip_ActiveUsers
             // 
@@ -363,6 +369,37 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             this.pictureBox1.TabIndex = 227;
             this.pictureBox1.TabStop = false;
             // 
+            // contextMenuStrip_NotActiveUsers
+            // 
+            this.contextMenuStrip_NotActiveUsers.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.contextMenuStrip_NotActiveUsers.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem_RestoreNotActiveUser,
+            this.toolStripSeparator3,
+            this.toolStripMenuItem_ShowNotActiveUserDetails});
+            this.contextMenuStrip_NotActiveUsers.Name = "contextMenuStrip1";
+            this.contextMenuStrip_NotActiveUsers.Size = new System.Drawing.Size(173, 86);
+            // 
+            // toolStripMenuItem_RestoreNotActiveUser
+            // 
+            this.toolStripMenuItem_RestoreNotActiveUser.Image = global::DVLD_System_Solution.Properties.Resources.Restore_24;
+            this.toolStripMenuItem_RestoreNotActiveUser.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItem_RestoreNotActiveUser.Name = "toolStripMenuItem_RestoreNotActiveUser";
+            this.toolStripMenuItem_RestoreNotActiveUser.Size = new System.Drawing.Size(172, 38);
+            this.toolStripMenuItem_RestoreNotActiveUser.Text = "Restore User";
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(169, 6);
+            // 
+            // toolStripMenuItem_ShowNotActiveUserDetails
+            // 
+            this.toolStripMenuItem_ShowNotActiveUserDetails.Image = global::DVLD_System_Solution.Properties.Resources.Person_Details_32;
+            this.toolStripMenuItem_ShowNotActiveUserDetails.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItem_ShowNotActiveUserDetails.Name = "toolStripMenuItem_ShowNotActiveUserDetails";
+            this.toolStripMenuItem_ShowNotActiveUserDetails.Size = new System.Drawing.Size(172, 38);
+            this.toolStripMenuItem_ShowNotActiveUserDetails.Text = "Show Details";
+            // 
             // frmManageUsers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -395,6 +432,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             this.contextMenuStrip_ActiveUsers.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.contextMenuStrip_NotActiveUsers.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -426,5 +464,9 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_SoftDeleteUser;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem changeLoginInfoToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip_NotActiveUsers;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_RestoreNotActiveUser;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_ShowNotActiveUserDetails;
     }
 }

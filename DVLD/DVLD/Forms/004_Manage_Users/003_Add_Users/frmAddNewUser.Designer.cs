@@ -18,7 +18,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
         {
             uconShowPersonInfo.SendPersonID -= _GetPersonID;
             frmCreateLoginInfo.CreatedLoginInfo -= _UpdateButtonModeCreateLoginInfo;
-            uconPersonCardWithUserFilter.SendIsUser -= _UpdateButtonModeCreateLoginInfo;
+            uconPersonCardWithIsUserFilter.SendIsUser -= _UpdateButtonModeCreateLoginInfo;
 
             if (disposing && (components != null))
             {
@@ -37,7 +37,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAddNewUser));
             this.lab_AddNewUser = new System.Windows.Forms.Label();
-            this.uconPersonCardWithUserFilter1 = new DVLD_System_Solution.Forms._004_Manage_Users.Controls.uconPersonCardWithUserFilter();
+            this.uconPersonCardWithIsUserFilter1 = new DVLD_System_Solution.Forms._004_Manage_Users.Controls.uconPersonCardWithIsUserFilter();
             this.btn_Close = new System.Windows.Forms.Button();
             this.btn_CreateLoginInfo = new System.Windows.Forms.Button();
             this.pictureBox11 = new System.Windows.Forms.PictureBox();
@@ -57,15 +57,15 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             this.lab_AddNewUser.Text = "Add New User";
             this.lab_AddNewUser.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // uconPersonCardWithUserFilter1
+            // uconPersonCardWithIsUserFilter1
             // 
-            this.uconPersonCardWithUserFilter1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.uconPersonCardWithIsUserFilter1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.uconPersonCardWithUserFilter1.AutoSize = true;
-            this.uconPersonCardWithUserFilter1.Location = new System.Drawing.Point(12, 128);
-            this.uconPersonCardWithUserFilter1.Name = "uconPersonCardWithUserFilter1";
-            this.uconPersonCardWithUserFilter1.Size = new System.Drawing.Size(1033, 448);
-            this.uconPersonCardWithUserFilter1.TabIndex = 224;
+            this.uconPersonCardWithIsUserFilter1.AutoSize = true;
+            this.uconPersonCardWithIsUserFilter1.Location = new System.Drawing.Point(12, 128);
+            this.uconPersonCardWithIsUserFilter1.Name = "uconPersonCardWithIsUserFilter1";
+            this.uconPersonCardWithIsUserFilter1.Size = new System.Drawing.Size(1033, 448);
+            this.uconPersonCardWithIsUserFilter1.TabIndex = 224;
             // 
             // btn_Close
             // 
@@ -122,7 +122,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             this.ClientSize = new System.Drawing.Size(1057, 642);
             this.Controls.Add(this.btn_Close);
             this.Controls.Add(this.btn_CreateLoginInfo);
-            this.Controls.Add(this.uconPersonCardWithUserFilter1);
+            this.Controls.Add(this.uconPersonCardWithIsUserFilter1);
             this.Controls.Add(this.pictureBox11);
             this.Controls.Add(this.lab_AddNewUser);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -143,7 +143,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
 
         private System.Windows.Forms.PictureBox pictureBox11;
         private System.Windows.Forms.Label lab_AddNewUser;
-        private Controls.uconPersonCardWithUserFilter uconPersonCardWithUserFilter1;
+        private Controls.uconPersonCardWithIsUserFilter uconPersonCardWithIsUserFilter1;
         private System.Windows.Forms.Button btn_Close;
         private System.Windows.Forms.Button btn_CreateLoginInfo;
     }

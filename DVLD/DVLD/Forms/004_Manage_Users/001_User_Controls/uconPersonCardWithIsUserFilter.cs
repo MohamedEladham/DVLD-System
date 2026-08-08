@@ -7,11 +7,11 @@ using DVLD_System_Solution.Forms._003_Manage_People.Controls;
 
 namespace DVLD_System_Solution.Forms._004_Manage_Users.Controls
 {
-    public partial class uconPersonCardWithUserFilter : UserControl
+    public partial class uconPersonCardWithIsUserFilter : UserControl
     {
         private int _personID = -1;
 
-        public uconPersonCardWithUserFilter()
+        public uconPersonCardWithIsUserFilter()
         {
             InitializeComponent();
         }

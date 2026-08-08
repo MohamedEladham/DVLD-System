@@ -97,11 +97,11 @@
     <Compile Include="Forms\003_Manage_People\004_Show_Person_Info\frmShowPersonInfo.Designer.cs">
       <DependentUpon>frmShowPersonInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\004_Manage_Users\001_User_Controls\uconPersonCardWithUserFilter.cs">
+    <Compile Include="Forms\004_Manage_Users\001_User_Controls\uconPersonCardWithIsUserFilter.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\004_Manage_Users\001_User_Controls\uconPersonCardWithUserFilter.Designer.cs">
-      <DependentUpon>uconPersonCardWithUserFilter.cs</DependentUpon>
+    <Compile Include="Forms\004_Manage_Users\001_User_Controls\uconPersonCardWithIsUserFilter.Designer.cs">
+      <DependentUpon>uconPersonCardWithIsUserFilter.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\004_Manage_Users\001_User_Controls\uconShowPersonAndUserInfo.cs">
       <SubType>UserControl</SubType>
@@ -176,8 +176,8 @@
     <EmbeddedResource Include="Forms\003_Manage_People\004_Show_Person_Info\frmShowPersonInfo.resx">
       <DependentUpon>frmShowPersonInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\004_Manage_Users\001_User_Controls\uconPersonCardWithUserFilter.resx">
-      <DependentUpon>uconPersonCardWithUserFilter.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\004_Manage_Users\001_User_Controls\uconPersonCardWithIsUserFilter.resx">
+      <DependentUpon>uconPersonCardWithIsUserFilter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\004_Manage_Users\001_User_Controls\uconShowPersonAndUserInfo.resx">
       <DependentUpon>uconShowPersonAndUserInfo.cs</DependentUpon>
