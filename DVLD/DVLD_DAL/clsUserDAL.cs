@@ -159,9 +159,12 @@ namespace DVLD_DAL
             return users;
         }
 
-        private static clsUserInfoGridViewDto _MapReaderToUserGridViewDto(SqlDataReader reader)
+        // >>
+
+
+        private static clsActiveUserInfoGridViewDto _MapReaderToActiveUserGridViewDto(SqlDataReader reader)
         {
-            return new clsUserInfoGridViewDto
+            return new clsActiveUserInfoGridViewDto
             {
                 UserID = (int)reader["UserID"],
                 PersonID = (int)reader["PersonID"],
@@ -171,9 +174,9 @@ namespace DVLD_DAL
             };
         }
 
-        public static List<clsUserInfoGridViewDto> GetUsersForGridView()
+        public static List<clsActiveUserInfoGridViewDto> GetUsersForGridView()
         {
-            List<clsUserInfoGridViewDto> users = new List<clsUserInfoGridViewDto>();
+            List<clsActiveUserInfoGridViewDto> users = new List<clsActiveUserInfoGridViewDto>();
 
             string query = @"Select 
                                     U.UserID, 
@@ -194,7 +197,7 @@ namespace DVLD_DAL
                 {
                     while (reader.Read())
                     {
-                        clsUserInfoGridViewDto user = _MapReaderToUserGridViewDto(reader);
+                        clsActiveUserInfoGridViewDto user = _MapReaderToActiveUserGridViewDto(reader);
                         users.Add(user);
                     }
                 }
@@ -202,6 +205,90 @@ namespace DVLD_DAL
 
             return users;
         }
+
+        public static List<clsActiveUserInfoGridViewDto> GetActiveUsersForGridView()
+        {
+            List<clsActiveUserInfoGridViewDto> users = new List<clsActiveUserInfoGridViewDto>();
+
+            string query = @"Select 
+                                    U.UserID, 
+                                    U.PersonID, 
+                                    U.UserName, 
+                                    P.FirstName, 
+                                    P.SecondName, 
+                                    P.ThirdName, 
+                                    P.LastName, 
+                                    U.IsActive 
+                            From Users U INNER JOIN Persons P ON  U.PersonID = P.PersonID AND U.IsActive = 1 ORDER BY U.UserID";
+
+            using (SqlConnection connection = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                connection.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        clsActiveUserInfoGridViewDto user = _MapReaderToActiveUserGridViewDto(reader);
+                        users.Add(user);
+                    }
+                }
+            }
+
+            return users;
+        }
+
+        // >>
+
+        private static clsNotActiveUserInfoGridViewDto _MapReaderToNotActiveUserGridViewDto(SqlDataReader reader)
+        {
+            return new clsNotActiveUserInfoGridViewDto
+            {
+                UserID = (int)reader["UserID"],
+                PersonID = (int)reader["PersonID"],
+                UserName = (string)reader["UserName"],
+                FullName = Convert.ToString(reader["FirstName"] + " " + reader["SecondName"] + " " + reader["ThirdName"] + " " + reader["LastName"]),
+                IsActive = (bool)reader["IsActive"],
+                DeletedAt = reader.IsDBNull(reader.GetOrdinal("DeletedAt")) ? null : (DateTime?)reader["DeletedAt"]
+            };
+        }
+
+        public static List<clsNotActiveUserInfoGridViewDto> GetNotActiveUsersForGridView()
+        {
+            List<clsNotActiveUserInfoGridViewDto> users = new List<clsNotActiveUserInfoGridViewDto>();
+
+            string query = @"Select 
+                                    U.UserID, 
+                                    U.PersonID, 
+                                    U.UserName, 
+                                    P.FirstName, 
+                                    P.SecondName, 
+                                    P.ThirdName, 
+                                    P.LastName, 
+                                    U.IsActive,
+                                    U.DeletedAt
+                            From Users U INNER JOIN Persons P ON  U.PersonID = P.PersonID AND U.IsActive = 0 ORDER BY U.UserID";
+
+            using (SqlConnection connection = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                connection.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        clsNotActiveUserInfoGridViewDto user = _MapReaderToNotActiveUserGridViewDto(reader);
+                        users.Add(user);
+                    }
+                }
+            }
+
+            return users;
+        }
+
+
+        // >>
+
 
         public static bool AddNewUserAndGetNewID(clsUser user, out int newID)
         {

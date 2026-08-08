@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DVLD_Models.User
 {
-    public class clsUserInfoGridViewDto
+    public class clsActiveUserInfoGridViewDto
     {
         public int UserID { set; get; }
         public int PersonID { set; get; }

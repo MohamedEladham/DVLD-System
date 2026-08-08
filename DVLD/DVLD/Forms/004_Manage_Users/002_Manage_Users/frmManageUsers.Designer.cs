@@ -53,9 +53,6 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView_ShowUsersInfos = new System.Windows.Forms.DataGridView();
-            this.btn_AddNewUser = new System.Windows.Forms.Button();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip_ActiveUsers = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem_ShowUserDetails = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -64,10 +61,13 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             this.toolStripMenuItem_SoftDeleteUser = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.changeLoginInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btn_AddNewUser = new System.Windows.Forms.Button();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_ShowUsersInfos)).BeginInit();
+            this.contextMenuStrip_ActiveUsers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.contextMenuStrip_ActiveUsers.SuspendLayout();
             this.SuspendLayout();
             // 
             // label3
@@ -90,6 +90,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             this.comBox_UserStatus.Name = "comBox_UserStatus";
             this.comBox_UserStatus.Size = new System.Drawing.Size(232, 24);
             this.comBox_UserStatus.TabIndex = 241;
+            this.comBox_UserStatus.SelectedIndexChanged += new System.EventHandler(this.comBox_UserStatus_SelectedIndexChanged);
             // 
             // lab_RecordsCount
             // 
@@ -260,42 +261,6 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             this.dataGridView_ShowUsersInfos.TabIndex = 228;
             this.dataGridView_ShowUsersInfos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_ShowUsersInfos_CellClick);
             // 
-            // btn_AddNewUser
-            // 
-            this.btn_AddNewUser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_AddNewUser.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
-            this.btn_AddNewUser.Image = global::DVLD_System_Solution.Properties.Resources.Add_New_User_32;
-            this.btn_AddNewUser.Location = new System.Drawing.Point(1085, 279);
-            this.btn_AddNewUser.Name = "btn_AddNewUser";
-            this.btn_AddNewUser.Size = new System.Drawing.Size(63, 56);
-            this.btn_AddNewUser.TabIndex = 234;
-            this.btn_AddNewUser.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btn_AddNewUser.UseVisualStyleBackColor = false;
-            this.btn_AddNewUser.Click += new System.EventHandler(this.btn_OpenfrmAddUpdatePersonInfo_Click);
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox2.Image = global::DVLD_System_Solution.Properties.Resources.Users2_400;
-            this.pictureBox2.Location = new System.Drawing.Point(462, 24);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(227, 165);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 229;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.Image = global::DVLD_System_Solution.Properties.Resources.DVLD_Logo2;
-            this.pictureBox1.Location = new System.Drawing.Point(927, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(221, 192);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 227;
-            this.pictureBox1.TabStop = false;
-            // 
             // contextMenuStrip_ActiveUsers
             // 
             this.contextMenuStrip_ActiveUsers.Font = new System.Drawing.Font("Segoe UI", 10F);
@@ -308,7 +273,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             this.toolStripSeparator1,
             this.changeLoginInfoToolStripMenuItem});
             this.contextMenuStrip_ActiveUsers.Name = "contextMenuStrip1";
-            this.contextMenuStrip_ActiveUsers.Size = new System.Drawing.Size(208, 228);
+            this.contextMenuStrip_ActiveUsers.Size = new System.Drawing.Size(208, 206);
             // 
             // toolStripMenuItem_ShowUserDetails
             // 
@@ -362,6 +327,42 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             this.changeLoginInfoToolStripMenuItem.Size = new System.Drawing.Size(207, 38);
             this.changeLoginInfoToolStripMenuItem.Text = "Change Login Info";
             // 
+            // btn_AddNewUser
+            // 
+            this.btn_AddNewUser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_AddNewUser.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
+            this.btn_AddNewUser.Image = global::DVLD_System_Solution.Properties.Resources.Add_New_User_32;
+            this.btn_AddNewUser.Location = new System.Drawing.Point(1085, 279);
+            this.btn_AddNewUser.Name = "btn_AddNewUser";
+            this.btn_AddNewUser.Size = new System.Drawing.Size(63, 56);
+            this.btn_AddNewUser.TabIndex = 234;
+            this.btn_AddNewUser.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_AddNewUser.UseVisualStyleBackColor = false;
+            this.btn_AddNewUser.Click += new System.EventHandler(this.btn_OpenfrmAddUpdatePersonInfo_Click);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox2.Image = global::DVLD_System_Solution.Properties.Resources.Users2_400;
+            this.pictureBox2.Location = new System.Drawing.Point(462, 24);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(227, 165);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 229;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.Image = global::DVLD_System_Solution.Properties.Resources.DVLD_Logo2;
+            this.pictureBox1.Location = new System.Drawing.Point(927, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(221, 192);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 227;
+            this.pictureBox1.TabStop = false;
+            // 
             // frmManageUsers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -391,9 +392,9 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmManageUsers_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_ShowUsersInfos)).EndInit();
+            this.contextMenuStrip_ActiveUsers.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.contextMenuStrip_ActiveUsers.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

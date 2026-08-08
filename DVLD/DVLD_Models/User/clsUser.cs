@@ -13,5 +13,7 @@ namespace DVLD_Models.User
         public string UserName { set; get; }
         public string Password { set; get; }
         public bool IsActive { set; get; }
+
+        public DateTime? DeletedAt { set; get; }
     }
 }

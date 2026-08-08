@@ -31,7 +31,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             }
         }
 
-        private void _BindData(List<clsUserInfoGridViewDto> data)
+        private void _BindData(List<clsActiveUserInfoGridViewDto> data)
         {
             dataGridView_ShowUsersInfos.DataSource = data;
 
@@ -46,6 +46,25 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
            
             lab_RecordsCount.Text = data == null ? "0" : data.Count.ToString();
         }
+
+        private void _BindData(List<clsNotActiveUserInfoGridViewDto> data)
+        {
+            dataGridView_ShowUsersInfos.DataSource = data;
+
+            if (data != null)
+            {
+                dataGridView_ShowUsersInfos.Columns["UserID"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridView_ShowUsersInfos.Columns["PersonID"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridView_ShowUsersInfos.Columns["UserName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridView_ShowUsersInfos.Columns["IsActive"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridView_ShowUsersInfos.Columns["DeletedAt"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            }
+
+
+            lab_RecordsCount.Text = data == null ? "0" : data.Count.ToString();
+        }
+
+        // >>
 
         private void _SetupComboBoxUsersStatusItems()
         {
@@ -79,21 +98,24 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
         }
 
 
-        private Dictionary<string, Func<clsUserInfoGridViewDto, string, bool>> _filtersForActiveUsers;
+        private Dictionary<string, Func<clsActiveUserInfoGridViewDto, string, bool>> _filtersForActiveUsers;
+        private Dictionary<string, Func<clsNotActiveUserInfoGridViewDto, string, bool>> _filtersForNotActiveUsers;
         private void _SetupUserFilters()
         {
-            _filtersForActiveUsers = clsUserFilterService.GetUserFilters();
+            _filtersForActiveUsers = clsUserFilterService.GetActiveUserFilters();
+            _filtersForNotActiveUsers = clsUserFilterService.GetNotActiveUserFilters();
         }
 
+        // >>
 
-        List<clsUserInfoGridViewDto> _usersGridViewDto = null;
-        private void _LoadUsersInfoToDataGridView()
+        List<clsActiveUserInfoGridViewDto> _activeUsersGridViewDto = null;
+        private void _LoadActiveUsersInfoToDataGridView()
         {
             try
             {
-                _usersGridViewDto = clsUserBL.GetUsersForGridView();
+                _activeUsersGridViewDto = clsUserBL.GetActiveUsersForGridView();
 
-                _BindData(_usersGridViewDto);
+                _BindData(_activeUsersGridViewDto);
                 _UpdateUserIDAndPersonIDLabels();
 
             }
@@ -102,6 +124,26 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
                 MessageBox.Show(clsGeneralValidationMessages.DatabaseOperationExceptionMessage, "Has Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
+        List<clsNotActiveUserInfoGridViewDto> _notActiveUsersGridViewDto = null;
+        private void _LoadNotActiveUsersInfoToDataGridView()
+        {
+            try
+            {
+                _notActiveUsersGridViewDto = clsUserBL.GetNotActiveUsersForGridView();
+
+                _BindData(_notActiveUsersGridViewDto);
+                _UpdateUserIDAndPersonIDLabels();
+
+            }
+            catch
+            {
+                MessageBox.Show(clsGeneralValidationMessages.DatabaseOperationExceptionMessage, "Has Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // >>
 
         private bool _createdLoginIngo = false;
 
@@ -129,7 +171,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             _SetupComboBoxUsersStatusItems();
             _SetupComboBoxFilterItems();
             _SetupUserFilters();
-            _LoadUsersInfoToDataGridView();
+            _LoadActiveUsersInfoToDataGridView();
             frmCreateLoginInfo.CreatedLoginInfo += _GetCreatedLoginInfo;
             frmUpdateLoginInfo.UpdateLoginInfo += _GetIsUpdateLoginInfo;
             frmAddUpdatePersons.AddOrUpdatePersonDialogResultReceived += _GetIsAddOrUpdatePersonDialogResult;
@@ -149,7 +191,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
 
             if (_createdLoginIngo || _isAddOrUpdatePersonDialogResult == DialogResult.OK)
             {
-                _LoadUsersInfoToDataGridView();
+                _LoadActiveUsersInfoToDataGridView();
                 _createdLoginIngo = false;
                 _isAddOrUpdatePersonDialogResult = DialogResult.No;
             }
@@ -181,15 +223,25 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
 
             if (_isUpdateLoginInfo || _isAddOrUpdatePersonDialogResult == DialogResult.OK)
             {
-                _LoadUsersInfoToDataGridView();
+                _LoadActiveUsersInfoToDataGridView();
                 _isUpdateLoginInfo = false;
                 _isAddOrUpdatePersonDialogResult = DialogResult.No;
             }
         }
 
-        
+
         // >>
 
+        private void comBox_UserStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comBox_FilterItems.SelectedValue = "None";
+
+            if(comBox_UserStatus.SelectedValue.ToString() == "Active")
+                _LoadActiveUsersInfoToDataGridView();
+
+            if (comBox_UserStatus.SelectedValue.ToString() == "NotActive")
+                _LoadNotActiveUsersInfoToDataGridView();
+        }
 
         private void comBox_FilterItems_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -205,7 +257,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
         {
             if (string.IsNullOrWhiteSpace(searchValue))
             {
-                _BindData(_usersGridViewDto);
+                _BindData(_activeUsersGridViewDto);
                 return;
             }
 
@@ -213,8 +265,26 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
 
             if (_filtersForActiveUsers.ContainsKey(filterSelected))
             {
-                List<clsUserInfoGridViewDto> result = clsUserFilterService.UsersFilters(
-                    _usersGridViewDto, _filtersForActiveUsers, filterSelected, searchValue);
+                List<clsActiveUserInfoGridViewDto> result = clsUserFilterService.ActiveUsersFilters(
+                    _activeUsersGridViewDto, _filtersForActiveUsers, filterSelected, searchValue);
+                _BindData(result);
+            }
+        }
+
+        private void _ApplyFilterWithNotActiveUsers(string searchValue)
+        {
+            if (string.IsNullOrWhiteSpace(searchValue))
+            {
+                _BindData(_notActiveUsersGridViewDto);
+                return;
+            }
+
+            string filterSelected = comBox_FilterItems.SelectedValue.ToString();
+
+            if (_filtersForNotActiveUsers.ContainsKey(filterSelected))
+            {
+                List<clsNotActiveUserInfoGridViewDto> result = clsUserFilterService.NotActiveUsersFilters(
+                    _notActiveUsersGridViewDto, _filtersForNotActiveUsers, filterSelected, searchValue);
                 _BindData(result);
             }
         }
@@ -223,7 +293,11 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
         {
             string searchValue = txt_SearchValue.Text.Trim();
 
-            _ApplyFilterWithActiveUsers(searchValue);
+            if (comBox_UserStatus.SelectedValue.ToString() == "Active")
+                _ApplyFilterWithActiveUsers(searchValue);
+
+            if (comBox_UserStatus.SelectedValue.ToString() == "NotActive")
+                _ApplyFilterWithNotActiveUsers(searchValue);
         }
 
         private void txt_SearchValue_TextChanged(object sender, EventArgs e)

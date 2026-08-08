@@ -23,7 +23,7 @@ namespace DVLD_System_Solution
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmMainScreen());
+            Application.Run(new frmManageUsers());
         }
     }
 }

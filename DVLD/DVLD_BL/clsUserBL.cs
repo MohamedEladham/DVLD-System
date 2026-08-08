@@ -83,9 +83,19 @@ namespace DVLD_BL
             return clsUserDAL.GetAllUsersInfo();
         }
 
-        public static List<clsUserInfoGridViewDto> GetUsersForGridView()
+        public static List<clsActiveUserInfoGridViewDto> GetUsersForGridView()
         {
             return clsUserDAL.GetUsersForGridView();
+        }
+
+        public static List<clsActiveUserInfoGridViewDto> GetActiveUsersForGridView()
+        {
+            return clsUserDAL.GetActiveUsersForGridView();
+        }
+
+        public static List<clsNotActiveUserInfoGridViewDto> GetNotActiveUsersForGridView()
+        {
+            return clsUserDAL.GetNotActiveUsersForGridView();
         }
 
         public static clsOperationResult AddNewUser(clsUser user)
