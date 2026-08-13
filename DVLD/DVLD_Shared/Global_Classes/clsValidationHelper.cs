@@ -27,6 +27,14 @@ namespace DVLD_Shared.Global_Classes
 
         // >>
 
+        public static DateTime? GetDeletedDate(bool status)
+        {
+            if (status)
+                return null;
+
+            return DateTime.Now;
+        }
+
         public static DateTime GetToDayDate()
         {
             return DateTime.Today;

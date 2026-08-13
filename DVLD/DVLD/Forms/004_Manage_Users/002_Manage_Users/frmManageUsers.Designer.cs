@@ -265,6 +265,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             this.dataGridView_ShowUsersInfos.Size = new System.Drawing.Size(1136, 376);
             this.dataGridView_ShowUsersInfos.TabIndex = 228;
             this.dataGridView_ShowUsersInfos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_ShowUsersInfos_CellClick);
+            this.dataGridView_ShowUsersInfos.DoubleClick += new System.EventHandler(this.dataGridView_ShowUsersInfos_DoubleClick);
             this.dataGridView_ShowUsersInfos.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dataGridView_ShowUsersInfos_MouseDown);
             // 
             // contextMenuStrip_ActiveUsers
@@ -288,6 +289,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             this.toolStripMenuItem_ShowUserDetails.Name = "toolStripMenuItem_ShowUserDetails";
             this.toolStripMenuItem_ShowUserDetails.Size = new System.Drawing.Size(207, 38);
             this.toolStripMenuItem_ShowUserDetails.Text = "Show User Details";
+            this.toolStripMenuItem_ShowUserDetails.Click += new System.EventHandler(this.toolStripMenuItem_ShowUserDetails_Click);
             // 
             // toolStripSeparator2
             // 

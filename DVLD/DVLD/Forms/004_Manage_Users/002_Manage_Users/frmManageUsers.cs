@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using DVLD_Models.UI_Models;
 using System.Collections.Generic;
 using Main_Screen.Forms.Persons;
+using DVLD_System_Solution.Forms._004_Manage_Users._005_Show_User_Info;
 
 namespace DVLD_System_Solution.Forms._004_Manage_Users
 {
@@ -16,12 +17,12 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
         {
             InitializeComponent();
         }
-
+        
         private void _UpdateUserIDAndPersonIDLabels()
         {
             if (dataGridView_ShowUsersInfos.CurrentRow != null)
             {
-                lab_UserIDToText.Text = dataGridView_ShowUsersInfos.CurrentRow.Cells["UserID"].Value.ToString();
+                lab_UserIDToText.Text = dataGridView_ShowUsersInfos.CurrentRow.Cells["userID"].Value.ToString();
                 lab_PersonIDToText.Text = dataGridView_ShowUsersInfos.CurrentRow.Cells["PersonID"].Value.ToString();
             }
             else
@@ -37,7 +38,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
 
             if(data != null)
             {
-                dataGridView_ShowUsersInfos.Columns["UserID"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridView_ShowUsersInfos.Columns["userID"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 dataGridView_ShowUsersInfos.Columns["PersonID"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 dataGridView_ShowUsersInfos.Columns["UserName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 dataGridView_ShowUsersInfos.Columns["IsActive"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
@@ -53,7 +54,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
 
             if (data != null)
             {
-                dataGridView_ShowUsersInfos.Columns["UserID"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridView_ShowUsersInfos.Columns["userID"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 dataGridView_ShowUsersInfos.Columns["PersonID"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 dataGridView_ShowUsersInfos.Columns["UserName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 dataGridView_ShowUsersInfos.Columns["IsActive"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
@@ -65,7 +66,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
         }
 
         // >>
-
+        
         private void _SetupComboBoxUsersStatusItems()
         {
             List<clsComboBoxFilterItem> comboBoxFiltersItems = new List<clsComboBoxFilterItem>
@@ -85,7 +86,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             List<clsComboBoxFilterItem> comboBoxFiltersItems = new List<clsComboBoxFilterItem>
             {
                 new clsComboBoxFilterItem { Display = "None"       , Value = "None" },
-                new clsComboBoxFilterItem { Display = "User ID"  , Value = "UserID" },
+                new clsComboBoxFilterItem { Display = "User ID"  , Value = "userID" },
                 new clsComboBoxFilterItem { Display = "Person ID"  , Value = "PersonID" },
                 new clsComboBoxFilterItem { Display = "User Name" , Value = "UserName" },
                 new clsComboBoxFilterItem { Display = "Name" , Value = "Name" }
@@ -183,6 +184,42 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
 
         // >>
 
+        private void _OpenFormShowUserInfo()
+        {
+            int personID = _GetID("PersonID");
+            int userID = _GetID("userID");
+
+            frmShowUserInfo frm = new frmShowUserInfo(personID, userID);
+            frm.ShowDialog();
+
+            if (_isAddOrUpdatePersonDialogResult == DialogResult.OK)
+            {
+                _LoadActiveUsersInfoToDataGridView();
+                _isAddOrUpdatePersonDialogResult = DialogResult.No;
+            }
+        }
+
+        private void toolStripMenuItem_ShowUserDetails_Click(object sender, EventArgs e)
+        {
+            _OpenFormShowUserInfo();
+        }
+
+        private void dataGridView_ShowUsersInfos_DoubleClick(object sender, EventArgs e)
+        {
+            _OpenFormShowUserInfo();
+        }
+
+
+
+
+
+
+
+
+
+
+
+
         private void _OpenFormAddNewUser()
         {
             frmAddNewUser frm = new frmAddNewUser(); 
@@ -221,9 +258,9 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             }
 
             int personID = _GetID("PersonID");
-            int UserID = _GetID("UserID");
+            int userID = _GetID("userID");
 
-            frmUpdateUserInfo frm = new frmUpdateUserInfo(personID, UserID);
+            frmUpdateUserInfo frm = new frmUpdateUserInfo(personID, userID);
             frm.ShowDialog();
 
             if (_isUpdateLoginInfo || _isAddOrUpdatePersonDialogResult == DialogResult.OK)
@@ -233,7 +270,6 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
                 _isAddOrUpdatePersonDialogResult = DialogResult.No;
             }
         }
-
 
         // >>
 

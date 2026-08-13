@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using DVLD_Shared.Operations_Result;
 using Main_Screen.Forms._004_Users.Controls;
 using static DVLD_Shared.Operations_Result.clsOperationResult;
+using DVLD_Shared.Global_Classes;
 
 namespace DVLD_System_Solution.Forms._004_Manage_Users
 {
@@ -81,13 +82,17 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             return result.IsValid;
         }
 
+
+        
+
         private clsUser _BuildLoginnfo()
         {
             return new clsUser
             {
                 UserID = _userID,
                 UserName = txt_UserName.Text.Trim(),
-                IsActive = rdoB_Active.Checked
+                IsActive = rdoB_Active.Checked,
+                DeletedAt = clsValidationHelper.GetDeletedDate(rdoB_Active.Checked)
             };
         }
 

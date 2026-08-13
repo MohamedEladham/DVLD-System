@@ -352,7 +352,8 @@ namespace DVLD_DAL
             string query = @"UPDATE Users 
                                         SET
                                             [UserName]   = @UserName, 
-                                            [IsActive]   = @IsActive
+                                            [IsActive]   = @IsActive,
+                                            [DeletedAt]  = @DeletedAt
                                         WHERE UserID     = @UserID";
 
             using (SqlConnection connection = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
@@ -360,6 +361,12 @@ namespace DVLD_DAL
             {
                 command.Parameters.Add("@UserName", System.Data.SqlDbType.VarChar, 250).Value = user.UserName;
                 command.Parameters.Add("@IsActive", System.Data.SqlDbType.Bit).Value = user.IsActive;
+
+                if(user.DeletedAt == null)
+                    command.Parameters.Add("@DeletedAt", System.Data.SqlDbType.DateTime2).Value = DBNull.Value;
+                else
+                    command.Parameters.Add("@DeletedAt", System.Data.SqlDbType.DateTime2).Value = user.DeletedAt;
+                
                 command.Parameters.Add("@UserID", System.Data.SqlDbType.Int).Value = user.UserID;
 
                 connection.Open();

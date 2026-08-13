@@ -56,6 +56,7 @@
             this.btn_Close.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.btn_Close.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             this.btn_Close.ForeColor = System.Drawing.Color.DimGray;
+            this.btn_Close.Image = global::DVLD_System_Solution.Properties.Resources.Close1_32;
             this.btn_Close.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.btn_Close.Location = new System.Drawing.Point(12, 492);
             this.btn_Close.Name = "btn_Close";
@@ -69,6 +70,7 @@
             // pictureBox11
             // 
             this.pictureBox11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox11.Image = global::DVLD_System_Solution.Properties.Resources.DVLD_Logo2;
             this.pictureBox11.Location = new System.Drawing.Point(778, 12);
             this.pictureBox11.Name = "pictureBox11";
             this.pictureBox11.Size = new System.Drawing.Size(116, 110);
