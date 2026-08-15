@@ -1,11 +1,12 @@
-﻿using DVLD_BL;
+﻿using System;
+using DVLD_BL;
+using System.IO;
+using System.Drawing;
 using DVLD_Models.User;
+using System.Windows.Forms;
 using DVLD_Shared.Global_Classes;
 using DVLD_Shared.Operations_Result;
-using System;
-using System.Drawing;
-using System.IO;
-using System.Windows.Forms;
+using static DVLD_Shared.Global_Enums.clsEnumHelpers;
 using static DVLD_Shared.Operations_Result.clsOperationResult;
 
 namespace DVLD_System_Solution.Forms._004_Manage_Users.Controls
@@ -68,6 +69,13 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users.Controls
                     break;
             }
         }
+
+
+        public void SetLinkLabelEditPerson(enPersonStatus personStatus)
+        {
+            uconShowPersonInfo1.SetLinkLabelEditPerson(personStatus);
+        }
+
         public void LoadPersonAndUserInfo(int personID, int userID)
         {
             uconShowPersonInfo1.LoadPersonByID(personID);

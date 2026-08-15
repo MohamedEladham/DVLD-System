@@ -31,5 +31,17 @@ namespace DVLD_Shared.Validation_Messages
         public static string UserUpdatedSuccessfullyMessage = "User Updated successfully.";
         public static string UserUpdatedFailedMessage = "Failed to Update User.";
 
+        // User Activated
+        public static string UserActivatedSuccessfullyMessage = "User has been activated successfully.";
+        public static string UserActivationFailedMessage = "Failed to activate user.";
+
+        // User Activated
+        public static string UserRestoredSuccessfullyMessage = "User has been restored successfully.";
+        public static string UserRestoredFailedMessage = "Failed to restored user.";
+
+        // User Updated Messages
+        public static string UserDeletedSuccessfullyMessage = "User Deleted successfully.";
+        public static string UserDeletedFailedMessage = "Failed to Deleted User.";
+
     }
 }

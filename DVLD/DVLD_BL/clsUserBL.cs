@@ -39,7 +39,6 @@ namespace DVLD_BL
             }
         }
 
-
         public static bool CheckPersonIsUser(int personID)
         {
             return clsUserDAL.CheckPersonIsUser(personID);
@@ -78,29 +77,35 @@ namespace DVLD_BL
 
         }
 
+        // >>
+
         public static List<clsUser> GetAllUsersInfo()
         {
             return clsUserDAL.GetAllUsersInfo();
         }
 
-        public static List<clsActiveUserInfoGridViewDto> GetUsersForGridView()
+        public static List<clsUserInfoGridViewDto> GetActiveUsersForGridView()
         {
-            return clsUserDAL.GetUsersForGridView();
-        }
-
-        public static List<clsActiveUserInfoGridViewDto> GetActiveUsersForGridView()
-        {
-            List <clsActiveUserInfoGridViewDto> activeUsersInfos = clsUserDAL.GetActiveUsersForGridView();
+            List <clsUserInfoGridViewDto> activeUsersInfos = clsUserDAL.GetActiveUsersForGridView();
 
             return activeUsersInfos.Count > 0 ? activeUsersInfos : null;
         }
 
-        public static List<clsNotActiveUserInfoGridViewDto> GetNotActiveUsersForGridView()
+        public static List<clsUserInfoGridViewDto> GetInActiveUsersForGridView()
         {
-            List<clsNotActiveUserInfoGridViewDto> notActiveUsersInfos = clsUserDAL.GetNotActiveUsersForGridView();
+            List<clsUserInfoGridViewDto> InActiveUsersInfos = clsUserDAL.GetInActiveUsersForGridView();
 
-            return notActiveUsersInfos.Count > 0 ? notActiveUsersInfos : null;
+            return InActiveUsersInfos.Count > 0 ? InActiveUsersInfos : null;
         }
+
+        public static List<clsDeleteUserInfoGridViewDto> GetDeletedUsersForGridView()
+        {
+            List<clsDeleteUserInfoGridViewDto> deletedUsersInfos = clsUserDAL.GetDeletedUsersForGridView();
+
+            return deletedUsersInfos.Count > 0 ? deletedUsersInfos : null;
+        }
+
+        // >>
 
         public static clsOperationResult AddNewUser(clsUser user)
         {
@@ -203,6 +208,114 @@ namespace DVLD_BL
                     {
                         Status = enOperationStatus.Failed,
                         Message = clsUserValidationMessages.UserUpdatedFailedMessage
+                    };
+            }
+            catch (Exception)
+            {
+                return new clsOperationResult
+                {
+                    Status = enOperationStatus.Exception,
+                    Message = clsGeneralValidationMessages.DatabaseOperationExceptionMessage
+                };
+            }
+        }
+
+        public static clsOperationResult ActivateUser(int userID)
+        {
+            if (userID <= 0)
+                return new clsOperationResult
+                {
+                    Status = enOperationStatus.Failed,
+                    Message = clsUserValidationMessages.UserIDMustBeGreaterThanZeroMessage
+                };
+
+            try
+            {
+                bool isActivated = clsUserDAL.ActivateUser(userID);
+
+                if (isActivated)
+                    return new clsOperationResult
+                    {
+                        Status = enOperationStatus.Success,
+                        Message = clsUserValidationMessages.UserActivatedSuccessfullyMessage
+                    };
+                else
+                    return new clsOperationResult
+                    {
+                        Status = enOperationStatus.Failed,
+                        Message = clsUserValidationMessages.UserActivationFailedMessage
+                    };
+            }
+            catch (Exception)
+            {
+                return new clsOperationResult
+                {
+                    Status = enOperationStatus.Exception,
+                    Message = clsGeneralValidationMessages.DatabaseOperationExceptionMessage
+                };
+            }
+        }
+
+        public static clsOperationResult RestoreUser(int userID)
+        {
+            if (userID <= 0)
+                return new clsOperationResult
+                {
+                    Status = enOperationStatus.Failed,
+                    Message = clsUserValidationMessages.UserIDMustBeGreaterThanZeroMessage
+                };
+
+            try
+            {
+                bool isActivated = clsUserDAL.RestoreUser(userID);
+
+                if (isActivated)
+                    return new clsOperationResult
+                    {
+                        Status = enOperationStatus.Success,
+                        Message = clsUserValidationMessages.UserRestoredSuccessfullyMessage
+                    };
+                else
+                    return new clsOperationResult
+                    {
+                        Status = enOperationStatus.Failed,
+                        Message = clsUserValidationMessages.UserRestoredFailedMessage
+                    };
+            }
+            catch (Exception)
+            {
+                return new clsOperationResult
+                {
+                    Status = enOperationStatus.Exception,
+                    Message = clsGeneralValidationMessages.DatabaseOperationExceptionMessage
+                };
+            }
+        }
+
+        public static clsOperationResult SoftDeleteUser(int userID)
+        {
+            if (userID <= 0)
+                return new clsOperationResult
+                {
+                    Status = enOperationStatus.Failed,
+                    Message = clsUserValidationMessages.UserIDMustBeGreaterThanZeroMessage
+                };
+
+            try
+            {
+                bool isDeleted = clsUserDAL.SoftDeleteUser(userID);
+
+                if (isDeleted)
+                    return new clsOperationResult
+                    {
+                        Status = enOperationStatus.Success,
+                        Message = clsUserValidationMessages.UserDeletedSuccessfullyMessage
+                    };
+                else
+                    return new clsOperationResult
+                    {
+                        Status = enOperationStatus.Failed,
+                        Message = clsUserValidationMessages.UserDeletedFailedMessage
                     };
             }
             catch (Exception)

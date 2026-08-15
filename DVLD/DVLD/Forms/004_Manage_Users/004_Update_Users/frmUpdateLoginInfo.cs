@@ -101,7 +101,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
 
         private bool _UpdateUserNameAndStatusInfo(clsUser user)
         {
-            clsOperationResult result = clsUserBL.UpdateUserNameAndStatusInfo(user);
+            clsOperationResult result = clsUserBL.UpdateUserNameAndStatusInfo(user); 
 
             switch (result.Status)
             {

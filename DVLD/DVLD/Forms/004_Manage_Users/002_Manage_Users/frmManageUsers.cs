@@ -5,9 +5,12 @@ using DVLD_BL.Services;
 using DVLD_Models.User;
 using System.Windows.Forms;
 using DVLD_Models.UI_Models;
-using System.Collections.Generic;
 using Main_Screen.Forms.Persons;
+using System.Collections.Generic;
+using static DVLD_Shared.Global_Enums.clsEnumHelpers;
 using DVLD_System_Solution.Forms._004_Manage_Users._005_Show_User_Info;
+using DVLD_Shared.Operations_Result;
+using static DVLD_Shared.Operations_Result.clsOperationResult;
 
 namespace DVLD_System_Solution.Forms._004_Manage_Users
 {
@@ -32,7 +35,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             }
         }
 
-        private void _BindData(List<clsActiveUserInfoGridViewDto> data)
+        private void _BindData(List<clsUserInfoGridViewDto> data)
         {
             dataGridView_ShowUsersInfos.DataSource = data;
 
@@ -43,12 +46,11 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
                 dataGridView_ShowUsersInfos.Columns["UserName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 dataGridView_ShowUsersInfos.Columns["IsActive"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             }
-
            
             lab_RecordsCount.Text = data == null ? "0" : data.Count.ToString();
         }
 
-        private void _BindData(List<clsNotActiveUserInfoGridViewDto> data)
+        private void _BindData(List<clsDeleteUserInfoGridViewDto> data)
         {
             dataGridView_ShowUsersInfos.DataSource = data;
 
@@ -58,27 +60,41 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
                 dataGridView_ShowUsersInfos.Columns["PersonID"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 dataGridView_ShowUsersInfos.Columns["UserName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 dataGridView_ShowUsersInfos.Columns["IsActive"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridView_ShowUsersInfos.Columns["IsDeleted"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 dataGridView_ShowUsersInfos.Columns["DeletedAt"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             }
-
 
             lab_RecordsCount.Text = data == null ? "0" : data.Count.ToString();
         }
 
         // >>
-        
+
+        private bool _HasCurrentRow()
+        {
+            if (dataGridView_ShowUsersInfos.CurrentRow == null)
+            {
+                MessageBox.Show(clsGeneralValidationMessages.NoDataInDataGridMessage, "No Data", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            return true;
+        }
+
+        // >>
+
         private void _SetupComboBoxUsersStatusItems()
         {
             List<clsComboBoxFilterItem> comboBoxFiltersItems = new List<clsComboBoxFilterItem>
             {
-                new clsComboBoxFilterItem { Display = "Active"       , Value = "Active" },
-                new clsComboBoxFilterItem { Display = "Not Active"  , Value = "NotActive" },
+                new clsComboBoxFilterItem { Display = "Active Users"       , Value = "ActiveUsers" },
+                new clsComboBoxFilterItem { Display = "InActive Users"  , Value = "InActiveUsers" },
+                new clsComboBoxFilterItem { Display = "Deleted Users"  , Value = "DeletedUsers" }
             };
 
-            comBox_UserStatus.DataSource = comboBoxFiltersItems;
-            comBox_UserStatus.DisplayMember = "Display";
-            comBox_UserStatus.ValueMember = "Value";
-            comBox_UserStatus.SelectedValue = "Active";
+            comBox_DisplayStatus.DataSource = comboBoxFiltersItems;
+            comBox_DisplayStatus.DisplayMember = "Display";
+            comBox_DisplayStatus.ValueMember   = "Value";
+            comBox_DisplayStatus.SelectedValue = "ActiveUsers";
         }
 
         private void _SetupComboBoxFilterItems()
@@ -86,9 +102,9 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             List<clsComboBoxFilterItem> comboBoxFiltersItems = new List<clsComboBoxFilterItem>
             {
                 new clsComboBoxFilterItem { Display = "None"       , Value = "None" },
-                new clsComboBoxFilterItem { Display = "User ID"  , Value = "userID" },
+                new clsComboBoxFilterItem { Display = "User ID"  , Value   = "UserID" },
                 new clsComboBoxFilterItem { Display = "Person ID"  , Value = "PersonID" },
-                new clsComboBoxFilterItem { Display = "User Name" , Value = "UserName" },
+                new clsComboBoxFilterItem { Display = "User Name" , Value  = "UserName" },
                 new clsComboBoxFilterItem { Display = "Name" , Value = "Name" }
             };
 
@@ -99,24 +115,24 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
         }
 
 
-        private Dictionary<string, Func<clsActiveUserInfoGridViewDto, string, bool>> _filtersForActiveUsers;
-        private Dictionary<string, Func<clsNotActiveUserInfoGridViewDto, string, bool>> _filtersForNotActiveUsers;
+        private Dictionary<string, Func<clsUserInfoGridViewDto, string, bool>> _filtersForActiveAndInActiveUsers;
+        private Dictionary<string, Func<clsDeleteUserInfoGridViewDto, string, bool>> _filtersForDeletedUsers;
         private void _SetupUserFilters()
         {
-            _filtersForActiveUsers = clsUserFilterService.GetActiveUserFilters();
-            _filtersForNotActiveUsers = clsUserFilterService.GetNotActiveUserFilters();
+            _filtersForActiveAndInActiveUsers = clsUserFilterService.GetActiveAndInActiveUserFilters();
+            _filtersForDeletedUsers = clsUserFilterService.GetDeletedUserFilters();
         }
 
         // >>
 
-        List<clsActiveUserInfoGridViewDto> _activeUsersGridViewDto = null;
+        List<clsUserInfoGridViewDto> _usersInfosGridViewDto = null;
         private void _LoadActiveUsersInfoToDataGridView()
         {
             try
             {
-                _activeUsersGridViewDto = clsUserBL.GetActiveUsersForGridView();
+                _usersInfosGridViewDto = clsUserBL.GetActiveUsersForGridView();
 
-                _BindData(_activeUsersGridViewDto);
+                _BindData(_usersInfosGridViewDto);
                 _UpdateUserIDAndPersonIDLabels();
             }
             catch
@@ -125,15 +141,31 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             }
         }
 
-
-        List<clsNotActiveUserInfoGridViewDto> _notActiveUsersGridViewDto = null;
-        private void _LoadNotActiveUsersInfoToDataGridView()
+        private void _LoadInActiveUsersInfoToDataGridView()
         {
             try
             {
-                _notActiveUsersGridViewDto = clsUserBL.GetNotActiveUsersForGridView();
+                _usersInfosGridViewDto = clsUserBL.GetInActiveUsersForGridView();
 
-                _BindData(_notActiveUsersGridViewDto);
+                _BindData(_usersInfosGridViewDto);
+                _UpdateUserIDAndPersonIDLabels();
+            }
+            catch
+            {
+                MessageBox.Show(clsGeneralValidationMessages.DatabaseOperationExceptionMessage, "Has Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // >>
+
+        List<clsDeleteUserInfoGridViewDto> _deletedUsersGridViewDto = null;
+        private void _LoadDeletedUsersInfoToDataGridView()
+        {
+            try
+            {
+                _deletedUsersGridViewDto = clsUserBL.GetDeletedUsersForGridView();
+
+                _BindData(_deletedUsersGridViewDto);
                 _UpdateUserIDAndPersonIDLabels();
             }
             catch
@@ -184,12 +216,12 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
 
         // >>
 
-        private void _OpenFormShowUserInfo()
+        private void _OpenFormShowUserInfo(enPersonStatus personStatus)
         {
             int personID = _GetID("PersonID");
             int userID = _GetID("userID");
 
-            frmShowUserInfo frm = new frmShowUserInfo(personID, userID);
+            frmShowUserInfo frm = new frmShowUserInfo(personID, userID, personStatus);
             frm.ShowDialog();
 
             if (_isAddOrUpdatePersonDialogResult == DialogResult.OK)
@@ -201,24 +233,28 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
 
         private void toolStripMenuItem_ShowUserDetails_Click(object sender, EventArgs e)
         {
-            _OpenFormShowUserInfo();
+            _OpenFormShowUserInfo(enPersonStatus.Active);
         }
 
         private void dataGridView_ShowUsersInfos_DoubleClick(object sender, EventArgs e)
         {
-            _OpenFormShowUserInfo();
+            if (!_HasCurrentRow())
+                return;
+
+            string selectedValue = comBox_DisplayStatus.SelectedValue.ToString();
+
+            switch (selectedValue)
+            {
+                case "ActiveUsers":
+                    _OpenFormShowUserInfo(enPersonStatus.Active);
+                    break;
+
+                case "InActiveUsers":
+                case "DeletedUsers":
+                    _OpenFormShowUserInfo(enPersonStatus.NotActive);
+                    break;
+            }
         }
-
-
-
-
-
-
-
-
-
-
-
 
         private void _OpenFormAddNewUser()
         {
@@ -227,7 +263,12 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
 
             if (_createdLoginIngo || _isAddOrUpdatePersonDialogResult == DialogResult.OK)
             {
-                _LoadActiveUsersInfoToDataGridView();
+                if(comBox_DisplayStatus.SelectedValue.ToString() == "ActiveUsers")
+                {
+                    _LoadActiveUsersInfoToDataGridView();
+                    _UpdateComboBoxFilterItems();
+                }
+
                 _createdLoginIngo = false;
                 _isAddOrUpdatePersonDialogResult = DialogResult.No;
             }
@@ -249,13 +290,21 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             return id != null ? Convert.ToInt32(id) : -1;
         }
 
+        private void _UpdateComboBoxFilterItems()
+        {
+            if (dataGridView_ShowUsersInfos.DataSource == null)
+            {
+                comBox_FilterItems.SelectedValue = "None";
+                comBox_FilterItems.Enabled = false;
+            }
+            else
+                comBox_FilterItems.Enabled = true;
+        }
+
         private void toolStripMenuItem_UpdateUserInfo_Click(object sender, EventArgs e)
         {
-            if (dataGridView_ShowUsersInfos.CurrentRow == null)
-            {
-                MessageBox.Show(clsGeneralValidationMessages.NoDataInDataGridMessage, "No Data", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            if (!_HasCurrentRow())
                 return;
-            }
 
             int personID = _GetID("PersonID");
             int userID = _GetID("userID");
@@ -266,12 +315,154 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             if (_isUpdateLoginInfo || _isAddOrUpdatePersonDialogResult == DialogResult.OK)
             {
                 _LoadActiveUsersInfoToDataGridView();
+                _UpdateComboBoxFilterItems();
                 _isUpdateLoginInfo = false;
                 _isAddOrUpdatePersonDialogResult = DialogResult.No;
             }
         }
 
+        private bool _SoftDeleteUser()
+        {
+            DialogResult dialogResult =
+               MessageBox.Show("Are you sure you want to delete this user?", "Delete User", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (dialogResult != DialogResult.Yes)
+                return false;
+
+            if (!_HasCurrentRow())
+                return false;
+
+            int userID = _GetID("userID");
+
+            clsOperationResult result = clsUserBL.SoftDeleteUser(userID);
+
+            switch (result.Status)
+            {
+                case enOperationStatus.Success:
+                    MessageBox.Show(result.Message, "Operation Succeeded", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return true;
+
+                case enOperationStatus.Failed:
+                    MessageBox.Show(result.Message, "Operation Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+
+                case enOperationStatus.Exception:
+                    MessageBox.Show(result.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+
+                default:
+                    return false;
+            }
+        }
+
+        private void toolStripMenuItem_SoftDeleteUser_Click(object sender, EventArgs e)
+        {
+            bool isDeleted = _SoftDeleteUser();
+
+            if(isDeleted)
+            {
+                _LoadActiveUsersInfoToDataGridView();
+                _UpdateComboBoxFilterItems();
+            }
+        }
+
         // >>
+
+        private bool _ActivateUser(int userID)
+        {
+            clsOperationResult result = clsUserBL.ActivateUser(userID);
+
+            switch (result.Status)
+            {
+                case enOperationStatus.Success:
+                    MessageBox.Show(result.Message, "Operation Succeeded", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return true;
+
+                case enOperationStatus.Failed:
+                    MessageBox.Show(result.Message, "Operation Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+
+                case enOperationStatus.Exception:
+                    MessageBox.Show(result.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+
+                default:
+                    return false;
+            }
+        }
+
+        private void toolStripMenuItem_ActiveUser_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult =
+               MessageBox.Show("Are you sure you want to active this user?", "Active User", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (dialogResult != DialogResult.Yes)
+                return;
+
+            int userID = _GetID("userID");
+
+            bool isActivated = _ActivateUser(userID);
+
+            if (isActivated)
+                _LoadInActiveUsersInfoToDataGridView();
+
+            _UpdateComboBoxFilterItems();
+        }
+
+        private void toolStripMenuItem_ShowInActiveUserDetails_Click(object sender, EventArgs e)
+        {
+            _OpenFormShowUserInfo(enPersonStatus.NotActive);
+        }
+
+        // >> 
+
+        private bool _RestoreUser(int userID)
+        {
+            clsOperationResult result = clsUserBL.RestoreUser(userID);
+
+            switch (result.Status)
+            {
+                case enOperationStatus.Success:
+                    MessageBox.Show(result.Message, "Operation Succeeded", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return true;
+
+                case enOperationStatus.Failed:
+                    MessageBox.Show(result.Message, "Operation Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+
+                case enOperationStatus.Exception:
+                    MessageBox.Show(result.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+
+                default:
+                    return false;
+            }
+        }
+
+        private void toolStripMenuItem_RestoreDeletedUser_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult =
+               MessageBox.Show("Are you sure you want to restore this user?", "Restore User", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (dialogResult != DialogResult.Yes)
+                return;
+
+            int userID = _GetID("userID");
+            
+            bool isRestored = _RestoreUser(userID);
+
+            if (isRestored)
+                _LoadDeletedUsersInfoToDataGridView();
+
+            _UpdateComboBoxFilterItems();
+        }
+
+        private void toolStripMenuItem_ShowDeletedUserDetails_Click(object sender, EventArgs e)
+        {
+            _OpenFormShowUserInfo(enPersonStatus.NotActive);
+        }
+
+        // >> 
 
         private void _UpdateFilterItems()
         {
@@ -286,12 +477,14 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             if (dataGridView_ShowUsersInfos.DataSource == null)
             {
                 contextMenuStrip_ActiveUsers.Enabled = false;
-                contextMenuStrip_NotActiveUsers.Enabled = false;
+                contextMenuStrip_InActiveUsers.Enabled = false;
+                contextMenuStrip_DeletedUsers.Enabled = false;
             }
             else
             {
                 contextMenuStrip_ActiveUsers.Enabled = true;
-                contextMenuStrip_NotActiveUsers.Enabled = true;
+                contextMenuStrip_InActiveUsers.Enabled = true;
+                contextMenuStrip_DeletedUsers.Enabled = true;
             }
         }
        
@@ -300,20 +493,28 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             _UpdateContextMenues();
         }
 
-        private void comBox_UserStatus_SelectedIndexChanged(object sender, EventArgs e)
+        private void comBox_DisplayStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
             comBox_FilterItems.SelectedValue = "None";
 
-            if(comBox_UserStatus.SelectedValue.ToString() == "Active")
-            {
-                _LoadActiveUsersInfoToDataGridView();
-                dataGridView_ShowUsersInfos.ContextMenuStrip = contextMenuStrip_ActiveUsers;
-            }
+            string selectedValue = comBox_DisplayStatus.SelectedValue.ToString();
 
-            if (comBox_UserStatus.SelectedValue.ToString() == "NotActive")
+            switch(selectedValue)
             {
-                _LoadNotActiveUsersInfoToDataGridView();
-                dataGridView_ShowUsersInfos.ContextMenuStrip = contextMenuStrip_NotActiveUsers;
+                case "ActiveUsers":
+                    _LoadActiveUsersInfoToDataGridView();
+                    dataGridView_ShowUsersInfos.ContextMenuStrip = contextMenuStrip_ActiveUsers;
+                    break;
+
+                case "InActiveUsers":
+                    _LoadInActiveUsersInfoToDataGridView();
+                    dataGridView_ShowUsersInfos.ContextMenuStrip = contextMenuStrip_InActiveUsers;
+                    break;
+
+                case "DeletedUsers":
+                    _LoadDeletedUsersInfoToDataGridView();
+                    dataGridView_ShowUsersInfos.ContextMenuStrip = contextMenuStrip_DeletedUsers;
+                    break;
             }
 
             _UpdateFilterItems();
@@ -329,38 +530,38 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             txt_SearchValue.Select();
         }
 
-        private void _ApplyFilterWithActiveUsers(string searchValue)
+        private void _ApplyFilterWithActiveAndInActiveUsers(string searchValue)
         {
             if (string.IsNullOrWhiteSpace(searchValue))
             {
-                _BindData(_activeUsersGridViewDto);
+                _BindData(_usersInfosGridViewDto);
                 return;
             }
 
             string filterSelected = comBox_FilterItems.SelectedValue.ToString();
 
-            if (_filtersForActiveUsers.ContainsKey(filterSelected))
+            if (_filtersForActiveAndInActiveUsers.ContainsKey(filterSelected))
             {
-                List<clsActiveUserInfoGridViewDto> result = clsUserFilterService.ActiveUsersFilters(
-                    _activeUsersGridViewDto, _filtersForActiveUsers, filterSelected, searchValue);
+                List<clsUserInfoGridViewDto> result = clsUserFilterService.ActiveAndInActiveUsersFilters(
+                    _usersInfosGridViewDto, _filtersForActiveAndInActiveUsers, filterSelected, searchValue);
                 _BindData(result);
             }
         }
 
-        private void _ApplyFilterWithNotActiveUsers(string searchValue)
+        private void _ApplyFilterWithDeletedUsers(string searchValue)
         {
             if (string.IsNullOrWhiteSpace(searchValue))
             {
-                _BindData(_notActiveUsersGridViewDto);
+                _BindData(_deletedUsersGridViewDto);
                 return;
             }
 
             string filterSelected = comBox_FilterItems.SelectedValue.ToString();
 
-            if (_filtersForNotActiveUsers.ContainsKey(filterSelected))
+            if (_filtersForDeletedUsers.ContainsKey(filterSelected))
             {
-                List<clsNotActiveUserInfoGridViewDto> result = clsUserFilterService.NotActiveUsersFilters(
-                    _notActiveUsersGridViewDto, _filtersForNotActiveUsers, filterSelected, searchValue);
+                List<clsDeleteUserInfoGridViewDto> result = clsUserFilterService.DeletedUsersFilters(
+                    _deletedUsersGridViewDto, _filtersForDeletedUsers, filterSelected, searchValue);
                 _BindData(result);
             }
         }
@@ -369,11 +570,23 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
         {
             string searchValue = txt_SearchValue.Text.Trim();
 
-            if (comBox_UserStatus.SelectedValue.ToString() == "Active")
-                _ApplyFilterWithActiveUsers(searchValue);
+            string selectedValue = comBox_DisplayStatus.SelectedValue.ToString();
 
-            if (comBox_UserStatus.SelectedValue.ToString() == "NotActive")
-                _ApplyFilterWithNotActiveUsers(searchValue);
+            switch (selectedValue)
+            {
+                case "ActiveUsers":
+                    _ApplyFilterWithActiveAndInActiveUsers(searchValue);
+                    break;
+
+                case "InActiveUsers":
+                    _ApplyFilterWithActiveAndInActiveUsers(searchValue);
+                    break;
+
+                case "DeletedUsers":
+                    _ApplyFilterWithDeletedUsers(searchValue);
+                    dataGridView_ShowUsersInfos.ContextMenuStrip = contextMenuStrip_DeletedUsers;
+                    break;
+            }
         }
 
         private void txt_SearchValue_TextChanged(object sender, EventArgs e)
@@ -390,7 +603,5 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
         {
             this.Close();
         }
-
-       
     }
 }

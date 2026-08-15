@@ -11,11 +11,11 @@ namespace DVLD_BL.Services
 {
     public class clsUserFilterService
     {
-        public static Dictionary<string, Func<clsActiveUserInfoGridViewDto, string, bool>> GetActiveUserFilters()
+        public static Dictionary<string, Func<clsUserInfoGridViewDto, string, bool>> GetActiveAndInActiveUserFilters()
         {
-            Dictionary<string, Func<clsActiveUserInfoGridViewDto, string, bool>> userFilter = null;
+            Dictionary<string, Func<clsUserInfoGridViewDto, string, bool>> userFilter = null;
 
-            userFilter = new Dictionary<string, Func<clsActiveUserInfoGridViewDto, string, bool>>
+            userFilter = new Dictionary<string, Func<clsUserInfoGridViewDto, string, bool>>
             {
                 ["UserID"]   = (U, val) => clsValidationHelper.IsMatchingID(U.UserID, val),
                 ["PersonID"] = (U, val) => clsValidationHelper.IsMatchingID(U.PersonID, val),
@@ -26,8 +26,8 @@ namespace DVLD_BL.Services
             return userFilter;
         }
 
-        public static List<clsActiveUserInfoGridViewDto> ActiveUsersFilters(List<clsActiveUserInfoGridViewDto> usersGridViewDto,
-            Dictionary<string, Func<clsActiveUserInfoGridViewDto, string, bool>> UserFilter, string filterSelected, string searchValue)
+        public static List<clsUserInfoGridViewDto> ActiveAndInActiveUsersFilters(List<clsUserInfoGridViewDto> usersGridViewDto,
+            Dictionary<string, Func<clsUserInfoGridViewDto, string, bool>> UserFilter, string filterSelected, string searchValue)
         {
             if (usersGridViewDto == null) return null;
 
@@ -36,11 +36,11 @@ namespace DVLD_BL.Services
 
         // >>
 
-        public static Dictionary<string, Func<clsNotActiveUserInfoGridViewDto, string, bool>> GetNotActiveUserFilters()
+        public static Dictionary<string, Func<clsDeleteUserInfoGridViewDto, string, bool>> GetDeletedUserFilters()
         {
-            Dictionary<string, Func<clsNotActiveUserInfoGridViewDto, string, bool>> userFilter = null;
+            Dictionary<string, Func<clsDeleteUserInfoGridViewDto, string, bool>> userFilter = null;
 
-            userFilter = new Dictionary<string, Func<clsNotActiveUserInfoGridViewDto, string, bool>>
+            userFilter = new Dictionary<string, Func<clsDeleteUserInfoGridViewDto, string, bool>>
             {
                 ["UserID"] = (U, val) => clsValidationHelper.IsMatchingID(U.UserID, val),
                 ["PersonID"] = (U, val) => clsValidationHelper.IsMatchingID(U.PersonID, val),
@@ -51,12 +51,12 @@ namespace DVLD_BL.Services
             return userFilter;
         }
 
-        public static List<clsNotActiveUserInfoGridViewDto> NotActiveUsersFilters(List<clsNotActiveUserInfoGridViewDto> usersGridViewDto,
-            Dictionary<string, Func<clsNotActiveUserInfoGridViewDto, string, bool>> UserFilter, string filterSelected, string searchValue)
+        public static List<clsDeleteUserInfoGridViewDto> DeletedUsersFilters(List<clsDeleteUserInfoGridViewDto> deletedUsersGridViewDto,
+            Dictionary<string, Func<clsDeleteUserInfoGridViewDto, string, bool>> UserFilter, string filterSelected, string searchValue)
         {
-            if (usersGridViewDto == null) return null;
+            if (deletedUsersGridViewDto == null) return null;
 
-            return usersGridViewDto.Where(p => UserFilter[filterSelected](p, searchValue)).ToList();
+            return deletedUsersGridViewDto.Where(p => UserFilter[filterSelected](p, searchValue)).ToList();
         }
     }
 }

@@ -161,10 +161,9 @@ namespace DVLD_DAL
 
         // >>
 
-
-        private static clsActiveUserInfoGridViewDto _MapReaderToActiveUserGridViewDto(SqlDataReader reader)
+        private static clsUserInfoGridViewDto _MapReaderToUserGridViewDto(SqlDataReader reader)
         {
-            return new clsActiveUserInfoGridViewDto
+            return new clsUserInfoGridViewDto
             {
                 UserID = (int)reader["UserID"],
                 PersonID = (int)reader["PersonID"],
@@ -174,9 +173,9 @@ namespace DVLD_DAL
             };
         }
 
-        public static List<clsActiveUserInfoGridViewDto> GetUsersForGridView()
+        public static List<clsUserInfoGridViewDto> GetActiveUsersForGridView()
         {
-            List<clsActiveUserInfoGridViewDto> users = new List<clsActiveUserInfoGridViewDto>();
+            List<clsUserInfoGridViewDto> users = new List<clsUserInfoGridViewDto>();
 
             string query = @"Select 
                                     U.UserID, 
@@ -187,7 +186,7 @@ namespace DVLD_DAL
                                     P.ThirdName, 
                                     P.LastName, 
                                     U.IsActive 
-                            From Users U INNER JOIN Persons P ON  U.PersonID = P.PersonID ORDER BY U.UserID";
+                            From Users U INNER JOIN Persons P ON U.PersonID = P.PersonID AND U.IsActive = 1 AND U.IsDeleted = 0 ORDER BY U.UserID";
 
             using (SqlConnection connection = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
             using (SqlCommand command = new SqlCommand(query, connection))
@@ -197,7 +196,7 @@ namespace DVLD_DAL
                 {
                     while (reader.Read())
                     {
-                        clsActiveUserInfoGridViewDto user = _MapReaderToActiveUserGridViewDto(reader);
+                        clsUserInfoGridViewDto user = _MapReaderToUserGridViewDto(reader);
                         users.Add(user);
                     }
                 }
@@ -206,9 +205,9 @@ namespace DVLD_DAL
             return users;
         }
 
-        public static List<clsActiveUserInfoGridViewDto> GetActiveUsersForGridView()
+        public static List<clsUserInfoGridViewDto> GetInActiveUsersForGridView()
         {
-            List<clsActiveUserInfoGridViewDto> users = new List<clsActiveUserInfoGridViewDto>();
+            List<clsUserInfoGridViewDto> users = new List<clsUserInfoGridViewDto>();
 
             string query = @"Select 
                                     U.UserID, 
@@ -218,8 +217,8 @@ namespace DVLD_DAL
                                     P.SecondName, 
                                     P.ThirdName, 
                                     P.LastName, 
-                                    U.IsActive 
-                            From Users U INNER JOIN Persons P ON  U.PersonID = P.PersonID AND U.IsActive = 1 ORDER BY U.UserID";
+                                    U.IsActive
+                            From Users U INNER JOIN Persons P ON U.PersonID = P.PersonID AND U.IsActive = 0 AND U.IsDeleted = 0 ORDER BY U.UserID";
 
             using (SqlConnection connection = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
             using (SqlCommand command = new SqlCommand(query, connection))
@@ -229,7 +228,7 @@ namespace DVLD_DAL
                 {
                     while (reader.Read())
                     {
-                        clsActiveUserInfoGridViewDto user = _MapReaderToActiveUserGridViewDto(reader);
+                        clsUserInfoGridViewDto user = _MapReaderToUserGridViewDto(reader);
                         users.Add(user);
                     }
                 }
@@ -240,22 +239,23 @@ namespace DVLD_DAL
 
         // >>
 
-        private static clsNotActiveUserInfoGridViewDto _MapReaderToNotActiveUserGridViewDto(SqlDataReader reader)
+        private static clsDeleteUserInfoGridViewDto _MapReaderToDeletedUserGridViewDto(SqlDataReader reader)
         {
-            return new clsNotActiveUserInfoGridViewDto
+            return new clsDeleteUserInfoGridViewDto
             {
                 UserID = (int)reader["UserID"],
                 PersonID = (int)reader["PersonID"],
                 UserName = (string)reader["UserName"],
                 FullName = Convert.ToString(reader["FirstName"] + " " + reader["SecondName"] + " " + reader["ThirdName"] + " " + reader["LastName"]),
                 IsActive = (bool)reader["IsActive"],
+                IsDeleted = (bool)reader["IsDeleted"],
                 DeletedAt = reader.IsDBNull(reader.GetOrdinal("DeletedAt")) ? null : (DateTime?)reader["DeletedAt"]
             };
         }
 
-        public static List<clsNotActiveUserInfoGridViewDto> GetNotActiveUsersForGridView()
+        public static List<clsDeleteUserInfoGridViewDto> GetDeletedUsersForGridView()
         {
-            List<clsNotActiveUserInfoGridViewDto> users = new List<clsNotActiveUserInfoGridViewDto>();
+            List<clsDeleteUserInfoGridViewDto> users = new List<clsDeleteUserInfoGridViewDto>();
 
             string query = @"Select 
                                     U.UserID, 
@@ -266,8 +266,9 @@ namespace DVLD_DAL
                                     P.ThirdName, 
                                     P.LastName, 
                                     U.IsActive,
+                                    U.IsDeleted,
                                     U.DeletedAt
-                            From Users U INNER JOIN Persons P ON  U.PersonID = P.PersonID AND U.IsActive = 0 ORDER BY U.UserID";
+                            From Users U INNER JOIN Persons P ON  U.PersonID = P.PersonID AND U.IsDeleted = 1 ORDER BY U.UserID";
 
             using (SqlConnection connection = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
             using (SqlCommand command = new SqlCommand(query, connection))
@@ -277,7 +278,7 @@ namespace DVLD_DAL
                 {
                     while (reader.Read())
                     {
-                        clsNotActiveUserInfoGridViewDto user = _MapReaderToNotActiveUserGridViewDto(reader);
+                        clsDeleteUserInfoGridViewDto user = _MapReaderToDeletedUserGridViewDto(reader);
                         users.Add(user);
                     }
                 }
@@ -286,9 +287,7 @@ namespace DVLD_DAL
             return users;
         }
 
-
         // >>
-
 
         public static bool AddNewUserAndGetNewID(clsUser user, out int newID)
         {
@@ -375,6 +374,76 @@ namespace DVLD_DAL
             }
 
             return isUpdate;
+        }
+
+        public static bool ActivateUser(int userID)
+        {
+            bool isRestored = false;
+
+            string query = @"Update Users 
+                                        Set 
+		                                IsActive = 1
+		                                Where UserID = @UserID AND IsActive = 0 AND IsDeleted = 0";
+
+            using (SqlConnection connection = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.Add("@UserID", System.Data.SqlDbType.Int).Value = userID;
+
+                connection.Open();
+
+                isRestored = (command.ExecuteNonQuery() > 0);
+            }
+
+            return isRestored;
+        }
+
+        public static bool RestoreUser(int userID)
+        {
+            bool isRestored = false;
+
+            string query = @"Update Users 
+                                        Set 
+		                                IsActive = 0,
+		                                IsDeleted = 0,
+		                                DeletedAt = null
+		                                Where UserID = @UserID AND IsActive = 0 AND IsDeleted = 1";
+
+            using (SqlConnection connection = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.Add("@UserID", System.Data.SqlDbType.Int).Value = userID;
+
+                connection.Open();
+
+                isRestored = (command.ExecuteNonQuery() > 0);
+            }
+
+            return isRestored;
+        }
+
+        public static bool SoftDeleteUser(int userID)
+        {
+            bool isDeleted = false;
+
+            string query = @"UPDATE Users 
+                                        SET
+                                            [IsActive]   = 0,
+                                            [IsDeleted]  = 1,
+                                            [DeletedAt]  = GETDATE()
+                                        WHERE UserID     = @UserID";
+
+            using (SqlConnection connection = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.Add("@UserID", System.Data.SqlDbType.Int).Value = userID;
+
+                connection.Open();
+
+                isDeleted = (command.ExecuteNonQuery() > 0);
+            }
+
+            return isDeleted;
         }
     }
 }

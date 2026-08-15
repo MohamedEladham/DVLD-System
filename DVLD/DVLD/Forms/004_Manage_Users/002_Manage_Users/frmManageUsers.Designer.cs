@@ -41,14 +41,13 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmManageUsers));
             this.label3 = new System.Windows.Forms.Label();
-            this.comBox_UserStatus = new System.Windows.Forms.ComboBox();
+            this.comBox_DisplayStatus = new System.Windows.Forms.ComboBox();
             this.lab_RecordsCount = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.lab_UserIDToText = new System.Windows.Forms.Label();
             this.lab_PersonIDToText = new System.Windows.Forms.Label();
             this.txt_SearchValue = new System.Windows.Forms.TextBox();
-            this.btn_Close = new System.Windows.Forms.Button();
             this.comBox_FilterItems = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -61,18 +60,24 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             this.toolStripMenuItem_SoftDeleteUser = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.changeLoginInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip_InActiveUsers = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem_ActiveUser = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem_ShowInActiveUserDetails = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip_DeletedUsers = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem_RestoreDeletedUser = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem_ShowDeletedUserDetails = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_AddNewUser = new System.Windows.Forms.Button();
+            this.btn_Close = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.contextMenuStrip_NotActiveUsers = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem_RestoreNotActiveUser = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem_ShowNotActiveUserDetails = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_ShowUsersInfos)).BeginInit();
             this.contextMenuStrip_ActiveUsers.SuspendLayout();
+            this.contextMenuStrip_InActiveUsers.SuspendLayout();
+            this.contextMenuStrip_DeletedUsers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.contextMenuStrip_NotActiveUsers.SuspendLayout();
             this.SuspendLayout();
             // 
             // label3
@@ -82,20 +87,20 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label3.Location = new System.Drawing.Point(12, 258);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(158, 33);
+            this.label3.Size = new System.Drawing.Size(184, 33);
             this.label3.TabIndex = 242;
-            this.label3.Text = "User Status: ";
+            this.label3.Text = "Display Status:";
             // 
-            // comBox_UserStatus
+            // comBox_DisplayStatus
             // 
-            this.comBox_UserStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comBox_UserStatus.Font = new System.Drawing.Font("Tahoma", 10F);
-            this.comBox_UserStatus.FormattingEnabled = true;
-            this.comBox_UserStatus.Location = new System.Drawing.Point(200, 267);
-            this.comBox_UserStatus.Name = "comBox_UserStatus";
-            this.comBox_UserStatus.Size = new System.Drawing.Size(232, 24);
-            this.comBox_UserStatus.TabIndex = 241;
-            this.comBox_UserStatus.SelectedIndexChanged += new System.EventHandler(this.comBox_UserStatus_SelectedIndexChanged);
+            this.comBox_DisplayStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comBox_DisplayStatus.Font = new System.Drawing.Font("Tahoma", 10F);
+            this.comBox_DisplayStatus.FormattingEnabled = true;
+            this.comBox_DisplayStatus.Location = new System.Drawing.Point(200, 267);
+            this.comBox_DisplayStatus.Name = "comBox_DisplayStatus";
+            this.comBox_DisplayStatus.Size = new System.Drawing.Size(232, 24);
+            this.comBox_DisplayStatus.TabIndex = 241;
+            this.comBox_DisplayStatus.SelectedIndexChanged += new System.EventHandler(this.comBox_DisplayStatus_SelectedIndexChanged);
             // 
             // lab_RecordsCount
             // 
@@ -162,21 +167,6 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             this.txt_SearchValue.Size = new System.Drawing.Size(242, 24);
             this.txt_SearchValue.TabIndex = 235;
             this.txt_SearchValue.TextChanged += new System.EventHandler(this.txt_SearchValue_TextChanged);
-            // 
-            // btn_Close
-            // 
-            this.btn_Close.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btn_Close.Font = new System.Drawing.Font("Segoe UI Semibold", 13F, System.Drawing.FontStyle.Bold);
-            this.btn_Close.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btn_Close.Image = global::DVLD_System_Solution.Properties.Resources.Close1_28;
-            this.btn_Close.Location = new System.Drawing.Point(12, 723);
-            this.btn_Close.Name = "btn_Close";
-            this.btn_Close.Size = new System.Drawing.Size(110, 38);
-            this.btn_Close.TabIndex = 233;
-            this.btn_Close.Text = " Close";
-            this.btn_Close.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btn_Close.UseVisualStyleBackColor = false;
-            this.btn_Close.Click += new System.EventHandler(this.btn_Close_Click);
             // 
             // comBox_FilterItems
             // 
@@ -321,6 +311,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             this.toolStripMenuItem_SoftDeleteUser.Name = "toolStripMenuItem_SoftDeleteUser";
             this.toolStripMenuItem_SoftDeleteUser.Size = new System.Drawing.Size(207, 38);
             this.toolStripMenuItem_SoftDeleteUser.Text = "Delete User";
+            this.toolStripMenuItem_SoftDeleteUser.Click += new System.EventHandler(this.toolStripMenuItem_SoftDeleteUser_Click);
             // 
             // toolStripSeparator1
             // 
@@ -335,6 +326,72 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             this.changeLoginInfoToolStripMenuItem.Size = new System.Drawing.Size(207, 38);
             this.changeLoginInfoToolStripMenuItem.Text = "Change Login Info";
             // 
+            // contextMenuStrip_InActiveUsers
+            // 
+            this.contextMenuStrip_InActiveUsers.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.contextMenuStrip_InActiveUsers.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem_ActiveUser,
+            this.toolStripSeparator3,
+            this.toolStripMenuItem_ShowInActiveUserDetails});
+            this.contextMenuStrip_InActiveUsers.Name = "contextMenuStrip1";
+            this.contextMenuStrip_InActiveUsers.Size = new System.Drawing.Size(258, 86);
+            // 
+            // toolStripMenuItem_ActiveUser
+            // 
+            this.toolStripMenuItem_ActiveUser.Image = global::DVLD_System_Solution.Properties.Resources.Active_User4_32;
+            this.toolStripMenuItem_ActiveUser.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItem_ActiveUser.Name = "toolStripMenuItem_ActiveUser";
+            this.toolStripMenuItem_ActiveUser.Size = new System.Drawing.Size(257, 38);
+            this.toolStripMenuItem_ActiveUser.Text = "Active User";
+            this.toolStripMenuItem_ActiveUser.Click += new System.EventHandler(this.toolStripMenuItem_ActiveUser_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(254, 6);
+            // 
+            // toolStripMenuItem_ShowInActiveUserDetails
+            // 
+            this.toolStripMenuItem_ShowInActiveUserDetails.Image = global::DVLD_System_Solution.Properties.Resources.Person_Details_32;
+            this.toolStripMenuItem_ShowInActiveUserDetails.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItem_ShowInActiveUserDetails.Name = "toolStripMenuItem_ShowInActiveUserDetails";
+            this.toolStripMenuItem_ShowInActiveUserDetails.Size = new System.Drawing.Size(257, 38);
+            this.toolStripMenuItem_ShowInActiveUserDetails.Text = "Show InActive User Details";
+            this.toolStripMenuItem_ShowInActiveUserDetails.Click += new System.EventHandler(this.toolStripMenuItem_ShowInActiveUserDetails_Click);
+            // 
+            // contextMenuStrip_DeletedUsers
+            // 
+            this.contextMenuStrip_DeletedUsers.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.contextMenuStrip_DeletedUsers.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem_RestoreDeletedUser,
+            this.toolStripSeparator4,
+            this.toolStripMenuItem_ShowDeletedUserDetails});
+            this.contextMenuStrip_DeletedUsers.Name = "contextMenuStrip1";
+            this.contextMenuStrip_DeletedUsers.Size = new System.Drawing.Size(173, 86);
+            // 
+            // toolStripMenuItem_RestoreDeletedUser
+            // 
+            this.toolStripMenuItem_RestoreDeletedUser.Image = global::DVLD_System_Solution.Properties.Resources.Restore_24;
+            this.toolStripMenuItem_RestoreDeletedUser.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItem_RestoreDeletedUser.Name = "toolStripMenuItem_RestoreDeletedUser";
+            this.toolStripMenuItem_RestoreDeletedUser.Size = new System.Drawing.Size(172, 38);
+            this.toolStripMenuItem_RestoreDeletedUser.Text = "Restore User";
+            this.toolStripMenuItem_RestoreDeletedUser.Click += new System.EventHandler(this.toolStripMenuItem_RestoreDeletedUser_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(169, 6);
+            // 
+            // toolStripMenuItem_ShowDeletedUserDetails
+            // 
+            this.toolStripMenuItem_ShowDeletedUserDetails.Image = global::DVLD_System_Solution.Properties.Resources.Person_Details_32;
+            this.toolStripMenuItem_ShowDeletedUserDetails.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItem_ShowDeletedUserDetails.Name = "toolStripMenuItem_ShowDeletedUserDetails";
+            this.toolStripMenuItem_ShowDeletedUserDetails.Size = new System.Drawing.Size(172, 38);
+            this.toolStripMenuItem_ShowDeletedUserDetails.Text = "Show Details";
+            this.toolStripMenuItem_ShowDeletedUserDetails.Click += new System.EventHandler(this.toolStripMenuItem_ShowDeletedUserDetails_Click);
+            // 
             // btn_AddNewUser
             // 
             this.btn_AddNewUser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -347,6 +404,21 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             this.btn_AddNewUser.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btn_AddNewUser.UseVisualStyleBackColor = false;
             this.btn_AddNewUser.Click += new System.EventHandler(this.btn_OpenfrmAddUpdatePersonInfo_Click);
+            // 
+            // btn_Close
+            // 
+            this.btn_Close.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btn_Close.Font = new System.Drawing.Font("Segoe UI Semibold", 13F, System.Drawing.FontStyle.Bold);
+            this.btn_Close.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btn_Close.Image = global::DVLD_System_Solution.Properties.Resources.Close1_28;
+            this.btn_Close.Location = new System.Drawing.Point(12, 723);
+            this.btn_Close.Name = "btn_Close";
+            this.btn_Close.Size = new System.Drawing.Size(110, 38);
+            this.btn_Close.TabIndex = 233;
+            this.btn_Close.Text = " Close";
+            this.btn_Close.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_Close.UseVisualStyleBackColor = false;
+            this.btn_Close.Click += new System.EventHandler(this.btn_Close_Click);
             // 
             // pictureBox2
             // 
@@ -371,44 +443,13 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             this.pictureBox1.TabIndex = 227;
             this.pictureBox1.TabStop = false;
             // 
-            // contextMenuStrip_NotActiveUsers
-            // 
-            this.contextMenuStrip_NotActiveUsers.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.contextMenuStrip_NotActiveUsers.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem_RestoreNotActiveUser,
-            this.toolStripSeparator3,
-            this.toolStripMenuItem_ShowNotActiveUserDetails});
-            this.contextMenuStrip_NotActiveUsers.Name = "contextMenuStrip1";
-            this.contextMenuStrip_NotActiveUsers.Size = new System.Drawing.Size(173, 86);
-            // 
-            // toolStripMenuItem_RestoreNotActiveUser
-            // 
-            this.toolStripMenuItem_RestoreNotActiveUser.Image = global::DVLD_System_Solution.Properties.Resources.Restore_24;
-            this.toolStripMenuItem_RestoreNotActiveUser.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripMenuItem_RestoreNotActiveUser.Name = "toolStripMenuItem_RestoreNotActiveUser";
-            this.toolStripMenuItem_RestoreNotActiveUser.Size = new System.Drawing.Size(172, 38);
-            this.toolStripMenuItem_RestoreNotActiveUser.Text = "Restore User";
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(169, 6);
-            // 
-            // toolStripMenuItem_ShowNotActiveUserDetails
-            // 
-            this.toolStripMenuItem_ShowNotActiveUserDetails.Image = global::DVLD_System_Solution.Properties.Resources.Person_Details_32;
-            this.toolStripMenuItem_ShowNotActiveUserDetails.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripMenuItem_ShowNotActiveUserDetails.Name = "toolStripMenuItem_ShowNotActiveUserDetails";
-            this.toolStripMenuItem_ShowNotActiveUserDetails.Size = new System.Drawing.Size(172, 38);
-            this.toolStripMenuItem_ShowNotActiveUserDetails.Text = "Show Details";
-            // 
             // frmManageUsers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1160, 773);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.comBox_UserStatus);
+            this.Controls.Add(this.comBox_DisplayStatus);
             this.Controls.Add(this.lab_RecordsCount);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -432,9 +473,10 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             this.Load += new System.EventHandler(this.frmManageUsers_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_ShowUsersInfos)).EndInit();
             this.contextMenuStrip_ActiveUsers.ResumeLayout(false);
+            this.contextMenuStrip_InActiveUsers.ResumeLayout(false);
+            this.contextMenuStrip_DeletedUsers.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.contextMenuStrip_NotActiveUsers.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -443,7 +485,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
         #endregion
 
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comBox_UserStatus;
+        private System.Windows.Forms.ComboBox comBox_DisplayStatus;
         private System.Windows.Forms.Label lab_RecordsCount;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
@@ -466,9 +508,13 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_SoftDeleteUser;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem changeLoginInfoToolStripMenuItem;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip_NotActiveUsers;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_RestoreNotActiveUser;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip_InActiveUsers;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_ActiveUser;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_ShowNotActiveUserDetails;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_ShowInActiveUserDetails;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip_DeletedUsers;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_RestoreDeletedUser;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_ShowDeletedUserDetails;
     }
 }

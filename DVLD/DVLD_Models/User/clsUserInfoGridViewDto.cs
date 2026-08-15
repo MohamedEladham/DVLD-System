@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace DVLD_Models.User
 {
-    public class clsNotActiveUserInfoGridViewDto
+    public class clsUserInfoGridViewDto
     {
         public int UserID { set; get; }
         public int PersonID { set; get; }
         public string UserName { set; get; }
         public string FullName { set; get; }
         public bool IsActive { set; get; }
-        public DateTime? DeletedAt { set; get; }
     }
 }

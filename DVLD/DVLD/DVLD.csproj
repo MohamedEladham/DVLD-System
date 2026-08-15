@@ -362,5 +362,8 @@
   <ItemGroup>
     <None Include="Resources\Update_Password2_32.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Active_User4_32.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
