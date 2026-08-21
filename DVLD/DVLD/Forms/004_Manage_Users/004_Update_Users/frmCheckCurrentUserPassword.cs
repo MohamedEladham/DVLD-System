@@ -57,6 +57,7 @@ namespace Main_Screen.Forms._004_Users.Controls
             if(isCurrentPasswordValid)
             {
                 await Task.Delay(1000);
+                lab_CurrentPasswordResult.Visible = false;
 
                 frmUpdatePassword frm = new frmUpdatePassword(_userID, _personID);
                 frm.ShowDialog();

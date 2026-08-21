@@ -91,8 +91,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             {
                 UserID = _userID,
                 UserName = txt_UserName.Text.Trim(),
-                IsActive = rdoB_Active.Checked,
-                DeletedAt = clsValidationHelper.GetDeletedDate(rdoB_Active.Checked)
+                IsActive = rdoB_Active.Checked
             };
         }
 

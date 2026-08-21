@@ -7,6 +7,23 @@ namespace DVLD_BL.Validations
 {
     public class clsUserValidations
     {
+        public static clsValidationResult IsValidUserName(string userName, int minLength, int maxLength)
+        {
+            if (string.IsNullOrEmpty(userName))
+                return new clsValidationResult { IsValid = false, Message = "Required" };
+
+            if (userName.Length < minLength)
+                return new clsValidationResult { IsValid = false, Message = "Is Too Short Length" };
+
+            if (userName.Length > maxLength)
+                return new clsValidationResult { IsValid = false, Message = "Out Of Length" };
+
+            if (!clsValidationHelper.IsAlphaNumeric(userName))
+                return new clsValidationResult { IsValid = false, Message = "Invalid Format" };
+
+            return new clsValidationResult { IsValid = true };
+        }
+
         public static clsValidationResult ValidateUserName(string userName, int minLength, int maxLength, int? userID = null)
         {
             if (string.IsNullOrEmpty(userName))

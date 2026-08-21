@@ -43,7 +43,50 @@ namespace DVLD_BL
         {
             return clsUserDAL.CheckPersonIsUser(personID);
         }
-        
+
+        public static clsValidationResult AuthenticateUser(string userName, string password)
+        {
+            try
+            {
+                string computeHashPassword = clsHashHelper.ComputeHash(password);
+
+                bool isAuthenticated = clsUserDAL.AuthenticateUser(userName, computeHashPassword);
+
+                if (isAuthenticated)
+                    return new clsValidationResult { IsValid = true, Message = clsUserValidationMessages.LoginSuccessfulMessage };
+                else
+                    return new clsValidationResult { IsValid = false, Message = clsUserValidationMessages.InvalidUserNameOrPasswordMessage };
+            }
+            catch (Exception)
+            {
+                return new clsValidationResult { IsValid = false, Message = clsGeneralValidationMessages.DatabaseOperationExceptionMessage };
+            }
+        }
+
+        public static (clsOperationResult, List<int>) GetUserPermissions(int userID)
+        {
+            if (userID <= 0)
+                return (new clsOperationResult
+                {
+                    Status = enOperationStatus.Failed,
+                    Message = clsUserValidationMessages.InvalidUserIDMessage
+                }, null);
+
+            try
+            {
+                return (new clsOperationResult { Status = enOperationStatus.Success }, clsUserDAL.GetUserPermissions(userID));
+            }
+            catch (Exception)
+            {
+                return (new clsOperationResult
+                {
+                    Status = enOperationStatus.Exception,
+                    Message = clsGeneralValidationMessages.DatabaseOperationExceptionMessage
+                }, null);
+            }
+        }
+
+
         public static (clsOperationResult, clsUser) GetUserByID(int userID)
         {
             if (userID <= 0)
@@ -56,6 +99,34 @@ namespace DVLD_BL
             try
             {
                 clsUser user = clsUserDAL.GetUserByID(userID);
+
+                if (user != null)
+                    return (new clsOperationResult { Status = enOperationStatus.Success }, user);
+                else
+                    return (new clsOperationResult
+                    {
+                        Status = enOperationStatus.Failed,
+                        Message = clsUserValidationMessages.UserNotFoundMessage
+                    }, null);
+            }
+            catch (Exception)
+            {
+                return (new clsOperationResult
+                {
+                    Status = enOperationStatus.Exception,
+                    Message = clsGeneralValidationMessages.DatabaseOperationExceptionMessage
+                }, null);
+            }
+
+        }
+
+        public static (clsOperationResult, clsUser) GetUserByUserNameAndPassword(string userName, string password)
+        {
+            try
+            {
+                string computeHashPassword = clsHashHelper.ComputeHash(password);
+
+                clsUser user = clsUserDAL.GetUserByUserNameAndPassword(userName, computeHashPassword);
 
                 if (user != null)
                     return (new clsOperationResult { Status = enOperationStatus.Success }, user);

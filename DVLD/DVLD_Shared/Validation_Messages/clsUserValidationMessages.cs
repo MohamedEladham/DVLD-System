@@ -43,5 +43,11 @@ namespace DVLD_Shared.Validation_Messages
         public static string UserDeletedSuccessfullyMessage = "User Deleted successfully.";
         public static string UserDeletedFailedMessage = "Failed to Deleted User.";
 
+
+        // Login Process Messages
+        public static string LoginSuccessfulMessage = "Login process successfully....";
+        public static string LoginFailedMessage = "Login process failed.";
+        public static string InvalidUserNameOrPasswordMessage = "Invalid username or password.";
+
     }
 }

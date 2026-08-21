@@ -90,7 +90,65 @@ namespace DVLD_DAL
             return isValid;
         }
 
+        public static bool AuthenticateUser(string userName, string password)
+        {
+            bool isAuthenticated = false;
+
+            string query = @"SELECT 1 From Users 
+                                            WHERE 
+                                            (UserName = @UserName AND
+                                             Password = @Password AND
+                                             IsActive = 1 AND
+                                             IsDeleted = 0)";
+
+            using (SqlConnection conniction = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
+            using (SqlCommand command = new SqlCommand(query, conniction))
+            {
+                command.Parameters.Add("@UserName", System.Data.SqlDbType.VarChar, 250).Value = userName;
+                command.Parameters.Add("@Password", System.Data.SqlDbType.VarChar, 550).Value = password;
+
+                conniction.Open();
+
+                object result = command.ExecuteScalar();
+                isAuthenticated = result != null;
+            }
+
+            return isAuthenticated;
+        }
+
+        public static List<int> GetUserPermissions(int userID)
+        {
+            List<int> permissions = new List<int>();
+
+            string query = @"SELECT DISTINCT
+
+		                                    RP.FK_PermissionID
+
+		                                    FROM UserRoles UR INNER JOIN RolePermissions RP 
+
+                                            ON UR.FK_RoleID = RP.FK_RoleID
+
+		                                    WHERE UR.FK_UserID = @UserID";
+
+            using (SqlConnection connection = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.Add("@UserID", System.Data.SqlDbType.Int).Value = userID;
+
+                connection.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                        permissions.Add((int)reader["FK_PermissionID"]);
+                }
+            }
+
+            return permissions;
+        }
+
+
         // >>
+
         private static clsUser _MapReaderToUser(SqlDataReader reader)
         {
             return new clsUser
@@ -130,7 +188,41 @@ namespace DVLD_DAL
 
             return userInfo;
         }
-        
+
+        public static clsUser GetUserByUserNameAndPassword(string userName, string password)
+        {
+            clsUser userInfo = null;
+
+            string query = @"SELECT 
+                                    [UserID], 
+                                    [PersonID], 
+                                    [UserName],
+                                    [IsActive]
+                                From Users
+                                WHERE 
+                                    (UserName = @UserName AND
+                                     Password = @Password AND
+                                     IsActive = 1 AND
+                                     IsDeleted = 0)";
+
+            using (SqlConnection connection = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.Add("@UserName", System.Data.SqlDbType.VarChar, 250).Value = userName;
+                command.Parameters.Add("@Password", System.Data.SqlDbType.VarChar, 550).Value = password;
+
+                connection.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                        userInfo = _MapReaderToUser(reader);
+                }
+            }
+
+            return userInfo;
+        }
+
         public static List<clsUser> GetAllUsersInfo()
         {
             List<clsUser> users = new List<clsUser>();
@@ -288,7 +380,7 @@ namespace DVLD_DAL
         }
 
         // >>
-
+        
         public static bool AddNewUserAndGetNewID(clsUser user, out int newID)
         {
             newID = -1;

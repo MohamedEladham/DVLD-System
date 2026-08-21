@@ -193,6 +193,16 @@ namespace DVLD_System_Solution.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Close2_32 {
+            get {
+                object obj = ResourceManager.GetObject("Close2_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Country_32 {
             get {
                 object obj = ResourceManager.GetObject("Country_32", resourceCulture);
@@ -436,6 +446,16 @@ namespace DVLD_System_Solution.Properties {
         internal static System.Drawing.Bitmap Send_Email_32 {
             get {
                 object obj = ResourceManager.GetObject("Send_Email_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SignIn_32 {
+            get {
+                object obj = ResourceManager.GetObject("SignIn_32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

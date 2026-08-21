@@ -190,8 +190,8 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             _isAddOrUpdatePersonDialogResult = dialogResult;
         }
 
+        
         private bool _isUpdateLoginInfo = false;
-
         private void _GetIsUpdateLoginInfo(object sender, bool status)
         {
             _isUpdateLoginInfo = status;
@@ -355,7 +355,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             }
         }
 
-        private void toolStripMenuItem_SoftDeleteUser_Click(object sender, EventArgs e)
+        private void toolStripMenuItem_SoftDeleteActiveUser_Click(object sender, EventArgs e)
         {
             bool isDeleted = _SoftDeleteUser();
 
@@ -366,7 +366,31 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             }
         }
 
+        private void toolStripMenuItem_UpdateLoginInfo_Click(object sender, EventArgs e)
+        {
+            if (!_HasCurrentRow())
+                return;
+
+            int userID = _GetID("userID");
+
+            frmUpdateLoginInfo frm = new frmUpdateLoginInfo(userID);
+            frm.ShowDialog();
+
+            if (_isUpdateLoginInfo)
+            {
+                _LoadActiveUsersInfoToDataGridView();
+                _UpdateComboBoxFilterItems();
+                _isUpdateLoginInfo = false;
+            }
+        }
+
+
         // >>
+
+        private void toolStripMenuItem_ShowInActiveUserDetails_Click(object sender, EventArgs e)
+        {
+            _OpenFormShowUserInfo(enPersonStatus.NotActive);
+        }
 
         private bool _ActivateUser(int userID)
         {
@@ -409,9 +433,15 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             _UpdateComboBoxFilterItems();
         }
 
-        private void toolStripMenuItem_ShowInActiveUserDetails_Click(object sender, EventArgs e)
+        private void toolStripMenuItem_SoftDeleteInActiveUser_Click(object sender, EventArgs e)
         {
-            _OpenFormShowUserInfo(enPersonStatus.NotActive);
+            bool isDeleted = _SoftDeleteUser();
+
+            if (isDeleted)
+            {
+                _LoadInActiveUsersInfoToDataGridView();
+                _UpdateComboBoxFilterItems();
+            }
         }
 
         // >> 
@@ -603,5 +633,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
         {
             this.Close();
         }
+
+        
     }
 }
