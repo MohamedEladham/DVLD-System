@@ -11,6 +11,8 @@ using static DVLD_Shared.Global_Enums.clsEnumHelpers;
 using DVLD_System_Solution.Forms._004_Manage_Users._005_Show_User_Info;
 using DVLD_Shared.Operations_Result;
 using static DVLD_Shared.Operations_Result.clsOperationResult;
+using DVLD_Shared.Global_Classes;
+using DVLD_Shared.Validation_Messages;
 
 namespace DVLD_System_Solution.Forms._004_Manage_Users
 {
@@ -69,17 +71,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
 
         // >>
 
-        private bool _HasCurrentRow()
-        {
-            if (dataGridView_ShowUsersInfos.CurrentRow == null)
-            {
-                MessageBox.Show(clsGeneralValidationMessages.NoDataInDataGridMessage, "No Data", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
-
-            return true;
-        }
-
+       
         // >>
 
         private void _SetupComboBoxUsersStatusItems()
@@ -212,12 +204,49 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
         private void frmManageUsers_Load(object sender, EventArgs e)
         {
             _LoadData();
+
+            toolStripMenuItem_ShowUserDetails.Enabled = clsCurrentUser.HasPermission(enPermissions.ViewUsers);
+            toolStripMenuItem_ShowInActiveUserDetails.Enabled = clsCurrentUser.HasPermission(enPermissions.ViewUsers);
+            toolStripMenuItem_ShowDeletedUserDetails.Enabled = clsCurrentUser.HasPermission(enPermissions.ViewUsers);
+
+            btn_AddNewUser.Enabled = clsCurrentUser.HasPermission(enPermissions.AddUser);
+            toolStripMenuItem_AddNewUser.Enabled = clsCurrentUser.HasPermission(enPermissions.AddUser);
+
+            toolStripMenuItem_UpdateUserInfo.Enabled = clsCurrentUser.HasPermission(enPermissions.UpdateLoginInfo_User);
+            toolStripMenuItem_UpdateLoginInfo.Enabled = clsCurrentUser.HasPermission(enPermissions.UpdateLoginInfo_User);
+            toolStripMenuItem_ActiveUser.Enabled = clsCurrentUser.HasPermission(enPermissions.UpdateLoginInfo_User);
+
+            toolStripMenuItem_SoftDeleteActiveUser.Enabled = clsCurrentUser.HasPermission(enPermissions.DeleteUser);
+            toolStripMenuItem_SoftDeleteInActiveUser.Enabled = clsCurrentUser.HasPermission(enPermissions.DeleteUser);
+
+            toolStripMenuItem_RestoreDeletedUser.Enabled = clsCurrentUser.HasPermission(enPermissions.RestoreUser);
         }
 
         // >>
 
+        private bool _HasCurrentRowAndPermission()
+        {
+            if (dataGridView_ShowUsersInfos.CurrentRow == null)
+            {
+                MessageBox.Show(clsGeneralValidationMessages.NoDataInDataGridMessage, "No Data", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            if (!clsCurrentUser.HasPermission(enPermissions.ViewUsers))
+            {
+                MessageBox.Show(clsUserValidationMessages.PermissionDeniedMessage, "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            return true;
+        }
+
+
         private void _OpenFormShowUserInfo(enPersonStatus personStatus)
         {
+            if (!_HasCurrentRowAndPermission())
+                return;
+
             int personID = _GetID("PersonID");
             int userID = _GetID("userID");
 
@@ -238,7 +267,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
 
         private void dataGridView_ShowUsersInfos_DoubleClick(object sender, EventArgs e)
         {
-            if (!_HasCurrentRow())
+            if (!_HasCurrentRowAndPermission())
                 return;
 
             string selectedValue = comBox_DisplayStatus.SelectedValue.ToString();
@@ -303,7 +332,8 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
 
         private void toolStripMenuItem_UpdateUserInfo_Click(object sender, EventArgs e)
         {
-            if (!_HasCurrentRow())
+
+            if (!_HasCurrentRowAndPermission())
                 return;
 
             int personID = _GetID("PersonID");
@@ -329,7 +359,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             if (dialogResult != DialogResult.Yes)
                 return false;
 
-            if (!_HasCurrentRow())
+            if (!_HasCurrentRowAndPermission())
                 return false;
 
             int userID = _GetID("userID");
@@ -366,9 +396,20 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             }
         }
 
+        private void toolStripMenuItem_SoftDeleteInActiveUser_Click(object sender, EventArgs e)
+        {
+            bool isDeleted = _SoftDeleteUser(); 
+
+            if (isDeleted)
+            {
+                _LoadInActiveUsersInfoToDataGridView();
+                _UpdateComboBoxFilterItems();
+            }
+        }
+
         private void toolStripMenuItem_UpdateLoginInfo_Click(object sender, EventArgs e)
         {
-            if (!_HasCurrentRow())
+            if (!_HasCurrentRowAndPermission())
                 return;
 
             int userID = _GetID("userID");
@@ -383,7 +424,6 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
                 _isUpdateLoginInfo = false;
             }
         }
-
 
         // >>
 
@@ -432,17 +472,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
 
             _UpdateComboBoxFilterItems();
         }
-
-        private void toolStripMenuItem_SoftDeleteInActiveUser_Click(object sender, EventArgs e)
-        {
-            bool isDeleted = _SoftDeleteUser();
-
-            if (isDeleted)
-            {
-                _LoadInActiveUsersInfoToDataGridView();
-                _UpdateComboBoxFilterItems();
-            }
-        }
+        
 
         // >> 
 
@@ -633,7 +663,5 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
         {
             this.Close();
         }
-
-        
     }
 }

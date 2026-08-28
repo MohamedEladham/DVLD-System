@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Global_Classes\clsHashHelper.cs" />
     <Compile Include="Global_Classes\clsImageHelper.cs" />
+    <Compile Include="Global_Classes\clsPermissions.cs" />
     <Compile Include="Global_Classes\clsValidationHelper.cs" />
     <Compile Include="Global_Enums\clsEnumHelpers.cs" />
     <Compile Include="Validation_Messages\clsCountryValidationMessages.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="Validation_Messages\clsNameValidationMessages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Operations_Result\clsOperationResult.cs" />
+    <Compile Include="Validation_Messages\clsRoleValidationMessages.cs" />
     <Compile Include="Validation_Messages\clsUserValidationMessages.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -121,13 +121,10 @@ namespace DVLD_DAL
             List<int> permissions = new List<int>();
 
             string query = @"SELECT DISTINCT
-
 		                                    RP.FK_PermissionID
-
-		                                    FROM UserRoles UR INNER JOIN RolePermissions RP 
-
+		                                    FROM UserRoles UR
+                                            INNER JOIN RolePermissions RP 
                                             ON UR.FK_RoleID = RP.FK_RoleID
-
 		                                    WHERE UR.FK_UserID = @UserID";
 
             using (SqlConnection connection = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
@@ -415,7 +412,28 @@ namespace DVLD_DAL
 
             return newID > 0;
         }
-        
+
+        public static bool AddUserRole(int userID, int roleID) 
+        {
+            bool isAdded = false;
+
+            string query = @"INSERT INTO UserRoles VALUES (@UserID, @RoleID)";
+
+            using (SqlConnection connection = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.Add("@UserID", System.Data.SqlDbType.Int).Value = userID;
+                command.Parameters.Add("@RoleID", System.Data.SqlDbType.Int).Value = roleID;
+
+                connection.Open();
+
+                isAdded = (command.ExecuteNonQuery() > 0);
+            }
+
+            return isAdded;
+        }
+
+
         public static bool UpdatePassword(string newPassword, int userID)
         {
             bool isUpdate = false;

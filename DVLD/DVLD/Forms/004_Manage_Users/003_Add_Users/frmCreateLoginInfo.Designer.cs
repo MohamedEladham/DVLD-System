@@ -47,6 +47,10 @@
             this.rdoB_NotActive = new System.Windows.Forms.RadioButton();
             this.rdoB_Active = new System.Windows.Forms.RadioButton();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.comBox_Roles = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.pictureBox7 = new System.Windows.Forms.PictureBox();
+            this.picB_ShowHidePassword = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -55,18 +59,18 @@
             this.btn_Save = new System.Windows.Forms.Button();
             this.pictureBox11 = new System.Windows.Forms.PictureBox();
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
-            this.picB_ShowHidePassword = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picB_ShowHidePassword)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picB_ShowHidePassword)).BeginInit();
             this.SuspendLayout();
             // 
             // lab_PersonIDToText
@@ -74,7 +78,7 @@
             this.lab_PersonIDToText.AutoSize = true;
             this.lab_PersonIDToText.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             this.lab_PersonIDToText.ForeColor = System.Drawing.Color.LimeGreen;
-            this.lab_PersonIDToText.Location = new System.Drawing.Point(161, 116);
+            this.lab_PersonIDToText.Location = new System.Drawing.Point(161, 146);
             this.lab_PersonIDToText.Name = "lab_PersonIDToText";
             this.lab_PersonIDToText.Size = new System.Drawing.Size(36, 19);
             this.lab_PersonIDToText.TabIndex = 220;
@@ -85,7 +89,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label1.Location = new System.Drawing.Point(8, 116);
+            this.label1.Location = new System.Drawing.Point(8, 146);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(100, 19);
             this.label1.TabIndex = 219;
@@ -107,10 +111,10 @@
             // txt_UserName
             // 
             this.txt_UserName.Font = new System.Drawing.Font("Tahoma", 10F);
-            this.txt_UserName.Location = new System.Drawing.Point(161, 206);
+            this.txt_UserName.Location = new System.Drawing.Point(161, 236);
             this.txt_UserName.MaxLength = 50;
             this.txt_UserName.Name = "txt_UserName";
-            this.txt_UserName.Size = new System.Drawing.Size(420, 24);
+            this.txt_UserName.Size = new System.Drawing.Size(542, 24);
             this.txt_UserName.TabIndex = 224;
             // 
             // lab_NationalNO
@@ -118,7 +122,7 @@
             this.lab_NationalNO.AutoSize = true;
             this.lab_NationalNO.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             this.lab_NationalNO.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lab_NationalNO.Location = new System.Drawing.Point(8, 211);
+            this.lab_NationalNO.Location = new System.Drawing.Point(8, 241);
             this.lab_NationalNO.Name = "lab_NationalNO";
             this.lab_NationalNO.Size = new System.Drawing.Size(104, 19);
             this.lab_NationalNO.TabIndex = 226;
@@ -129,7 +133,7 @@
             this.lab_UserIDToText.AutoSize = true;
             this.lab_UserIDToText.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             this.lab_UserIDToText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lab_UserIDToText.Location = new System.Drawing.Point(161, 160);
+            this.lab_UserIDToText.Location = new System.Drawing.Point(161, 190);
             this.lab_UserIDToText.Name = "lab_UserIDToText";
             this.lab_UserIDToText.Size = new System.Drawing.Size(36, 19);
             this.lab_UserIDToText.TabIndex = 229;
@@ -140,7 +144,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label3.Location = new System.Drawing.Point(8, 160);
+            this.label3.Location = new System.Drawing.Point(8, 190);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(81, 19);
             this.label3.TabIndex = 228;
@@ -151,7 +155,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label4.Location = new System.Drawing.Point(8, 259);
+            this.label4.Location = new System.Drawing.Point(8, 289);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(93, 19);
             this.label4.TabIndex = 232;
@@ -160,10 +164,10 @@
             // txt_Password
             // 
             this.txt_Password.Font = new System.Drawing.Font("Tahoma", 10F);
-            this.txt_Password.Location = new System.Drawing.Point(161, 254);
+            this.txt_Password.Location = new System.Drawing.Point(161, 284);
             this.txt_Password.MaxLength = 50;
             this.txt_Password.Name = "txt_Password";
-            this.txt_Password.Size = new System.Drawing.Size(420, 24);
+            this.txt_Password.Size = new System.Drawing.Size(542, 24);
             this.txt_Password.TabIndex = 230;
             this.txt_Password.UseSystemPasswordChar = true;
             // 
@@ -172,7 +176,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label5.Location = new System.Drawing.Point(8, 307);
+            this.label5.Location = new System.Drawing.Point(8, 337);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(162, 19);
             this.label5.TabIndex = 235;
@@ -181,10 +185,10 @@
             // txt_ConfirmPassword
             // 
             this.txt_ConfirmPassword.Font = new System.Drawing.Font("Tahoma", 10F);
-            this.txt_ConfirmPassword.Location = new System.Drawing.Point(207, 302);
+            this.txt_ConfirmPassword.Location = new System.Drawing.Point(207, 332);
             this.txt_ConfirmPassword.MaxLength = 50;
             this.txt_ConfirmPassword.Name = "txt_ConfirmPassword";
-            this.txt_ConfirmPassword.Size = new System.Drawing.Size(374, 24);
+            this.txt_ConfirmPassword.Size = new System.Drawing.Size(496, 24);
             this.txt_ConfirmPassword.TabIndex = 233;
             this.txt_ConfirmPassword.UseSystemPasswordChar = true;
             // 
@@ -198,16 +202,16 @@
             this.panel1.Controls.Add(this.rdoB_NotActive);
             this.panel1.Controls.Add(this.rdoB_Active);
             this.panel1.Controls.Add(this.pictureBox6);
-            this.panel1.Location = new System.Drawing.Point(207, 332);
+            this.panel1.Location = new System.Drawing.Point(207, 425);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(374, 39);
+            this.panel1.Size = new System.Drawing.Size(496, 39);
             this.panel1.TabIndex = 236;
             // 
             // pictureBox5
             // 
             this.pictureBox5.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox5.Image = global::DVLD_System_Solution.Properties.Resources.Active_User_32;
-            this.pictureBox5.Location = new System.Drawing.Point(64, 12);
+            this.pictureBox5.Location = new System.Drawing.Point(115, 9);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(23, 24);
             this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -220,7 +224,7 @@
             this.rdoB_NotActive.AutoSize = true;
             this.rdoB_NotActive.Font = new System.Drawing.Font("Tahoma", 10F);
             this.rdoB_NotActive.ForeColor = System.Drawing.Color.Black;
-            this.rdoB_NotActive.Location = new System.Drawing.Point(228, 12);
+            this.rdoB_NotActive.Location = new System.Drawing.Point(317, 11);
             this.rdoB_NotActive.Name = "rdoB_NotActive";
             this.rdoB_NotActive.Size = new System.Drawing.Size(89, 21);
             this.rdoB_NotActive.TabIndex = 8;
@@ -234,7 +238,7 @@
             this.rdoB_Active.Checked = true;
             this.rdoB_Active.Font = new System.Drawing.Font("Tahoma", 10F);
             this.rdoB_Active.ForeColor = System.Drawing.Color.Black;
-            this.rdoB_Active.Location = new System.Drawing.Point(96, 12);
+            this.rdoB_Active.Location = new System.Drawing.Point(144, 11);
             this.rdoB_Active.Name = "rdoB_Active";
             this.rdoB_Active.Size = new System.Drawing.Size(63, 21);
             this.rdoB_Active.TabIndex = 7;
@@ -246,17 +250,60 @@
             // 
             this.pictureBox6.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox6.Image = global::DVLD_System_Solution.Properties.Resources.Block_User_32;
-            this.pictureBox6.Location = new System.Drawing.Point(199, 12);
+            this.pictureBox6.Location = new System.Drawing.Point(288, 9);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(23, 24);
             this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox6.TabIndex = 27;
             this.pictureBox6.TabStop = false;
             // 
+            // comBox_Roles
+            // 
+            this.comBox_Roles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comBox_Roles.Font = new System.Drawing.Font("Tahoma", 10F);
+            this.comBox_Roles.FormattingEnabled = true;
+            this.comBox_Roles.Location = new System.Drawing.Point(207, 380);
+            this.comBox_Roles.Name = "comBox_Roles";
+            this.comBox_Roles.Size = new System.Drawing.Size(496, 24);
+            this.comBox_Roles.TabIndex = 242;
+            this.comBox_Roles.MouseClick += new System.Windows.Forms.MouseEventHandler(this.comBox_Roles_MouseClick);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label2.Location = new System.Drawing.Point(12, 383);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(52, 19);
+            this.label2.TabIndex = 243;
+            this.label2.Text = "Role:";
+            // 
+            // pictureBox7
+            // 
+            this.pictureBox7.Image = global::DVLD_System_Solution.Properties.Resources.Permissions1_32;
+            this.pictureBox7.Location = new System.Drawing.Point(173, 380);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(23, 24);
+            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox7.TabIndex = 244;
+            this.pictureBox7.TabStop = false;
+            // 
+            // picB_ShowHidePassword
+            // 
+            this.picB_ShowHidePassword.Image = global::DVLD_System_Solution.Properties.Resources.Hide_Passowrd_32;
+            this.picB_ShowHidePassword.Location = new System.Drawing.Point(724, 280);
+            this.picB_ShowHidePassword.Name = "picB_ShowHidePassword";
+            this.picB_ShowHidePassword.Size = new System.Drawing.Size(32, 32);
+            this.picB_ShowHidePassword.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.picB_ShowHidePassword.TabIndex = 240;
+            this.picB_ShowHidePassword.TabStop = false;
+            this.picB_ShowHidePassword.Click += new System.EventHandler(this.picB_ShowHidePassword_Click);
+            // 
             // pictureBox4
             // 
             this.pictureBox4.Image = global::DVLD_System_Solution.Properties.Resources.Password_32;
-            this.pictureBox4.Location = new System.Drawing.Point(173, 302);
+            this.pictureBox4.Location = new System.Drawing.Point(173, 332);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(23, 24);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -266,7 +313,7 @@
             // pictureBox3
             // 
             this.pictureBox3.Image = global::DVLD_System_Solution.Properties.Resources.Password_32;
-            this.pictureBox3.Location = new System.Drawing.Point(127, 254);
+            this.pictureBox3.Location = new System.Drawing.Point(127, 284);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(23, 24);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -276,7 +323,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::DVLD_System_Solution.Properties.Resources.Number_32;
-            this.pictureBox1.Location = new System.Drawing.Point(127, 155);
+            this.pictureBox1.Location = new System.Drawing.Point(127, 185);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(23, 24);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -286,7 +333,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = global::DVLD_System_Solution.Properties.Resources.Person_32;
-            this.pictureBox2.Location = new System.Drawing.Point(127, 206);
+            this.pictureBox2.Location = new System.Drawing.Point(127, 236);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(23, 24);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -301,7 +348,7 @@
             this.btn_Close.ForeColor = System.Drawing.Color.DimGray;
             this.btn_Close.Image = global::DVLD_System_Solution.Properties.Resources.Close1_28;
             this.btn_Close.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btn_Close.Location = new System.Drawing.Point(8, 396);
+            this.btn_Close.Location = new System.Drawing.Point(8, 510);
             this.btn_Close.Name = "btn_Close";
             this.btn_Close.Size = new System.Drawing.Size(135, 39);
             this.btn_Close.TabIndex = 223;
@@ -318,7 +365,7 @@
             this.btn_Save.ForeColor = System.Drawing.Color.DimGray;
             this.btn_Save.Image = global::DVLD_System_Solution.Properties.Resources.Save1_32;
             this.btn_Save.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btn_Save.Location = new System.Drawing.Point(637, 396);
+            this.btn_Save.Location = new System.Drawing.Point(637, 510);
             this.btn_Save.Name = "btn_Save";
             this.btn_Save.Size = new System.Drawing.Size(135, 39);
             this.btn_Save.TabIndex = 222;
@@ -341,33 +388,24 @@
             // pictureBox10
             // 
             this.pictureBox10.Image = global::DVLD_System_Solution.Properties.Resources.Number_32;
-            this.pictureBox10.Location = new System.Drawing.Point(127, 111);
+            this.pictureBox10.Location = new System.Drawing.Point(127, 141);
             this.pictureBox10.Name = "pictureBox10";
             this.pictureBox10.Size = new System.Drawing.Size(23, 24);
             this.pictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox10.TabIndex = 217;
             this.pictureBox10.TabStop = false;
             // 
-            // picB_ShowHidePassword
-            // 
-            this.picB_ShowHidePassword.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.picB_ShowHidePassword.Image = global::DVLD_System_Solution.Properties.Resources.Hide_Passowrd_32;
-            this.picB_ShowHidePassword.Location = new System.Drawing.Point(598, 250);
-            this.picB_ShowHidePassword.Name = "picB_ShowHidePassword";
-            this.picB_ShowHidePassword.Size = new System.Drawing.Size(32, 32);
-            this.picB_ShowHidePassword.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.picB_ShowHidePassword.TabIndex = 240;
-            this.picB_ShowHidePassword.TabStop = false;
-            this.picB_ShowHidePassword.Click += new System.EventHandler(this.picB_ShowHidePassword_Click);
-            // 
             // frmCreateLoginInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(784, 447);
-            this.Controls.Add(this.picB_ShowHidePassword);
+            this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pictureBox7);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.comBox_Roles);
+            this.Controls.Add(this.picB_ShowHidePassword);
             this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txt_ConfirmPassword);
@@ -391,8 +429,8 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(800, 486);
-            this.MinimumSize = new System.Drawing.Size(800, 486);
+            this.MaximumSize = new System.Drawing.Size(800, 600);
+            this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "frmCreateLoginInfo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Create Login Info Screen";
@@ -402,13 +440,14 @@
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picB_ShowHidePassword)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picB_ShowHidePassword)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -442,5 +481,8 @@
         private System.Windows.Forms.RadioButton rdoB_Active;
         private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.PictureBox picB_ShowHidePassword;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox comBox_Roles;
+        private System.Windows.Forms.PictureBox pictureBox7;
     }
 }

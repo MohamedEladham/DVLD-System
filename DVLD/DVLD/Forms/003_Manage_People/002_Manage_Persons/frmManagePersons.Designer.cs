@@ -41,7 +41,7 @@ namespace Main_Screen.Froms.Persons_Screen
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmManagePersons));
             this.dataGridView_ShowPersonsInfos = new System.Windows.Forms.DataGridView();
             this.contextMenuStrip_ActivePersons = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem_ShowDetails1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem_ShowPersonInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem_AddNew = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem_Edit = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,14 +59,14 @@ namespace Main_Screen.Froms.Persons_Screen
             this.label5 = new System.Windows.Forms.Label();
             this.toolStripMenuItem_ShowDetails = new System.Windows.Forms.ToolStripMenuItem();
             this.lab_RecordsCount = new System.Windows.Forms.Label();
-            this.btn_OpenfrmAddUpdatePersonInfo = new System.Windows.Forms.Button();
+            this.btn_AddNewPerson = new System.Windows.Forms.Button();
             this.btn_Close = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.toolStripMenuItem_ShowDeletedDetails = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem_ShowDeletedPersonInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip_DeletedPersons = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem_RestoreDeletedPerson = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem_RestoreDeletedPerson = new System.Windows.Forms.ToolStripMenuItem();
             this.comBox_PersonStatus = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_ShowPersonsInfos)).BeginInit();
@@ -112,7 +112,7 @@ namespace Main_Screen.Froms.Persons_Screen
             this.dataGridView_ShowPersonsInfos.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView_ShowPersonsInfos.EnableHeadersVisualStyles = false;
             this.dataGridView_ShowPersonsInfos.GridColor = System.Drawing.Color.DimGray;
-            this.dataGridView_ShowPersonsInfos.Location = new System.Drawing.Point(12, 295);
+            this.dataGridView_ShowPersonsInfos.Location = new System.Drawing.Point(12, 305);
             this.dataGridView_ShowPersonsInfos.Name = "dataGridView_ShowPersonsInfos";
             this.dataGridView_ShowPersonsInfos.ReadOnly = true;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -125,7 +125,7 @@ namespace Main_Screen.Froms.Persons_Screen
             this.dataGridView_ShowPersonsInfos.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView_ShowPersonsInfos.RowHeadersWidth = 35;
             this.dataGridView_ShowPersonsInfos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dataGridView_ShowPersonsInfos.Size = new System.Drawing.Size(1307, 398);
+            this.dataGridView_ShowPersonsInfos.Size = new System.Drawing.Size(1307, 388);
             this.dataGridView_ShowPersonsInfos.TabIndex = 1;
             this.dataGridView_ShowPersonsInfos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_ShowPersonsInfos_CellClick);
             this.dataGridView_ShowPersonsInfos.DoubleClick += new System.EventHandler(this.dataGridView_ShowPersonsInfos_DoubleClick);
@@ -135,7 +135,7 @@ namespace Main_Screen.Froms.Persons_Screen
             // 
             this.contextMenuStrip_ActivePersons.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.contextMenuStrip_ActivePersons.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem_ShowDetails1,
+            this.toolStripMenuItem_ShowPersonInfo,
             this.toolStripSeparator2,
             this.toolStripMenuItem_AddNew,
             this.toolStripMenuItem_Edit,
@@ -146,14 +146,14 @@ namespace Main_Screen.Froms.Persons_Screen
             this.contextMenuStrip_ActivePersons.Name = "contextMenuStrip1";
             this.contextMenuStrip_ActivePersons.Size = new System.Drawing.Size(196, 244);
             // 
-            // toolStripMenuItem_ShowDetails1
+            // toolStripMenuItem_ShowPersonInfo
             // 
-            this.toolStripMenuItem_ShowDetails1.Image = global::DVLD_System_Solution.Properties.Resources.Person_Details_32;
-            this.toolStripMenuItem_ShowDetails1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripMenuItem_ShowDetails1.Name = "toolStripMenuItem_ShowDetails1";
-            this.toolStripMenuItem_ShowDetails1.Size = new System.Drawing.Size(195, 38);
-            this.toolStripMenuItem_ShowDetails1.Text = "Show Details";
-            this.toolStripMenuItem_ShowDetails1.Click += new System.EventHandler(this.toolStripMenuItem_ShowDetails_Click);
+            this.toolStripMenuItem_ShowPersonInfo.Image = global::DVLD_System_Solution.Properties.Resources.Person_Details_32;
+            this.toolStripMenuItem_ShowPersonInfo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItem_ShowPersonInfo.Name = "toolStripMenuItem_ShowPersonInfo";
+            this.toolStripMenuItem_ShowPersonInfo.Size = new System.Drawing.Size(195, 38);
+            this.toolStripMenuItem_ShowPersonInfo.Text = "Show Details";
+            this.toolStripMenuItem_ShowPersonInfo.Click += new System.EventHandler(this.toolStripMenuItem_ShowPersonInfo_Click);
             // 
             // toolStripSeparator2
             // 
@@ -214,7 +214,7 @@ namespace Main_Screen.Froms.Persons_Screen
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 22F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label1.Location = new System.Drawing.Point(438, 218);
+            this.label1.Location = new System.Drawing.Point(438, 183);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(386, 41);
             this.label1.TabIndex = 3;
@@ -226,27 +226,27 @@ namespace Main_Screen.Froms.Persons_Screen
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Sitka Small", 16F);
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label2.Location = new System.Drawing.Point(12, 256);
+            this.label2.Location = new System.Drawing.Point(12, 227);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(128, 33);
+            this.label2.Size = new System.Drawing.Size(121, 33);
             this.label2.TabIndex = 4;
-            this.label2.Text = "Filter By: ";
+            this.label2.Text = "Filter By:";
             // 
             // comBox_FilterItems
             // 
             this.comBox_FilterItems.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comBox_FilterItems.Font = new System.Drawing.Font("Tahoma", 10F);
             this.comBox_FilterItems.FormattingEnabled = true;
-            this.comBox_FilterItems.Location = new System.Drawing.Point(200, 265);
+            this.comBox_FilterItems.Location = new System.Drawing.Point(200, 231);
             this.comBox_FilterItems.Name = "comBox_FilterItems";
-            this.comBox_FilterItems.Size = new System.Drawing.Size(232, 24);
+            this.comBox_FilterItems.Size = new System.Drawing.Size(230, 24);
             this.comBox_FilterItems.TabIndex = 5;
             this.comBox_FilterItems.SelectedIndexChanged += new System.EventHandler(this.comBox_FilterItems_SelectedIndexChanged);
             // 
             // txt_SearchValue
             // 
             this.txt_SearchValue.Font = new System.Drawing.Font("Tahoma", 10F);
-            this.txt_SearchValue.Location = new System.Drawing.Point(445, 265);
+            this.txt_SearchValue.Location = new System.Drawing.Point(445, 231);
             this.txt_SearchValue.Name = "txt_SearchValue";
             this.txt_SearchValue.Size = new System.Drawing.Size(242, 24);
             this.txt_SearchValue.TabIndex = 9;
@@ -317,18 +317,18 @@ namespace Main_Screen.Froms.Persons_Screen
             this.lab_RecordsCount.Text = "??";
             this.lab_RecordsCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // btn_OpenfrmAddUpdatePersonInfo
+            // btn_AddNewPerson
             // 
-            this.btn_OpenfrmAddUpdatePersonInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_OpenfrmAddUpdatePersonInfo.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
-            this.btn_OpenfrmAddUpdatePersonInfo.Image = global::DVLD_System_Solution.Properties.Resources.Add_Person_40;
-            this.btn_OpenfrmAddUpdatePersonInfo.Location = new System.Drawing.Point(1256, 236);
-            this.btn_OpenfrmAddUpdatePersonInfo.Name = "btn_OpenfrmAddUpdatePersonInfo";
-            this.btn_OpenfrmAddUpdatePersonInfo.Size = new System.Drawing.Size(63, 53);
-            this.btn_OpenfrmAddUpdatePersonInfo.TabIndex = 7;
-            this.btn_OpenfrmAddUpdatePersonInfo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btn_OpenfrmAddUpdatePersonInfo.UseVisualStyleBackColor = false;
-            this.btn_OpenfrmAddUpdatePersonInfo.Click += new System.EventHandler(this.btn_OpenfrmAddUpdatePersonInfo_Click);
+            this.btn_AddNewPerson.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_AddNewPerson.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
+            this.btn_AddNewPerson.Image = global::DVLD_System_Solution.Properties.Resources.Add_Person_40;
+            this.btn_AddNewPerson.Location = new System.Drawing.Point(1256, 236);
+            this.btn_AddNewPerson.Name = "btn_AddNewPerson";
+            this.btn_AddNewPerson.Size = new System.Drawing.Size(63, 53);
+            this.btn_AddNewPerson.TabIndex = 7;
+            this.btn_AddNewPerson.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_AddNewPerson.UseVisualStyleBackColor = false;
+            this.btn_AddNewPerson.Click += new System.EventHandler(this.btn_AddNewPerson_Click);
             // 
             // btn_Close
             // 
@@ -352,7 +352,7 @@ namespace Main_Screen.Froms.Persons_Screen
             this.pictureBox2.Image = global::DVLD_System_Solution.Properties.Resources.Group_Persons2_560;
             this.pictureBox2.Location = new System.Drawing.Point(515, 12);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(221, 192);
+            this.pictureBox2.Size = new System.Drawing.Size(221, 158);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 2;
             this.pictureBox2.TabStop = false;
@@ -368,24 +368,29 @@ namespace Main_Screen.Froms.Persons_Screen
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // toolStripMenuItem_ShowDeletedDetails
+            // toolStripMenuItem_ShowDeletedPersonInfo
             // 
-            this.toolStripMenuItem_ShowDeletedDetails.Image = global::DVLD_System_Solution.Properties.Resources.Person_Details_32;
-            this.toolStripMenuItem_ShowDeletedDetails.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripMenuItem_ShowDeletedDetails.Name = "toolStripMenuItem_ShowDeletedDetails";
-            this.toolStripMenuItem_ShowDeletedDetails.Size = new System.Drawing.Size(185, 38);
-            this.toolStripMenuItem_ShowDeletedDetails.Text = "Show Details";
-            this.toolStripMenuItem_ShowDeletedDetails.Click += new System.EventHandler(this.toolStripMenuItem_ShowDeletedDetails_Click);
+            this.toolStripMenuItem_ShowDeletedPersonInfo.Image = global::DVLD_System_Solution.Properties.Resources.Person_Details_32;
+            this.toolStripMenuItem_ShowDeletedPersonInfo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItem_ShowDeletedPersonInfo.Name = "toolStripMenuItem_ShowDeletedPersonInfo";
+            this.toolStripMenuItem_ShowDeletedPersonInfo.Size = new System.Drawing.Size(185, 38);
+            this.toolStripMenuItem_ShowDeletedPersonInfo.Text = "Show Details";
+            this.toolStripMenuItem_ShowDeletedPersonInfo.Click += new System.EventHandler(this.toolStripMenuItem_ShowDeletedPersonInfo_Click);
             // 
             // contextMenuStrip_DeletedPersons
             // 
             this.contextMenuStrip_DeletedPersons.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.contextMenuStrip_DeletedPersons.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem_RestoreDeletedPerson,
+            this.toolStripMenuItem_ShowDeletedPersonInfo,
             this.toolStripSeparator3,
-            this.toolStripMenuItem_ShowDeletedDetails});
+            this.toolStripMenuItem_RestoreDeletedPerson});
             this.contextMenuStrip_DeletedPersons.Name = "contextMenuStrip1";
             this.contextMenuStrip_DeletedPersons.Size = new System.Drawing.Size(186, 86);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(182, 6);
             // 
             // toolStripMenuItem_RestoreDeletedPerson
             // 
@@ -396,19 +401,14 @@ namespace Main_Screen.Froms.Persons_Screen
             this.toolStripMenuItem_RestoreDeletedPerson.Text = "Restore Person";
             this.toolStripMenuItem_RestoreDeletedPerson.Click += new System.EventHandler(this.toolStripMenuItem_RestoreDeletedPerson_Click);
             // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(182, 6);
-            // 
             // comBox_PersonStatus
             // 
             this.comBox_PersonStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comBox_PersonStatus.Font = new System.Drawing.Font("Tahoma", 10F);
             this.comBox_PersonStatus.FormattingEnabled = true;
-            this.comBox_PersonStatus.Location = new System.Drawing.Point(200, 221);
+            this.comBox_PersonStatus.Location = new System.Drawing.Point(200, 273);
             this.comBox_PersonStatus.Name = "comBox_PersonStatus";
-            this.comBox_PersonStatus.Size = new System.Drawing.Size(232, 24);
+            this.comBox_PersonStatus.Size = new System.Drawing.Size(230, 24);
             this.comBox_PersonStatus.TabIndex = 225;
             this.comBox_PersonStatus.SelectedIndexChanged += new System.EventHandler(this.comBox_PersonStatus_SelectedIndexChanged);
             // 
@@ -417,11 +417,11 @@ namespace Main_Screen.Froms.Persons_Screen
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Sitka Small", 16F);
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label3.Location = new System.Drawing.Point(12, 212);
+            this.label3.Location = new System.Drawing.Point(12, 269);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(182, 33);
+            this.label3.Size = new System.Drawing.Size(175, 33);
             this.label3.TabIndex = 226;
-            this.label3.Text = "Person Status: ";
+            this.label3.Text = "Person Status:";
             // 
             // frmManagePersons
             // 
@@ -437,7 +437,7 @@ namespace Main_Screen.Froms.Persons_Screen
             this.Controls.Add(this.lab_NationalNoToText);
             this.Controls.Add(this.lab_PersonIDToText);
             this.Controls.Add(this.txt_SearchValue);
-            this.Controls.Add(this.btn_OpenfrmAddUpdatePersonInfo);
+            this.Controls.Add(this.btn_AddNewPerson);
             this.Controls.Add(this.btn_Close);
             this.Controls.Add(this.comBox_FilterItems);
             this.Controls.Add(this.label2);
@@ -471,7 +471,7 @@ namespace Main_Screen.Froms.Persons_Screen
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comBox_FilterItems;
         private System.Windows.Forms.Button btn_Close;
-        private System.Windows.Forms.Button btn_OpenfrmAddUpdatePersonInfo;
+        private System.Windows.Forms.Button btn_AddNewPerson;
         private System.Windows.Forms.TextBox txt_SearchValue;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip_ActivePersons;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
@@ -481,14 +481,14 @@ namespace Main_Screen.Froms.Persons_Screen
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_SendEmail;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_PhoneCall;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_ShowDetails1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_ShowPersonInfo;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_ShowDetails;
         private System.Windows.Forms.Label lab_PersonIDToText;
         private System.Windows.Forms.Label lab_NationalNoToText;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lab_RecordsCount;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_ShowDeletedDetails;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_ShowDeletedPersonInfo;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip_DeletedPersons;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_RestoreDeletedPerson;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;

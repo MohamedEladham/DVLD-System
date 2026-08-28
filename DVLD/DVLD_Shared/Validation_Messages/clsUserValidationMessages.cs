@@ -8,8 +8,9 @@ namespace DVLD_Shared.Validation_Messages
 {
     public class clsUserValidationMessages
     {
-        public const string InvalidUserIDMessage = "Invalid ID Number, Enter A Valid Number.";
+        public const string InvalidUserIDMessage = "Invalid User ID Number, Enter A Valid Number.";
         public const string UserIDMustBeGreaterThanZeroMessage = "Invalid user id, user id must be greater than zero.";
+        public const string RoleIDMustBeGreaterThanZeroMessage = "Invalid role id, user id must be greater than zero.";
         public const string UserNotFoundMessage = "No User was found with the specified ID.";
         public static string UserInfoRequiredMessage = "User information is required.";
 
@@ -21,6 +22,10 @@ namespace DVLD_Shared.Validation_Messages
         // User Added Messages
         public static string UserAddedSuccessfullyMessage = "User added successfully.";
         public static string UserAddFailedMessage = "Failed to add User.";
+
+        // User Role Added Messages
+        public static string UserRoleAddedSuccessfullyMessage = "User Role added successfully.";
+        public static string UserRoleAddFailedMessage = "Failed to add User Role.";
 
         // Update Password Messages
         public static string NewPasswordRequiredMessage  = "Please enter your New password to updated.";
@@ -48,6 +53,9 @@ namespace DVLD_Shared.Validation_Messages
         public static string LoginSuccessfulMessage = "Login process successfully....";
         public static string LoginFailedMessage = "Login process failed.";
         public static string InvalidUserNameOrPasswordMessage = "Invalid username or password.";
+
+        // Permissions Messages
+        public static string PermissionDeniedMessage = "You do not have permission to perform this operation.";
 
     }
 }

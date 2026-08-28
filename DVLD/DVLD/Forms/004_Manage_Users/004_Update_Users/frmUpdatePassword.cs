@@ -64,9 +64,6 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             return result.IsValid;
         }
 
-        //public delegate void UpdateLoginInfoEventHandler(object sender, bool isCreated);
-        //public static event UpdateLoginInfoEventHandler UpdateLoginInfo;
-
         private bool _UpdatePassword(string newPassword, int userID)
         {
             clsOperationResult result = clsUserBL.UpdatePassword(newPassword, userID);

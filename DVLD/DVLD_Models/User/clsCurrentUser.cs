@@ -1,8 +1,5 @@
-﻿using System;
+﻿using DVLD_Shared.Global_Classes;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DVLD_Models.User
 {
@@ -11,5 +8,10 @@ namespace DVLD_Models.User
         public static int UserID { set; get; }
         public static string UserName { set; get; }
         public static List<int> Permissions { get; set; }
+
+        public static bool HasPermission(enPermissions permission)
+        {
+            return Permissions.Contains((int)permission);
+        }
     }
 }

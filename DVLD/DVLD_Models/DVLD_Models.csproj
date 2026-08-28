@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DVLD_Shared">
+      <HintPath>..\DVLD_Shared\bin\Debug\DVLD_Shared.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,6 +49,7 @@
     <Compile Include="Person\clsPerson.cs" />
     <Compile Include="Person\clsPersonInfoGridViewDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Roles\clsRole.cs" />
     <Compile Include="UI Models\clsComboBoxFilterItem.cs" />
     <Compile Include="User\clsCurrentUser.cs" />
     <Compile Include="User\clsDeleteUserInfoGridViewDto.cs" />

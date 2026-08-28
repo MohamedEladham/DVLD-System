@@ -9,6 +9,7 @@ using DVLD_Shared.Global_Classes;
 using DVLD_Shared.Operations_Result;
 using static DVLD_Shared.Global_Enums.clsEnumHelpers;
 using static DVLD_Shared.Operations_Result.clsOperationResult;
+using DVLD_Models.User;
 
 namespace DVLD_System_Solution.Forms._003_Manage_People.Controls
 {
@@ -134,7 +135,8 @@ namespace DVLD_System_Solution.Forms._003_Manage_People.Controls
                     if (person != null)
                     {
                         _FillUserControlByPersonInfo(person);
-                        linkLabel_EditPerson.Enabled = true;
+                        //linkLabel_EditPerson.Enabled = true;
+                        linkLabel_EditPerson.Enabled = clsCurrentUser.HasPermission(enPermissions.UpdatePerson);
                     }
                     break;
 
@@ -160,7 +162,8 @@ namespace DVLD_System_Solution.Forms._003_Manage_People.Controls
                     if (person != null)
                     {
                         _FillUserControlByPersonInfo(person);
-                        linkLabel_EditPerson.Enabled = true;
+                        //linkLabel_EditPerson.Enabled = true;
+                        linkLabel_EditPerson.Enabled = clsCurrentUser.HasPermission(enPermissions.UpdatePerson);
                     }
                     break;
 
@@ -186,7 +189,8 @@ namespace DVLD_System_Solution.Forms._003_Manage_People.Controls
                     if (person != null)
                     {
                         _FillUserControlByPersonInfo(person);
-                        linkLabel_EditPerson.Enabled = true;
+                        //linkLabel_EditPerson.Enabled = true;
+                        linkLabel_EditPerson.Enabled = clsCurrentUser.HasPermission(enPermissions.UpdatePerson);
                     }
                     break;
 

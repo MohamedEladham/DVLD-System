@@ -10,6 +10,7 @@ using DVLD_Shared.Global_Classes;
 using DVLD_Shared.Operations_Result;
 using static DVLD_Shared.Operations_Result.clsOperationResult;
 using static DVLD_Shared.Global_Enums.clsEnumHelpers;
+using DVLD_Models.User;
 
 namespace Main_Screen.Forms.Persons
 {
@@ -665,6 +666,9 @@ namespace Main_Screen.Forms.Persons
             lab_PersonIDToText.Text = _PersonID.ToString();
             
             lab_PersonIDToText.ForeColor = Color.LimeGreen;
+
+            if (!clsCurrentUser.HasPermission(enPermissions.UpdatePerson))
+                return;
 
             _addUpdateMode = enAddUpdateMode.UpdateInfo;
             

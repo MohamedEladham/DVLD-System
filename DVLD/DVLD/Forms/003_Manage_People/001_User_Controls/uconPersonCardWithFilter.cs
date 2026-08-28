@@ -3,6 +3,8 @@ using DVLD_BL.Validations;
 using DVLD_Models.UI_Models;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using DVLD_Models.User;
+using DVLD_Shared.Global_Classes;
 
 namespace DVLD_System_Solution.Forms._003_Manage_People.Controls
 {
@@ -40,8 +42,10 @@ namespace DVLD_System_Solution.Forms._003_Manage_People.Controls
             {
                 clsValidationResult result = clsPersonValidations.ValidatePersonID(sreachValue);
 
-                if(result.IsValid)
+                if (result.IsValid)
+                {
                     uconShowPersonInfo1.LoadActivePersonByID(result.ID);
+                }
                 else
                     errorProvider1.SetError(txt_SearchValue, result.Message);
             }
@@ -51,7 +55,9 @@ namespace DVLD_System_Solution.Forms._003_Manage_People.Controls
                 clsValidationResult result = clsPersonValidations.ValidateNationalNumber(sreachValue);
 
                 if (result.IsValid)
+                {
                     uconShowPersonInfo1.LoadActivePersonByNationalNO(sreachValue);
+                }
                 else
                     errorProvider1.SetError(txt_SearchValue, result.Message);
             }

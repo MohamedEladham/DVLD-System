@@ -7,6 +7,7 @@ using DVLD_Shared.Operations_Result;
 using Main_Screen.Forms._004_Users.Controls;
 using static DVLD_Shared.Operations_Result.clsOperationResult;
 using DVLD_Shared.Global_Classes;
+using DVLD_Shared.Validation_Messages;
 
 namespace DVLD_System_Solution.Forms._004_Manage_Users
 {
@@ -39,7 +40,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
 
         private void _GetUserByID(int userID)
         {
-            (clsOperationResult result, clsUser user) = clsUserBL.GetUserByID(userID);
+            (clsOperationResult result, clsUser user) = clsUserBL.GetUserByUserID(userID);
 
             switch (result.Status)
             {
@@ -61,6 +62,8 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
         private void frmUpdateLoginInfo_Load(object sender, EventArgs e)
         {
             _GetUserByID(_userID);
+
+            btn_ChangePassword.Enabled = clsCurrentUser.HasPermission(enPermissions.UpdatePassword_User);
         }
        
         // >>
@@ -134,6 +137,12 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
 
         private void btn_Save_Click(object sender, EventArgs e)
         {
+            if (!clsCurrentUser.HasPermission(enPermissions.UpdateLoginInfo_User))
+            {
+                MessageBox.Show(clsUserValidationMessages.PermissionDeniedMessage, "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             _Save();
         }
 
@@ -141,7 +150,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
 
         private void btn_UpdatePassword_Click(object sender, EventArgs e)
         {
-            frmCheckCurrentUserPassword frm = new frmCheckCurrentUserPassword(_userID, _personID);
+            frmUpdatePassword frm = new frmUpdatePassword(_userID, _personID);
             frm.ShowDialog();
         }
 

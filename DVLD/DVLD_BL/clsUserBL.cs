@@ -86,9 +86,16 @@ namespace DVLD_BL
             }
         }
 
-
-        public static (clsOperationResult, clsUser) GetUserByID(int userID)
+        public static (clsOperationResult, clsUser) GetUserByUserID(int userID)
         {
+            if (!clsCurrentUser.HasPermission(enPermissions.ViewUsers))
+                return (new clsOperationResult
+                {
+                    Status = enOperationStatus.Failed,
+                    Message = clsUserValidationMessages.PermissionDeniedMessage
+                }, null);
+
+
             if (userID <= 0)
                 return (new clsOperationResult
                 {
@@ -122,6 +129,7 @@ namespace DVLD_BL
 
         public static (clsOperationResult, clsUser) GetUserByUserNameAndPassword(string userName, string password)
         {
+            
             try
             {
                 string computeHashPassword = clsHashHelper.ComputeHash(password);
@@ -180,6 +188,13 @@ namespace DVLD_BL
 
         public static clsOperationResult AddNewUser(clsUser user)
         {
+            if (!clsCurrentUser.HasPermission(enPermissions.AddUser))
+                return new clsOperationResult
+                {
+                    Status = enOperationStatus.Failed,
+                    Message = clsUserValidationMessages.PermissionDeniedMessage
+                };
+
             if (user == null)
                 return new clsOperationResult
                 {
@@ -217,9 +232,66 @@ namespace DVLD_BL
             }
         }
 
+        public static clsOperationResult AddUserRole(int userID, int roleID)
+        {
+            if (!clsCurrentUser.HasPermission(enPermissions.AddUser))
+                return new clsOperationResult
+                {
+                    Status = enOperationStatus.Failed,
+                    Message = clsUserValidationMessages.PermissionDeniedMessage
+                };
+
+            if (userID <= 0)
+                return new clsOperationResult
+                {
+                    Status = enOperationStatus.Failed,
+                    Message = clsUserValidationMessages.UserIDMustBeGreaterThanZeroMessage
+                };
+
+            if (roleID <= 0)
+                return new clsOperationResult
+                {
+                    Status = enOperationStatus.Failed,
+                    Message = clsUserValidationMessages.RoleIDMustBeGreaterThanZeroMessage
+                };
+
+            try
+            {
+                bool isAdded = clsUserDAL.AddUserRole(userID, roleID);
+
+                if (isAdded)
+                    return new clsOperationResult
+                    {
+                        Status = enOperationStatus.Success,
+                        Message = clsUserValidationMessages.UserRoleAddedSuccessfullyMessage,
+                    };
+                else
+                    return new clsOperationResult
+                    {
+                        Status = enOperationStatus.Failed,
+                        Message = clsUserValidationMessages.UserRoleAddFailedMessage
+                    };
+            }
+            catch (Exception)
+            {
+                return new clsOperationResult
+                {
+                    Status = enOperationStatus.Exception,
+                    Message = clsGeneralValidationMessages.DatabaseOperationExceptionMessage
+                };
+            }
+        }
+
         public static clsOperationResult UpdatePassword(string newPassword, int userID)
         {
-            if(string.IsNullOrEmpty(newPassword))
+            if (!clsCurrentUser.HasPermission(enPermissions.UpdatePassword_User))
+                return new clsOperationResult
+                {
+                    Status = enOperationStatus.Failed,
+                    Message = clsUserValidationMessages.PermissionDeniedMessage
+                };
+
+            if (string.IsNullOrEmpty(newPassword))
                 return new clsOperationResult
                 {
                     Status = enOperationStatus.Failed,
@@ -257,6 +329,13 @@ namespace DVLD_BL
 
         public static clsOperationResult UpdateUserNameAndStatusInfo(clsUser user)
         {
+            if(!clsCurrentUser.HasPermission(enPermissions.UpdateLoginInfo_User))
+                return new clsOperationResult
+                {
+                    Status = enOperationStatus.Failed,
+                    Message = clsUserValidationMessages.PermissionDeniedMessage
+                };
+
             if (user == null)
                 return new clsOperationResult
                 {
@@ -293,6 +372,13 @@ namespace DVLD_BL
 
         public static clsOperationResult ActivateUser(int userID)
         {
+            if (!clsCurrentUser.HasPermission(enPermissions.UpdateLoginInfo_User))
+                return new clsOperationResult
+                {
+                    Status = enOperationStatus.Failed,
+                    Message = clsUserValidationMessages.PermissionDeniedMessage
+                };
+
             if (userID <= 0)
                 return new clsOperationResult
                 {
@@ -329,6 +415,13 @@ namespace DVLD_BL
 
         public static clsOperationResult RestoreUser(int userID)
         {
+            if (!clsCurrentUser.HasPermission(enPermissions.RestoreUser))
+                return new clsOperationResult
+                {
+                    Status = enOperationStatus.Failed,
+                    Message = clsUserValidationMessages.PermissionDeniedMessage
+                };
+
             if (userID <= 0)
                 return new clsOperationResult
                 {
@@ -365,6 +458,13 @@ namespace DVLD_BL
 
         public static clsOperationResult SoftDeleteUser(int userID)
         {
+            if (!clsCurrentUser.HasPermission(enPermissions.DeleteUser))
+                return new clsOperationResult
+                {
+                    Status = enOperationStatus.Failed,
+                    Message = clsUserValidationMessages.PermissionDeniedMessage
+                };
+
             if (userID <= 0)
                 return new clsOperationResult
                 {

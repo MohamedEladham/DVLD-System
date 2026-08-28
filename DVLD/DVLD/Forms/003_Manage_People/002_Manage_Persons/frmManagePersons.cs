@@ -12,6 +12,9 @@ using DVLD_Shared.Operations_Result;
 using DVLD_System_Solution.Forms._003_Manage_People;
 using static DVLD_Shared.Operations_Result.clsOperationResult;
 using static DVLD_Shared.Global_Enums.clsEnumHelpers;
+using DVLD_Models.User;
+using DVLD_Shared.Validation_Messages;
+using DVLD_Shared.Global_Classes;
 
 namespace Main_Screen.Froms.Persons_Screen
 {
@@ -255,6 +258,20 @@ namespace Main_Screen.Froms.Persons_Screen
             _LoadPersonInfoToDataGridView();
             _UpdateComboBoxFilterItems();
             frmAddUpdatePersons.AddOrUpdatePersonDialogResultReceived += _GetIsAddOrUpdatePersonDialogResult;
+
+            toolStripMenuItem_ShowPersonInfo.Enabled = clsCurrentUser.HasPermission(enPermissions.ViewPersons);
+            toolStripMenuItem_ShowDeletedPersonInfo.Enabled = clsCurrentUser.HasPermission(enPermissions.ViewPersons);
+
+            toolStripMenuItem_AddNew.Enabled = clsCurrentUser.HasPermission(enPermissions.AddPerson);
+            btn_AddNewPerson.Enabled = clsCurrentUser.HasPermission(enPermissions.AddPerson);
+
+            toolStripMenuItem_Edit.Enabled = clsCurrentUser.HasPermission(enPermissions.UpdatePerson);
+            toolStripMenuItem_SoftDelete.Enabled = clsCurrentUser.HasPermission(enPermissions.DeletePerson);
+
+            toolStripMenuItem_RestoreDeletedPerson.Enabled = clsCurrentUser.HasPermission(enPermissions.RestorePerson);
+
+            toolStripMenuItem_SendEmail.Enabled = false;
+            toolStripMenuItem_PhoneCall.Enabled = false;
         }
 
         private void frmManagePersons_Load(object sender, EventArgs e)
@@ -329,14 +346,14 @@ namespace Main_Screen.Froms.Persons_Screen
 
             if (comBox_PersonStatus.SelectedValue.ToString() == "Active")
             {
-                btn_OpenfrmAddUpdatePersonInfo.Visible = true;
+                btn_AddNewPerson.Visible = true;
                 dataGridView_ShowPersonsInfos.ContextMenuStrip = contextMenuStrip_ActivePersons;
                 _LoadPersonInfoToDataGridView();
             }
 
             if (comBox_PersonStatus.SelectedValue.ToString() == "NotActive")
             {
-                btn_OpenfrmAddUpdatePersonInfo.Visible = false;
+                btn_AddNewPerson.Visible = false;
                 dataGridView_ShowPersonsInfos.ContextMenuStrip = contextMenuStrip_DeletedPersons;
                 _LoadDeletedPersonInfoToDataGridView();
             }
@@ -359,7 +376,7 @@ namespace Main_Screen.Froms.Persons_Screen
             }
         }
         
-        private void btn_OpenfrmAddUpdatePersonInfo_Click(object sender, EventArgs e)
+        private void btn_AddNewPerson_Click(object sender, EventArgs e)
         {
             int personID = -1;
             _OpenAddUpdatePersonForm(personID, enAddUpdateMode.AddNewInfo);
@@ -379,6 +396,12 @@ namespace Main_Screen.Froms.Persons_Screen
 
         private void _OpenFormShowDetails()
         {
+            if(!clsCurrentUser.HasPermission(enPermissions.ViewPersons))
+            {
+                MessageBox.Show(clsUserValidationMessages.PermissionDeniedMessage, "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             int personID = _GetCurrentPersonID();
             frmShowPersonInfo frm = new frmShowPersonInfo(personID, enPersonStatus.Active);
             frm.ShowDialog();
@@ -390,36 +413,59 @@ namespace Main_Screen.Froms.Persons_Screen
             }
         }
 
-        private void toolStripMenuItem_ShowDetails_Click(object sender, EventArgs e)
+        private void toolStripMenuItem_ShowPersonInfo_Click(object sender, EventArgs e)
         {
             _OpenFormShowDetails();
         }
 
-        private void dataGridView_ShowPersonsInfos_DoubleClick(object sender, EventArgs e)
+        private void _OpenFormShowDeletedPersonInfo()
         {
-            if (dataGridView_ShowPersonsInfos.CurrentRow == null)
+            if (!clsCurrentUser.HasPermission(enPermissions.ViewPersons)) 
+            {
+                MessageBox.Show(clsUserValidationMessages.PermissionDeniedMessage, "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
+            }
 
-            if(comBox_PersonStatus.SelectedValue.ToString() == "Active")
-                _OpenFormShowDetails();
-            else
-                _OpenFormShowDeletedDetails();
-        }
-
-        private void _OpenFormShowDeletedDetails()
-        {
             int personID = _GetCurrentPersonID();
 
             frmShowPersonInfo frm = new frmShowPersonInfo(personID, enPersonStatus.NotActive);
             frm.ShowDialog();
         }
 
-
-        private void toolStripMenuItem_ShowDeletedDetails_Click(object sender, EventArgs e)
+        private void toolStripMenuItem_ShowDeletedPersonInfo_Click(object sender, EventArgs e)
         {
-            _OpenFormShowDeletedDetails();
+            _OpenFormShowDeletedPersonInfo();
         }
 
+        private bool _HasCurrentRowAndPermission()
+        {
+            if (dataGridView_ShowPersonsInfos.CurrentRow == null)
+            {
+                MessageBox.Show(clsGeneralValidationMessages.NoDataInDataGridMessage, "No Data", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            if (!clsCurrentUser.HasPermission(enPermissions.ViewUsers))
+            {
+                MessageBox.Show(clsUserValidationMessages.PermissionDeniedMessage, "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            return true;
+        }
+
+        private void dataGridView_ShowPersonsInfos_DoubleClick(object sender, EventArgs e)
+        {
+            if (!_HasCurrentRowAndPermission())
+                return;
+
+            if(comBox_PersonStatus.SelectedValue.ToString() == "Active")
+                _OpenFormShowDetails();
+            else
+                _OpenFormShowDeletedPersonInfo();
+        }
+
+      
         private bool _SoftDeletePerson(int personID)
         {
             clsOperationResult result = clsPersonBL.SoftDeletePerson(personID);

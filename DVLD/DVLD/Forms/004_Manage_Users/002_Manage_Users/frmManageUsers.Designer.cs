@@ -67,9 +67,9 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem_SoftDeleteInActiveUser = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip_DeletedUsers = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem_RestoreDeletedUser = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem_ShowDeletedUserDetails = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem_RestoreDeletedUser = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_AddNewUser = new System.Windows.Forms.Button();
             this.btn_Close = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -382,25 +382,11 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             // 
             this.contextMenuStrip_DeletedUsers.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.contextMenuStrip_DeletedUsers.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem_RestoreDeletedUser,
+            this.toolStripMenuItem_ShowDeletedUserDetails,
             this.toolStripSeparator4,
-            this.toolStripMenuItem_ShowDeletedUserDetails});
+            this.toolStripMenuItem_RestoreDeletedUser});
             this.contextMenuStrip_DeletedUsers.Name = "contextMenuStrip1";
             this.contextMenuStrip_DeletedUsers.Size = new System.Drawing.Size(173, 86);
-            // 
-            // toolStripMenuItem_RestoreDeletedUser
-            // 
-            this.toolStripMenuItem_RestoreDeletedUser.Image = global::DVLD_System_Solution.Properties.Resources.Restore_24;
-            this.toolStripMenuItem_RestoreDeletedUser.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripMenuItem_RestoreDeletedUser.Name = "toolStripMenuItem_RestoreDeletedUser";
-            this.toolStripMenuItem_RestoreDeletedUser.Size = new System.Drawing.Size(172, 38);
-            this.toolStripMenuItem_RestoreDeletedUser.Text = "Restore User";
-            this.toolStripMenuItem_RestoreDeletedUser.Click += new System.EventHandler(this.toolStripMenuItem_RestoreDeletedUser_Click);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(169, 6);
             // 
             // toolStripMenuItem_ShowDeletedUserDetails
             // 
@@ -410,6 +396,20 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             this.toolStripMenuItem_ShowDeletedUserDetails.Size = new System.Drawing.Size(172, 38);
             this.toolStripMenuItem_ShowDeletedUserDetails.Text = "Show Details";
             this.toolStripMenuItem_ShowDeletedUserDetails.Click += new System.EventHandler(this.toolStripMenuItem_ShowDeletedUserDetails_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(169, 6);
+            // 
+            // toolStripMenuItem_RestoreDeletedUser
+            // 
+            this.toolStripMenuItem_RestoreDeletedUser.Image = global::DVLD_System_Solution.Properties.Resources.Restore_24;
+            this.toolStripMenuItem_RestoreDeletedUser.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItem_RestoreDeletedUser.Name = "toolStripMenuItem_RestoreDeletedUser";
+            this.toolStripMenuItem_RestoreDeletedUser.Size = new System.Drawing.Size(172, 38);
+            this.toolStripMenuItem_RestoreDeletedUser.Text = "Restore User";
+            this.toolStripMenuItem_RestoreDeletedUser.Click += new System.EventHandler(this.toolStripMenuItem_RestoreDeletedUser_Click);
             // 
             // btn_AddNewUser
             // 

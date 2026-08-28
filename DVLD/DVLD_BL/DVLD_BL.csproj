@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="clsCountryBL.cs" />
     <Compile Include="clsPersonBL.cs" />
+    <Compile Include="clsRoleBL.cs" />
     <Compile Include="clsUserBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\clsPersonFilterService.cs" />

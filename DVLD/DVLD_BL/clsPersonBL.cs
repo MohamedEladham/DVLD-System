@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using DVLD_Shared.Operations_Result;
 using DVLD_Shared.Validation_Messages;
 using static DVLD_Shared.Operations_Result.clsOperationResult;
+using DVLD_Models.User;
+using DVLD_Shared.Global_Classes;
 
 namespace DVLD_BL
 {
@@ -108,6 +110,14 @@ namespace DVLD_BL
 
         public static (clsOperationResult, clsPerson) GetPersonByID(int personID)
         {
+            if (!clsCurrentUser.HasPermission(enPermissions.ViewPersons))
+                return (new clsOperationResult
+                {
+                    Status = enOperationStatus.Failed,
+                    Message = clsUserValidationMessages.PermissionDeniedMessage
+                }, null);
+
+
             if (personID <= 0)
                 return (new clsOperationResult
                 {
@@ -207,6 +217,11 @@ namespace DVLD_BL
 
         public static clsOperationResult AddNewPerson(clsPerson person)
         {
+            if (!clsCurrentUser.HasPermission(enPermissions.AddPerson))
+                return new clsOperationResult{
+                    Status = enOperationStatus.Failed,
+                    Message = clsUserValidationMessages.PermissionDeniedMessage};
+
             if (person == null) 
                 return new clsOperationResult { Status = enOperationStatus.Failed,
                     Message = clsPersonValidationMessages.PersonInfoRequiredMessage };
@@ -231,6 +246,14 @@ namespace DVLD_BL
 
         public static clsOperationResult UpdatePersonInfo(clsPerson person)
         {
+            if(!clsCurrentUser.HasPermission(enPermissions.UpdatePerson))
+                return new clsOperationResult
+                {
+                    Status = enOperationStatus.Failed,
+                    Message = clsUserValidationMessages.PermissionDeniedMessage
+                };
+
+
             if (person == null)
                 return new clsOperationResult { Status = enOperationStatus.Failed,
                     Message = clsPersonValidationMessages.PersonInfoRequiredMessage };
@@ -255,6 +278,10 @@ namespace DVLD_BL
 
         public static clsOperationResult SoftDeletePerson(int personID)
         {
+            if (!clsCurrentUser.HasPermission(enPermissions.DeletePerson))
+                return new clsOperationResult{Status = enOperationStatus.Failed,
+                    Message = clsUserValidationMessages.PermissionDeniedMessage};
+
             if (personID <= 0)
                 return new clsOperationResult {Status = enOperationStatus.Failed, 
                     Message = clsPersonValidationMessages.InvalidPersonIDMessage};
@@ -279,6 +306,13 @@ namespace DVLD_BL
 
         public static clsOperationResult RestoreDeletedPerson(int personID)
         {
+            if (!clsCurrentUser.HasPermission(enPermissions.RestorePerson))
+                return new clsOperationResult
+                {
+                    Status = enOperationStatus.Failed,
+                    Message = clsUserValidationMessages.PermissionDeniedMessage
+                };
+
             if (personID <= 0)
                 return new clsOperationResult
                 {
