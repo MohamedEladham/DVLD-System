@@ -10,6 +10,7 @@ using static DVLD_Shared.Global_Enums.clsEnumHelpers;
 using static DVLD_Shared.Operations_Result.clsOperationResult;
 using DVLD_Models.Role;
 using System.Collections.Generic;
+using DVLD_System_Solution.Forms._004_Manage_Users._004_Update_Users;
 
 namespace DVLD_System_Solution.Forms._004_Manage_Users.Controls
 {
@@ -49,7 +50,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users.Controls
             }
         }
 
-        private List<string> _GetRoleNamesByUserID(int userID)
+        private List<string> _GetCurrentRoleNamesByUserID(int userID)
         {
             (clsOperationResult result, List<string> roleNames) = clsRoleBL.GetRoleNamesByUserID(userID);
 
@@ -57,11 +58,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users.Controls
             {
                 case enOperationStatus.Success:
                     return roleNames;
-
-                case enOperationStatus.Failed:
-                    MessageBox.Show(result.Message, "Failed Operation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return null;
-
+              
                 case enOperationStatus.Exception:
                     MessageBox.Show(result.Message, "Database Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return null;
@@ -94,37 +91,46 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users.Controls
             lab_IsActive.ForeColor = status ? Color.LimeGreen : Color.Firebrick;
             _SetDefaultActiveUserImage(status);
         }
+            
+        Label label = new Label(); 
 
         private void _DisplayRoleNames(List<string> roleNames)
         {
-            Label label = new Label();
             label.AutoSize = true;
-            label.Text = string.Join(", ", roleNames);
+
+            if (roleNames != null && roleNames.Count > 0)
+                label.Text = string.Join(", ", roleNames);
+            else
+                label.Text = "[???]";
+                
             panel1.Controls.Add(label);
         }
-
+      
         private void _LoadUserByID(int userID) 
         {
             clsUser user = _GetUserByID(userID);
 
             if(user != null)
             {
-                List<string> roleNames = _GetRoleNamesByUserID(userID);
-
-                if(roleNames != null)
-                {
-                    lab_UserID.Text = Convert.ToString(user.UserID);
-                    lab_UserName.Text = Convert.ToString(user.UserName);
-                    _ResetLabelIsActive(user.IsActive);
-                    _DisplayRoleNames(roleNames);
-                }
+                List<string> roleNames = _GetCurrentRoleNamesByUserID(userID);
+               
+                lab_UserID.Text = Convert.ToString(user.UserID);
+                lab_UserName.Text = Convert.ToString(user.UserName);
+                _ResetLabelIsActive(user.IsActive);
+                _DisplayRoleNames(roleNames);
             }
         }
-        
-        
+
+       
+
         public void LoadPersonAndUserInfo(int personID, int userID)
         {
             uconShowPersonInfo1.LoadPersonByID(personID);
+            _LoadUserByID(userID);
+        }
+
+        public void _LoadUserInfo(int userID)
+        {
             _LoadUserByID(userID);
         }
     }

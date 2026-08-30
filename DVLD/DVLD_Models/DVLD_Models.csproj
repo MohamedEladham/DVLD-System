@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Countries\clsCountry.cs" />
+    <Compile Include="Permissions\clsPermission.cs" />
     <Compile Include="Person\clsDeletedPersonInfoGridViewDto.cs" />
     <Compile Include="Person\clsPerson.cs" />
     <Compile Include="Person\clsPersonInfoGridViewDto.cs" />

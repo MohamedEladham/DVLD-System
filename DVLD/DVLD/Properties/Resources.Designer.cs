@@ -313,6 +313,16 @@ namespace DVLD_System_Solution.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Lpgin_Page1_512 {
+            get {
+                object obj = ResourceManager.GetObject("Lpgin_Page1_512", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Male_512 {
             get {
                 object obj = ResourceManager.GetObject("Male_512", resourceCulture);
@@ -373,6 +383,16 @@ namespace DVLD_System_Solution.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Permissions2_32 {
+            get {
+                object obj = ResourceManager.GetObject("Permissions2_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Person_32 {
             get {
                 object obj = ResourceManager.GetObject("Person_32", resourceCulture);
@@ -416,6 +436,16 @@ namespace DVLD_System_Solution.Properties {
         internal static System.Drawing.Bitmap Phone_Call_32 {
             get {
                 object obj = ResourceManager.GetObject("Phone_Call 32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Reset_Password2_512 {
+            get {
+                object obj = ResourceManager.GetObject("Reset_Password2_512", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -486,6 +516,16 @@ namespace DVLD_System_Solution.Properties {
         internal static System.Drawing.Bitmap Update_Password2_32 {
             get {
                 object obj = ResourceManager.GetObject("Update_Password2_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Update_Password3_32 {
+            get {
+                object obj = ResourceManager.GetObject("Update_Password3_32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

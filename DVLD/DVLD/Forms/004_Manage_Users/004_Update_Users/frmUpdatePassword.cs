@@ -7,26 +7,28 @@ using System.Windows.Forms;
 using DVLD_Shared.Global_Classes;
 using DVLD_Shared.Operations_Result;
 using static DVLD_Shared.Operations_Result.clsOperationResult;
+using DVLD_Models.User;
+using DVLD_Shared.Validation_Messages;
 
 namespace DVLD_System_Solution.Forms._004_Manage_Users
 {
     public partial class frmUpdatePassword : Form
     {
         private int _userID = -1;
-        private int _personID = -1;
+        private string _userName = "";
 
-        public frmUpdatePassword(int userID, int personID)
+        public frmUpdatePassword(int userID, string userName)
         {
             InitializeComponent();
 
             _userID = userID;
-            _personID = personID;
+            _userName = userName;
         }
 
         private void frmUpdatePassword_Load(object sender, EventArgs e)
         {
-            lab_PersonIDToText.Text = Convert.ToString(_personID);
-            lab_UserIDToText.Text = Convert.ToString(_userID);
+            lab_UserID.Text = Convert.ToString(_userID);
+            lab_UserName.Text = Convert.ToString(_userName);
             txt_NewPassword.Select();
         }
 
@@ -97,6 +99,12 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
 
         private void btn_Save_Click(object sender, EventArgs e)
         {
+            if (!clsCurrentUser.HasPermission(enPermissions.UpdateUserPassword))
+            {
+                MessageBox.Show(clsUserValidationMessages.PermissionDeniedMessage, "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             _Save();
         }
 

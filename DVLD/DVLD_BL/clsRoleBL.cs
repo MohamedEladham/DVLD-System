@@ -19,16 +19,23 @@ namespace DVLD_BL
     {
         public static (clsOperationResult, List<clsRole>) GetAllRoles()
         {
+            if (!clsCurrentUser.HasPermission(enPermissions.ViewUsers))
+                return (new clsOperationResult
+                {
+                    Status = enOperationStatus.Failed,
+                    Message = clsUserValidationMessages.PermissionDeniedMessage
+                }, null);
+
             try
             {
                 List<clsRole> roles = clsRoleDAL.GetAllRoles();
 
                 if (roles != null && roles.Count > 0)
-                    return (new clsOperationResult { Status = clsOperationResult.enOperationStatus.Success }, roles);
+                    return (new clsOperationResult { Status = enOperationStatus.Success }, roles);
                 else
                     return (new clsOperationResult
                     {
-                        Status = clsOperationResult.enOperationStatus.Failed,
+                        Status = enOperationStatus.Failed,
                         Message = clsRoleValidationMessages.FailedToRetrieveRolsMessage
                     }, null);
             }
@@ -36,7 +43,7 @@ namespace DVLD_BL
             {
                 return (new clsOperationResult
                 {
-                    Status = clsOperationResult.enOperationStatus.Exception,
+                    Status  = enOperationStatus.Exception,
                     Message = clsGeneralValidationMessages.DatabaseOperationExceptionMessage
                 }, null);
             }
@@ -61,16 +68,7 @@ namespace DVLD_BL
 
             try
             {
-                List<string> roleNames = clsRoleDAL.GetRoleNamesByUserID(userID);
-
-                if (roleNames != null && roleNames.Count > 0)
-                    return (new clsOperationResult { Status = enOperationStatus.Success }, roleNames);
-                else
-                    return (new clsOperationResult
-                    {
-                        Status = enOperationStatus.Failed,
-                        Message = clsRoleValidationMessages.RolesNameNotFoundMessage
-                    }, null);
+                return (new clsOperationResult { Status = enOperationStatus.Success }, clsRoleDAL.GetRoleNamesByUserID(userID));
             }
             catch (Exception)
             {
@@ -80,6 +78,64 @@ namespace DVLD_BL
                     Message = clsGeneralValidationMessages.DatabaseOperationExceptionMessage
                 }, null);
             }
+        }
+
+        public static clsOperationResult UpdateUserRoles(int userID, List<int> roleIDs)
+        {
+            if (!clsCurrentUser.HasPermission(enPermissions.UpdateUserRoles))
+                return new clsOperationResult
+                {
+                    Status = enOperationStatus.Failed,
+                    Message = clsUserValidationMessages.PermissionDeniedMessage
+                };
+
+            if (userID <= 0)
+                return new clsOperationResult
+                {
+                    Status = enOperationStatus.Failed,
+                    Message = clsUserValidationMessages.InvalidUserIDMessage
+                };
+
+            if (roleIDs == null)
+                return new clsOperationResult
+                {
+                    Status = enOperationStatus.Failed,
+                    Message = clsRoleValidationMessages.RoleRequiredMessage
+                };
+
+            if (roleIDs.Count != roleIDs.Distinct().Count())
+                return new clsOperationResult
+                {
+                    Status = enOperationStatus.Failed,
+                    Message = clsRoleValidationMessages.DuplicateRolesMessage
+                };
+
+            try
+            {
+                bool isUpdated = clsRoleDAL.UpdateUserRoles(userID, roleIDs);
+
+                if(isUpdated)
+                    return new clsOperationResult
+                    {
+                        Status = enOperationStatus.Success,
+                        Message = clsRoleValidationMessages.RoleUpdatedSuccessfullyMessage
+                    };
+                else
+                    return new clsOperationResult
+                    {
+                        Status = enOperationStatus.Failed,
+                        Message = clsRoleValidationMessages.RoleUpdateFailedMessage
+                    };
+            }
+            catch (Exception)
+            {
+                return new clsOperationResult
+                {
+                    Status = enOperationStatus.Exception,
+                    Message = clsGeneralValidationMessages.DatabaseOperationExceptionMessage
+                };
+            }
+
         }
     }
 }

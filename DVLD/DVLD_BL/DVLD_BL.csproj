@@ -58,6 +58,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\clsPersonFilterService.cs" />
     <Compile Include="Services\clsUserFilterService.cs" />
+    <Compile Include="Validations\clsPermissionBL.cs" />
     <Compile Include="Validations\clsPersonValidations.cs" />
     <Compile Include="Validations\clsUserValidations.cs" />
     <Compile Include="Validations\clsValidationResult.cs" />

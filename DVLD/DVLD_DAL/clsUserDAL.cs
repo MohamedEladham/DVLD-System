@@ -116,34 +116,6 @@ namespace DVLD_DAL
             return isAuthenticated;
         }
 
-        public static List<int> GetUserPermissions(int userID)
-        {
-            List<int> permissions = new List<int>();
-
-            string query = @"SELECT DISTINCT
-		                                    RP.FK_PermissionID
-		                                    FROM UserRoles UR
-                                            INNER JOIN RolePermissions RP 
-                                            ON UR.FK_RoleID = RP.FK_RoleID
-		                                    WHERE UR.FK_UserID = @UserID";
-
-            using (SqlConnection connection = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
-            using (SqlCommand command = new SqlCommand(query, connection))
-            {
-                command.Parameters.Add("@UserID", System.Data.SqlDbType.Int).Value = userID;
-
-                connection.Open();
-                using (SqlDataReader reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                        permissions.Add((int)reader["FK_PermissionID"]);
-                }
-            }
-
-            return permissions;
-        }
-
-
         // >>
 
         private static clsUser _MapReaderToUser(SqlDataReader reader)
@@ -199,8 +171,7 @@ namespace DVLD_DAL
                                 WHERE 
                                     (UserName = @UserName AND
                                      Password = @Password AND
-                                     IsActive = 1 AND
-                                     IsDeleted = 0)";
+                                     IsActive = 1 AND IsDeleted = 0)";
 
             using (SqlConnection connection = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
             using (SqlCommand command = new SqlCommand(query, connection))

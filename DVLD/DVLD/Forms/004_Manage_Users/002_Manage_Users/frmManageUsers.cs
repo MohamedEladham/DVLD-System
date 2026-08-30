@@ -212,9 +212,9 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             btn_AddNewUser.Enabled = clsCurrentUser.HasPermission(enPermissions.AddUser);
             toolStripMenuItem_AddNewUser.Enabled = clsCurrentUser.HasPermission(enPermissions.AddUser);
 
-            toolStripMenuItem_UpdateUserInfo.Enabled = clsCurrentUser.HasPermission(enPermissions.UpdateLoginInfo_User);
-            toolStripMenuItem_UpdateLoginInfo.Enabled = clsCurrentUser.HasPermission(enPermissions.UpdateLoginInfo_User);
-            toolStripMenuItem_ActiveUser.Enabled = clsCurrentUser.HasPermission(enPermissions.UpdateLoginInfo_User);
+            toolStripMenuItem_UpdateUserInfo.Enabled = clsCurrentUser.HasPermission(enPermissions.UpdateUserLoginInfo);
+            toolStripMenuItem_UpdateLoginInfo.Enabled = clsCurrentUser.HasPermission(enPermissions.UpdateUserLoginInfo);
+            toolStripMenuItem_ActiveUser.Enabled = clsCurrentUser.HasPermission(enPermissions.UpdateUserLoginInfo);
 
             toolStripMenuItem_SoftDeleteActiveUser.Enabled = clsCurrentUser.HasPermission(enPermissions.DeleteUser);
             toolStripMenuItem_SoftDeleteInActiveUser.Enabled = clsCurrentUser.HasPermission(enPermissions.DeleteUser);
@@ -332,7 +332,6 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
 
         private void toolStripMenuItem_UpdateUserInfo_Click(object sender, EventArgs e)
         {
-
             if (!_HasCurrentRowAndPermission())
                 return;
 

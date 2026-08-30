@@ -36,7 +36,8 @@
             this.toolStripMenuItem_ManageUsers = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem_AccountSetting = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.lab_Permissions = new System.Windows.Forms.Label();
+            this.lab_UserName = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -111,17 +112,29 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // lab_Permissions
+            // lab_UserName
             // 
-            this.lab_Permissions.AutoSize = true;
-            this.lab_Permissions.BackColor = System.Drawing.Color.Transparent;
-            this.lab_Permissions.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            this.lab_Permissions.ForeColor = System.Drawing.Color.White;
-            this.lab_Permissions.Location = new System.Drawing.Point(12, 111);
-            this.lab_Permissions.Name = "lab_Permissions";
-            this.lab_Permissions.Size = new System.Drawing.Size(36, 19);
-            this.lab_Permissions.TabIndex = 206;
-            this.lab_Permissions.Text = "???";
+            this.lab_UserName.AutoSize = true;
+            this.lab_UserName.BackColor = System.Drawing.Color.Transparent;
+            this.lab_UserName.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.lab_UserName.ForeColor = System.Drawing.Color.Lime;
+            this.lab_UserName.Location = new System.Drawing.Point(122, 106);
+            this.lab_UserName.Name = "lab_UserName";
+            this.lab_UserName.Size = new System.Drawing.Size(36, 19);
+            this.lab_UserName.TabIndex = 208;
+            this.lab_UserName.Text = "???";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(12, 106);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(104, 19);
+            this.label2.TabIndex = 211;
+            this.label2.Text = "User Name:";
             // 
             // frmMainScreen
             // 
@@ -129,7 +142,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1203, 701);
-            this.Controls.Add(this.lab_Permissions);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lab_UserName);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -157,7 +171,8 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_Applicatios;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_Drivers;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_AccountSetting;
-        private System.Windows.Forms.Label lab_Permissions;
+        private System.Windows.Forms.Label lab_UserName;
+        private System.Windows.Forms.Label label2;
     }
 }
 

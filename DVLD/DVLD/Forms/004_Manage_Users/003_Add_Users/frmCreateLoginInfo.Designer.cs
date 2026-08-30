@@ -32,7 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCreateLoginInfo));
             this.lab_PersonIDToText = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.lab_ModeStatue = new System.Windows.Forms.Label();
             this.txt_UserName = new System.Windows.Forms.TextBox();
             this.lab_NationalNO = new System.Windows.Forms.Label();
             this.lab_UserIDToText = new System.Windows.Forms.Label();
@@ -43,12 +42,13 @@
             this.txt_ConfirmPassword = new System.Windows.Forms.TextBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.rdoB_NotActive = new System.Windows.Forms.RadioButton();
             this.rdoB_Active = new System.Windows.Forms.RadioButton();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.comBox_Roles = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.pictureBox8 = new System.Windows.Forms.PictureBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.picB_ShowHidePassword = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
@@ -61,6 +61,7 @@
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
@@ -94,19 +95,6 @@
             this.label1.Size = new System.Drawing.Size(100, 19);
             this.label1.TabIndex = 219;
             this.label1.Text = "Person ID: ";
-            // 
-            // lab_ModeStatue
-            // 
-            this.lab_ModeStatue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lab_ModeStatue.Font = new System.Drawing.Font("Sitka Small", 33F, System.Drawing.FontStyle.Bold);
-            this.lab_ModeStatue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lab_ModeStatue.Location = new System.Drawing.Point(150, 32);
-            this.lab_ModeStatue.Name = "lab_ModeStatue";
-            this.lab_ModeStatue.Size = new System.Drawing.Size(452, 65);
-            this.lab_ModeStatue.TabIndex = 221;
-            this.lab_ModeStatue.Text = "Create Login Info";
-            this.lab_ModeStatue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txt_UserName
             // 
@@ -207,17 +195,6 @@
             this.panel1.Size = new System.Drawing.Size(496, 39);
             this.panel1.TabIndex = 236;
             // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pictureBox5.Image = global::DVLD_System_Solution.Properties.Resources.Active_User_32;
-            this.pictureBox5.Location = new System.Drawing.Point(115, 9);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(23, 24);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox5.TabIndex = 26;
-            this.pictureBox5.TabStop = false;
-            // 
             // rdoB_NotActive
             // 
             this.rdoB_NotActive.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -246,17 +223,6 @@
             this.rdoB_Active.Text = "Active";
             this.rdoB_Active.UseVisualStyleBackColor = true;
             // 
-            // pictureBox6
-            // 
-            this.pictureBox6.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pictureBox6.Image = global::DVLD_System_Solution.Properties.Resources.Block_User_32;
-            this.pictureBox6.Location = new System.Drawing.Point(288, 9);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(23, 24);
-            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox6.TabIndex = 27;
-            this.pictureBox6.TabStop = false;
-            // 
             // comBox_Roles
             // 
             this.comBox_Roles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -278,6 +244,39 @@
             this.label2.Size = new System.Drawing.Size(52, 19);
             this.label2.TabIndex = 243;
             this.label2.Text = "Role:";
+            // 
+            // pictureBox8
+            // 
+            this.pictureBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox8.Image = global::DVLD_System_Solution.Properties.Resources.Lpgin_Page1_512;
+            this.pictureBox8.Location = new System.Drawing.Point(283, 39);
+            this.pictureBox8.Name = "pictureBox8";
+            this.pictureBox8.Size = new System.Drawing.Size(225, 156);
+            this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox8.TabIndex = 245;
+            this.pictureBox8.TabStop = false;
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pictureBox5.Image = global::DVLD_System_Solution.Properties.Resources.Active_User_32;
+            this.pictureBox5.Location = new System.Drawing.Point(115, 9);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(23, 24);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox5.TabIndex = 26;
+            this.pictureBox5.TabStop = false;
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pictureBox6.Image = global::DVLD_System_Solution.Properties.Resources.Block_User_32;
+            this.pictureBox6.Location = new System.Drawing.Point(288, 9);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(23, 24);
+            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox6.TabIndex = 27;
+            this.pictureBox6.TabStop = false;
             // 
             // pictureBox7
             // 
@@ -401,6 +400,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.pictureBox8);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pictureBox7);
             this.Controls.Add(this.label2);
@@ -424,7 +424,6 @@
             this.Controls.Add(this.lab_PersonIDToText);
             this.Controls.Add(this.pictureBox10);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.lab_ModeStatue);
             this.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -438,6 +437,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
@@ -459,7 +459,6 @@
         private System.Windows.Forms.Label lab_PersonIDToText;
         private System.Windows.Forms.PictureBox pictureBox10;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label lab_ModeStatue;
         private System.Windows.Forms.Button btn_Close;
         private System.Windows.Forms.Button btn_Save;
         private System.Windows.Forms.TextBox txt_UserName;
@@ -484,5 +483,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comBox_Roles;
         private System.Windows.Forms.PictureBox pictureBox7;
+        private System.Windows.Forms.PictureBox pictureBox8;
     }
 }

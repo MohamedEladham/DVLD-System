@@ -13,6 +13,12 @@ namespace DVLD_Shared.Validation_Messages
         public static string FailedToRetrieveRolsMessage = "Failed to retrieve Roles data.";
         public const string RoleNotFoundMessage = "No Role was found with the specified ID.";
         public const string RolesNameNotFoundMessage = "No Roles Name was found with the specified ID.";
+        public static string DuplicateRolesMessage = "Duplicate roles are not allowed.";
+
+
+        // Role Updated Messages
+        public static string RoleUpdatedSuccessfullyMessage = "Role Updated successfully.";
+        public static string RoleUpdateFailedMessage = "Failed to Update Role.";
 
     }
 }

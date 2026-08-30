@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clsCountryDAL.cs" />
+    <Compile Include="clsPermissionDAL.cs" />
     <Compile Include="clsPersonDAL.cs" />
     <Compile Include="clsRoleDAL.cs" />
     <Compile Include="clsUserDAL.cs" />

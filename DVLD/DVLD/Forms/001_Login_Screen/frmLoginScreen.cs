@@ -13,6 +13,7 @@ using System.Runtime.InteropServices;
 using DVLD_System_Solution.Properties;
 using static DVLD_Shared.Operations_Result.clsOperationResult;
 using DVLD_Shared.Validation_Messages;
+using DVLD_Models.Permissions;
 
 namespace Main_Screen.Forms._001_Login_Screen
 {
@@ -103,6 +104,56 @@ namespace Main_Screen.Forms._001_Login_Screen
             return true;
         }
 
+        private clsUser _GetUserByUserNameAndPassword(string userName, string password)
+        {
+            (clsOperationResult result, clsUser user) = clsUserBL.GetUserByUserNameAndPassword(userName, password);
+
+            switch(result.Status)
+            {
+                case enOperationStatus.Success:
+                    return user;
+
+                case enOperationStatus.Failed:
+                    return null;
+
+                case enOperationStatus.Exception:
+                    MessageBox.Show(result.Message, "Database Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return null;
+
+                default:
+                    return null;
+            }
+        }
+
+        private List<clsPermission> _GetUserPermissions(int userID)
+        {
+            (clsOperationResult result, List<clsPermission> permissions) = clsPermissionBL.GetUserPermissions(userID);
+
+            switch (result.Status)
+            {
+                case enOperationStatus.Success:
+                    return permissions;
+
+                case enOperationStatus.Failed:
+                    MessageBox.Show(result.Message, "Operation Faild", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return null;
+
+                case enOperationStatus.Exception:
+                    MessageBox.Show(result.Message, "Database Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return null;
+
+                default:
+                    return null;
+            }
+        }
+
+        private void _BuildCurrentUser(clsUser user, List<clsPermission> userPermissions)
+        {
+            clsCurrentUser.UserID = user.UserID;
+            clsCurrentUser.UserName = user.UserName;
+            clsCurrentUser.UserPermissions = userPermissions;
+        }
+
         private void _SetLoginResult(bool isValid, string message)
         {
             if (isValid)
@@ -135,56 +186,6 @@ namespace Main_Screen.Forms._001_Login_Screen
             Settings.Default.Save();
         }
 
-        private clsUser _GetUserByUserNameAndPassword(string userName, string password)
-        {
-            (clsOperationResult result, clsUser user) = clsUserBL.GetUserByUserNameAndPassword(userName, password);
-
-            switch(result.Status)
-            {
-                case enOperationStatus.Success:
-                    return user;
-
-                case enOperationStatus.Failed:
-                    return null;
-
-                case enOperationStatus.Exception:
-                    MessageBox.Show(result.Message, "Database Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return null;
-
-                default:
-                    return null;
-            }
-        }
-
-        private List<int> _GetUserPermissions(int userID)
-        {
-            (clsOperationResult result, List<int> permissions) = clsUserBL.GetUserPermissions(userID);
-
-            switch (result.Status)
-            {
-                case enOperationStatus.Success:
-                    return permissions;
-
-                case enOperationStatus.Failed:
-                    MessageBox.Show(result.Message, "Operation Faild", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return null;
-
-                case enOperationStatus.Exception:
-                    MessageBox.Show(result.Message, "Database Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return null;
-
-                default:
-                    return null;
-            }
-        }
-
-        private void _BuildCurrentUser(clsUser user, List<int> permissions)
-        {
-            clsCurrentUser.UserID = user.UserID;
-            clsCurrentUser.UserName = user.UserName;
-            clsCurrentUser.Permissions = permissions;
-        }
-
         private async void btn_Login_Click(object sender, EventArgs e)
         {
             string userName = txt_UserName.Text.Trim();
@@ -197,11 +198,11 @@ namespace Main_Screen.Forms._001_Login_Screen
 
             if(user != null)
             {
-                List<int> permissions = _GetUserPermissions(user.UserID);
+                List<clsPermission> userPermissions = _GetUserPermissions(user.UserID);
 
-                if(permissions != null)
+                if(userPermissions != null)
                 {
-                    _BuildCurrentUser(user, permissions);
+                    _BuildCurrentUser(user, userPermissions);
 
                     _SetLoginResult(true, clsUserValidationMessages.LoginSuccessfulMessage);
 
@@ -218,6 +219,8 @@ namespace Main_Screen.Forms._001_Login_Screen
                     txt_UserName.Select();
                     txt_UserName.SelectAll();
                 }
+                else
+                    _SetLoginResult(false, "Faild To Git Permissions....");
             }
             else
                 _SetLoginResult(false, clsUserValidationMessages.LoginFailedMessage);

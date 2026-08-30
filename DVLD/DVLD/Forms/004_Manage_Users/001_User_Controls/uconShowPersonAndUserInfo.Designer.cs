@@ -1,4 +1,6 @@
-﻿namespace DVLD_System_Solution.Forms._004_Manage_Users.Controls
+﻿using DVLD_System_Solution.Forms._004_Manage_Users._004_Update_Users;
+
+namespace DVLD_System_Solution.Forms._004_Manage_Users.Controls
 {
     partial class uconShowPersonAndUserInfo
     {

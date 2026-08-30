@@ -63,29 +63,6 @@ namespace DVLD_BL
             }
         }
 
-        public static (clsOperationResult, List<int>) GetUserPermissions(int userID)
-        {
-            if (userID <= 0)
-                return (new clsOperationResult
-                {
-                    Status = enOperationStatus.Failed,
-                    Message = clsUserValidationMessages.InvalidUserIDMessage
-                }, null);
-
-            try
-            {
-                return (new clsOperationResult { Status = enOperationStatus.Success }, clsUserDAL.GetUserPermissions(userID));
-            }
-            catch (Exception)
-            {
-                return (new clsOperationResult
-                {
-                    Status = enOperationStatus.Exception,
-                    Message = clsGeneralValidationMessages.DatabaseOperationExceptionMessage
-                }, null);
-            }
-        }
-
         public static (clsOperationResult, clsUser) GetUserByUserID(int userID)
         {
             if (!clsCurrentUser.HasPermission(enPermissions.ViewUsers))
@@ -129,7 +106,6 @@ namespace DVLD_BL
 
         public static (clsOperationResult, clsUser) GetUserByUserNameAndPassword(string userName, string password)
         {
-            
             try
             {
                 string computeHashPassword = clsHashHelper.ComputeHash(password);
@@ -284,7 +260,7 @@ namespace DVLD_BL
 
         public static clsOperationResult UpdatePassword(string newPassword, int userID)
         {
-            if (!clsCurrentUser.HasPermission(enPermissions.UpdatePassword_User))
+            if (!clsCurrentUser.HasPermission(enPermissions.UpdateUserPassword))
                 return new clsOperationResult
                 {
                     Status = enOperationStatus.Failed,
@@ -329,7 +305,7 @@ namespace DVLD_BL
 
         public static clsOperationResult UpdateUserNameAndStatusInfo(clsUser user)
         {
-            if(!clsCurrentUser.HasPermission(enPermissions.UpdateLoginInfo_User))
+            if(!clsCurrentUser.HasPermission(enPermissions.UpdateUserLoginInfo))
                 return new clsOperationResult
                 {
                     Status = enOperationStatus.Failed,
@@ -372,7 +348,7 @@ namespace DVLD_BL
 
         public static clsOperationResult ActivateUser(int userID)
         {
-            if (!clsCurrentUser.HasPermission(enPermissions.UpdateLoginInfo_User))
+            if (!clsCurrentUser.HasPermission(enPermissions.UpdateUserLoginInfo))
                 return new clsOperationResult
                 {
                     Status = enOperationStatus.Failed,

@@ -1,4 +1,5 @@
-﻿using DVLD_Shared.Global_Classes;
+﻿using DVLD_Models.Permissions;
+using DVLD_Shared.Global_Classes;
 using System.Collections.Generic;
 
 namespace DVLD_Models.User
@@ -7,11 +8,17 @@ namespace DVLD_Models.User
     {
         public static int UserID { set; get; }
         public static string UserName { set; get; }
-        public static List<int> Permissions { get; set; }
-
-        public static bool HasPermission(enPermissions permission)
+        public static List<clsPermission> UserPermissions { get; set; } 
+        
+        public static bool HasPermission(enPermissions permissionID)
         {
-            return Permissions.Contains((int)permission);
+            foreach (clsPermission permission in UserPermissions)
+            {
+                if (permission.PermissionID == (int)permissionID)
+                    return true;
+            }
+
+            return false;
         }
     }
 }

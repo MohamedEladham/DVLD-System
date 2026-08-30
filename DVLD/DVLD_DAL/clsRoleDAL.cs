@@ -3,6 +3,7 @@ using DVLD_Infrastructure;
 using System.Data.SqlClient;
 using System.Collections.Generic;
 using System;
+using System.Data;
 
 namespace DVLD_DAL
 {
@@ -65,6 +66,51 @@ namespace DVLD_DAL
             }
 
             return roleNames;
+        }
+
+        public static bool UpdateUserRoles(int userID, List<int> roleIDs)
+        {
+            using (SqlConnection connection = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
+            {
+                connection.Open();
+
+                using (SqlTransaction transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        string deleteQuery = @"DELETE FROM UserRoles WHERE FK_UserID = @UserID";
+
+                        using (SqlCommand deleteCommand = new SqlCommand(deleteQuery, connection, transaction))
+                        {
+                            deleteCommand.Parameters.Add("@UserID", SqlDbType.Int).Value = userID;
+                            deleteCommand.ExecuteNonQuery();
+                        }
+
+                        string insertQuery = @"INSERT INTO UserRoles (FK_UserID, FK_RoleID) VALUES (@UserID, @RoleID)";
+
+                        foreach (int roleID in roleIDs)
+                        {
+                            using (SqlCommand insertCommand = new SqlCommand(insertQuery, connection, transaction))
+                            {
+                                insertCommand.Parameters.Add("@UserID", SqlDbType.Int).Value = userID;
+                                insertCommand.Parameters.Add("@RoleID", SqlDbType.Int).Value = roleID;
+
+                                insertCommand.ExecuteNonQuery();
+                            }
+                        }
+
+                        transaction.Commit();
+
+                        return true;
+                    }
+                    catch
+                    {
+                        transaction.Rollback();
+
+                        return false;
+                    }
+                }
+            }
         }
     }
 }

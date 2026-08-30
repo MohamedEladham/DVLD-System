@@ -34,11 +34,12 @@
             this.txt_ConfirmPassword = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txt_NewPassword = new System.Windows.Forms.TextBox();
-            this.lab_UpdatePassword = new System.Windows.Forms.Label();
-            this.lab_UserIDToText = new System.Windows.Forms.Label();
+            this.lab_UserID = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.lab_PersonIDToText = new System.Windows.Forms.Label();
+            this.lab_UserName = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
             this.picB_ShowHidePassword = new System.Windows.Forms.PictureBox();
@@ -47,14 +48,14 @@
             this.btn_Close = new System.Windows.Forms.Button();
             this.btn_Save = new System.Windows.Forms.Button();
             this.pictureBox11 = new System.Windows.Forms.PictureBox();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picB_ShowHidePassword)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // label5
@@ -103,68 +104,69 @@
             this.txt_NewPassword.Click += new System.EventHandler(this.txt_Password_Click);
             this.txt_NewPassword.TextChanged += new System.EventHandler(this.txt_Password_TextChanged);
             // 
-            // lab_UpdatePassword
+            // lab_UserID
             // 
-            this.lab_UpdatePassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lab_UpdatePassword.AutoSize = true;
-            this.lab_UpdatePassword.Font = new System.Drawing.Font("Sitka Small", 33F, System.Drawing.FontStyle.Bold);
-            this.lab_UpdatePassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lab_UpdatePassword.Location = new System.Drawing.Point(166, 35);
-            this.lab_UpdatePassword.Name = "lab_UpdatePassword";
-            this.lab_UpdatePassword.Size = new System.Drawing.Size(432, 65);
-            this.lab_UpdatePassword.TabIndex = 242;
-            this.lab_UpdatePassword.Text = "Update Password";
-            this.lab_UpdatePassword.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lab_UserIDToText
-            // 
-            this.lab_UserIDToText.AutoSize = true;
-            this.lab_UserIDToText.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            this.lab_UserIDToText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lab_UserIDToText.Location = new System.Drawing.Point(215, 189);
-            this.lab_UserIDToText.Name = "lab_UserIDToText";
-            this.lab_UserIDToText.Size = new System.Drawing.Size(36, 19);
-            this.lab_UserIDToText.TabIndex = 257;
-            this.lab_UserIDToText.Text = "???";
+            this.lab_UserID.AutoSize = true;
+            this.lab_UserID.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.lab_UserID.ForeColor = System.Drawing.Color.LimeGreen;
+            this.lab_UserID.Location = new System.Drawing.Point(215, 154);
+            this.lab_UserID.Name = "lab_UserID";
+            this.lab_UserID.Size = new System.Drawing.Size(36, 19);
+            this.lab_UserID.TabIndex = 257;
+            this.lab_UserID.Text = "???";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label3.Location = new System.Drawing.Point(12, 189);
+            this.label3.Location = new System.Drawing.Point(12, 154);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(81, 19);
             this.label3.TabIndex = 256;
             this.label3.Text = "User ID: ";
             // 
-            // lab_PersonIDToText
+            // lab_UserName
             // 
-            this.lab_PersonIDToText.AutoSize = true;
-            this.lab_PersonIDToText.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            this.lab_PersonIDToText.ForeColor = System.Drawing.Color.LimeGreen;
-            this.lab_PersonIDToText.Location = new System.Drawing.Point(215, 145);
-            this.lab_PersonIDToText.Name = "lab_PersonIDToText";
-            this.lab_PersonIDToText.Size = new System.Drawing.Size(36, 19);
-            this.lab_PersonIDToText.TabIndex = 254;
-            this.lab_PersonIDToText.Text = "???";
+            this.lab_UserName.AutoSize = true;
+            this.lab_UserName.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.lab_UserName.ForeColor = System.Drawing.Color.Brown;
+            this.lab_UserName.Location = new System.Drawing.Point(215, 195);
+            this.lab_UserName.Name = "lab_UserName";
+            this.lab_UserName.Size = new System.Drawing.Size(36, 19);
+            this.lab_UserName.TabIndex = 254;
+            this.lab_UserName.Text = "???";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label1.Location = new System.Drawing.Point(12, 145);
+            this.label1.Location = new System.Drawing.Point(12, 195);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(100, 19);
+            this.label1.Size = new System.Drawing.Size(104, 19);
             this.label1.TabIndex = 253;
-            this.label1.Text = "Person ID: ";
+            this.label1.Text = "User Name:";
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox2.Image = global::DVLD_System_Solution.Properties.Resources.Reset_Password2_512;
+            this.pictureBox2.Location = new System.Drawing.Point(288, 24);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(250, 151);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 258;
+            this.pictureBox2.TabStop = false;
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::DVLD_System_Solution.Properties.Resources.Number_32;
-            this.pictureBox1.Location = new System.Drawing.Point(180, 186);
+            this.pictureBox1.Location = new System.Drawing.Point(180, 151);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(23, 24);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -173,8 +175,8 @@
             // 
             // pictureBox10
             // 
-            this.pictureBox10.Image = global::DVLD_System_Solution.Properties.Resources.Number_32;
-            this.pictureBox10.Location = new System.Drawing.Point(180, 142);
+            this.pictureBox10.Image = global::DVLD_System_Solution.Properties.Resources.Person_32;
+            this.pictureBox10.Location = new System.Drawing.Point(180, 192);
             this.pictureBox10.Name = "pictureBox10";
             this.pictureBox10.Size = new System.Drawing.Size(23, 24);
             this.pictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -259,19 +261,16 @@
             this.pictureBox11.TabIndex = 241;
             this.pictureBox11.TabStop = false;
             // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
-            // 
             // frmUpdatePassword
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(782, 386);
-            this.Controls.Add(this.lab_UserIDToText);
+            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.lab_UserID);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.lab_PersonIDToText);
+            this.Controls.Add(this.lab_UserName);
             this.Controls.Add(this.pictureBox10);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.picB_ShowHidePassword);
@@ -284,7 +283,6 @@
             this.Controls.Add(this.btn_Close);
             this.Controls.Add(this.btn_Save);
             this.Controls.Add(this.pictureBox11);
-            this.Controls.Add(this.lab_UpdatePassword);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(798, 425);
@@ -293,13 +291,14 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Update Password";
             this.Load += new System.EventHandler(this.frmUpdatePassword_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picB_ShowHidePassword)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -317,13 +316,13 @@
         private System.Windows.Forms.Button btn_Close;
         private System.Windows.Forms.Button btn_Save;
         private System.Windows.Forms.PictureBox pictureBox11;
-        private System.Windows.Forms.Label lab_UpdatePassword;
-        private System.Windows.Forms.Label lab_UserIDToText;
+        private System.Windows.Forms.Label lab_UserID;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label lab_PersonIDToText;
+        private System.Windows.Forms.Label lab_UserName;
         private System.Windows.Forms.PictureBox pictureBox10;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }

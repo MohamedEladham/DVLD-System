@@ -115,12 +115,6 @@
     <Compile Include="Forms\004_Manage_Users\003_Add_Users\frmAddNewUser.Designer.cs">
       <DependentUpon>frmAddNewUser.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\004_Manage_Users\004_Update_Users\frmCheckCurrentUserPassword.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\004_Manage_Users\004_Update_Users\frmCheckCurrentUserPassword.Designer.cs">
-      <DependentUpon>frmCheckCurrentUserPassword.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\004_Manage_Users\003_Add_Users\frmCreateLoginInfo.cs">
       <SubType>Form</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -146,6 +140,12 @@
     </Compile>
     <Compile Include="Forms\004_Manage_Users\004_Update_Users\frmUpdatePassword.Designer.cs">
       <DependentUpon>frmUpdatePassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\004_Manage_Users\004_Update_Users\frmUpdateRoles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\004_Manage_Users\004_Update_Users\frmUpdateRoles.Designer.cs">
+      <DependentUpon>frmUpdateRoles.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\004_Manage_Users\004_Update_Users\frmUpdateUserInfo.cs">
       <SubType>Form</SubType>
@@ -191,9 +191,6 @@
     <EmbeddedResource Include="Forms\004_Manage_Users\003_Add_Users\frmAddNewUser.resx">
       <DependentUpon>frmAddNewUser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\004_Manage_Users\004_Update_Users\frmCheckCurrentUserPassword.resx">
-      <DependentUpon>frmCheckCurrentUserPassword.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\004_Manage_Users\003_Add_Users\frmCreateLoginInfo.resx">
       <DependentUpon>frmCreateLoginInfo.cs</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -206,6 +203,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\004_Manage_Users\004_Update_Users\frmUpdatePassword.resx">
       <DependentUpon>frmUpdatePassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\004_Manage_Users\004_Update_Users\frmUpdateRoles.resx">
+      <DependentUpon>frmUpdateRoles.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\004_Manage_Users\004_Update_Users\frmUpdateUserInfo.resx">
       <DependentUpon>frmUpdateUserInfo.cs</DependentUpon>
@@ -373,6 +373,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Permissions1_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Permissions2_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Update_Password3_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Reset_Password2_512.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Lpgin_Page1_512.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
