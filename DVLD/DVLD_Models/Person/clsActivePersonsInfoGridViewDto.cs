@@ -1,7 +1,7 @@
 ﻿
 namespace DVLD_Models
 {
-    public class clsPersonInfoGridViewDto
+    public class clsActivePersonsInfoGridViewDto
     {
         public int PersonID { set; get; }
         public string NationalNO { set; get; }

@@ -1,4 +1,7 @@
-﻿using DVLD_System_Solution.Forms._004_Manage_Users._004_Update_Users;
+﻿using DVLD_Models.User;
+using DVLD_Shared.Global_Classes;
+using DVLD_Shared.Validation_Messages;
+using DVLD_System_Solution.Forms._004_Manage_Users._004_Update_Users;
 using System;
 using System.Windows.Forms;
 
@@ -22,11 +25,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             uconShowPersonAndUserInfo1.LoadPersonAndUserInfo(_personID, _userID);
         }
 
-        private void _LoadUserInfo()
-        {
-            uconShowPersonAndUserInfo1._LoadUserInfo(_userID);
-        }
-
+        
         // >>
 
         private bool _isUpdateLoginInfo = false;
@@ -46,13 +45,24 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
         {
             _LoadPersonAndUserInfo();
             frmUpdateLoginInfo.UpdateLoginInfo += _GetIsUpdateLoginInfo;
-            frmUpdateRoles.UpdateUserRole += _GetIsUpdateUserRole;
+            frmUpdateUserRoles.UpdateUserRole += _GetIsUpdateUserRole;
         }
 
-        
+        // >>
+        private void _LoadUserInfo()
+        {
+            uconShowPersonAndUserInfo1._LoadUserInfo(_userID);
+        }
 
         private void btn_UpdateLoginInfo_Click(object sender, EventArgs e)
         {
+            if (!clsCurrentUser.HasPermission(enPermissions.UpdateUserLoginInfo))
+            {
+                MessageBox.Show(clsUserValidationMessages.PermissionDeniedMessage, "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+
             frmUpdateLoginInfo frm = new frmUpdateLoginInfo(_userID);
             frm.ShowDialog();
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace DVLD_Shared.Validation_Messages
 {
@@ -13,6 +14,7 @@ namespace DVLD_Shared.Validation_Messages
         public const string RoleIDMustBeGreaterThanZeroMessage = "Invalid role id, user id must be greater than zero.";
         public const string UserNotFoundMessage = "No User was found with the specified ID.";
         public static string UserInfoRequiredMessage = "User information is required.";
+        public static string UserNameAlreadyExistsMessage = "User Name Already Exists, Enter Another One. ";
 
         // Current Password
         public const string CurrentPasswordRequiredMessage = "Please enter your current password for verification.";

@@ -41,11 +41,11 @@ namespace Main_Screen.Froms.Persons_Screen
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmManagePersons));
             this.dataGridView_ShowPersonsInfos = new System.Windows.Forms.DataGridView();
             this.contextMenuStrip_ActivePersons = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem_ShowPersonInfo = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem_ShowActivePersonDelails = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem_AddNew = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem_Edit = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem_SoftDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem_AddNewPerson = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem_EditPersonInfo = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem_SoftDeletePerson = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem_SendEmail = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem_PhoneCall = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,11 +63,11 @@ namespace Main_Screen.Froms.Persons_Screen
             this.btn_Close = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.toolStripMenuItem_ShowDeletedPersonInfo = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem_ShowDeletedPersonDetails = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip_DeletedPersons = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem_RestoreDeletedPerson = new System.Windows.Forms.ToolStripMenuItem();
-            this.comBox_PersonStatus = new System.Windows.Forms.ComboBox();
+            this.comBox_DisplayStatus = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_ShowPersonsInfos)).BeginInit();
             this.contextMenuStrip_ActivePersons.SuspendLayout();
@@ -135,57 +135,57 @@ namespace Main_Screen.Froms.Persons_Screen
             // 
             this.contextMenuStrip_ActivePersons.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.contextMenuStrip_ActivePersons.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem_ShowPersonInfo,
+            this.toolStripMenuItem_ShowActivePersonDelails,
             this.toolStripSeparator2,
-            this.toolStripMenuItem_AddNew,
-            this.toolStripMenuItem_Edit,
-            this.toolStripMenuItem_SoftDelete,
+            this.toolStripMenuItem_AddNewPerson,
+            this.toolStripMenuItem_EditPersonInfo,
+            this.toolStripMenuItem_SoftDeletePerson,
             this.toolStripSeparator1,
             this.toolStripMenuItem_SendEmail,
             this.toolStripMenuItem_PhoneCall});
             this.contextMenuStrip_ActivePersons.Name = "contextMenuStrip1";
             this.contextMenuStrip_ActivePersons.Size = new System.Drawing.Size(196, 244);
             // 
-            // toolStripMenuItem_ShowPersonInfo
+            // toolStripMenuItem_ShowActivePersonDelails
             // 
-            this.toolStripMenuItem_ShowPersonInfo.Image = global::DVLD_System_Solution.Properties.Resources.Person_Details_32;
-            this.toolStripMenuItem_ShowPersonInfo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripMenuItem_ShowPersonInfo.Name = "toolStripMenuItem_ShowPersonInfo";
-            this.toolStripMenuItem_ShowPersonInfo.Size = new System.Drawing.Size(195, 38);
-            this.toolStripMenuItem_ShowPersonInfo.Text = "Show Details";
-            this.toolStripMenuItem_ShowPersonInfo.Click += new System.EventHandler(this.toolStripMenuItem_ShowPersonInfo_Click);
+            this.toolStripMenuItem_ShowActivePersonDelails.Image = global::DVLD_System_Solution.Properties.Resources.Person_Details_32;
+            this.toolStripMenuItem_ShowActivePersonDelails.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItem_ShowActivePersonDelails.Name = "toolStripMenuItem_ShowActivePersonDelails";
+            this.toolStripMenuItem_ShowActivePersonDelails.Size = new System.Drawing.Size(195, 38);
+            this.toolStripMenuItem_ShowActivePersonDelails.Text = "Show Details";
+            this.toolStripMenuItem_ShowActivePersonDelails.Click += new System.EventHandler(this.toolStripMenuItem_ShowActivePersonDetails_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(192, 6);
             // 
-            // toolStripMenuItem_AddNew
+            // toolStripMenuItem_AddNewPerson
             // 
-            this.toolStripMenuItem_AddNew.Image = global::DVLD_System_Solution.Properties.Resources.Add_Person_32;
-            this.toolStripMenuItem_AddNew.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripMenuItem_AddNew.Name = "toolStripMenuItem_AddNew";
-            this.toolStripMenuItem_AddNew.Size = new System.Drawing.Size(195, 38);
-            this.toolStripMenuItem_AddNew.Text = "Add New Person";
-            this.toolStripMenuItem_AddNew.Click += new System.EventHandler(this.toolStripMenuItem_AddNew_Click);
+            this.toolStripMenuItem_AddNewPerson.Image = global::DVLD_System_Solution.Properties.Resources.Add_Person_32;
+            this.toolStripMenuItem_AddNewPerson.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItem_AddNewPerson.Name = "toolStripMenuItem_AddNewPerson";
+            this.toolStripMenuItem_AddNewPerson.Size = new System.Drawing.Size(195, 38);
+            this.toolStripMenuItem_AddNewPerson.Text = "Add New Person";
+            this.toolStripMenuItem_AddNewPerson.Click += new System.EventHandler(this.toolStripMenuItem_AddNewPerson_Click);
             // 
-            // toolStripMenuItem_Edit
+            // toolStripMenuItem_EditPersonInfo
             // 
-            this.toolStripMenuItem_Edit.Image = global::DVLD_System_Solution.Properties.Resources.Edit_32;
-            this.toolStripMenuItem_Edit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripMenuItem_Edit.Name = "toolStripMenuItem_Edit";
-            this.toolStripMenuItem_Edit.Size = new System.Drawing.Size(195, 38);
-            this.toolStripMenuItem_Edit.Text = "Edit";
-            this.toolStripMenuItem_Edit.Click += new System.EventHandler(this.toolStripMenuItem_Edit_Click);
+            this.toolStripMenuItem_EditPersonInfo.Image = global::DVLD_System_Solution.Properties.Resources.Edit_32;
+            this.toolStripMenuItem_EditPersonInfo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItem_EditPersonInfo.Name = "toolStripMenuItem_EditPersonInfo";
+            this.toolStripMenuItem_EditPersonInfo.Size = new System.Drawing.Size(195, 38);
+            this.toolStripMenuItem_EditPersonInfo.Text = "Edit";
+            this.toolStripMenuItem_EditPersonInfo.Click += new System.EventHandler(this.toolStripMenuItem_EditPersonInfo_Click);
             // 
-            // toolStripMenuItem_SoftDelete
+            // toolStripMenuItem_SoftDeletePerson
             // 
-            this.toolStripMenuItem_SoftDelete.Image = global::DVLD_System_Solution.Properties.Resources.Delete_32;
-            this.toolStripMenuItem_SoftDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripMenuItem_SoftDelete.Name = "toolStripMenuItem_SoftDelete";
-            this.toolStripMenuItem_SoftDelete.Size = new System.Drawing.Size(195, 38);
-            this.toolStripMenuItem_SoftDelete.Text = "Delete";
-            this.toolStripMenuItem_SoftDelete.Click += new System.EventHandler(this.toolStripMenuItem_SoftDelete_Click);
+            this.toolStripMenuItem_SoftDeletePerson.Image = global::DVLD_System_Solution.Properties.Resources.Delete_32;
+            this.toolStripMenuItem_SoftDeletePerson.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItem_SoftDeletePerson.Name = "toolStripMenuItem_SoftDeletePerson";
+            this.toolStripMenuItem_SoftDeletePerson.Size = new System.Drawing.Size(195, 38);
+            this.toolStripMenuItem_SoftDeletePerson.Text = "Delete";
+            this.toolStripMenuItem_SoftDeletePerson.Click += new System.EventHandler(this.toolStripMenuItem_SoftDeletePerson_Click);
             // 
             // toolStripSeparator1
             // 
@@ -226,7 +226,7 @@ namespace Main_Screen.Froms.Persons_Screen
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Sitka Small", 16F);
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label2.Location = new System.Drawing.Point(12, 227);
+            this.label2.Location = new System.Drawing.Point(12, 269);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(121, 33);
             this.label2.TabIndex = 4;
@@ -237,27 +237,28 @@ namespace Main_Screen.Froms.Persons_Screen
             this.comBox_FilterItems.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comBox_FilterItems.Font = new System.Drawing.Font("Tahoma", 10F);
             this.comBox_FilterItems.FormattingEnabled = true;
-            this.comBox_FilterItems.Location = new System.Drawing.Point(200, 231);
+            this.comBox_FilterItems.Location = new System.Drawing.Point(139, 273);
             this.comBox_FilterItems.Name = "comBox_FilterItems";
-            this.comBox_FilterItems.Size = new System.Drawing.Size(230, 24);
+            this.comBox_FilterItems.Size = new System.Drawing.Size(284, 24);
             this.comBox_FilterItems.TabIndex = 5;
             this.comBox_FilterItems.SelectedIndexChanged += new System.EventHandler(this.comBox_FilterItems_SelectedIndexChanged);
             // 
             // txt_SearchValue
             // 
             this.txt_SearchValue.Font = new System.Drawing.Font("Tahoma", 10F);
-            this.txt_SearchValue.Location = new System.Drawing.Point(445, 231);
+            this.txt_SearchValue.Location = new System.Drawing.Point(429, 273);
             this.txt_SearchValue.Name = "txt_SearchValue";
             this.txt_SearchValue.Size = new System.Drawing.Size(242, 24);
             this.txt_SearchValue.TabIndex = 9;
             this.txt_SearchValue.TextChanged += new System.EventHandler(this.txt_SearchValue_TextChanged);
+            this.txt_SearchValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_SearchValue_KeyPress);
             // 
             // lab_PersonIDToText
             // 
             this.lab_PersonIDToText.AutoSize = true;
             this.lab_PersonIDToText.Font = new System.Drawing.Font("Tahoma", 10F);
             this.lab_PersonIDToText.ForeColor = System.Drawing.Color.LimeGreen;
-            this.lab_PersonIDToText.Location = new System.Drawing.Point(120, 153);
+            this.lab_PersonIDToText.Location = new System.Drawing.Point(116, 153);
             this.lab_PersonIDToText.Name = "lab_PersonIDToText";
             this.lab_PersonIDToText.Size = new System.Drawing.Size(29, 17);
             this.lab_PersonIDToText.TabIndex = 218;
@@ -268,7 +269,7 @@ namespace Main_Screen.Froms.Persons_Screen
             this.lab_NationalNoToText.AutoSize = true;
             this.lab_NationalNoToText.Font = new System.Drawing.Font("Tahoma", 10F);
             this.lab_NationalNoToText.ForeColor = System.Drawing.Color.LimeGreen;
-            this.lab_NationalNoToText.Location = new System.Drawing.Point(120, 187);
+            this.lab_NationalNoToText.Location = new System.Drawing.Point(116, 187);
             this.lab_NationalNoToText.Name = "lab_NationalNoToText";
             this.lab_NationalNoToText.Size = new System.Drawing.Size(29, 17);
             this.lab_NationalNoToText.TabIndex = 219;
@@ -279,7 +280,7 @@ namespace Main_Screen.Froms.Persons_Screen
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Sitka Small", 10F);
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label4.Location = new System.Drawing.Point(14, 150);
+            this.label4.Location = new System.Drawing.Point(12, 150);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(83, 20);
             this.label4.TabIndex = 220;
@@ -290,7 +291,7 @@ namespace Main_Screen.Froms.Persons_Screen
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Sitka Small", 10F);
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label5.Location = new System.Drawing.Point(14, 184);
+            this.label5.Location = new System.Drawing.Point(12, 184);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(98, 20);
             this.label5.TabIndex = 221;
@@ -368,20 +369,20 @@ namespace Main_Screen.Froms.Persons_Screen
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // toolStripMenuItem_ShowDeletedPersonInfo
+            // toolStripMenuItem_ShowDeletedPersonDetails
             // 
-            this.toolStripMenuItem_ShowDeletedPersonInfo.Image = global::DVLD_System_Solution.Properties.Resources.Person_Details_32;
-            this.toolStripMenuItem_ShowDeletedPersonInfo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripMenuItem_ShowDeletedPersonInfo.Name = "toolStripMenuItem_ShowDeletedPersonInfo";
-            this.toolStripMenuItem_ShowDeletedPersonInfo.Size = new System.Drawing.Size(185, 38);
-            this.toolStripMenuItem_ShowDeletedPersonInfo.Text = "Show Details";
-            this.toolStripMenuItem_ShowDeletedPersonInfo.Click += new System.EventHandler(this.toolStripMenuItem_ShowDeletedPersonInfo_Click);
+            this.toolStripMenuItem_ShowDeletedPersonDetails.Image = global::DVLD_System_Solution.Properties.Resources.Person_Details_32;
+            this.toolStripMenuItem_ShowDeletedPersonDetails.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItem_ShowDeletedPersonDetails.Name = "toolStripMenuItem_ShowDeletedPersonDetails";
+            this.toolStripMenuItem_ShowDeletedPersonDetails.Size = new System.Drawing.Size(185, 38);
+            this.toolStripMenuItem_ShowDeletedPersonDetails.Text = "Show Details";
+            this.toolStripMenuItem_ShowDeletedPersonDetails.Click += new System.EventHandler(this.toolStripMenuItem_ShowDeletedPersonDetails_Click);
             // 
             // contextMenuStrip_DeletedPersons
             // 
             this.contextMenuStrip_DeletedPersons.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.contextMenuStrip_DeletedPersons.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem_ShowDeletedPersonInfo,
+            this.toolStripMenuItem_ShowDeletedPersonDetails,
             this.toolStripSeparator3,
             this.toolStripMenuItem_RestoreDeletedPerson});
             this.contextMenuStrip_DeletedPersons.Name = "contextMenuStrip1";
@@ -401,23 +402,23 @@ namespace Main_Screen.Froms.Persons_Screen
             this.toolStripMenuItem_RestoreDeletedPerson.Text = "Restore Person";
             this.toolStripMenuItem_RestoreDeletedPerson.Click += new System.EventHandler(this.toolStripMenuItem_RestoreDeletedPerson_Click);
             // 
-            // comBox_PersonStatus
+            // comBox_DisplayStatus
             // 
-            this.comBox_PersonStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comBox_PersonStatus.Font = new System.Drawing.Font("Tahoma", 10F);
-            this.comBox_PersonStatus.FormattingEnabled = true;
-            this.comBox_PersonStatus.Location = new System.Drawing.Point(200, 273);
-            this.comBox_PersonStatus.Name = "comBox_PersonStatus";
-            this.comBox_PersonStatus.Size = new System.Drawing.Size(230, 24);
-            this.comBox_PersonStatus.TabIndex = 225;
-            this.comBox_PersonStatus.SelectedIndexChanged += new System.EventHandler(this.comBox_PersonStatus_SelectedIndexChanged);
+            this.comBox_DisplayStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comBox_DisplayStatus.Font = new System.Drawing.Font("Tahoma", 10F);
+            this.comBox_DisplayStatus.FormattingEnabled = true;
+            this.comBox_DisplayStatus.Location = new System.Drawing.Point(193, 243);
+            this.comBox_DisplayStatus.Name = "comBox_DisplayStatus";
+            this.comBox_DisplayStatus.Size = new System.Drawing.Size(230, 24);
+            this.comBox_DisplayStatus.TabIndex = 225;
+            this.comBox_DisplayStatus.SelectedIndexChanged += new System.EventHandler(this.comBox_PersonStatus_SelectedIndexChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Sitka Small", 16F);
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label3.Location = new System.Drawing.Point(12, 269);
+            this.label3.Location = new System.Drawing.Point(12, 236);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(175, 33);
             this.label3.TabIndex = 226;
@@ -430,7 +431,7 @@ namespace Main_Screen.Froms.Persons_Screen
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(1331, 757);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.comBox_PersonStatus);
+            this.Controls.Add(this.comBox_DisplayStatus);
             this.Controls.Add(this.lab_RecordsCount);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -475,24 +476,24 @@ namespace Main_Screen.Froms.Persons_Screen
         private System.Windows.Forms.TextBox txt_SearchValue;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip_ActivePersons;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_AddNew;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_Edit;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_SoftDelete;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_AddNewPerson;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_EditPersonInfo;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_SoftDeletePerson;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_SendEmail;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_PhoneCall;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_ShowPersonInfo;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_ShowActivePersonDelails;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_ShowDetails;
         private System.Windows.Forms.Label lab_PersonIDToText;
         private System.Windows.Forms.Label lab_NationalNoToText;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lab_RecordsCount;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_ShowDeletedPersonInfo;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_ShowDeletedPersonDetails;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip_DeletedPersons;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_RestoreDeletedPerson;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ComboBox comBox_PersonStatus;
+        private System.Windows.Forms.ComboBox comBox_DisplayStatus;
         private System.Windows.Forms.Label label3;
     }
 }

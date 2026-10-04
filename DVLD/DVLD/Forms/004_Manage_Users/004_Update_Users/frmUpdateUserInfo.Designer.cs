@@ -15,7 +15,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            frmUpdateRoles.UpdateUserRole -= _GetIsUpdateUserRole;
+            frmUpdateUserRoles.UpdateUserRole -= _GetIsUpdateUserRole;
             frmUpdateLoginInfo.UpdateLoginInfo -= _GetIsUpdateLoginInfo;
 
 

@@ -4,6 +4,8 @@ namespace DVLD_Shared.Validation_Messages
     public class clsPersonValidationMessages
     {
         public const string InvalidPersonIDMessage = "Invalid ID Number, Enter A Valid Number.";
+        public const string FailedToRetrievePersonInfodMessage = "Failed to retrieve personal data.";
+
         public const string PersonIDMustBeGreaterThanZeroMessage = "Invalid Person ID. Person ID must be greater than zero.";
         public const string PersonNotFoundMessage = "No person was found with the specified ID.";
         public const string PersonNotFoundByNationalNOMessage = "No person was found with the specified National No.";
@@ -38,10 +40,10 @@ namespace DVLD_Shared.Validation_Messages
 
         
         // Name Length Messages 
-        public static string FirstNameLengthValidationMessage  = "First Name must contain between 4 and 50 letters.";
-        public static string SecondNameLengthValidationMessage = "Second Name must contain between 4 and 50 letters.";
-        public static string ThirdNameLengthValidationMessage  = "Third Name must contain between 4 and 50 letters.";
-        public static string LastNameLengthValidationMessage   = "Last Name must contain between 4 and 50 letters.";
+        public static string FirstNameLengthValidationMessage  = "First Name must contain between 3 and 50 letters.";
+        public static string SecondNameLengthValidationMessage = "Second Name must contain between 3 and 50 letters.";
+        public static string ThirdNameLengthValidationMessage  = "Third Name must contain between 3 and 50 letters.";
+        public static string LastNameLengthValidationMessage   = "Last Name must contain between 3 and 50 letters.";
 
         
         // Name Invalid Format

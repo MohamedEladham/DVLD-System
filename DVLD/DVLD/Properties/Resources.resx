@@ -136,14 +136,14 @@
   <data name="Check_Password_ 24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Check_Password_ 24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Update_Password2_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Update_Password2_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="CheckList_Document2_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CheckList_Document2_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="SignIn_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SignIn_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Lpgin_Page1_512" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Lpgin_Page1_512.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="User_Access_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\User_Access_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Manage_Roles1_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Manage_Roles1_64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Add_Person 32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Add_Person 32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -154,17 +154,26 @@
   <data name="Calendar_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Calendar_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Country_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Country_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Description1_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Description1_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Permissions2_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Permissions2_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="DVLD_BackGround1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DVLD_BackGround1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SignIn_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SignIn_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Close1_28" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Close1_28.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Person_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Person_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Role_Managements1_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Role_Managements1_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Phone_Call 32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Phone_Call 32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -184,8 +193,8 @@
   <data name="Password_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Password_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Permissions2_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Permissions2_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Update_CheckList_Document1_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Update_CheckList_Document1_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Permissions1_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Permissions1_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -208,17 +217,29 @@
   <data name="Users2_400" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Users2_400.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Search_Person" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Search_Person.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Delete_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Delete_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Login_Info_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Login_Info_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Add_CheckList_Document1_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Add_CheckList_Document1_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Address_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Address_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="TickBox2_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TickBox2_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Person_Document1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Person_Document1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="User_Access_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\User_Access_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Update_Password_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Update_Password_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -226,8 +247,8 @@
   <data name="Group_Persons1_80" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Group_Persons1_80.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Block_User_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Block_User_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Country_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Country_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Man_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Man_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -238,8 +259,14 @@
   <data name="Add_New_User 32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Add_New_User 32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ID_Number1_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ID_Number1_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Save1_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Save1_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Delete_File1_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Delete_File1_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Users2_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Users2_64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -250,8 +277,14 @@
   <data name="Hide_Passowrd_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Hide_Passowrd_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Search_Person" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Search_Person.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="CheckList_Document1_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CheckList_Document1_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Block_User_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Block_User_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Update_Password2_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Update_Password2_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Close1 32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Close1 32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -271,7 +304,10 @@
   <data name="Check_Password_ 32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Check_Password_ 32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Lpgin_Page1_512" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Lpgin_Page1_512.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Permissions1_321" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Permissions1_321.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TickBox1_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TickBox1_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -9,11 +9,11 @@ namespace DVLD_BL.Services
 {
     public class clsPersonFilterService
     {
-        public static Dictionary<string, Func<clsPersonInfoGridViewDto, string, bool>> GetPersonFilters()
+        public static Dictionary<string, Func<clsActivePersonsInfoGridViewDto, string, bool>> GetPersonFilters()
         {
-            Dictionary<string, Func<clsPersonInfoGridViewDto, string, bool>> personFilter = null;
+            Dictionary<string, Func<clsActivePersonsInfoGridViewDto, string, bool>> personFilter = null;
 
-            personFilter = new Dictionary<string, Func<clsPersonInfoGridViewDto, string, bool>>
+            personFilter = new Dictionary<string, Func<clsActivePersonsInfoGridViewDto, string, bool>>
             {
                 ["PersonID"] = (p, val) => clsValidationHelper.IsMatchingID(p.PersonID, val),
                 ["NationalNO"] = (p, val) => clsValidationHelper.ContainsIgnoreCase(p.NationalNO, val),
@@ -29,8 +29,8 @@ namespace DVLD_BL.Services
             return personFilter;
         }
 
-        public static List<clsPersonInfoGridViewDto> FilterPersons(List<clsPersonInfoGridViewDto> personsGridViewDto,
-            Dictionary<string, Func<clsPersonInfoGridViewDto, string, bool>> personFilter, string filterSelected, string searchValue)
+        public static List<clsActivePersonsInfoGridViewDto> FilterPersons(List<clsActivePersonsInfoGridViewDto> personsGridViewDto,
+            Dictionary<string, Func<clsActivePersonsInfoGridViewDto, string, bool>> personFilter, string filterSelected, string searchValue)
         {
             if (personsGridViewDto == null) return null;
 

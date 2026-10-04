@@ -141,11 +141,11 @@
     <Compile Include="Forms\004_Manage_Users\004_Update_Users\frmUpdatePassword.Designer.cs">
       <DependentUpon>frmUpdatePassword.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\004_Manage_Users\004_Update_Users\frmUpdateRoles.cs">
+    <Compile Include="Forms\004_Manage_Users\004_Update_Users\frmUpdateUserRoles.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\004_Manage_Users\004_Update_Users\frmUpdateRoles.Designer.cs">
-      <DependentUpon>frmUpdateRoles.cs</DependentUpon>
+    <Compile Include="Forms\004_Manage_Users\004_Update_Users\frmUpdateUserRoles.Designer.cs">
+      <DependentUpon>frmUpdateUserRoles.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\004_Manage_Users\004_Update_Users\frmUpdateUserInfo.cs">
       <SubType>Form</SubType>
@@ -158,6 +158,54 @@
     </Compile>
     <Compile Include="Forms\004_Manage_Users\005_Show_User_Info\frmShowUserInfo.Designer.cs">
       <DependentUpon>frmShowUserInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\005_Manage_Roles_Permissions\001_User_Controls\uconShowPermissionDetails.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\005_Manage_Roles_Permissions\001_User_Controls\uconShowPermissionDetails.Designer.cs">
+      <DependentUpon>uconShowPermissionDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\005_Manage_Roles_Permissions\001_User_Controls\uconShowRoleDetails.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\005_Manage_Roles_Permissions\001_User_Controls\uconShowRoleDetails.Designer.cs">
+      <DependentUpon>uconShowRoleDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\005_Manage_Roles_Permissions\002_RolesManagements\001_Manage_Roles\frmRolesManagements.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\005_Manage_Roles_Permissions\002_RolesManagements\001_Manage_Roles\frmRolesManagements.Designer.cs">
+      <DependentUpon>frmRolesManagements.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\005_Manage_Roles_Permissions\002_RolesManagements\002_Add_Update_Roles\frmAddUpdateRole.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\005_Manage_Roles_Permissions\002_RolesManagements\002_Add_Update_Roles\frmAddUpdateRole.Designer.cs">
+      <DependentUpon>frmAddUpdateRole.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\005_Manage_Roles_Permissions\002_RolesManagements\003_Show_Role_Details\frmShowRoleDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\005_Manage_Roles_Permissions\002_RolesManagements\003_Show_Role_Details\frmShowRoleDetails.Designer.cs">
+      <DependentUpon>frmShowRoleDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\005_Manage_Roles_Permissions\003_PermissionsManagements\001_Manage_Permissions\frmPermissionsManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\005_Manage_Roles_Permissions\003_PermissionsManagements\001_Manage_Permissions\frmPermissionsManagement.Designer.cs">
+      <DependentUpon>frmPermissionsManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\005_Manage_Roles_Permissions\003_PermissionsManagements\002_Add_Update_Permissions\frmAddUpdatePermission.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\005_Manage_Roles_Permissions\003_PermissionsManagements\002_Add_Update_Permissions\frmAddUpdatePermission.Designer.cs">
+      <DependentUpon>frmAddUpdatePermission.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\005_Manage_Roles_Permissions\003_PermissionsManagements\003_Show_Permission_Details\frmShowPermissionDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\005_Manage_Roles_Permissions\003_PermissionsManagements\003_Show_Permission_Details\frmShowPermissionDetails.Designer.cs">
+      <DependentUpon>frmShowPermissionDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -204,14 +252,38 @@
     <EmbeddedResource Include="Forms\004_Manage_Users\004_Update_Users\frmUpdatePassword.resx">
       <DependentUpon>frmUpdatePassword.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\004_Manage_Users\004_Update_Users\frmUpdateRoles.resx">
-      <DependentUpon>frmUpdateRoles.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\004_Manage_Users\004_Update_Users\frmUpdateUserRoles.resx">
+      <DependentUpon>frmUpdateUserRoles.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\004_Manage_Users\004_Update_Users\frmUpdateUserInfo.resx">
       <DependentUpon>frmUpdateUserInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\004_Manage_Users\005_Show_User_Info\frmShowUserInfo.resx">
       <DependentUpon>frmShowUserInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\005_Manage_Roles_Permissions\001_User_Controls\uconShowPermissionDetails.resx">
+      <DependentUpon>uconShowPermissionDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\005_Manage_Roles_Permissions\001_User_Controls\uconShowRoleDetails.resx">
+      <DependentUpon>uconShowRoleDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\005_Manage_Roles_Permissions\002_RolesManagements\001_Manage_Roles\frmRolesManagements.resx">
+      <DependentUpon>frmRolesManagements.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\005_Manage_Roles_Permissions\002_RolesManagements\002_Add_Update_Roles\frmAddUpdateRole.resx">
+      <DependentUpon>frmAddUpdateRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\005_Manage_Roles_Permissions\002_RolesManagements\003_Show_Role_Details\frmShowRoleDetails.resx">
+      <DependentUpon>frmShowRoleDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\005_Manage_Roles_Permissions\003_PermissionsManagements\001_Manage_Permissions\frmPermissionsManagement.resx">
+      <DependentUpon>frmPermissionsManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\005_Manage_Roles_Permissions\003_PermissionsManagements\002_Add_Update_Permissions\frmAddUpdatePermission.resx">
+      <DependentUpon>frmAddUpdatePermission.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\005_Manage_Roles_Permissions\003_PermissionsManagements\003_Show_Permission_Details\frmShowPermissionDetails.resx">
+      <DependentUpon>frmShowPermissionDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -385,6 +457,42 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Lpgin_Page1_512.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Manage_Roles1_64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CheckList_Document1_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Add_CheckList_Document1_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Update_CheckList_Document1_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Delete_File1_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CheckList_Document2_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Description1_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ID_Number1_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Role_Managements1_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Permissions1_321.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TickBox2_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TickBox1_32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

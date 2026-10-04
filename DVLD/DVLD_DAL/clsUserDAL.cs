@@ -3,16 +3,94 @@ using DVLD_Models.User;
 using DVLD_Infrastructure;
 using System.Data.SqlClient;
 using System.Collections.Generic;
+using DVLD_Models.Role;
+using DVLD_Models.Permissions;
 
 namespace DVLD_DAL
 {
     public class clsUserDAL
     {
+        // >> Fore Login Screen
+        public static clsUser GetUserByUserNameAndPassword(string userName, string password)
+        {
+            clsUser userInfo = null;
+
+            string query = @"SELECT 
+                                    [UserID], 
+                                    [PersonID], 
+                                    [UserName],
+                                    [IsActive]
+                                From Users
+                                WHERE 
+                                    (UserName = @UserName AND
+                                     Password = @Password AND
+                                     IsActive = 1 AND IsDeleted = 0)";
+
+            using (SqlConnection connection = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.Add("@UserName", System.Data.SqlDbType.VarChar, 250).Value = userName;
+                command.Parameters.Add("@Password", System.Data.SqlDbType.VarChar, 550).Value = password;
+
+                connection.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                        userInfo = _MapReaderToUser(reader);
+                }
+            }
+
+            return userInfo;
+        }
+
+        // >> Fore Login Screen
+        private static clsPermission _MapReaderToPermission(SqlDataReader reader)
+        {
+            return new clsPermission
+            {
+                PermissionID = (int)reader["PermissionID"],
+                PermissionName = (string)reader["PermissionName"],
+            };
+        }
+        public static List<clsPermission> GetUserPermissions(int userID)
+        {
+            List<clsPermission> permissions = new List<clsPermission>();
+
+            string query = @"SELECT 
+		                            P.PermissionID,
+		                            P.PermissionName
+		                            FROM UserRoles UR
+		                            INNER JOIN RolePermissions RP 
+		                            ON UR.FK_RoleID = RP.FK_RoleID
+		                            INNER JOIN Permissions P 
+		                            ON RP.FK_PermissionID = P.PermissionID
+		                            WHERE UR.FK_UserID = @UserID";
+
+            using (SqlConnection connection = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.Add("@UserID", System.Data.SqlDbType.Int).Value = userID;
+
+                connection.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                        permissions.Add(_MapReaderToPermission(reader));
+                }
+            }
+
+            return permissions;
+        }
+
+
+
+        // >>
         public static bool CheckPersonIsUser(int personID)
         {
             bool isExists = false;
 
-            string query = @"SELECT 1 From Users WHERE PersonID = @PersonID";
+            string query = @"SELECT 1 From Users WHERE PersonID = @PersonID AND IsDeleted = 0";
 
             using(SqlConnection conniction = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
             using(SqlCommand command = new SqlCommand(query, conniction))
@@ -116,8 +194,8 @@ namespace DVLD_DAL
             return isAuthenticated;
         }
 
-        // >>
 
+        // >>
         private static clsUser _MapReaderToUser(SqlDataReader reader)
         {
             return new clsUser
@@ -145,39 +223,6 @@ namespace DVLD_DAL
             using (SqlCommand command = new SqlCommand(query, connection))
             {
                 command.Parameters.Add("@UserID", System.Data.SqlDbType.Int).Value = userID;
-
-                connection.Open();
-
-                using (SqlDataReader reader = command.ExecuteReader())
-                {
-                    if (reader.Read())
-                        userInfo = _MapReaderToUser(reader);
-                }
-            }
-
-            return userInfo;
-        }
-
-        public static clsUser GetUserByUserNameAndPassword(string userName, string password)
-        {
-            clsUser userInfo = null;
-
-            string query = @"SELECT 
-                                    [UserID], 
-                                    [PersonID], 
-                                    [UserName],
-                                    [IsActive]
-                                From Users
-                                WHERE 
-                                    (UserName = @UserName AND
-                                     Password = @Password AND
-                                     IsActive = 1 AND IsDeleted = 0)";
-
-            using (SqlConnection connection = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
-            using (SqlCommand command = new SqlCommand(query, connection))
-            {
-                command.Parameters.Add("@UserName", System.Data.SqlDbType.VarChar, 250).Value = userName;
-                command.Parameters.Add("@Password", System.Data.SqlDbType.VarChar, 550).Value = password;
 
                 connection.Open();
 
@@ -219,8 +264,9 @@ namespace DVLD_DAL
             return users;
         }
 
+        
+        
         // >>
-
         private static clsUserInfoGridViewDto _MapReaderToUserGridViewDto(SqlDataReader reader)
         {
             return new clsUserInfoGridViewDto
@@ -235,9 +281,9 @@ namespace DVLD_DAL
 
         public static List<clsUserInfoGridViewDto> GetActiveUsersForGridView()
         {
-            List<clsUserInfoGridViewDto> users = new List<clsUserInfoGridViewDto>();
+            List<clsUserInfoGridViewDto> activeUsers = new List<clsUserInfoGridViewDto>();
 
-            string query = @"Select 
+            string query = @"SELECT 
                                     U.UserID, 
                                     U.PersonID, 
                                     U.UserName, 
@@ -246,7 +292,12 @@ namespace DVLD_DAL
                                     P.ThirdName, 
                                     P.LastName, 
                                     U.IsActive 
-                            From Users U INNER JOIN Persons P ON U.PersonID = P.PersonID AND U.IsActive = 1 AND U.IsDeleted = 0 ORDER BY U.UserID";
+                                FROM Users U
+                                INNER JOIN Persons P 
+                                ON U.PersonID = P.PersonID 
+                                AND U.IsActive = 1 
+                                AND U.IsDeleted = 0 
+                                ORDER BY U.UserID";
 
             using (SqlConnection connection = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
             using (SqlCommand command = new SqlCommand(query, connection))
@@ -257,19 +308,21 @@ namespace DVLD_DAL
                     while (reader.Read())
                     {
                         clsUserInfoGridViewDto user = _MapReaderToUserGridViewDto(reader);
-                        users.Add(user);
+                        activeUsers.Add(user);
                     }
                 }
             }
 
-            return users;
+            return activeUsers;
         }
 
+
+        // >>
         public static List<clsUserInfoGridViewDto> GetInActiveUsersForGridView()
         {
-            List<clsUserInfoGridViewDto> users = new List<clsUserInfoGridViewDto>();
+            List<clsUserInfoGridViewDto> inActiveUsers = new List<clsUserInfoGridViewDto>();
 
-            string query = @"Select 
+            string query = @"SELECT 
                                     U.UserID, 
                                     U.PersonID, 
                                     U.UserName, 
@@ -278,7 +331,12 @@ namespace DVLD_DAL
                                     P.ThirdName, 
                                     P.LastName, 
                                     U.IsActive
-                            From Users U INNER JOIN Persons P ON U.PersonID = P.PersonID AND U.IsActive = 0 AND U.IsDeleted = 0 ORDER BY U.UserID";
+                                FROM Users U 
+                                INNER JOIN Persons P 
+                                ON U.PersonID = P.PersonID
+                                AND U.IsActive = 0
+                                AND U.IsDeleted = 0
+                                ORDER BY U.UserID";
 
             using (SqlConnection connection = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
             using (SqlCommand command = new SqlCommand(query, connection))
@@ -289,16 +347,17 @@ namespace DVLD_DAL
                     while (reader.Read())
                     {
                         clsUserInfoGridViewDto user = _MapReaderToUserGridViewDto(reader);
-                        users.Add(user);
+                        inActiveUsers.Add(user);
                     }
                 }
             }
 
-            return users;
+            return inActiveUsers;
         }
 
+        
+        
         // >>
-
         private static clsDeleteUserInfoGridViewDto _MapReaderToDeletedUserGridViewDto(SqlDataReader reader)
         {
             return new clsDeleteUserInfoGridViewDto
@@ -317,7 +376,7 @@ namespace DVLD_DAL
         {
             List<clsDeleteUserInfoGridViewDto> users = new List<clsDeleteUserInfoGridViewDto>();
 
-            string query = @"Select 
+            string query = @"SELECT 
                                     U.UserID, 
                                     U.PersonID, 
                                     U.UserName, 
@@ -328,7 +387,11 @@ namespace DVLD_DAL
                                     U.IsActive,
                                     U.IsDeleted,
                                     U.DeletedAt
-                            From Users U INNER JOIN Persons P ON  U.PersonID = P.PersonID AND U.IsDeleted = 1 ORDER BY U.UserID";
+                                FROM Users U 
+                                INNER JOIN Persons P 
+                                ON  U.PersonID = P.PersonID 
+                                AND U.IsDeleted = 1
+                                ORDER BY U.UserID";
 
             using (SqlConnection connection = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
             using (SqlCommand command = new SqlCommand(query, connection))
@@ -347,75 +410,95 @@ namespace DVLD_DAL
             return users;
         }
 
-        // >>
         
-        public static bool AddNewUserAndGetNewID(clsUser user, out int newID)
+        
+        // >>
+        public static bool AddNewUserAndRole(clsUser user, int roleID, out int newUserID)
         {
-            newID = -1;
-
-            string query = @"INSERT INTO Users 
-                                                ([PersonID],
-                                                [UserName],
-                                                [Password],
-                                                [IsActive])
-                                        VALUES 
-                                                (@PersonID,
-                                                @UserName,
-                                                @Password,
-                                                @IsActive); 
-                                        SELECT SCOPE_IDENTITY();";
+            newUserID = -1;
 
             using (SqlConnection connection = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
-            using (SqlCommand command = new SqlCommand(query, connection))
             {
-                command.Parameters.Add("@PersonID", System.Data.SqlDbType.Int).Value = user.PersonID;
-                command.Parameters.Add("@UserName", System.Data.SqlDbType.VarChar, 250).Value = user.UserName;
-                command.Parameters.Add("@Password", System.Data.SqlDbType.VarChar, 550).Value = user.Password;
-                command.Parameters.Add("@IsActive", System.Data.SqlDbType.Bit).Value = user.IsActive;
-
                 connection.Open();
 
-                var result = command.ExecuteScalar();
+                using (SqlTransaction transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        string insertUserQuery = @"INSERT INTO Users 
+                                                                ([PersonID],
+                                                                [UserName],
+                                                                [Password],
+                                                                [IsActive])
+                                                            VALUES 
+                                                                (@PersonID,
+                                                                @UserName,
+                                                                @Password,
+                                                                @IsActive); 
+                                                            SELECT SCOPE_IDENTITY();";
 
-                if (result != null && result != DBNull.Value)
-                    newID = Convert.ToInt32(result);
+                        using (SqlCommand insertUserCommand = new SqlCommand(insertUserQuery, connection, transaction))
+                        {
+                            insertUserCommand.Parameters.Add("@PersonID", System.Data.SqlDbType.Int).Value = user.PersonID;
+                            insertUserCommand.Parameters.Add("@UserName", System.Data.SqlDbType.VarChar, 250).Value = user.UserName;
+                            insertUserCommand.Parameters.Add("@Password", System.Data.SqlDbType.VarChar, 550).Value = user.Password;
+                            insertUserCommand.Parameters.Add("@IsActive", System.Data.SqlDbType.Bit).Value = user.IsActive;
+
+                            var result = insertUserCommand.ExecuteScalar();
+
+                            if (result != null && result != DBNull.Value)
+                                newUserID = Convert.ToInt32(result);
+                        }
+
+                        if (roleID > 0 && newUserID > 0)
+                        {
+                            string insertUserRoleQuery = @"INSERT INTO UserRoles ([FK_UserID], [FK_RoleID]) VALUES (@UserID, @RoleID)";
+
+                            using (SqlCommand insertUserRoleCommand = new SqlCommand(insertUserRoleQuery, connection, transaction))
+                            {
+                                insertUserRoleCommand.Parameters.Add("@UserID", System.Data.SqlDbType.Int).Value = newUserID;
+                                insertUserRoleCommand.Parameters.Add("@RoleID", System.Data.SqlDbType.Int).Value = roleID;
+
+                                insertUserRoleCommand.ExecuteNonQuery();
+                            }
+
+                            transaction.Commit();
+                            return true;
+                        }
+                        else
+                        {
+                            transaction.Rollback();
+                            return false;
+                        }
+                    }
+                    catch
+                    {
+                        transaction.Rollback();
+                        throw;
+                    }
+                }
             }
-
-            return newID > 0;
         }
 
-        public static bool AddUserRole(int userID, int roleID) 
-        {
-            bool isAdded = false;
 
-            string query = @"INSERT INTO UserRoles VALUES (@UserID, @RoleID)";
-
-            using (SqlConnection connection = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
-            using (SqlCommand command = new SqlCommand(query, connection))
-            {
-                command.Parameters.Add("@UserID", System.Data.SqlDbType.Int).Value = userID;
-                command.Parameters.Add("@RoleID", System.Data.SqlDbType.Int).Value = roleID;
-
-                connection.Open();
-
-                isAdded = (command.ExecuteNonQuery() > 0);
-            }
-
-            return isAdded;
-        }
-
-
-        public static bool UpdatePassword(string newPassword, int userID)
+        // >>
+        public static bool UpdateUserNameAndStatusInfo(clsUser user)
         {
             bool isUpdate = false;
 
-            string query = @"UPDATE Users SET Password = @NewPassword WHERE UserID = @UserID";
+            string query = @"UPDATE Users 
+                                        SET
+                                            [UserName]   = @UserName, 
+                                            [IsActive]   = @IsActive
+                                        WHERE UserID     = @UserID";
 
             using (SqlConnection connection = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
             using (SqlCommand command = new SqlCommand(query, connection))
             {
-                command.Parameters.Add("@UserID", System.Data.SqlDbType.Int).Value = userID;
-                command.Parameters.Add("@NewPassword", System.Data.SqlDbType.VarChar, 550).Value = newPassword;
+                command.Parameters.Add("@UserName", System.Data.SqlDbType.VarChar, 250).Value = user.UserName;
+                command.Parameters.Add("@IsActive", System.Data.SqlDbType.Bit).Value = user.IsActive;
+              
+                command.Parameters.Add("@UserID", System.Data.SqlDbType.Int).Value = user.UserID;
 
                 connection.Open();
 
@@ -425,29 +508,18 @@ namespace DVLD_DAL
             return isUpdate;
         }
 
-        public static bool UpdateUserNameAndStatusInfo(clsUser user)
+        
+        public static bool UpdateUserPassword(string newPassword, int userID)
         {
             bool isUpdate = false;
 
-            string query = @"UPDATE Users 
-                                        SET
-                                            [UserName]   = @UserName, 
-                                            [IsActive]   = @IsActive,
-                                            [DeletedAt]  = @DeletedAt
-                                        WHERE UserID     = @UserID";
+            string query = @"UPDATE Users SET Password = @NewPassword WHERE UserID = @UserID";
 
             using (SqlConnection connection = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
             using (SqlCommand command = new SqlCommand(query, connection))
             {
-                command.Parameters.Add("@UserName", System.Data.SqlDbType.VarChar, 250).Value = user.UserName;
-                command.Parameters.Add("@IsActive", System.Data.SqlDbType.Bit).Value = user.IsActive;
-
-                if(user.DeletedAt == null)
-                    command.Parameters.Add("@DeletedAt", System.Data.SqlDbType.DateTime2).Value = DBNull.Value;
-                else
-                    command.Parameters.Add("@DeletedAt", System.Data.SqlDbType.DateTime2).Value = user.DeletedAt;
-                
-                command.Parameters.Add("@UserID", System.Data.SqlDbType.Int).Value = user.UserID;
+                command.Parameters.Add("@NewPassword", System.Data.SqlDbType.VarChar, 550).Value = newPassword;
+                command.Parameters.Add("@UserID", System.Data.SqlDbType.Int).Value = userID;
 
                 connection.Open();
 
@@ -465,30 +537,6 @@ namespace DVLD_DAL
                                         Set 
 		                                IsActive = 1
 		                                Where UserID = @UserID AND IsActive = 0 AND IsDeleted = 0";
-
-            using (SqlConnection connection = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
-            using (SqlCommand command = new SqlCommand(query, connection))
-            {
-                command.Parameters.Add("@UserID", System.Data.SqlDbType.Int).Value = userID;
-
-                connection.Open();
-
-                isRestored = (command.ExecuteNonQuery() > 0);
-            }
-
-            return isRestored;
-        }
-
-        public static bool RestoreUser(int userID)
-        {
-            bool isRestored = false;
-
-            string query = @"Update Users 
-                                        Set 
-		                                IsActive = 0,
-		                                IsDeleted = 0,
-		                                DeletedAt = null
-		                                Where UserID = @UserID AND IsActive = 0 AND IsDeleted = 1";
 
             using (SqlConnection connection = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
             using (SqlCommand command = new SqlCommand(query, connection))
@@ -525,6 +573,30 @@ namespace DVLD_DAL
             }
 
             return isDeleted;
+        }
+
+        public static bool RestoreUser(int userID)
+        {
+            bool isRestored = false;
+
+            string query = @"Update Users 
+                                        Set 
+		                                IsActive = 0,
+		                                IsDeleted = 0,
+		                                DeletedAt = null
+		                                Where UserID = @UserID AND IsActive = 0 AND IsDeleted = 1";
+
+            using (SqlConnection connection = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.Add("@UserID", System.Data.SqlDbType.Int).Value = userID;
+
+                connection.Open();
+
+                isRestored = (command.ExecuteNonQuery() > 0);
+            }
+
+            return isRestored;
         }
     }
 }

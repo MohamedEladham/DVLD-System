@@ -20,44 +20,61 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
         public frmUpdateLoginInfo(int userID)
         {
             InitializeComponent();
-            
             _userID = userID;
         }
 
-        private void _FillFormByUserInfo(clsUser user)
+        private void txt_UserName_TextChanged(object sender, EventArgs e)
         {
-            _personID = user.PersonID;
-            _userName = user.UserName;
-            lab_PersonIDToText.Text = Convert.ToString(_personID);
-            lab_UserIDToText.Text = Convert.ToString(user.UserID);
-            txt_UserName.Text = Convert.ToString(user.UserName);
-            txt_UserName.Select();
-            txt_UserName.SelectAll();
-
-            if (user.IsActive)
-                rdoB_Active.Checked = true;
-            else
-                rdoB_NotActive.Checked = true;
+            errorProvider1.SetError(txt_UserName, string.Empty);
         }
 
-        private void _GetUserByID(int userID)
+        private void txt_UserName_MouseClick(object sender, MouseEventArgs e)
         {
-            (clsOperationResult result, clsUser user) = clsUserBL.GetUserByUserID(userID);
+            errorProvider1.SetError(txt_UserName, string.Empty);
+        }
+
+        
+        // >>
+        private clsUser _GetUserByID()
+        {
+            (clsOperationResult result, clsUser user) = clsUserBL.GetUserByUserID(_userID);
 
             switch (result.Status)
             {
                 case enOperationStatus.Success:
-                    if (user != null)
-                        _FillFormByUserInfo(user);
-                    break;
+                    return user;
 
                 case enOperationStatus.Failed:
                     MessageBox.Show(result.Message, "Failed Operation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    break;
+                    return null;
 
                 case enOperationStatus.Exception:
                     MessageBox.Show(result.Message, "Database Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    break;
+                    return null;
+
+                default:
+                    return null;
+            }
+        }
+
+        private void _LoadUserInfo()
+        {
+            clsUser user = _GetUserByID();
+
+            if (user != null)
+            {
+                _personID = user.PersonID;
+                _userName = user.UserName;
+                lab_PersonIDToText.Text = Convert.ToString(_personID);
+                lab_UserIDToText.Text = Convert.ToString(user.UserID);
+                txt_UserName.Text = Convert.ToString(user.UserName);
+                txt_UserName.Select();
+                txt_UserName.SelectAll();
+
+                if (user.IsActive)
+                    rdoB_Active.Checked = true;
+                else
+                    rdoB_NotActive.Checked = true;
             }
         }
 
@@ -65,30 +82,13 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
         {
             btn_UpdateRoles.Enabled = clsCurrentUser.HasPermission(enPermissions.UpdateUserRoles);
             btn_ChangePassword.Enabled = clsCurrentUser.HasPermission(enPermissions.UpdateUserPassword);
-            _GetUserByID(_userID);
+            _LoadUserInfo();
         }
-       
+
+
         // >>
-
-        // Save Data To Database
-        private bool _ValidateUserName()
-        {
-            string userName = txt_UserName.Text.Trim();
-
-            clsValidationResult result = clsUserValidations.ValidateUserName(userName, 2, 50, _userID);
-
-            if (!result.IsValid)
-            {
-                errorProvider1.SetError(txt_UserName, $">> User Name {result.Message}!");
-                txt_UserName.Select();
-                txt_UserName.SelectAll();
-            }
-
-            return result.IsValid;
-        }
-
-
-        
+        public delegate void UpdateLoginInfoEventHandler(object sender, bool isCreated);
+        public static event UpdateLoginInfoEventHandler UpdateLoginInfo;
 
         private clsUser _BuildLoginnfo()
         {
@@ -100,11 +100,29 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             };
         }
 
-        public delegate void UpdateLoginInfoEventHandler(object sender, bool isCreated);
-        public static event UpdateLoginInfoEventHandler UpdateLoginInfo;
+        private Control _GetControlByPropertyName(string propertyName)
+        {
+            if (propertyName == nameof(clsUser.UserName))
+                return txt_UserName;
+           
+            return null;
+        }
+
+        private void _SetErrorProvider(string propertyName, string message)
+        {
+            Control control = _GetControlByPropertyName(propertyName);
+            errorProvider1.SetError(control, message);
+            control.Select();
+        }
 
         private bool _UpdateUserNameAndStatusInfo(clsUser user)
         {
+            if (!clsCurrentUser.HasPermission(enPermissions.UpdateUserLoginInfo))
+            {
+                MessageBox.Show(clsUserValidationMessages.PermissionDeniedMessage, "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
             clsOperationResult result = clsUserBL.UpdateUserNameAndStatusInfo(user); 
 
             switch (result.Status)
@@ -115,7 +133,10 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
                     return true;
 
                 case enOperationStatus.Failed:
-                    MessageBox.Show(result.Message, "Operation Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    if (string.IsNullOrEmpty(result.PropertyName))
+                        MessageBox.Show(result.Message, "Operation Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    else
+                        _SetErrorProvider(result.PropertyName, result.Message);
                     return false;
 
                 case enOperationStatus.Exception:
@@ -129,66 +150,43 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
 
         private bool _Save()
         {
-            if (!_ValidateUserName())
-                return false;
-
-            clsUser user = _BuildLoginnfo();
-
-            return _UpdateUserNameAndStatusInfo(user);
+            return _UpdateUserNameAndStatusInfo(_BuildLoginnfo());
         }
 
         private void btn_Save_Click(object sender, EventArgs e)
         {
-            if (!clsCurrentUser.HasPermission(enPermissions.UpdateUserLoginInfo))
-            {
-                MessageBox.Show(clsUserValidationMessages.PermissionDeniedMessage, "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
             _Save();
         }
 
         // >>
 
-
         private void btn_UpdateRoles_Click(object sender, EventArgs e)
         {
-            frmUpdateRoles frm = new frmUpdateRoles(_userID, _userName);
+            if (!clsCurrentUser.HasPermission(enPermissions.UpdateUserRoles))
+            {
+                MessageBox.Show(clsUserValidationMessages.PermissionDeniedMessage, "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            frmUpdateUserRoles frm = new frmUpdateUserRoles(_userID, _userName);
             frm.ShowDialog();
-
-
-
-
-
-
-
         }
-
-
 
         private void btn_UpdatePassword_Click(object sender, EventArgs e)
         {
+            if (!clsCurrentUser.HasPermission(enPermissions.UpdateUserPassword))
+            {
+                MessageBox.Show(clsUserValidationMessages.PermissionDeniedMessage, "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             frmUpdatePassword frm = new frmUpdatePassword(_userID, _userName);
             frm.ShowDialog();
-        }
-
-        // >>
-
-        private void txt_UserName_TextChanged(object sender, EventArgs e)
-        {
-            errorProvider1.SetError(txt_UserName, string.Empty);
-        }
-
-        private void txt_UserName_MouseClick(object sender, MouseEventArgs e)
-        {
-            errorProvider1.SetError(txt_UserName, string.Empty);
         }
 
         private void btn_Close_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
-        
     }
 }

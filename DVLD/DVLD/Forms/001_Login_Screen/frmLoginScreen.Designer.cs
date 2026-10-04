@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLoginScreen));
             this.txt_UserName = new System.Windows.Forms.TextBox();
             this.lab_Name = new System.Windows.Forms.Label();
             this.txt_Password = new System.Windows.Forms.TextBox();
@@ -250,6 +251,7 @@
             this.Controls.Add(this.lab_Name);
             this.Controls.Add(this.pictureBox_LogoScreen);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmLoginScreen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login Screen";

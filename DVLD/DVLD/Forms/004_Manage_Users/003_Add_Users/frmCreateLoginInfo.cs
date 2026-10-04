@@ -12,6 +12,7 @@ using DVLD_Shared.Validation_Messages;
 using DVLD_Models;
 using System.Collections.Generic;
 using DVLD_Models.Role;
+using DVLD_Models.Roles;
 
 namespace DVLD_System_Solution.Forms._004_Manage_Users
 {
@@ -25,6 +26,11 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             InitializeComponent();
 
             _personID = personID;
+        }
+
+        private void comBox_Roles_MouseClick(object sender, MouseEventArgs e)
+        {
+            errorProvider1.SetError(comBox_Roles, string.Empty);
         }
 
         private void _ClearErrorProviderOn_MouseClick(object sender, MouseEventArgs e)
@@ -89,101 +95,56 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             }
         }
 
-        private void _BindRolesToComboBox(List<clsRole> roles)
+
+
+        // >>
+
+        List<clsActiveRolesInfoGridViewDto> _activeRoles = null;
+        private List<clsActiveRolesInfoGridViewDto> _GetActiveRoles()
         {
-            comBox_Roles.DataSource = roles;
+            (clsOperationResult result, List<clsActiveRolesInfoGridViewDto> activeRoles) = clsRoleBL.GetActiveRoles();
+
+            switch (result.Status)
+            {
+                case enOperationStatus.Success:
+                    return activeRoles;
+
+                case enOperationStatus.Failed:
+                    MessageBox.Show(result.Message, "Filed To Retrive Data", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return null;
+
+                case enOperationStatus.Exception:
+                    MessageBox.Show(result.Message, "Database Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return null;
+
+                default:
+                    return null;
+            }
+        }
+        private void _LoadRolesToComboBox()
+        {
+            _activeRoles = _GetActiveRoles();
+            comBox_Roles.DataSource = _activeRoles;
             comBox_Roles.DisplayMember = "RoleName";
             comBox_Roles.ValueMember = "RoleID";
             comBox_Roles.SelectedIndex = -1;
         }
 
-        private void _GetAllRoles()
+        private void _Load()
         {
-            (clsOperationResult result, List<clsRole> roles) = clsRoleBL.GetAllRoles();
-
-            switch (result.Status)
-            {
-                case enOperationStatus.Success:
-                    _BindRolesToComboBox(roles);
-                    break;
-
-                case enOperationStatus.Failed:
-                    MessageBox.Show(result.Message, "Filed To Retrive Data", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    break;
-
-                case enOperationStatus.Exception:
-                    MessageBox.Show(result.Message, "Database Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    break;
-            }
+            _LoadRolesToComboBox();
+            _LinkEventsToControls(this);
+            txt_UserName.Select();
+            lab_PersonIDToText.Text = Convert.ToString(_personID);
         }
 
         private void frmCreateLoginInfo_Load(object sender, EventArgs e)
         {
-            txt_UserName.Select();
-            lab_PersonIDToText.Text = Convert.ToString(_personID);
-            _LinkEventsToControls(this);
-            _GetAllRoles();
+            _Load();
         }
 
-        private bool _ValidateUserName()
-        {
-            string userName = txt_UserName.Text.Trim();
 
-            clsValidationResult result = clsUserValidations.ValidateUserName(userName, 2, 50);
-
-            if (!result.IsValid)
-            {
-                errorProvider1.SetError(txt_UserName, $">> User Name {result.Message}!");
-                txt_UserName.Select();
-                txt_UserName.SelectAll();
-            }
-
-            return result.IsValid;
-        }
-
-        private bool _ValidatePassword()
-        {
-            string password = txt_Password.Text.Trim();
-
-            clsValidationResult result = clsUserValidations.ValidatePassword(password, 3, 150);
-
-            if (!result.IsValid)
-            {
-                errorProvider1.SetError(txt_Password, $">> Password {result.Message}!");
-                txt_Password.Select();
-                txt_Password.SelectAll();
-            }
-
-            return result.IsValid;
-        }
-
-        private bool _ValidateConfirmPassword()
-        {
-            string confirmPassword = txt_ConfirmPassword.Text.Trim();
-
-            clsValidationResult result = clsUserValidations.ValidateConfirmPassword(confirmPassword, txt_Password.Text.Trim());
-
-            if (!result.IsValid)
-            {
-                errorProvider1.SetError(txt_ConfirmPassword, $"{result.Message}!");
-                txt_ConfirmPassword.Select();
-                txt_ConfirmPassword.SelectAll();
-            }
-
-            return result.IsValid;
-        }
-
-        private bool _ValidateRole()
-        {
-            if (comBox_Roles.SelectedIndex == -1)
-            {
-                errorProvider1.SetError(comBox_Roles, $"{clsRoleValidationMessages.RoleRequiredMessage}!");
-                return false;
-            }
-
-            return true;
-        }
-
+        // >>
         private clsUser _BuildUserInfo()
         {
             return new clsUser
@@ -196,111 +157,10 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             };
         }
 
-        // Save Data To Database
+        
         public delegate void CreatedLoginInfoEventHandler(object sender, bool isCreated);
         public static event CreatedLoginInfoEventHandler CreatedLoginInfo;
 
-        private bool _AddNewUser(clsUser user)
-        {
-            clsOperationResult result = clsUserBL.AddNewUser(user);
-
-            switch (result.Status)
-            {
-                case enOperationStatus.Success:
-                    _userID = result.CreatedID;
-                    CreatedLoginInfo?.Invoke(this, true);
-                    return true;
-
-                case enOperationStatus.Failed:
-                    MessageBox.Show(result.Message, "Operation Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return false;
-
-                case enOperationStatus.Exception:
-                    MessageBox.Show(result.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return false;
-
-                default:
-                    return false;
-            }
-        }
-
-        private bool _AddUserRole(int userID, int roleID)
-        {
-            clsOperationResult result = clsUserBL.AddUserRole(userID, roleID);
-
-            switch (result.Status)
-            {
-                case enOperationStatus.Success:
-                    return true;
-
-                case enOperationStatus.Failed:
-                    MessageBox.Show(result.Message, "Operation Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return false;
-
-                case enOperationStatus.Exception:
-                    MessageBox.Show(result.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return false;
-
-                default:
-                    return false;
-            }
-        }
-
-        private void _HandleSuccessfulSave()
-        {
-            lab_UserIDToText.Text = Convert.ToString(_userID);
-
-            txt_UserName.Enabled = false;
-            txt_Password.Enabled = false;
-            txt_ConfirmPassword.Enabled = false;
-            rdoB_Active.Enabled = false;
-            rdoB_NotActive.Enabled = false;
-            btn_Save.Enabled = false;
-            picB_ShowHidePassword.Enabled = false;
-            comBox_Roles.Enabled = false;
-            _SetPasswordCharacter(false);
-            _SetDefaultShowPasswordImage(false);
-        }
-
-        private bool _Save()
-        {
-            if (!_ValidateUserName() || !_ValidatePassword() || !_ValidateConfirmPassword() || !_ValidateRole())
-                return false;
-
-            clsUser user = _BuildUserInfo();
-
-            bool isAddedNewUser = _AddNewUser(user);
-
-            if (isAddedNewUser)
-            {
-                int roleID = Convert.ToInt32(comBox_Roles.SelectedValue);
-
-                bool isAddedUserRole = _AddUserRole(_userID, roleID);
-
-                if(isAddedUserRole)
-                {
-                    _HandleSuccessfulSave();
-                    MessageBox.Show(clsUserValidationMessages.UserAddedSuccessfullyMessage,
-                        "Operation Succeeded", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        private void btn_Save_Click(object sender, EventArgs e)
-        {
-            if (!clsCurrentUser.HasPermission(enPermissions.AddUser))
-            {
-                MessageBox.Show(clsUserValidationMessages.PermissionDeniedMessage, "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            _Save();
-        }
-
-        // >>
 
         private bool _showHidePasswordClick = false;
 
@@ -343,14 +203,101 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             _SetDefaultShowPasswordImage(_showHidePasswordClick);
         }
 
+        private void _HandleSuccessfulSave()
+        {
+            lab_UserIDToText.Text = Convert.ToString(_userID);
+
+            txt_UserName.Enabled = false;
+            txt_Password.Enabled = false;
+            txt_ConfirmPassword.Enabled = false;
+            rdoB_Active.Enabled = false;
+            rdoB_NotActive.Enabled = false;
+            btn_Save.Enabled = false;
+            picB_ShowHidePassword.Enabled = false;
+            comBox_Roles.Enabled = false;
+            _showHidePasswordClick = false;
+            _SetPasswordCharacter(_showHidePasswordClick = true);
+            _SetDefaultShowPasswordImage(false);
+        }
+
+        private Control _GetControlByPropertyName(string propertyName)
+        {
+            if (propertyName == nameof(clsUser.UserName))
+                return txt_UserName;
+
+            if (propertyName == nameof(clsUser.Password))
+                return txt_Password;
+
+            if (propertyName == "ConfirmPassword")
+                return txt_ConfirmPassword;
+
+            if (propertyName == "Role")
+                return comBox_Roles;
+
+            return null;
+        }
+
+        private void _SetErrorProvider(string propertyName, string message)
+        {
+            Control control = _GetControlByPropertyName(propertyName);
+            errorProvider1.SetError(control, message);
+            control.Select();
+        }
+
+        private bool _AddNewUser(clsUser user)
+        {
+            if (!clsCurrentUser.HasPermission(enPermissions.AddUserAndRole))
+            {
+                MessageBox.Show(clsUserValidationMessages.PermissionDeniedMessage, "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            string confirmPassword = txt_ConfirmPassword.Text.Trim();
+            int roleID = Convert.ToInt32(comBox_Roles.SelectedValue);
+
+            clsOperationResult result = clsUserBL.AddNewUserAndRole(user, confirmPassword, roleID);
+
+            switch (result.Status)
+            {
+                case enOperationStatus.Success:
+                    _userID = result.CreatedID;
+                    CreatedLoginInfo?.Invoke(this, true);
+                    _HandleSuccessfulSave();
+                    MessageBox.Show(clsUserValidationMessages.UserAddedSuccessfullyMessage,
+                        "Operation Succeeded", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return true;
+
+                case enOperationStatus.Failed:
+                    if(string.IsNullOrEmpty(result.PropertyName))
+                        MessageBox.Show(result.Message, "Operation Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    else
+                        _SetErrorProvider(result.PropertyName, result.Message);
+                    return false;
+
+                case enOperationStatus.Exception:
+                    MessageBox.Show(result.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+
+                default:
+                    return false;
+            }
+        }
+
+        private bool _Save()
+        {
+            return _AddNewUser(_BuildUserInfo());
+        }
+
+        private void btn_Save_Click(object sender, EventArgs e)
+        {
+            _Save();
+        }
+
+        
+        // >>
         private void btn_Close_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void comBox_Roles_MouseClick(object sender, MouseEventArgs e)
-        {
-            errorProvider1.SetError(comBox_Roles, string.Empty);
         }
     }
 }

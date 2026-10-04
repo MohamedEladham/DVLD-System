@@ -11,6 +11,7 @@ using DVLD_Shared.Operations_Result;
 using static DVLD_Shared.Operations_Result.clsOperationResult;
 using static DVLD_Shared.Global_Enums.clsEnumHelpers;
 using DVLD_Models.User;
+using DVLD_Models.Role;
 
 namespace Main_Screen.Forms.Persons
 {
@@ -18,7 +19,6 @@ namespace Main_Screen.Forms.Persons
     {
         private int _PersonID = -1;
         enAddUpdateMode _addUpdateMode;
-
         
         private string _UniqueImageName = "";
         
@@ -26,7 +26,6 @@ namespace Main_Screen.Forms.Persons
 
         enum enImageState { None = 1, Add = 2, Replace = 3, Remove = 4 };
         enImageState _ImageState = enImageState.None;
-
 
         // Costructor
         public frmAddUpdatePersons(int personID = -1, enAddUpdateMode addUpdateMode = enAddUpdateMode.AddNewInfo)
@@ -390,135 +389,6 @@ namespace Main_Screen.Forms.Persons
         }
         
         
-        // Verification Person Info
-        private bool ValidateName(Control control, string label)
-        {
-            clsValidationResult result = clsPersonValidations.ValidateName(control.Text, 3, 50);
-
-            if (!result.IsValid)
-            {
-                errorProvider1.SetError(control, $"> {label} {result.Message}.");
-                control.Select();
-                return false;
-            }
-
-            return true;
-        }
-
-        private bool ValidateFullName()
-        {
-            if (!ValidateName(txt_FirstName, "First Name")) return false;
-            if (!ValidateName(txt_SecondName, "Second Name")) return false;
-            if (!ValidateName(txt_ThirdName, "Third Name")) return false;
-            if (!ValidateName(txt_LastName, "Last Name")) return false;
-            return true;
-        }
-
-        private bool ValidateNationalNumber()
-        {
-            if (_addUpdateMode == enAddUpdateMode.UpdateInfo) return true;
-
-            string nationalNumber = txt_NationalNo.Text.Trim();
-
-            int minLength = 2, maxLength = 50;
-
-            clsValidationResult result = clsPersonValidations.ValidateNationalNumberAndCheckIsExists(nationalNumber, minLength, maxLength);
-           
-            if (!result.IsValid)
-            {
-                errorProvider1.SetError(txt_NationalNo, result.Message);
-                txt_NationalNo.Select();
-                return false;
-            }
-
-            return true;
-        }
-
-        private bool ValidateEmail()
-        {
-            string email = txt_Email.Text.Trim();
-
-            int maxLength = 500;
-
-            clsValidationResult result = (_addUpdateMode == enAddUpdateMode.AddNewInfo) ? 
-                clsPersonValidations.ValidateEmail(email, maxLength) :
-                clsPersonValidations.ValidateEmail(email, maxLength, _PersonID);
-
-            if (!result.IsValid)
-            {
-                errorProvider1.SetError(txt_Email, result.Message);
-                txt_Email.Select();
-                return false;
-            }
-
-            return true;
-        }
-
-        private bool ValidateAge()
-        {
-            DateTime age = dateTimePicker1.Value;
-
-            int minAge = 18, maxAge = 50;
-
-            clsValidationResult result = clsPersonValidations.ValidateAge(age, minAge, maxAge);
-
-            if (!result.IsValid)
-            {
-                errorProvider1.SetError(dateTimePicker1, result.Message);
-                dateTimePicker1.Select();
-                return false;
-            }
-
-            return true;
-        }
-
-        private bool ValidatePhone()
-        {
-            string phoneNumber = txt_Phone.Text.Trim();
-
-            clsValidationResult result = (_addUpdateMode == enAddUpdateMode.AddNewInfo) ? 
-                clsPersonValidations.ValidatePhone(phoneNumber) :
-                clsPersonValidations.ValidatePhone(phoneNumber, _PersonID);
-
-            if (!result.IsValid)
-            {
-                errorProvider1.SetError(txt_Phone, result.Message);
-                txt_Phone.Select();
-                return false;
-            }
-
-            return true;
-        }
-
-        private bool ValidateAddress()
-        {
-            string address = txt_Address.Text.Trim();
-
-            int maxValue = 2000;
-
-            clsValidationResult result = clsPersonValidations.ValidateAddress(address, maxValue);
-
-            if (!result.IsValid)
-            {
-                errorProvider1.SetError(txt_Address, result.Message);
-                txt_Address.Select();
-                return false;
-            }
-
-            return true;
-        }
-
-        private bool _ValidateAllInformations()
-        {
-            if (!ValidateFullName() || !ValidateNationalNumber() ||
-                !ValidateEmail() || !ValidateAge() || !ValidatePhone() ||
-                !ValidateAddress())
-                return false;
-
-            return true;
-        }
-
-        
         // Save Data To Database
         public delegate void AddOrUpdatePersonDialogResultEventHandler(object sender, DialogResult dialogResult);
         public static event AddOrUpdatePersonDialogResultEventHandler AddOrUpdatePersonDialogResultReceived;
@@ -636,6 +506,45 @@ namespace Main_Screen.Forms.Persons
                 ImageName = _SavePersonImageAndGetUniqueName()};
         }
 
+        private Control _GetControlByPropertyName(string propertyName)
+        {
+            if (propertyName == nameof(clsPerson.FirstName))
+                return txt_FirstName;
+
+            if (propertyName == nameof(clsPerson.SecondName))
+                return txt_SecondName;
+
+            if (propertyName == nameof(clsPerson.ThirdName))
+                return txt_ThirdName;
+
+            if (propertyName == nameof(clsPerson.LastName))
+                return txt_LastName;
+
+            if (propertyName == nameof(clsPerson.NationalNO))
+                return txt_NationalNo;
+
+            if (propertyName == nameof(clsPerson.Email))
+                return txt_Email;
+
+            if (propertyName == nameof(clsPerson.DateOfBirth))
+                return dateTimePicker1;
+
+            if (propertyName == nameof(clsPerson.Phone))
+                return txt_Phone;
+
+            if (propertyName == nameof(clsPerson.Address))
+                return txt_Address;
+
+            return null;
+        }
+
+        private void _SetErrorProvider(string propertyName, string message)
+        {
+            Control control = _GetControlByPropertyName(propertyName);
+            errorProvider1.SetError(control, message);
+            control.Select();
+        }
+
         private bool _AddNewPersonAndGetNewID(clsPerson person)
         {
             clsOperationResult result = clsPersonBL.AddNewPerson(person);
@@ -649,7 +558,10 @@ namespace Main_Screen.Forms.Persons
                     return true;
 
                 case enOperationStatus.Failed:
-                    MessageBox.Show(result.Message, "Operation Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    if(string.IsNullOrEmpty(result.PropertyName))
+                        MessageBox.Show(result.Message, "Operation Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    else
+                        _SetErrorProvider(result.PropertyName, result.Message);
                     return false;
 
                 case enOperationStatus.Exception:
@@ -689,7 +601,10 @@ namespace Main_Screen.Forms.Persons
                     return true;
 
                 case enOperationStatus.Failed:
-                    MessageBox.Show(result.Message, "Operation Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    if (string.IsNullOrEmpty(result.PropertyName))
+                        MessageBox.Show(result.Message, "Operation Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    else
+                        _SetErrorProvider(result.PropertyName, result.Message);
                     return false;
 
                 case enOperationStatus.Exception:
@@ -715,10 +630,6 @@ namespace Main_Screen.Forms.Persons
 
         private void _Save()
         {
-            if (!_ValidateAllInformations()) return;
-
-            clsPerson person = _BuildPersonInfo();
-
             if (_PersonImageSaveResult == enPersonImageSaveResult.Failed)
                 return;
 
@@ -726,14 +637,13 @@ namespace Main_Screen.Forms.Persons
             {
                 case enAddUpdateMode.AddNewInfo:
                     {
-                        bool isAdded = _AddNewPersonAndGetNewID(person);
+                        bool isAdded = _AddNewPersonAndGetNewID(_BuildPersonInfo());
                         
                         if (isAdded)
                             _HandleSuccessfulSave();
                         else
                         {
-                            if(_ImageState == enImageState.Add && 
-                                _PersonImageSaveResult == enPersonImageSaveResult.Valid && 
+                            if(_ImageState == enImageState.Add && _PersonImageSaveResult == enPersonImageSaveResult.Valid && 
                                 !string.IsNullOrWhiteSpace(_UniqueImageName))
                                 _DeleteCopiedImageIfNeeded();
                         }
@@ -743,7 +653,7 @@ namespace Main_Screen.Forms.Persons
 
                 case enAddUpdateMode.UpdateInfo:
                     {
-                        bool isUpdated = _UpdatePersonInfo(person);
+                        bool isUpdated = _UpdatePersonInfo(_BuildPersonInfo());
                         
                         if (isUpdated)
                         {
@@ -763,8 +673,7 @@ namespace Main_Screen.Forms.Persons
                         }
                         else
                         {
-                            if ((_ImageState == enImageState.Add || _ImageState == enImageState.Replace) && 
-                                _PersonImageSaveResult == enPersonImageSaveResult.Valid &&
+                            if ((_ImageState == enImageState.Add || _ImageState == enImageState.Replace) && _PersonImageSaveResult == enPersonImageSaveResult.Valid &&
                                 !string.IsNullOrWhiteSpace(_UniqueImageName))
                                 _DeleteCopiedImageIfNeeded();
                         }

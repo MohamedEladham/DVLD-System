@@ -71,7 +71,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users.Controls
             this.lab_IsUserToText.TabIndex = 241;
             this.lab_IsUserToText.Text = "[???]";
             // 
-            // uconPersonCardWithUserFilter
+            // uconPersonCardWithIsUserFilter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -79,7 +79,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users.Controls
             this.Controls.Add(this.lab_IsUserToText);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.uconPersonCardWithFilter1);
-            this.Name = "uconPersonCardWithUserFilter";
+            this.Name = "uconPersonCardWithIsUserFilter";
             this.Size = new System.Drawing.Size(884, 448);
             this.Load += new System.EventHandler(this.uconPersonCardWithUserFilter_Load);
             this.ResumeLayout(false);

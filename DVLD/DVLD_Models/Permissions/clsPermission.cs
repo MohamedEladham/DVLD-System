@@ -10,5 +10,7 @@ namespace DVLD_Models.Permissions
     {
         public int PermissionID { set; get; }
         public string PermissionName { set; get; }
+        public string PermissionCategory { set; get; }
+        public bool IsActive { set; get; }
     }
 }

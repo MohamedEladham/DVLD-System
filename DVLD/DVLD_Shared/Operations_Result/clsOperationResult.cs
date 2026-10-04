@@ -20,5 +20,7 @@ namespace DVLD_Shared.Operations_Result
         public string Message { get; set; }
 
         public int CreatedID { get; set; }
+
+        public string PropertyName { get; set; }
     }
 }

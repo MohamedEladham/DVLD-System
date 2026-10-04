@@ -10,5 +10,8 @@ namespace DVLD_Models.Role
     {
         public int RoleID { set; get; }
         public string RoleName { set; get; }
+        public string Description { set; get; } 
+        public bool IsDeleted { set; get; }
+        public DateTime? DeletedAt { set; get; }
     }
 }

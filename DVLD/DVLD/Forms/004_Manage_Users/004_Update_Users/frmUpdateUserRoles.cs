@@ -1,5 +1,6 @@
 ﻿using DVLD_BL;
 using DVLD_Models.Role;
+using DVLD_Models.Roles;
 using DVLD_Models.User;
 using DVLD_Shared.Global_Classes;
 using DVLD_Shared.Operations_Result;
@@ -12,12 +13,12 @@ using static DVLD_Shared.Operations_Result.clsOperationResult;
 
 namespace DVLD_System_Solution.Forms._004_Manage_Users._004_Update_Users
 {
-    public partial class frmUpdateRoles : Form
+    public partial class frmUpdateUserRoles : Form
     {
         private int _userID = -1;
         private string _userName = "";
 
-        public frmUpdateRoles(int userID, string userName)
+        public frmUpdateUserRoles(int userID, string userName)
         {
             InitializeComponent();
             _userID = userID;
@@ -32,7 +33,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users._004_Update_Users
 
         // >>
 
-        List<string> _currentRoles = new List<string>();
+        private List<string> _currentRoles = null;
 
         private List<string> _GetCurrentRoleNamesByUserID(int userID)
         {
@@ -62,17 +63,19 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users._004_Update_Users
             listB_CurrentRoles.DataSource = _currentRoles;
         }
 
+        // >>
 
-        List<clsRole> _roles = new List<clsRole>();
+        List<clsActiveRolesInfoGridViewDto> _activeRoles = null;
 
-        private List<clsRole> _GetAllRoles()
+
+        private List<clsActiveRolesInfoGridViewDto> _GetActiveRoles()
         {
-            (clsOperationResult result, List<clsRole> roles) = clsRoleBL.GetAllRoles();
+            (clsOperationResult result, List<clsActiveRolesInfoGridViewDto> activeRoles) = clsRoleBL.GetActiveRoles();
 
             switch (result.Status)
             {
                 case enOperationStatus.Success:
-                    return roles;
+                    return activeRoles;
 
                 case enOperationStatus.Failed:
                     MessageBox.Show(result.Message, "Filed To Retrive Data", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -89,23 +92,21 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users._004_Update_Users
 
         private void _LoadRolesToCheckedListBox()
         {
-            _roles = _GetAllRoles();
-
-            if (_roles != null)
-            {
-                chB_Roles.DataSource = _roles;
-                chB_Roles.DisplayMember = "RoleName";
-                chB_Roles.ValueMember = "RoleID";
-            }
+            _activeRoles = _GetActiveRoles();
+            chB_Roles.DataSource = _activeRoles;
+            chB_Roles.DisplayMember = "RoleName";
+            chB_Roles.ValueMember = "RoleID";
         }
 
+
+        // >>
         private void _CheckForCurrentRoles()
         {
-            if (_currentRoles != null && _roles != null)
+            if (_currentRoles != null && _activeRoles != null)
             {
                 for (int i = 0; i < chB_Roles.Items.Count; i++)
                 {
-                    clsRole role = (clsRole)chB_Roles.Items[i];
+                    var role = (clsActiveRolesInfoGridViewDto)chB_Roles.Items[i];
 
                     if (_currentRoles.Contains(role.RoleName))
                         chB_Roles.SetItemChecked(i, true);
@@ -113,7 +114,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users._004_Update_Users
             }
         }
 
-        private void frmUpdateRoles_Load(object sender, EventArgs e)
+        private void _LoadData()
         {
             lab_UserID.Text = Convert.ToString(_userID);
             lab_UserName.Text = _userName;
@@ -122,28 +123,38 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users._004_Update_Users
             _CheckForCurrentRoles();
         }
 
+        private void frmUpdateRoles_Load(object sender, EventArgs e)
+        {
+            _LoadData();
+        }
+
+        
         // >>
+        public delegate void UpdateUserRoleEventHandler(object sender, bool isUpdateUserRole);
+        public static event UpdateUserRoleEventHandler UpdateUserRole; 
+
         private List<int> _GteCheckedRoleIDs()
         {
             List<int> roleIDs = new List<int>();
 
             for (int i = 0; i < chB_Roles.CheckedItems.Count; i++)
             {
-                clsRole role = (clsRole)chB_Roles.CheckedItems[i];
+                var role = (clsActiveRolesInfoGridViewDto)chB_Roles.CheckedItems[i];
                 roleIDs.Add(role.RoleID);
             }
 
             return roleIDs;
         }
 
-        public delegate void UpdateUserRoleEventHandler(object sender, bool isUpdateUserRole);
-        public static event UpdateUserRoleEventHandler UpdateUserRole; 
-
         private bool _UpdateUserRoles() 
         {
-            List<int> roleIDs = _GteCheckedRoleIDs();
+            if (!clsCurrentUser.HasPermission(enPermissions.UpdateUserRoles))
+            {
+                MessageBox.Show(clsUserValidationMessages.PermissionDeniedMessage, "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
 
-            clsOperationResult result = clsRoleBL.UpdateUserRoles(_userID, roleIDs);
+            clsOperationResult result = clsRoleBL.UpdateUserRoles(_userID, _GteCheckedRoleIDs());
 
             switch (result.Status)
             {
@@ -167,16 +178,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users._004_Update_Users
 
         private void btn_Save_Click(object sender, EventArgs e)
         {
-            if (!clsCurrentUser.HasPermission(enPermissions.UpdateUserRoles))
-            {
-                MessageBox.Show(clsUserValidationMessages.PermissionDeniedMessage, "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            bool isUpdated = _UpdateUserRoles();
-
-            if(isUpdated)
-                _LoadCurrentRolesToListBox();
+            if(_UpdateUserRoles()) _LoadCurrentRolesToListBox();
         }
 
         

@@ -1,6 +1,6 @@
 ﻿namespace DVLD_System_Solution.Forms._004_Manage_Users._004_Update_Users
 {
-    partial class frmUpdateRoles
+    partial class frmUpdateUserRoles
     {
         /// <summary>
         /// Required designer variable.
@@ -28,69 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmUpdateRoles));
-            this.pictureBox11 = new System.Windows.Forms.PictureBox();
-            this.btn_Close = new System.Windows.Forms.Button();
-            this.btn_Save = new System.Windows.Forms.Button();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmUpdateUserRoles));
             this.listB_CurrentRoles = new System.Windows.Forms.ListBox();
             this.lab_UserID = new System.Windows.Forms.Label();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.lab_UserName = new System.Windows.Forms.Label();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.chB_Roles = new System.Windows.Forms.CheckedListBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.btn_Close = new System.Windows.Forms.Button();
+            this.btn_Save = new System.Windows.Forms.Button();
+            this.pictureBox11 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pictureBox11
-            // 
-            this.pictureBox11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox11.Image = global::DVLD_System_Solution.Properties.Resources.DVLD_Logo2;
-            this.pictureBox11.Location = new System.Drawing.Point(378, 12);
-            this.pictureBox11.Name = "pictureBox11";
-            this.pictureBox11.Size = new System.Drawing.Size(153, 122);
-            this.pictureBox11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox11.TabIndex = 256;
-            this.pictureBox11.TabStop = false;
-            // 
-            // btn_Close
-            // 
-            this.btn_Close.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btn_Close.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.btn_Close.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btn_Close.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            this.btn_Close.ForeColor = System.Drawing.Color.DimGray;
-            this.btn_Close.Image = global::DVLD_System_Solution.Properties.Resources.Close1_28;
-            this.btn_Close.Location = new System.Drawing.Point(12, 508);
-            this.btn_Close.Name = "btn_Close";
-            this.btn_Close.Size = new System.Drawing.Size(118, 39);
-            this.btn_Close.TabIndex = 264;
-            this.btn_Close.Text = "  Close";
-            this.btn_Close.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btn_Close.UseVisualStyleBackColor = false;
-            this.btn_Close.Click += new System.EventHandler(this.btn_Close_Click);
-            // 
-            // btn_Save
-            // 
-            this.btn_Save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Save.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.btn_Save.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btn_Save.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            this.btn_Save.ForeColor = System.Drawing.Color.DimGray;
-            this.btn_Save.Image = global::DVLD_System_Solution.Properties.Resources.Save1_32;
-            this.btn_Save.Location = new System.Drawing.Point(407, 508);
-            this.btn_Save.Name = "btn_Save";
-            this.btn_Save.Size = new System.Drawing.Size(124, 39);
-            this.btn_Save.TabIndex = 263;
-            this.btn_Save.Text = "  Save";
-            this.btn_Save.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btn_Save.UseVisualStyleBackColor = false;
-            this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
             // 
             // listB_CurrentRoles
             // 
@@ -117,16 +72,6 @@
             this.lab_UserID.TabIndex = 271;
             this.lab_UserID.Text = "???";
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::DVLD_System_Solution.Properties.Resources.Number_32;
-            this.pictureBox2.Location = new System.Drawing.Point(107, 42);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(23, 24);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 269;
-            this.pictureBox2.TabStop = false;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -148,16 +93,6 @@
             this.lab_UserName.Size = new System.Drawing.Size(32, 17);
             this.lab_UserName.TabIndex = 268;
             this.lab_UserName.Text = "???";
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Image = global::DVLD_System_Solution.Properties.Resources.Person_32;
-            this.pictureBox4.Location = new System.Drawing.Point(107, 82);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(23, 24);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox4.TabIndex = 266;
-            this.pictureBox4.TabStop = false;
             // 
             // label4
             // 
@@ -206,7 +141,72 @@
             this.chB_Roles.TabIndex = 274;
             this.chB_Roles.SelectedIndexChanged += new System.EventHandler(this.chB_Roles_SelectedIndexChanged);
             // 
-            // frmUpdateRoles
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::DVLD_System_Solution.Properties.Resources.Number_32;
+            this.pictureBox2.Location = new System.Drawing.Point(107, 42);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(23, 24);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 269;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = global::DVLD_System_Solution.Properties.Resources.Person_32;
+            this.pictureBox4.Location = new System.Drawing.Point(107, 82);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(23, 24);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox4.TabIndex = 266;
+            this.pictureBox4.TabStop = false;
+            // 
+            // btn_Close
+            // 
+            this.btn_Close.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btn_Close.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btn_Close.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btn_Close.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.btn_Close.ForeColor = System.Drawing.Color.DimGray;
+            this.btn_Close.Image = global::DVLD_System_Solution.Properties.Resources.Close1_28;
+            this.btn_Close.Location = new System.Drawing.Point(12, 508);
+            this.btn_Close.Name = "btn_Close";
+            this.btn_Close.Size = new System.Drawing.Size(118, 39);
+            this.btn_Close.TabIndex = 264;
+            this.btn_Close.Text = "  Close";
+            this.btn_Close.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_Close.UseVisualStyleBackColor = false;
+            this.btn_Close.Click += new System.EventHandler(this.btn_Close_Click);
+            // 
+            // btn_Save
+            // 
+            this.btn_Save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_Save.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btn_Save.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btn_Save.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.btn_Save.ForeColor = System.Drawing.Color.DimGray;
+            this.btn_Save.Image = global::DVLD_System_Solution.Properties.Resources.Save1_32;
+            this.btn_Save.Location = new System.Drawing.Point(407, 508);
+            this.btn_Save.Name = "btn_Save";
+            this.btn_Save.Size = new System.Drawing.Size(124, 39);
+            this.btn_Save.TabIndex = 263;
+            this.btn_Save.Text = "  Save";
+            this.btn_Save.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_Save.UseVisualStyleBackColor = false;
+            this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
+            // 
+            // pictureBox11
+            // 
+            this.pictureBox11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox11.Image = global::DVLD_System_Solution.Properties.Resources.DVLD_Logo2;
+            this.pictureBox11.Location = new System.Drawing.Point(378, 12);
+            this.pictureBox11.Name = "pictureBox11";
+            this.pictureBox11.Size = new System.Drawing.Size(153, 122);
+            this.pictureBox11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox11.TabIndex = 256;
+            this.pictureBox11.TabStop = false;
+            // 
+            // frmUpdateUserRoles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -226,13 +226,13 @@
             this.Controls.Add(this.btn_Save);
             this.Controls.Add(this.pictureBox11);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "frmUpdateRoles";
+            this.Name = "frmUpdateUserRoles";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Update Roles";
+            this.Text = "Update User Roles";
             this.Load += new System.EventHandler(this.frmUpdateRoles_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

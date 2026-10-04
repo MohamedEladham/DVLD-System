@@ -1,19 +1,102 @@
-﻿using System;
+﻿using DVLD_BL.Validations;
 using DVLD_DAL;
-using DVLD_Shared;
+using DVLD_Models.Permissions;
 using DVLD_Models.User;
-using System.Collections.Generic;
+using DVLD_Shared;
 using DVLD_Shared.Global_Classes;
 using DVLD_Shared.Operations_Result;
 using DVLD_Shared.Validation_Messages;
+using System;
+using System.Collections.Generic;
 using static DVLD_Shared.Operations_Result.clsOperationResult;
-using System.Data.SqlClient;
-using DVLD_BL.Validations;
 
 namespace DVLD_BL
 {
     public class clsUserBL
     {
+
+        // >> Fore Login Screen
+        public static (clsOperationResult, clsUser) GetUserByUserNameAndPassword(string userName, string password)
+        {
+            clsValidationResult validateUserName = clsUserValidations.IsValidUserName(userName, 2, 50);
+
+            if (!validateUserName.IsValid)
+                return (new clsOperationResult
+                {
+                    Status = enOperationStatus.Failed,
+                    Message = $"> User Name {validateUserName.Message}. ",
+                    PropertyName = nameof(clsUser.UserName)
+
+                }, null);
+
+
+            clsValidationResult validatePassword = clsUserValidations.ValidatePassword(password, 2, 500);
+
+            if (!validatePassword.IsValid)
+                return (new clsOperationResult
+                {
+                    Status = enOperationStatus.Failed,
+                    Message = $"> Password {validatePassword.Message}. ",
+                    PropertyName = nameof(clsUser.Password)
+
+                }, null);
+
+
+            try
+            {
+                string computeHashPassword = clsHashHelper.ComputeHash(password);
+
+                clsUser user = clsUserDAL.GetUserByUserNameAndPassword(userName, computeHashPassword);
+
+                if (user != null)
+                    return (new clsOperationResult { Status = enOperationStatus.Success }, user);
+                else
+                    return (new clsOperationResult
+                    {
+                        Status = enOperationStatus.Failed,
+                        Message = clsUserValidationMessages.UserNotFoundMessage,
+                        PropertyName = string.Empty
+                    }, null);
+            }
+            catch (Exception)
+            {
+                return (new clsOperationResult
+                {
+                    Status = enOperationStatus.Exception,
+                    Message = clsGeneralValidationMessages.DatabaseOperationExceptionMessage,
+                    PropertyName = string.Empty
+                }, null);
+            }
+
+        }
+
+        // >> Fore Login Screen
+        public static (clsOperationResult, List<clsPermission>) GetUserPermissions(int userID)
+        {
+            if (userID <= 0)
+                return (new clsOperationResult
+                {
+                    Status = enOperationStatus.Failed,
+                    Message = clsUserValidationMessages.InvalidUserIDMessage
+                }, null);
+
+            try
+            {
+                return (new clsOperationResult { Status = enOperationStatus.Success }, clsUserDAL.GetUserPermissions(userID));
+            }
+            catch (Exception)
+            {
+                return (new clsOperationResult
+                {
+                    Status = enOperationStatus.Exception,
+                    Message = clsGeneralValidationMessages.DatabaseOperationExceptionMessage
+                }, null);
+            }
+        }
+
+
+
+        // >>
         public static clsValidationResult IsCurrentPasswordValid(string currentPassword, int userID)
         {
             if(string.IsNullOrWhiteSpace(currentPassword))
@@ -39,9 +122,27 @@ namespace DVLD_BL
             }
         }
 
-        public static bool CheckPersonIsUser(int personID)
+        public static (clsOperationResult, bool) CheckPersonIsUser(int personID)
         {
-            return clsUserDAL.CheckPersonIsUser(personID);
+            if (personID <= 0)
+                return (new clsOperationResult
+                {
+                    Status = enOperationStatus.Failed,
+                    Message = clsPersonValidationMessages.PersonIDMustBeGreaterThanZeroMessage
+                }, false);
+
+            try
+            {
+                return (new clsOperationResult { Status = enOperationStatus.Success }, clsUserDAL.CheckPersonIsUser(personID));
+            }
+            catch(Exception)
+            {
+                return (new clsOperationResult 
+                {
+                    Status = enOperationStatus.Exception,
+                    Message = clsGeneralValidationMessages.DatabaseOperationExceptionMessage
+                }, false);
+            }
         }
 
         public static clsValidationResult AuthenticateUser(string userName, string password)
@@ -63,6 +164,8 @@ namespace DVLD_BL
             }
         }
 
+
+        // >>
         public static (clsOperationResult, clsUser) GetUserByUserID(int userID)
         {
             if (!clsCurrentUser.HasPermission(enPermissions.ViewUsers))
@@ -103,23 +206,25 @@ namespace DVLD_BL
             }
 
         }
-
-        public static (clsOperationResult, clsUser) GetUserByUserNameAndPassword(string userName, string password)
+        
+        
+        // >>
+        public static (clsOperationResult, List<clsUserInfoGridViewDto>) GetActiveUsersForGridView()
         {
+            if (!clsCurrentUser.HasPermission(enPermissions.ViewUsers))
+                return (new clsOperationResult
+                {
+                    Status = enOperationStatus.Failed,
+                    Message = clsPermissionsValidationMessages.PermissionDeniedMessage
+                }, null);
+
             try
             {
-                string computeHashPassword = clsHashHelper.ComputeHash(password);
+                List<clsUserInfoGridViewDto> activeUsersInfos = clsUserDAL.GetActiveUsersForGridView();
 
-                clsUser user = clsUserDAL.GetUserByUserNameAndPassword(userName, computeHashPassword);
+                activeUsersInfos = (activeUsersInfos != null && activeUsersInfos.Count > 0) ? activeUsersInfos : null;
 
-                if (user != null)
-                    return (new clsOperationResult { Status = enOperationStatus.Success }, user);
-                else
-                    return (new clsOperationResult
-                    {
-                        Status = enOperationStatus.Failed,
-                        Message = clsUserValidationMessages.UserNotFoundMessage
-                    }, null);
+                return (new clsOperationResult { Status = enOperationStatus.Success }, activeUsersInfos);
             }
             catch (Exception)
             {
@@ -129,73 +234,127 @@ namespace DVLD_BL
                     Message = clsGeneralValidationMessages.DatabaseOperationExceptionMessage
                 }, null);
             }
-
         }
+
 
         // >>
-
-        public static List<clsUser> GetAllUsersInfo()
+        public static (clsOperationResult, List<clsUserInfoGridViewDto>) GetInActiveUsersForGridView()
         {
-            return clsUserDAL.GetAllUsersInfo();
-        }
-
-        public static List<clsUserInfoGridViewDto> GetActiveUsersForGridView()
-        {
-            List <clsUserInfoGridViewDto> activeUsersInfos = clsUserDAL.GetActiveUsersForGridView();
-
-            return activeUsersInfos.Count > 0 ? activeUsersInfos : null;
-        }
-
-        public static List<clsUserInfoGridViewDto> GetInActiveUsersForGridView()
-        {
-            List<clsUserInfoGridViewDto> InActiveUsersInfos = clsUserDAL.GetInActiveUsersForGridView();
-
-            return InActiveUsersInfos.Count > 0 ? InActiveUsersInfos : null;
-        }
-
-        public static List<clsDeleteUserInfoGridViewDto> GetDeletedUsersForGridView()
-        {
-            List<clsDeleteUserInfoGridViewDto> deletedUsersInfos = clsUserDAL.GetDeletedUsersForGridView();
-
-            return deletedUsersInfos.Count > 0 ? deletedUsersInfos : null;
-        }
-
-        // >>
-
-        public static clsOperationResult AddNewUser(clsUser user)
-        {
-            if (!clsCurrentUser.HasPermission(enPermissions.AddUser))
-                return new clsOperationResult
+            if (!clsCurrentUser.HasPermission(enPermissions.ViewUsers))
+                return (new clsOperationResult
                 {
                     Status = enOperationStatus.Failed,
-                    Message = clsUserValidationMessages.PermissionDeniedMessage
-                };
+                    Message = clsPermissionsValidationMessages.PermissionDeniedMessage
+                }, null);
+
+            try
+            {
+                List<clsUserInfoGridViewDto> inActiveUsersInfos = clsUserDAL.GetInActiveUsersForGridView();
+
+                inActiveUsersInfos = (inActiveUsersInfos != null && inActiveUsersInfos.Count > 0) ? inActiveUsersInfos : null;
+
+                return (new clsOperationResult { Status = enOperationStatus.Success }, inActiveUsersInfos);
+            }
+            catch (Exception)
+            {
+                return (new clsOperationResult
+                {
+                    Status = enOperationStatus.Exception,
+                    Message = clsGeneralValidationMessages.DatabaseOperationExceptionMessage
+                }, null);
+            }
+        }
+
+
+        // >>
+        public static (clsOperationResult, List<clsDeleteUserInfoGridViewDto>) GetDeletedUsersForGridView()
+        {
+            if (!clsCurrentUser.HasPermission(enPermissions.ViewUsers))
+                return (new clsOperationResult
+                {
+                    Status = enOperationStatus.Failed,
+                    Message = clsPermissionsValidationMessages.PermissionDeniedMessage
+                }, null);
+
+            try
+            {
+                List<clsDeleteUserInfoGridViewDto> deletedUsersInfos = clsUserDAL.GetDeletedUsersForGridView();
+
+                deletedUsersInfos = (deletedUsersInfos != null && deletedUsersInfos.Count > 0) ? deletedUsersInfos : null;
+
+                return (new clsOperationResult { Status = enOperationStatus.Success }, deletedUsersInfos);
+            }
+            catch (Exception)
+            {
+                return (new clsOperationResult
+                {
+                    Status = enOperationStatus.Exception,
+                    Message = clsGeneralValidationMessages.DatabaseOperationExceptionMessage
+                }, null);
+            }
+        }
+
+        
+        // >>
+        public static clsOperationResult AddNewUserAndRole(clsUser user, string confirmPassword, int roleID)
+        {
+            if (!clsCurrentUser.HasPermission(enPermissions.AddUserAndRole))
+                return new clsOperationResult { Status = enOperationStatus.Failed,
+                    Message = clsUserValidationMessages.PermissionDeniedMessage,
+                    PropertyName = string.Empty };
 
             if (user == null)
+                return new clsOperationResult { Status = enOperationStatus.Failed,
+                    Message = clsUserValidationMessages.UserInfoRequiredMessage,
+                    PropertyName = string.Empty };
+
+
+            clsOperationResult validateUserNameResult = clsUserValidations.ValidateUserNameAndCheckIsExists(user.UserName);
+
+            if (validateUserNameResult.Status == enOperationStatus.Failed || 
+                validateUserNameResult.Status == enOperationStatus.Exception)
+                return validateUserNameResult;
+
+
+            clsOperationResult validatePasswordResult = clsUserValidations.ValidatePasswordResult(user.Password);
+
+            if (validatePasswordResult.Status == enOperationStatus.Failed)
+                return validatePasswordResult;
+
+            
+            clsOperationResult validateConfirmPasswordResult = clsUserValidations.ValidateConfirmPasswordResult(confirmPassword, user.Password);
+
+            if (validateConfirmPasswordResult.Status == enOperationStatus.Failed)
+                return validateConfirmPasswordResult;
+
+            if (roleID <= 0)
                 return new clsOperationResult
                 {
                     Status = enOperationStatus.Failed,
-                    Message = clsUserValidationMessages.UserInfoRequiredMessage
+                    Message = clsRoleValidationMessages.RoleRequiredMessage,
+                    PropertyName = "Role"
                 };
 
             try
             {
                 user.Password = clsHashHelper.ComputeHash(user.Password);
 
-                bool isAdded = clsUserDAL.AddNewUserAndGetNewID(user, out int newID);
+                bool isAdded = clsUserDAL.AddNewUserAndRole(user, roleID, out int newID);
 
                 if (isAdded)
                     return new clsOperationResult
                     {
                         Status = enOperationStatus.Success,
                         Message = clsUserValidationMessages.UserAddedSuccessfullyMessage,
-                        CreatedID = newID
+                        CreatedID = newID,
+                        PropertyName = string.Empty
                     };
                 else
                     return new clsOperationResult
                     {
                         Status = enOperationStatus.Failed,
-                        Message = clsUserValidationMessages.UserAddFailedMessage 
+                        Message = clsUserValidationMessages.UserAddFailedMessage,
+                        PropertyName = string.Empty
                     };
             }
             catch (Exception)
@@ -203,121 +362,38 @@ namespace DVLD_BL
                 return new clsOperationResult
                 {
                     Status = enOperationStatus.Exception,
-                    Message = clsGeneralValidationMessages.DatabaseOperationExceptionMessage
+                    Message = clsGeneralValidationMessages.DatabaseOperationExceptionMessage,
+                    PropertyName = string.Empty
                 };
             }
         }
 
-        public static clsOperationResult AddUserRole(int userID, int roleID)
-        {
-            if (!clsCurrentUser.HasPermission(enPermissions.AddUser))
-                return new clsOperationResult
-                {
-                    Status = enOperationStatus.Failed,
-                    Message = clsUserValidationMessages.PermissionDeniedMessage
-                };
 
-            if (userID <= 0)
-                return new clsOperationResult
-                {
-                    Status = enOperationStatus.Failed,
-                    Message = clsUserValidationMessages.UserIDMustBeGreaterThanZeroMessage
-                };
-
-            if (roleID <= 0)
-                return new clsOperationResult
-                {
-                    Status = enOperationStatus.Failed,
-                    Message = clsUserValidationMessages.RoleIDMustBeGreaterThanZeroMessage
-                };
-
-            try
-            {
-                bool isAdded = clsUserDAL.AddUserRole(userID, roleID);
-
-                if (isAdded)
-                    return new clsOperationResult
-                    {
-                        Status = enOperationStatus.Success,
-                        Message = clsUserValidationMessages.UserRoleAddedSuccessfullyMessage,
-                    };
-                else
-                    return new clsOperationResult
-                    {
-                        Status = enOperationStatus.Failed,
-                        Message = clsUserValidationMessages.UserRoleAddFailedMessage
-                    };
-            }
-            catch (Exception)
-            {
-                return new clsOperationResult
-                {
-                    Status = enOperationStatus.Exception,
-                    Message = clsGeneralValidationMessages.DatabaseOperationExceptionMessage
-                };
-            }
-        }
-
-        public static clsOperationResult UpdatePassword(string newPassword, int userID)
-        {
-            if (!clsCurrentUser.HasPermission(enPermissions.UpdateUserPassword))
-                return new clsOperationResult
-                {
-                    Status = enOperationStatus.Failed,
-                    Message = clsUserValidationMessages.PermissionDeniedMessage
-                };
-
-            if (string.IsNullOrEmpty(newPassword))
-                return new clsOperationResult
-                {
-                    Status = enOperationStatus.Failed,
-                    Message = clsUserValidationMessages.NewPasswordRequiredMessage
-                };
-
-            try
-            {
-                string computeHashPassword = clsHashHelper.ComputeHash(newPassword);
-
-                bool isUpdated = clsUserDAL.UpdatePassword(computeHashPassword, userID);
-
-                if (isUpdated)
-                    return new clsOperationResult
-                    {
-                        Status = enOperationStatus.Success,
-                        Message = clsUserValidationMessages.PasswordUpdatedSuccessfullyMessage
-                    };
-                else
-                    return new clsOperationResult
-                    {
-                        Status = enOperationStatus.Failed,
-                        Message = clsUserValidationMessages.PasswordUpdatedFailedMessage
-                    };
-            }
-            catch (Exception)
-            {
-                return new clsOperationResult
-                {
-                    Status = enOperationStatus.Exception,
-                    Message = clsGeneralValidationMessages.DatabaseOperationExceptionMessage
-                };
-            }
-        }
-
+        // >>
         public static clsOperationResult UpdateUserNameAndStatusInfo(clsUser user)
         {
-            if(!clsCurrentUser.HasPermission(enPermissions.UpdateUserLoginInfo))
+            if (!clsCurrentUser.HasPermission(enPermissions.UpdateUserLoginInfo))
                 return new clsOperationResult
                 {
                     Status = enOperationStatus.Failed,
-                    Message = clsUserValidationMessages.PermissionDeniedMessage
+                    Message = clsUserValidationMessages.PermissionDeniedMessage,
+                    PropertyName = string.Empty
                 };
 
             if (user == null)
                 return new clsOperationResult
                 {
                     Status = enOperationStatus.Failed,
-                    Message = clsUserValidationMessages.UserInfoRequiredMessage
+                    Message = clsUserValidationMessages.UserInfoRequiredMessage,
+                    PropertyName = string.Empty
                 };
+
+            clsOperationResult validateUserNameResult = clsUserValidations.ValidateUserNameAndCheckIsExists(user.UserName, user.UserID);
+
+            if (validateUserNameResult.Status == enOperationStatus.Failed ||
+                validateUserNameResult.Status == enOperationStatus.Exception)
+                return validateUserNameResult;
+
 
             try
             {
@@ -327,13 +403,15 @@ namespace DVLD_BL
                     return new clsOperationResult
                     {
                         Status = enOperationStatus.Success,
-                        Message = clsUserValidationMessages.UserUpdatedSuccessfullyMessage
+                        Message = clsUserValidationMessages.UserUpdatedSuccessfullyMessage,
+                        PropertyName = string.Empty
                     };
                 else
                     return new clsOperationResult
                     {
                         Status = enOperationStatus.Failed,
-                        Message = clsUserValidationMessages.UserUpdatedFailedMessage
+                        Message = clsUserValidationMessages.UserUpdatedFailedMessage,
+                        PropertyName = string.Empty
                     };
             }
             catch (Exception)
@@ -341,11 +419,68 @@ namespace DVLD_BL
                 return new clsOperationResult
                 {
                     Status = enOperationStatus.Exception,
-                    Message = clsGeneralValidationMessages.DatabaseOperationExceptionMessage
+                    Message = clsGeneralValidationMessages.DatabaseOperationExceptionMessage,
+                    PropertyName = string.Empty
                 };
             }
         }
 
+
+        // >>
+        public static clsOperationResult UpdateUserPassword(string newPassword, string confirmPassword, int userID) 
+        {
+            if (!clsCurrentUser.HasPermission(enPermissions.UpdateUserPassword))
+                return new clsOperationResult
+                {
+                    Status = enOperationStatus.Failed,
+                    Message = clsUserValidationMessages.PermissionDeniedMessage,
+                    PropertyName = string.Empty
+                };
+
+            clsOperationResult validatePasswordResult = clsUserValidations.ValidatePasswordResult(newPassword);
+
+            if (validatePasswordResult.Status == enOperationStatus.Failed)
+                return validatePasswordResult;
+
+            clsOperationResult validateConfirmPasswordResult = clsUserValidations.ValidateConfirmPasswordResult(confirmPassword, newPassword);
+
+            if (validateConfirmPasswordResult.Status == enOperationStatus.Failed)
+                return validateConfirmPasswordResult;
+
+            try
+            {
+                string computeHashPassword = clsHashHelper.ComputeHash(newPassword);
+
+                bool isUpdated = clsUserDAL.UpdateUserPassword(computeHashPassword, userID);
+
+                if (isUpdated)
+                    return new clsOperationResult
+                    {
+                        Status = enOperationStatus.Success,
+                        Message = clsUserValidationMessages.PasswordUpdatedSuccessfullyMessage,
+                        PropertyName = string.Empty
+                    };
+                else
+                    return new clsOperationResult
+                    {
+                        Status = enOperationStatus.Failed,
+                        Message = clsUserValidationMessages.PasswordUpdatedFailedMessage,
+                        PropertyName = string.Empty
+                    };
+            }
+            catch (Exception)
+            {
+                return new clsOperationResult
+                {
+                    Status = enOperationStatus.Exception,
+                    Message = clsGeneralValidationMessages.DatabaseOperationExceptionMessage,
+                    PropertyName = string.Empty
+                };
+            }
+        }
+
+       
+        // >>
         public static clsOperationResult ActivateUser(int userID)
         {
             if (!clsCurrentUser.HasPermission(enPermissions.UpdateUserLoginInfo))
@@ -389,49 +524,8 @@ namespace DVLD_BL
             }
         }
 
-        public static clsOperationResult RestoreUser(int userID)
-        {
-            if (!clsCurrentUser.HasPermission(enPermissions.RestoreUser))
-                return new clsOperationResult
-                {
-                    Status = enOperationStatus.Failed,
-                    Message = clsUserValidationMessages.PermissionDeniedMessage
-                };
-
-            if (userID <= 0)
-                return new clsOperationResult
-                {
-                    Status = enOperationStatus.Failed,
-                    Message = clsUserValidationMessages.UserIDMustBeGreaterThanZeroMessage
-                };
-
-            try
-            {
-                bool isActivated = clsUserDAL.RestoreUser(userID);
-
-                if (isActivated)
-                    return new clsOperationResult
-                    {
-                        Status = enOperationStatus.Success,
-                        Message = clsUserValidationMessages.UserRestoredSuccessfullyMessage
-                    };
-                else
-                    return new clsOperationResult
-                    {
-                        Status = enOperationStatus.Failed,
-                        Message = clsUserValidationMessages.UserRestoredFailedMessage
-                    };
-            }
-            catch (Exception)
-            {
-                return new clsOperationResult
-                {
-                    Status = enOperationStatus.Exception,
-                    Message = clsGeneralValidationMessages.DatabaseOperationExceptionMessage
-                };
-            }
-        }
-
+        
+        // >>
         public static clsOperationResult SoftDeleteUser(int userID)
         {
             if (!clsCurrentUser.HasPermission(enPermissions.DeleteUser))
@@ -463,6 +557,51 @@ namespace DVLD_BL
                     {
                         Status = enOperationStatus.Failed,
                         Message = clsUserValidationMessages.UserDeletedFailedMessage
+                    };
+            }
+            catch (Exception)
+            {
+                return new clsOperationResult
+                {
+                    Status = enOperationStatus.Exception,
+                    Message = clsGeneralValidationMessages.DatabaseOperationExceptionMessage
+                };
+            }
+        }
+
+
+        // >>
+        public static clsOperationResult RestoreUser(int userID)
+        {
+            if (!clsCurrentUser.HasPermission(enPermissions.RestoreUser))
+                return new clsOperationResult
+                {
+                    Status = enOperationStatus.Failed,
+                    Message = clsUserValidationMessages.PermissionDeniedMessage
+                };
+
+            if (userID <= 0)
+                return new clsOperationResult
+                {
+                    Status = enOperationStatus.Failed,
+                    Message = clsUserValidationMessages.UserIDMustBeGreaterThanZeroMessage
+                };
+
+            try
+            {
+                bool isActivated = clsUserDAL.RestoreUser(userID);
+
+                if (isActivated)
+                    return new clsOperationResult
+                    {
+                        Status = enOperationStatus.Success,
+                        Message = clsUserValidationMessages.UserRestoredSuccessfullyMessage
+                    };
+                else
+                    return new clsOperationResult
+                    {
+                        Status = enOperationStatus.Failed,
+                        Message = clsUserValidationMessages.UserRestoredFailedMessage
                     };
             }
             catch (Exception)

@@ -4,6 +4,7 @@ using DVLD_Shared;
 using System.Drawing;
 using System.Windows.Forms;
 using DVLD_System_Solution.Forms._003_Manage_People.Controls;
+using DVLD_Shared.Operations_Result;
 
 namespace DVLD_System_Solution.Forms._004_Manage_Users.Controls
 {
@@ -15,10 +16,15 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users.Controls
         {
             InitializeComponent();
         }
+        
+        
+        // >>
+        public delegate void SendIsUserEventHandler(object sender, bool isUser);
+        public static event SendIsUserEventHandler SendIsUser;
 
         private void _ResetLabelIsUser(bool isUser)
         {
-            if(isUser)
+            if (isUser)
             {
                 lab_IsUserToText.Text = "Yes";
                 lab_IsUserToText.ForeColor = Color.Red;
@@ -30,27 +36,29 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users.Controls
             }
         }
 
-        public delegate void SendIsUserEventHandler(object sender, bool isUser);
-        public static event SendIsUserEventHandler SendIsUser;
-
         private void _GetPersonIDAndCheckIsUser(object sender, int personID)
         {
             _personID = personID;
-            
-            if(_personID > 0)
+
+            (clsOperationResult result, bool isUser) = clsUserBL.CheckPersonIsUser(_personID);
+
+            switch(result.Status)
             {
-                try
-                {
-                    bool isUser = clsUserBL.CheckPersonIsUser(_personID);
+                case clsOperationResult.enOperationStatus.Success:
                     SendIsUser?.Invoke(this, isUser);
                     _ResetLabelIsUser(isUser);
-                }
-                catch
-                {
-                    MessageBox.Show(clsGeneralValidationMessages.DatabaseOperationExceptionMessage, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                    break;
+
+                case clsOperationResult.enOperationStatus.Failed:
+                    MessageBox.Show(result.Message, "Operation Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    break;
+
+                case clsOperationResult.enOperationStatus.Exception:
+                    MessageBox.Show(result.Message, "Database Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
             }
         }
+        
         private void _ResetLabelIsUser(object sender, bool isUser)
         {
             _ResetLabelIsUser(isUser);

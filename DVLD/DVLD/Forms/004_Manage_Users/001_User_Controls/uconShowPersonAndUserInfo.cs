@@ -121,8 +121,6 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users.Controls
             }
         }
 
-       
-
         public void LoadPersonAndUserInfo(int personID, int userID)
         {
             uconShowPersonInfo1.LoadPersonByID(personID);

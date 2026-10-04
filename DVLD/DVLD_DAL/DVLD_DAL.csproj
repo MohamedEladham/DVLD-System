@@ -51,7 +51,9 @@
     <Compile Include="clsPermissionDAL.cs" />
     <Compile Include="clsPersonDAL.cs" />
     <Compile Include="clsRoleDAL.cs" />
+    <Compile Include="clsRolePermissionsDAL.cs" />
     <Compile Include="clsUserDAL.cs" />
+    <Compile Include="clsUserRolesDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

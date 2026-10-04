@@ -93,6 +93,16 @@ namespace DVLD_System_Solution.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Add_CheckList_Document1_32 {
+            get {
+                object obj = ResourceManager.GetObject("Add_CheckList_Document1_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Add_New_User_32 {
             get {
                 object obj = ResourceManager.GetObject("Add_New_User 32", resourceCulture);
@@ -173,6 +183,26 @@ namespace DVLD_System_Solution.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CheckList_Document1_32 {
+            get {
+                object obj = ResourceManager.GetObject("CheckList_Document1_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CheckList_Document2_32 {
+            get {
+                object obj = ResourceManager.GetObject("CheckList_Document2_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Close1_28 {
             get {
                 object obj = ResourceManager.GetObject("Close1_28", resourceCulture);
@@ -216,6 +246,26 @@ namespace DVLD_System_Solution.Properties {
         internal static System.Drawing.Bitmap Delete_32 {
             get {
                 object obj = ResourceManager.GetObject("Delete_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Delete_File1_32 {
+            get {
+                object obj = ResourceManager.GetObject("Delete_File1_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Description1_32 {
+            get {
+                object obj = ResourceManager.GetObject("Description1_32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -303,6 +353,16 @@ namespace DVLD_System_Solution.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ID_Number1_32 {
+            get {
+                object obj = ResourceManager.GetObject("ID_Number1_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Login_Info_32 {
             get {
                 object obj = ResourceManager.GetObject("Login_Info_32", resourceCulture);
@@ -343,6 +403,16 @@ namespace DVLD_System_Solution.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Manage_Roles1_64 {
+            get {
+                object obj = ResourceManager.GetObject("Manage_Roles1_64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Next_32 {
             get {
                 object obj = ResourceManager.GetObject("Next_32", resourceCulture);
@@ -376,6 +446,16 @@ namespace DVLD_System_Solution.Properties {
         internal static System.Drawing.Bitmap Permissions1_32 {
             get {
                 object obj = ResourceManager.GetObject("Permissions1_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Permissions1_321 {
+            get {
+                object obj = ResourceManager.GetObject("Permissions1_321", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -463,6 +543,16 @@ namespace DVLD_System_Solution.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Role_Managements1_32 {
+            get {
+                object obj = ResourceManager.GetObject("Role_Managements1_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Save1_32 {
             get {
                 object obj = ResourceManager.GetObject("Save1_32", resourceCulture);
@@ -496,6 +586,36 @@ namespace DVLD_System_Solution.Properties {
         internal static System.Drawing.Bitmap SignIn_32 {
             get {
                 object obj = ResourceManager.GetObject("SignIn_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TickBox1_32 {
+            get {
+                object obj = ResourceManager.GetObject("TickBox1_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TickBox2_32 {
+            get {
+                object obj = ResourceManager.GetObject("TickBox2_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Update_CheckList_Document1_32 {
+            get {
+                object obj = ResourceManager.GetObject("Update_CheckList_Document1_32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
