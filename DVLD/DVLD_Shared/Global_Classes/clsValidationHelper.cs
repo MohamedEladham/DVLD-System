@@ -24,7 +24,7 @@ namespace DVLD_Shared.Global_Classes
         {
             return !string.IsNullOrEmpty(source) && source.IndexOf(value, StringComparison.OrdinalIgnoreCase) >= 0;
         }
-
+     
         // >>
 
         public static DateTime? GetDeletedDate(bool status)

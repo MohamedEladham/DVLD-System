@@ -93,7 +93,5 @@ namespace DVLD_System_Solution.Forms._003_Manage_People.Controls
 
             txt_SearchValue.Select();
         }
-
-       
     }
 }

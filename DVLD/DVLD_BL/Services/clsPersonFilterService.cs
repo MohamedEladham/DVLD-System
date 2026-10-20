@@ -29,6 +29,7 @@ namespace DVLD_BL.Services
             return personFilter;
         }
 
+
         public static List<clsActivePersonsInfoGridViewDto> FilterPersons(List<clsActivePersonsInfoGridViewDto> personsGridViewDto,
             Dictionary<string, Func<clsActivePersonsInfoGridViewDto, string, bool>> personFilter, string filterSelected, string searchValue)
         {
@@ -36,6 +37,9 @@ namespace DVLD_BL.Services
 
             return personsGridViewDto.Where(p => personFilter[filterSelected](p, searchValue)).ToList(); 
         }
+
+        
+        // >>
 
         public static Dictionary<string, Func<clsDeletedPersonInfoGridViewDto, string, bool>> GetDeletedPersonFilters()
         {

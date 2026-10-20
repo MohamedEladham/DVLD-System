@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="clsApplicationBL.cs" />
     <Compile Include="clsCountryBL.cs" />
     <Compile Include="clsPersonBL.cs" />
     <Compile Include="clsRoleBL.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="clsUserBL.cs" />
     <Compile Include="clsUserRolesBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\clsApplicationsFilterService.cs" />
     <Compile Include="Services\clsPermissionsFilterService.cs" />
     <Compile Include="Services\clsPersonFilterService.cs" />
     <Compile Include="Services\clsRolesFilterService.cs" />

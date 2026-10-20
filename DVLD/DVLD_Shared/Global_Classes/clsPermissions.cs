@@ -3,7 +3,6 @@ namespace DVLD_Shared.Global_Classes
 {
     public enum enPermissions 
     {
-        ManageApplications = -1,
         ManageDrivers = -2,
         ManageAccountSitting = -3,
         ViewUsers = 1,
@@ -33,6 +32,8 @@ namespace DVLD_Shared.Global_Classes
         UpdatePermissions = 1034,
         DisablingPermissions = 1035,
         ActivePermissions = 1036,
-        ManagePermissions = 1037
+        ManagePermissions = 1037,
+        ManageApplications = 1062,
+        ViewApplications = 1063 
     }
 }

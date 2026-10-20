@@ -10,6 +10,7 @@ using System.Linq;
 using DVLD_Shared.Validation_Messages;
 using DVLD_Shared;
 using DVLD_System_Solution.Forms._005_Manage_Roles_Permissions._003_PermissionsManagements._001_Manage_Permissions;
+using DVLD_System_Solution.Forms._003_Manage_Applications;
 
 namespace Main_Screen
 {
@@ -35,20 +36,13 @@ namespace Main_Screen
         // >>
         private void frmMainScreen_Load(object sender, EventArgs e)
         {
-            //toolStripMenuItem_Applicatios.Enabled = false;
-            //toolStripMenuItem_ManagePersons.Enabled = false;
-            //toolStripMenuItem_ManageUsers.Enabled = false;
-            //toolStripMenuItem_Drivers.Enabled = false;
-            //toolStripMenuItem_AccountSetting.Enabled = false;
-
-
-            //toolStripMenuItem_ManageApplicatios.Enabled = clsCurrentUser.HasPermission(enPermissions.ManageApplications);
-            //toolStripMenuItem_ManagePersons.Enabled = clsCurrentUser.HasPermission(enPermissions.ManagePersons);
-            //toolStripMenuItem_ManageDrivers.Enabled = clsCurrentUser.HasPermission(enPermissions.ManageDrivers);
-            //toolStripMenuItem_ManageUsers.Enabled = clsCurrentUser.HasPermission(enPermissions.ManageUsers);
-            //toolStripMenuItem_RolesManagements.Enabled = clsCurrentUser.HasPermission(enPermissions.ManageRoles);
-            //toolStripMenuItem_ManageAccountSetting.Enabled = clsCurrentUser.HasPermission(enPermissions.ManageAccountSitting);
-
+            toolStripMenuItem_ManageApplicatios.Enabled = clsCurrentUser.HasPermission(enPermissions.ManageApplications);
+            toolStripMenuItem_ManagePersons.Enabled = clsCurrentUser.HasPermission(enPermissions.ManagePersons);
+            toolStripMenuItem_ManageDrivers.Enabled = clsCurrentUser.HasPermission(enPermissions.ManageDrivers);
+            toolStripMenuItem_ManageUsers.Enabled = clsCurrentUser.HasPermission(enPermissions.ManageUsers);
+            toolStripMenuItem_ManageRoles.Enabled = clsCurrentUser.HasPermission(enPermissions.ManageRoles);
+            toolStripMenuItem_ManagePermissions.Enabled = clsCurrentUser.HasPermission(enPermissions.ManagePermissions);
+            toolStripMenuItem_ManageAccountSetting.Enabled = clsCurrentUser.HasPermission(enPermissions.ManageAccountSitting);
 
             // >>
             lab_UserName.Text = clsCurrentUser.UserName;
@@ -58,6 +52,13 @@ namespace Main_Screen
 
 
         // >>
+
+        private void toolStripMenuItem_ManageApplicatios_Click(object sender, EventArgs e)
+        {
+            frmApplicationsManagements frm = new frmApplicationsManagements();
+            frm.ShowDialog();
+        }
+
         private void toolStripMenuItem_Persons_Click(object sender, EventArgs e)
         {
             if (!_HasPermission(enPermissions.ManagePersons))
@@ -93,5 +94,7 @@ namespace Main_Screen
             frmPermissionsManagement frm = new frmPermissionsManagement();
             frm.ShowDialog();
         }
+
+        
     }
 }
