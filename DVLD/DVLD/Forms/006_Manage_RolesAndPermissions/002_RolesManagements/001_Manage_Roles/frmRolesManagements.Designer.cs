@@ -40,7 +40,11 @@ namespace DVLD_System_Solution.Forms._005_Manage_Roles._001_ShowRoles
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView_ShowRolesInfo = new System.Windows.Forms.DataGridView();
             this.contextMenuStrip_ActiveRoles = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem_ShowActiveRoleDetails = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem_AddNewRole = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem_UpdateRoleInfo = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem_SoftDeleteRole = new System.Windows.Forms.ToolStripMenuItem();
             this.lab_RecordsCount = new System.Windows.Forms.Label();
             this.txt_SearchValue = new System.Windows.Forms.TextBox();
             this.comBox_FilterItems = new System.Windows.Forms.ComboBox();
@@ -48,16 +52,12 @@ namespace DVLD_System_Solution.Forms._005_Manage_Roles._001_ShowRoles
             this.label3 = new System.Windows.Forms.Label();
             this.comBox_DisplayStatus = new System.Windows.Forms.ComboBox();
             this.contextMenuStrip_DeletedRoles = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem_ShowDeletedRoleDetails = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem_RestoreRole = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_AddNewRole = new System.Windows.Forms.Button();
             this.btn_Close = new System.Windows.Forms.Button();
-            this.toolStripMenuItem_ShowActiveRoleDetails = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem_AddNewRole = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem_UpdateRoleInfo = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem_SoftDeleteRole = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox11 = new System.Windows.Forms.PictureBox();
-            this.toolStripMenuItem_ShowDeletedRoleDetails = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem_RestoreRole = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_ShowRolesInfo)).BeginInit();
             this.contextMenuStrip_ActiveRoles.SuspendLayout();
             this.contextMenuStrip_DeletedRoles.SuspendLayout();
@@ -143,10 +143,46 @@ namespace DVLD_System_Solution.Forms._005_Manage_Roles._001_ShowRoles
             this.contextMenuStrip_ActiveRoles.Name = "contextMenuStrip1";
             this.contextMenuStrip_ActiveRoles.Size = new System.Drawing.Size(203, 162);
             // 
+            // toolStripMenuItem_ShowActiveRoleDetails
+            // 
+            this.toolStripMenuItem_ShowActiveRoleDetails.Image = global::DVLD_System_Solution.Properties.Resources.CheckList_Document1_32;
+            this.toolStripMenuItem_ShowActiveRoleDetails.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItem_ShowActiveRoleDetails.Name = "toolStripMenuItem_ShowActiveRoleDetails";
+            this.toolStripMenuItem_ShowActiveRoleDetails.Size = new System.Drawing.Size(202, 38);
+            this.toolStripMenuItem_ShowActiveRoleDetails.Text = "Show Role Details";
+            this.toolStripMenuItem_ShowActiveRoleDetails.Click += new System.EventHandler(this.toolStripMenuItem_ShowRoleDetails_Click);
+            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(199, 6);
+            // 
+            // toolStripMenuItem_AddNewRole
+            // 
+            this.toolStripMenuItem_AddNewRole.Image = global::DVLD_System_Solution.Properties.Resources.Add_CheckList_Document1_32;
+            this.toolStripMenuItem_AddNewRole.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItem_AddNewRole.Name = "toolStripMenuItem_AddNewRole";
+            this.toolStripMenuItem_AddNewRole.Size = new System.Drawing.Size(202, 38);
+            this.toolStripMenuItem_AddNewRole.Text = "Add New Role";
+            this.toolStripMenuItem_AddNewRole.Click += new System.EventHandler(this.toolStripMenuItem_AddNewRole_Click);
+            // 
+            // toolStripMenuItem_UpdateRoleInfo
+            // 
+            this.toolStripMenuItem_UpdateRoleInfo.Image = global::DVLD_System_Solution.Properties.Resources.Update_CheckList_Document1_32;
+            this.toolStripMenuItem_UpdateRoleInfo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItem_UpdateRoleInfo.Name = "toolStripMenuItem_UpdateRoleInfo";
+            this.toolStripMenuItem_UpdateRoleInfo.Size = new System.Drawing.Size(202, 38);
+            this.toolStripMenuItem_UpdateRoleInfo.Text = "Update Role";
+            this.toolStripMenuItem_UpdateRoleInfo.Click += new System.EventHandler(this.toolStripMenuItem_UpdateRoleInfo_Click);
+            // 
+            // toolStripMenuItem_SoftDeleteRole
+            // 
+            this.toolStripMenuItem_SoftDeleteRole.Image = global::DVLD_System_Solution.Properties.Resources.Delete_File1_32;
+            this.toolStripMenuItem_SoftDeleteRole.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItem_SoftDeleteRole.Name = "toolStripMenuItem_SoftDeleteRole";
+            this.toolStripMenuItem_SoftDeleteRole.Size = new System.Drawing.Size(202, 38);
+            this.toolStripMenuItem_SoftDeleteRole.Text = "Delete Role";
+            this.toolStripMenuItem_SoftDeleteRole.Click += new System.EventHandler(this.toolStripMenuItem_SoftDeleteRole_Click);
             // 
             // lab_RecordsCount
             // 
@@ -168,6 +204,7 @@ namespace DVLD_System_Solution.Forms._005_Manage_Roles._001_ShowRoles
             this.txt_SearchValue.Name = "txt_SearchValue";
             this.txt_SearchValue.Size = new System.Drawing.Size(296, 24);
             this.txt_SearchValue.TabIndex = 244;
+            this.txt_SearchValue.Visible = false;
             this.txt_SearchValue.TextChanged += new System.EventHandler(this.txt_SearchValue_TextChanged);
             this.txt_SearchValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_SearchValue_KeyPress);
             // 
@@ -225,10 +262,28 @@ namespace DVLD_System_Solution.Forms._005_Manage_Roles._001_ShowRoles
             this.contextMenuStrip_DeletedRoles.Name = "contextMenuStrip1";
             this.contextMenuStrip_DeletedRoles.Size = new System.Drawing.Size(203, 86);
             // 
+            // toolStripMenuItem_ShowDeletedRoleDetails
+            // 
+            this.toolStripMenuItem_ShowDeletedRoleDetails.Image = global::DVLD_System_Solution.Properties.Resources.CheckList_Document1_32;
+            this.toolStripMenuItem_ShowDeletedRoleDetails.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItem_ShowDeletedRoleDetails.Name = "toolStripMenuItem_ShowDeletedRoleDetails";
+            this.toolStripMenuItem_ShowDeletedRoleDetails.Size = new System.Drawing.Size(202, 38);
+            this.toolStripMenuItem_ShowDeletedRoleDetails.Text = "Show Role Details";
+            this.toolStripMenuItem_ShowDeletedRoleDetails.Click += new System.EventHandler(this.toolStripMenuItem_ShowRoleDetails_Click);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(199, 6);
+            // 
+            // toolStripMenuItem_RestoreRole
+            // 
+            this.toolStripMenuItem_RestoreRole.Image = global::DVLD_System_Solution.Properties.Resources.Restore_24;
+            this.toolStripMenuItem_RestoreRole.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItem_RestoreRole.Name = "toolStripMenuItem_RestoreRole";
+            this.toolStripMenuItem_RestoreRole.Size = new System.Drawing.Size(202, 38);
+            this.toolStripMenuItem_RestoreRole.Text = "Restore Role";
+            this.toolStripMenuItem_RestoreRole.Click += new System.EventHandler(this.toolStripMenuItem_RestoreRole_Click);
             // 
             // btn_AddNewRole
             // 
@@ -258,42 +313,6 @@ namespace DVLD_System_Solution.Forms._005_Manage_Roles._001_ShowRoles
             this.btn_Close.UseVisualStyleBackColor = false;
             this.btn_Close.Click += new System.EventHandler(this.btn_Close_Click);
             // 
-            // toolStripMenuItem_ShowActiveRoleDetails
-            // 
-            this.toolStripMenuItem_ShowActiveRoleDetails.Image = global::DVLD_System_Solution.Properties.Resources.CheckList_Document1_32;
-            this.toolStripMenuItem_ShowActiveRoleDetails.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripMenuItem_ShowActiveRoleDetails.Name = "toolStripMenuItem_ShowActiveRoleDetails";
-            this.toolStripMenuItem_ShowActiveRoleDetails.Size = new System.Drawing.Size(202, 38);
-            this.toolStripMenuItem_ShowActiveRoleDetails.Text = "Show Role Details";
-            this.toolStripMenuItem_ShowActiveRoleDetails.Click += new System.EventHandler(this.toolStripMenuItem_ShowRoleDetails_Click);
-            // 
-            // toolStripMenuItem_AddNewRole
-            // 
-            this.toolStripMenuItem_AddNewRole.Image = global::DVLD_System_Solution.Properties.Resources.Add_CheckList_Document1_32;
-            this.toolStripMenuItem_AddNewRole.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripMenuItem_AddNewRole.Name = "toolStripMenuItem_AddNewRole";
-            this.toolStripMenuItem_AddNewRole.Size = new System.Drawing.Size(202, 38);
-            this.toolStripMenuItem_AddNewRole.Text = "Add New Role";
-            this.toolStripMenuItem_AddNewRole.Click += new System.EventHandler(this.toolStripMenuItem_AddNewRole_Click);
-            // 
-            // toolStripMenuItem_UpdateRoleInfo
-            // 
-            this.toolStripMenuItem_UpdateRoleInfo.Image = global::DVLD_System_Solution.Properties.Resources.Update_CheckList_Document1_32;
-            this.toolStripMenuItem_UpdateRoleInfo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripMenuItem_UpdateRoleInfo.Name = "toolStripMenuItem_UpdateRoleInfo";
-            this.toolStripMenuItem_UpdateRoleInfo.Size = new System.Drawing.Size(202, 38);
-            this.toolStripMenuItem_UpdateRoleInfo.Text = "Update Role";
-            this.toolStripMenuItem_UpdateRoleInfo.Click += new System.EventHandler(this.toolStripMenuItem_UpdateRoleInfo_Click);
-            // 
-            // toolStripMenuItem_SoftDeleteRole
-            // 
-            this.toolStripMenuItem_SoftDeleteRole.Image = global::DVLD_System_Solution.Properties.Resources.Delete_File1_32;
-            this.toolStripMenuItem_SoftDeleteRole.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripMenuItem_SoftDeleteRole.Name = "toolStripMenuItem_SoftDeleteRole";
-            this.toolStripMenuItem_SoftDeleteRole.Size = new System.Drawing.Size(202, 38);
-            this.toolStripMenuItem_SoftDeleteRole.Text = "Delete Role";
-            this.toolStripMenuItem_SoftDeleteRole.Click += new System.EventHandler(this.toolStripMenuItem_SoftDeleteRole_Click);
-            // 
             // pictureBox11
             // 
             this.pictureBox11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -304,24 +323,6 @@ namespace DVLD_System_Solution.Forms._005_Manage_Roles._001_ShowRoles
             this.pictureBox11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox11.TabIndex = 223;
             this.pictureBox11.TabStop = false;
-            // 
-            // toolStripMenuItem_ShowDeletedRoleDetails
-            // 
-            this.toolStripMenuItem_ShowDeletedRoleDetails.Image = global::DVLD_System_Solution.Properties.Resources.CheckList_Document1_32;
-            this.toolStripMenuItem_ShowDeletedRoleDetails.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripMenuItem_ShowDeletedRoleDetails.Name = "toolStripMenuItem_ShowDeletedRoleDetails";
-            this.toolStripMenuItem_ShowDeletedRoleDetails.Size = new System.Drawing.Size(202, 38);
-            this.toolStripMenuItem_ShowDeletedRoleDetails.Text = "Show Role Details";
-            this.toolStripMenuItem_ShowDeletedRoleDetails.Click += new System.EventHandler(this.toolStripMenuItem_ShowRoleDetails_Click);
-            // 
-            // toolStripMenuItem_RestoreRole
-            // 
-            this.toolStripMenuItem_RestoreRole.Image = global::DVLD_System_Solution.Properties.Resources.Restore_24;
-            this.toolStripMenuItem_RestoreRole.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripMenuItem_RestoreRole.Name = "toolStripMenuItem_RestoreRole";
-            this.toolStripMenuItem_RestoreRole.Size = new System.Drawing.Size(202, 38);
-            this.toolStripMenuItem_RestoreRole.Text = "Restore Role";
-            this.toolStripMenuItem_RestoreRole.Click += new System.EventHandler(this.toolStripMenuItem_RestoreRole_Click);
             // 
             // frmRolesManagements
             // 

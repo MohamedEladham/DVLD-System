@@ -46,15 +46,19 @@
   <ItemGroup>
     <Compile Include="Application\clsApplication.cs" />
     <Compile Include="Application\clsApplicationGridViewDto.cs" />
-    <Compile Include="Countries\clsCountry.cs" />
-    <Compile Include="Permissions\clsPermission.cs" />
+    <Compile Include="Country\clsCountry.cs" />
+    <Compile Include="LicenseClass\clsLicenseClass.cs" />
+    <Compile Include="License\clsLicense.cs" />
+    <Compile Include="Permission\clsPermission.cs" />
     <Compile Include="Person\clsDeletedPersonInfoGridViewDto.cs" />
     <Compile Include="Person\clsPerson.cs" />
     <Compile Include="Person\clsActivePersonsInfoGridViewDto.cs" />
+    <Compile Include="Person\clsPersonBasicInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Roles\clsActiveRolesInfoGridViewDto.cs" />
-    <Compile Include="Roles\clsDeleteRolesInfoGridViewDto.cs" />
-    <Compile Include="Roles\clsRole.cs" />
+    <Compile Include="Role\clsActiveRolesInfoGridViewDto.cs" />
+    <Compile Include="Role\clsDeleteRolesInfoGridViewDto.cs" />
+    <Compile Include="Role\clsRole.cs" />
+    <Compile Include="Service\clsService.cs" />
     <Compile Include="UI Models\clsComboBoxFilterItem.cs" />
     <Compile Include="User\clsCurrentUser.cs" />
     <Compile Include="User\clsDeleteUserInfoGridViewDto.cs" />

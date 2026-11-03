@@ -250,6 +250,7 @@ namespace Main_Screen.Froms.Persons_Screen
             this.txt_SearchValue.Name = "txt_SearchValue";
             this.txt_SearchValue.Size = new System.Drawing.Size(242, 24);
             this.txt_SearchValue.TabIndex = 9;
+            this.txt_SearchValue.Visible = false;
             this.txt_SearchValue.TextChanged += new System.EventHandler(this.txt_SearchValue_TextChanged);
             this.txt_SearchValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_SearchValue_KeyPress);
             // 
@@ -411,7 +412,7 @@ namespace Main_Screen.Froms.Persons_Screen
             this.comBox_DisplayStatus.Name = "comBox_DisplayStatus";
             this.comBox_DisplayStatus.Size = new System.Drawing.Size(230, 24);
             this.comBox_DisplayStatus.TabIndex = 225;
-            this.comBox_DisplayStatus.SelectedIndexChanged += new System.EventHandler(this.comBox_PersonStatus_SelectedIndexChanged);
+            this.comBox_DisplayStatus.SelectedIndexChanged += new System.EventHandler(this.comBox_DisplayStatus_SelectedIndexChanged);
             // 
             // label3
             // 

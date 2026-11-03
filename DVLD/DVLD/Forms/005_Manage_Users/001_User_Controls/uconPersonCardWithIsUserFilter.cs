@@ -22,6 +22,8 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users.Controls
         public delegate void SendIsUserEventHandler(object sender, bool isUser);
         public static event SendIsUserEventHandler SendIsUser;
 
+        
+
         private void _ResetLabelIsUser(bool isUser)
         {
             if (isUser)
@@ -36,8 +38,22 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users.Controls
             }
         }
 
+        private void _ResetLabelIsUser(object sender, bool isUser)
+        {
+            _ResetLabelIsUser(isUser);
+        }
+
+
         private void _GetPersonIDAndCheckIsUser(object sender, int personID)
         {
+            if(personID == -1)
+            {
+                SendIsUser?.Invoke(this, true);
+                lab_IsUserToText.Text = "???";
+                lab_IsUserToText.ForeColor = Color.DimGray;
+                return;
+            }
+
             _personID = personID;
 
             (clsOperationResult result, bool isUser) = clsUserBL.CheckPersonIsUser(_personID);
@@ -59,15 +75,11 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users.Controls
             }
         }
         
-        private void _ResetLabelIsUser(object sender, bool isUser)
-        {
-            _ResetLabelIsUser(isUser);
-        }
-
+        
         private void uconPersonCardWithUserFilter_Load(object sender, EventArgs e)
         {
             frmCreateLoginInfo.CreatedLoginInfo += _ResetLabelIsUser;
-            uconShowPersonInfo.SendPersonID += _GetPersonIDAndCheckIsUser; 
+            uconShowPersonInfo.SendPersonID += _GetPersonIDAndCheckIsUser;
         }
     }
 }

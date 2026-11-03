@@ -113,6 +113,7 @@ namespace DVLD_System_Solution.Forms._003_Manage_People.Controls
         {
             _personID = personInfo.PersonID;
             SendPersonID?.Invoke(this, _personID);
+            linkLabel_EditPerson.Enabled = clsCurrentUser.HasPermission(enPermissions.UpdatePerson);
             lab_PersonID.Text = personInfo.PersonID.ToString();
             lab_Name.Text = personInfo.FirstName + " - " + personInfo.SecondName + " - " + personInfo.ThirdName + " - " + personInfo.LastName;
             lab_NationalNO.Text = personInfo.NationalNO;
@@ -125,33 +126,25 @@ namespace DVLD_System_Solution.Forms._003_Manage_People.Controls
             _DisplayPersonImage(personInfo.ImageName, personInfo.Gender);
         }
 
-        public void LoadPersonByID(int personID)
+        private void _ResetUserControl()
         {
-            (clsOperationResult result, clsPerson person) = clsPersonBL.GetPersonByID(personID);
-
-            switch (result.Status)
-            {
-                case enOperationStatus.Success:
-                    if (person != null)
-                    {
-                        _FillUserControlByPersonInfo(person);
-                        //linkLabel_EditPerson.Enabled = true;
-                        linkLabel_EditPerson.Enabled = clsCurrentUser.HasPermission(enPermissions.UpdatePerson);
-                    }
-                    break;
-
-                case enOperationStatus.Failed:
-                    MessageBox.Show(result.Message, "Failed Operation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    linkLabel_EditPerson.Enabled = false;
-                    break;
-
-                case enOperationStatus.Exception:
-                    MessageBox.Show(result.Message, "Database Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    linkLabel_EditPerson.Enabled = false;
-                    break;
-            }
+            _personID = -1;
+            SendPersonID?.Invoke(this, _personID);
+            linkLabel_EditPerson.Enabled = false;
+            lab_PersonID.Text = "[???]";
+            lab_Name.Text = "[???]";
+            lab_NationalNO.Text = "[???]";
+            lab_Gendor.Text = "[???]";
+            lab_DateOfBirth.Text = "[???]";
+            lab_Email.Text = "[???]";
+            lab_Phone.Text = "[???]";
+            lab_Country.Text = "[???]";
+            lab_Address.Text = "[???]";
+            _DisplayPersonImage(null, 'M');
         }
 
+        
+        // >>
         public void LoadActivePersonByID(int personID)
         {
             (clsOperationResult result, clsPerson person) = clsPersonBL.GetActivePersonByID(personID);
@@ -159,22 +152,18 @@ namespace DVLD_System_Solution.Forms._003_Manage_People.Controls
             switch (result.Status)
             {
                 case enOperationStatus.Success:
-                    if (person != null)
-                    {
-                        _FillUserControlByPersonInfo(person);
-                        //linkLabel_EditPerson.Enabled = true;
-                        linkLabel_EditPerson.Enabled = clsCurrentUser.HasPermission(enPermissions.UpdatePerson);
-                    }
+                    if (person != null) _FillUserControlByPersonInfo(person);
+                    
                     break;
 
                 case enOperationStatus.Failed:
+                    _ResetUserControl();
                     MessageBox.Show(result.Message, "Failed Operation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    linkLabel_EditPerson.Enabled = false;
                     break;
 
                 case enOperationStatus.Exception:
+                    _ResetUserControl();
                     MessageBox.Show(result.Message, "Database Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    linkLabel_EditPerson.Enabled = false;
                     break;
             }
         }
@@ -186,12 +175,33 @@ namespace DVLD_System_Solution.Forms._003_Manage_People.Controls
             switch (result.Status)
             {
                 case enOperationStatus.Success:
-                    if (person != null)
-                    {
-                        _FillUserControlByPersonInfo(person);
-                        //linkLabel_EditPerson.Enabled = true;
-                        linkLabel_EditPerson.Enabled = clsCurrentUser.HasPermission(enPermissions.UpdatePerson);
-                    }
+                    if (person != null)    _FillUserControlByPersonInfo(person);
+                    
+                    break;
+
+                case enOperationStatus.Failed:
+                    _ResetUserControl();
+                    MessageBox.Show(result.Message, "Failed Operation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    break;
+
+                case enOperationStatus.Exception:
+                    _ResetUserControl();
+                    MessageBox.Show(result.Message, "Database Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+            }
+        }
+
+
+        // >>
+        public void LoadPersonByID(int personID)
+        {
+            (clsOperationResult result, clsPerson person) = clsPersonBL.GetPersonByID(personID);
+
+            switch (result.Status)
+            {
+                case enOperationStatus.Success:
+                    if (person != null) _FillUserControlByPersonInfo(person);
+                    
                     break;
 
                 case enOperationStatus.Failed:

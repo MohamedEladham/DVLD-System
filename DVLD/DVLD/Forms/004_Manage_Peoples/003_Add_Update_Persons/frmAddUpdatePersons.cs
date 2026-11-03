@@ -541,8 +541,15 @@ namespace Main_Screen.Forms.Persons
         private void _SetErrorProvider(string propertyName, string message)
         {
             Control control = _GetControlByPropertyName(propertyName);
-            errorProvider1.SetError(control, message);
-            control.Select();
+
+            if (control != null)
+            {
+                errorProvider1.SetError(control, message);
+
+                if (control is TextBox) control.Select();
+            }
+            else
+                MessageBox.Show(message, "Operation Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         private bool _AddNewPersonAndGetNewID(clsPerson person)
@@ -554,6 +561,7 @@ namespace Main_Screen.Forms.Persons
                 case enOperationStatus.Success:
                     _PersonID = result.CreatedID;
                     AddOrUpdatePersonDialogResultReceived?.Invoke(this, DialogResult.OK);
+                    _HandleSuccessfulSave();
                     MessageBox.Show(result.Message, "Operation Succeeded", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return true;
 
@@ -637,11 +645,7 @@ namespace Main_Screen.Forms.Persons
             {
                 case enAddUpdateMode.AddNewInfo:
                     {
-                        bool isAdded = _AddNewPersonAndGetNewID(_BuildPersonInfo());
-                        
-                        if (isAdded)
-                            _HandleSuccessfulSave();
-                        else
+                        if (!_AddNewPersonAndGetNewID(_BuildPersonInfo()))
                         {
                             if(_ImageState == enImageState.Add && _PersonImageSaveResult == enPersonImageSaveResult.Valid && 
                                 !string.IsNullOrWhiteSpace(_UniqueImageName))

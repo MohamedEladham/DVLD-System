@@ -116,10 +116,11 @@ namespace DVLD_System_Solution.Forms._005_Manage_Roles._002_AddRoles
 
         private void comBox_FilterItems_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comBox_FilterItems.Text == "None")
-                txt_SearchValue.Visible = false;
-            else
-                txt_SearchValue.Visible = true;
+            if (!(comBox_FilterItems.SelectedValue is string))
+                return;
+
+            txt_SearchValue.Visible = (comBox_FilterItems.SelectedValue.ToString() != "None");
+
             txt_SearchValue.Clear();
             txt_SearchValue.Select();
         }
@@ -159,10 +160,9 @@ namespace DVLD_System_Solution.Forms._005_Manage_Roles._002_AddRoles
             comBox_FilterItems.DataSource = comboBoxFiltersItems;
             comBox_FilterItems.DisplayMember = "Display";
             comBox_FilterItems.ValueMember = "Value";
-            comBox_FilterItems.Text = "None";
         }
 
-        private void _SetupRolesFilters()
+        private void _SetFilters()
         {
             _SetupComboBoxFilterItems();
             _permissionsFilters = clsPermissionsFilterService.GetPermissionsFilters();
@@ -292,7 +292,7 @@ namespace DVLD_System_Solution.Forms._005_Manage_Roles._002_AddRoles
 
         private void frmAddUpdateRole_Load(object sender, EventArgs e)
         {
-            _SetupRolesFilters();
+            _SetFilters();
             _UpdateModeStatusLabel();
             _LoadActivePermissionsToCheckedListBox();
 
@@ -407,8 +407,14 @@ namespace DVLD_System_Solution.Forms._005_Manage_Roles._002_AddRoles
         private void _SetErrorProvider(string propertyName, string message)
         {
             Control control = _GetControlByPropertyName(propertyName);
-            errorProvider1.SetError(control, message);
-            control.Select();
+
+            if (control != null)
+            {
+                errorProvider1.SetError(control, message);
+                if (control is TextBox) control.Select();
+            }
+            else
+                MessageBox.Show(message, "Operation Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         private bool _AddRoleAndPermissions(clsRole role, List<int> permissionIDs)
@@ -457,14 +463,10 @@ namespace DVLD_System_Solution.Forms._005_Manage_Roles._002_AddRoles
                     return true;
 
                 case enOperationStatus.Failed:
-                    if (!string.IsNullOrEmpty(result.PropertyName))
-                    {
-                        Control control = _GetControlByPropertyName(result.PropertyName);
-                        errorProvider1.SetError(control, result.Message);
-                        control.Select();
-                    }
-                    else
+                    if (string.IsNullOrEmpty(result.PropertyName))
                         MessageBox.Show(result.Message, "Operation Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    else
+                        _SetErrorProvider(result.PropertyName, result.Message);
                     return false;
 
                 case enOperationStatus.Exception:

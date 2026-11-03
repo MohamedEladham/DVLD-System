@@ -146,8 +146,14 @@ namespace DVLD_System_Solution.Forms._005_Manage_Roles_Permissions._003_Permissi
         private void _SetErrorProvider(string propertyName, string message)
         {
             Control control = _GetControlByPropertyName(propertyName);
-            errorProvider1.SetError(control, message);
-            control.Select();
+            
+            if (control != null)
+            {
+                errorProvider1.SetError(control, message);
+                if (control is TextBox) control.Select();
+            }
+            else
+                MessageBox.Show(message, "Operation Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         private bool _AddNewPermission(clsPermission permission)

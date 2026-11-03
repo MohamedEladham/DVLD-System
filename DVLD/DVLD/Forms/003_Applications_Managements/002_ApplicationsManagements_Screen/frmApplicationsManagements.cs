@@ -5,9 +5,11 @@ using DVLD_Models.Application;
 using DVLD_Models.Person;
 using DVLD_Models.UI_Models;
 using DVLD_Models.User;
+using DVLD_Shared.Events;
 using DVLD_Shared.Global_Classes;
 using DVLD_Shared.Operations_Result;
 using DVLD_Shared.Validation_Messages;
+using DVLD_System_Solution.Forms._003_Applications_Managements._002_FirstTimeDrivingLicense_Screens;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,12 +19,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static DVLD_Shared.Global_Enums.clsEnumHelpers;
 using static DVLD_Shared.Operations_Result.clsOperationResult;
 
 namespace DVLD_System_Solution.Forms._003_Manage_Applications
 {
     public partial class frmApplicationsManagements : Form
-    { 
+    {
         enApplicationStatuses _applicationStatuses = enApplicationStatuses.New; 
 
 
@@ -52,7 +55,7 @@ namespace DVLD_System_Solution.Forms._003_Manage_Applications
 
         // >>
 
-        private void _SetupComboBoxApplicationsStatusItems()
+        private void _SetupComboBoxDisplayStatus()
         {
             List<clsComboBoxFilterItem> comBApplicationsStatusFilterItems = new List<clsComboBoxFilterItem>
             {
@@ -65,7 +68,6 @@ namespace DVLD_System_Solution.Forms._003_Manage_Applications
             comBox_DisplayStatus.DataSource = comBApplicationsStatusFilterItems;
             comBox_DisplayStatus.DisplayMember = "Display";
             comBox_DisplayStatus.ValueMember = "Value";
-            comBox_DisplayStatus.Text = "New";
         }
 
         private void _SetupComboBoxFilterItems()
@@ -84,13 +86,13 @@ namespace DVLD_System_Solution.Forms._003_Manage_Applications
             comBox_FilterItems.DataSource = comboBoxFiltersItems;
             comBox_FilterItems.DisplayMember = "Display";
             comBox_FilterItems.ValueMember = "Value";
-            comBox_FilterItems.Text = "None";
         }
 
 
         private Dictionary<string, Func<clsApplicationGridViewDto, string, bool>> _applicationFilterItems;
-        private void _SetupFilters()
+        private void _SetupComboBoxesAndFilters()
         {
+            _SetupComboBoxDisplayStatus();
             _SetupComboBoxFilterItems();
             _applicationFilterItems = clsApplicationsFilterService.GetApplicationFilters();
         }
@@ -158,22 +160,29 @@ namespace DVLD_System_Solution.Forms._003_Manage_Applications
 
         private void _LoadData()
         {
-            _SetupComboBoxApplicationsStatusItems();
-            _SetupFilters();
+            _SetupComboBoxesAndFilters();
+            _LoadApplicationsToDataGridView(enApplicationStatuses.New);
+        }
+
+        private void _ApplicationCreated(int applicationID)
+        {
             _LoadApplicationsToDataGridView(enApplicationStatuses.New);
         }
 
         private void frmManageApplications_Load(object sender, EventArgs e)
         {
+            clsApplicationEvents.ApplicationCreated += _ApplicationCreated;
             _LoadData();
         }
 
+        // >>
+
         private void comBox_DisplayStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
-            comBox_FilterItems.SelectedValue = "None";
-
-            if (comBox_DisplayStatus.SelectedValue == null)
+            if (!(comBox_DisplayStatus.SelectedValue is string))
                 return;
+
+            comBox_FilterItems.SelectedValue = "None";
 
             string selectedValue = comBox_DisplayStatus.SelectedValue.ToString();
 
@@ -195,6 +204,17 @@ namespace DVLD_System_Solution.Forms._003_Manage_Applications
                     _LoadApplicationsToDataGridView(enApplicationStatuses.All);
                     break;
             }
+        }
+
+        private void comBox_FilterItems_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!(comBox_FilterItems.SelectedValue is string))
+                return;
+
+            txt_SearchValue.Visible = (comBox_FilterItems.SelectedValue.ToString() != "None");
+
+            txt_SearchValue.Clear();
+            txt_SearchValue.Select();
         }
 
         // >>
@@ -228,17 +248,18 @@ namespace DVLD_System_Solution.Forms._003_Manage_Applications
             _ApplyFilter();
         }
 
-        private void comBox_FilterItems_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (comBox_FilterItems.Text == "None") txt_SearchValue.Visible = false;
-            else txt_SearchValue.Visible = true;
-            txt_SearchValue.Clear();
-            txt_SearchValue.Select();
-        }
-
         private void dataGridView_ShowApplicationsInfos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             _UpdateApplicationIDLabel();
+        }
+
+
+        // >> 
+
+        private void btn_FirstTimeDrivingLicense_Click(object sender, EventArgs e)
+        {
+            frmSelectPerson frm = new frmSelectPerson(enServices.FirstTimeLicenseIssuance);
+            frm.ShowDialog();
         }
     }
 }

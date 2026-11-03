@@ -53,9 +53,13 @@
   <ItemGroup>
     <Compile Include="clsApplicationBL.cs" />
     <Compile Include="clsCountryBL.cs" />
+    <Compile Include="clsFirstTimeDrivingLicenseApplicationBL.cs" />
+    <Compile Include="clsLicenseBL.cs" />
+    <Compile Include="clsLicenseClassBL.cs" />
     <Compile Include="clsPersonBL.cs" />
     <Compile Include="clsRoleBL.cs" />
     <Compile Include="clsRolePermissionsBL.cs" />
+    <Compile Include="clsServiceBL.cs" />
     <Compile Include="clsUserBL.cs" />
     <Compile Include="clsUserRolesBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

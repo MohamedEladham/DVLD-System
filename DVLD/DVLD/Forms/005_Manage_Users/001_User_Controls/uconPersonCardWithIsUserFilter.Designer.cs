@@ -64,7 +64,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users.Controls
             this.lab_IsUserToText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lab_IsUserToText.AutoSize = true;
             this.lab_IsUserToText.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
-            this.lab_IsUserToText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lab_IsUserToText.ForeColor = System.Drawing.Color.DimGray;
             this.lab_IsUserToText.Location = new System.Drawing.Point(91, 413);
             this.lab_IsUserToText.Name = "lab_IsUserToText";
             this.lab_IsUserToText.Size = new System.Drawing.Size(44, 17);

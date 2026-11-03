@@ -42,7 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Global_Classes\clsApplicationStatuses.cs" />
+    <Compile Include="Events\clsApplicationEvents.cs" />
     <Compile Include="Global_Classes\clsHashHelper.cs" />
     <Compile Include="Global_Classes\clsImageHelper.cs" />
     <Compile Include="Global_Classes\clsPermissions.cs" />
@@ -52,6 +52,8 @@
     <Compile Include="Validation_Messages\clsCountryValidationMessages.cs" />
     <Compile Include="Validation_Messages\clsGeneralValidationMessages.cs" />
     <Compile Include="Validation_Messages\clsImageValidationMessage.cs" />
+    <Compile Include="Validation_Messages\clsLicenseClassValidationMessages.cs" />
+    <Compile Include="Validation_Messages\clsLicenseValidationMessages.cs" />
     <Compile Include="Validation_Messages\clsPermissionsValidationMessages.cs" />
     <Compile Include="Validation_Messages\clsPersonValidationMessages.cs" />
     <Compile Include="Validation_Messages\clsNameValidationMessages.cs" />
@@ -59,7 +61,9 @@
     <Compile Include="Operations_Result\clsOperationResult.cs" />
     <Compile Include="Validation_Messages\clsRolePermissionsValidationMessages.cs" />
     <Compile Include="Validation_Messages\clsRoleValidationMessages.cs" />
+    <Compile Include="Validation_Messages\clsServiceValidationMessages.cs" />
     <Compile Include="Validation_Messages\clsUserValidationMessages.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

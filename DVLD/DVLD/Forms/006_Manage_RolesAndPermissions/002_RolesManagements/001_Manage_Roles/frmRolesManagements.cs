@@ -80,16 +80,7 @@ namespace DVLD_System_Solution.Forms._005_Manage_Roles._001_ShowRoles
             }
         }
 
-        private void comBox_FilterItems_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (comBox_FilterItems.Text == "None")
-                txt_SearchValue.Visible = false;
-            else
-                txt_SearchValue.Visible = true;
-            txt_SearchValue.Clear();
-            txt_SearchValue.Select();
-        }
-
+        
         private void _UpdateContextMenues()
         {
             if (dataGridView_ShowRolesInfo.DataSource != null)
@@ -190,7 +181,7 @@ namespace DVLD_System_Solution.Forms._005_Manage_Roles._001_ShowRoles
 
 
         // >>
-        private void _SetupComboBoxRolesStatusItems()
+        private void _SetupComboBoxDisplayStatus()
         {
             List<clsComboBoxFilterItem> comboBoxFiltersItems = new List<clsComboBoxFilterItem>
             {
@@ -201,7 +192,6 @@ namespace DVLD_System_Solution.Forms._005_Manage_Roles._001_ShowRoles
             comBox_DisplayStatus.DataSource = comboBoxFiltersItems;
             comBox_DisplayStatus.DisplayMember = "Display";
             comBox_DisplayStatus.ValueMember = "Value";
-            comBox_DisplayStatus.Text = "ActiveRoles";
         }
 
         private void _SetupComboBoxFilterItems()
@@ -216,15 +206,14 @@ namespace DVLD_System_Solution.Forms._005_Manage_Roles._001_ShowRoles
             comBox_FilterItems.DataSource = comboBoxFiltersItems;
             comBox_FilterItems.DisplayMember = "Display";
             comBox_FilterItems.ValueMember = "Value";
-            comBox_FilterItems.Text = "None";
         }
 
         private Dictionary<string, Func<clsActiveRolesInfoGridViewDto, string, bool>> _filtersForActiveRoles;
         private Dictionary<string, Func<clsDeleteRolesInfoGridViewDto, string, bool>> _filtersForDeletedRoles; 
         
-        private void _SetupRolesFilters()
+        private void _SetComboBoxes()
         {
-            _SetupComboBoxRolesStatusItems();
+            _SetupComboBoxDisplayStatus();
             _SetupComboBoxFilterItems();
             _filtersForActiveRoles = clsRolesFilterService.GetActiveRolesFilters();
             _filtersForDeletedRoles = clsRolesFilterService.GetDeletedRolesFilters();
@@ -292,7 +281,7 @@ namespace DVLD_System_Solution.Forms._005_Manage_Roles._001_ShowRoles
         // >>
         private void frmShowRoles_Load(object sender, EventArgs e)
         {
-            _SetupRolesFilters();
+            _SetComboBoxes();
             
             _LoadActiveRolesToDataGridView();
             
@@ -351,6 +340,9 @@ namespace DVLD_System_Solution.Forms._005_Manage_Roles._001_ShowRoles
         // >>
         private void comBox_DisplayStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (!(comBox_DisplayStatus.SelectedValue is string))
+                return;
+
             comBox_FilterItems.SelectedValue = "None";
 
             string selectedValue = comBox_DisplayStatus.SelectedValue.ToString();
@@ -369,6 +361,17 @@ namespace DVLD_System_Solution.Forms._005_Manage_Roles._001_ShowRoles
                     btn_AddNewRole.Visible = false;
                     break;
             }
+        }
+
+        private void comBox_FilterItems_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!(comBox_FilterItems.SelectedValue is string))
+                return;
+
+            txt_SearchValue.Visible = (comBox_FilterItems.SelectedValue.ToString() != "None");
+
+            txt_SearchValue.Clear();
+            txt_SearchValue.Select();
         }
 
 

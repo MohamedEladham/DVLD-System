@@ -61,16 +61,34 @@
     <Compile Include="Forms\001_Login_Screen\frmLoginScreen.Designer.cs">
       <DependentUpon>frmLoginScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\003_Applications_Managements\frmApplicationsManagements.cs">
+    <Compile Include="Forms\003_Applications_Managements\001_User_Controls\uconApplicationDetails.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\003_Applications_Managements\001_User_Controls\uconApplicationDetails.Designer.cs">
+      <DependentUpon>uconApplicationDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\003_Applications_Managements\002_ApplicationsManagements_Screen\frmApplicationsManagements.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\003_Applications_Managements\frmApplicationsManagements.Designer.cs">
+    <Compile Include="Forms\003_Applications_Managements\002_ApplicationsManagements_Screen\frmApplicationsManagements.Designer.cs">
       <DependentUpon>frmApplicationsManagements.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\006_Manage_RolesAndPermissions\002_Main_Screen\frmMainScreen.cs">
+    <Compile Include="Forms\003_Applications_Managements\003_FirstTimeDrivingLicenesApplication_Screen\frmFirstTimeDrivingLicenesApplication.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\006_Manage_RolesAndPermissions\002_Main_Screen\frmMainScreen.Designer.cs">
+    <Compile Include="Forms\003_Applications_Managements\003_FirstTimeDrivingLicenesApplication_Screen\frmFirstTimeDrivingLicenesApplication.Designer.cs">
+      <DependentUpon>frmFirstTimeDrivingLicenesApplication.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\003_Applications_Managements\SelectPerson\frmSelectPerson.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\003_Applications_Managements\SelectPerson\frmSelectPerson.Designer.cs">
+      <DependentUpon>frmSelectPerson.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\002_Main_Screen\frmMainScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\002_Main_Screen\frmMainScreen.Designer.cs">
       <DependentUpon>frmMainScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\004_Manage_Peoples\001_User_Controls\uconPersonCardWithFilter.cs">
@@ -218,10 +236,19 @@
     <EmbeddedResource Include="Forms\001_Login_Screen\frmLoginScreen.resx">
       <DependentUpon>frmLoginScreen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\003_Applications_Managements\frmApplicationsManagements.resx">
+    <EmbeddedResource Include="Forms\003_Applications_Managements\001_User_Controls\uconApplicationDetails.resx">
+      <DependentUpon>uconApplicationDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\003_Applications_Managements\002_ApplicationsManagements_Screen\frmApplicationsManagements.resx">
       <DependentUpon>frmApplicationsManagements.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\006_Manage_RolesAndPermissions\002_Main_Screen\frmMainScreen.resx">
+    <EmbeddedResource Include="Forms\003_Applications_Managements\003_FirstTimeDrivingLicenesApplication_Screen\frmFirstTimeDrivingLicenesApplication.resx">
+      <DependentUpon>frmFirstTimeDrivingLicenesApplication.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\003_Applications_Managements\SelectPerson\frmSelectPerson.resx">
+      <DependentUpon>frmSelectPerson.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\002_Main_Screen\frmMainScreen.resx">
       <DependentUpon>frmMainScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\004_Manage_Peoples\001_User_Controls\uconPersonCardWithFilter.resx">
@@ -506,5 +533,6 @@
   <ItemGroup>
     <None Include="Resources\Manage_Application_512.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

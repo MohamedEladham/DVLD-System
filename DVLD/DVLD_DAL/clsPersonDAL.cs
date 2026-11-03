@@ -3,6 +3,8 @@ using DVLD_Models;
 using DVLD_Infrastructure;
 using System.Data.SqlClient;
 using System.Collections.Generic;
+using DVLD_Models.Person;
+using System.Data;
 
 namespace DVLD_DAL
 {
@@ -101,8 +103,78 @@ namespace DVLD_DAL
             return isExists;
         }
 
+
         // >>
 
+        public static DateTime? GetPersonDateOfBirth(int personID)
+        {
+            string query = @"SELECT 
+                                    DateOfBirth
+                                 FROM Persons
+                                 WHERE PersonID = @PersonID";
+
+            using (SqlConnection connection = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.Add("@PersonID", SqlDbType.Int).Value = personID;
+
+                connection.Open();
+
+                var result = command.ExecuteScalar();
+
+                if (result != null && result != DBNull.Value)
+                    return Convert.ToDateTime(result);
+            }
+
+            return null;
+        }
+
+        // >>
+        private static clsPerson _MapReaderToPersonBasicInfo(SqlDataReader reader) 
+        {
+            return new clsPerson
+            {
+                PersonID = (int)reader["PersonID"],
+                FirstName  = (string)reader["FirstName"],
+                SecondName = (string)reader["SecondName"],
+                ThirdName  = (string)reader["ThirdName"],
+                LastName   = (string)reader["LastName"],
+                DateOfBirth = (DateTime)reader["DateOfBirth"]
+            };
+        }
+
+        public static clsPerson GetPersonBasicInfoByID(int personID) 
+        {
+            clsPerson personBasicInfo = null;
+
+            string query = @"SELECT 
+                                    [PersonID], 
+                                    [FirstName],
+                                    [SecondName], 
+                                    [ThirdName],
+                                    [LastName],
+                                    [DateOfBirth]
+                                FROM Persons
+                                WHERE PersonID = @PersonID";
+
+            using (SqlConnection connection = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.Add("@PersonID", System.Data.SqlDbType.Int).Value = personID;
+                connection.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                        personBasicInfo = _MapReaderToPersonBasicInfo(reader);
+                }
+            }
+
+            return personBasicInfo;
+        }
+
+
+        // >> 
         private static clsPerson _MapReaderToActivePerson(SqlDataReader reader)
         {
             return new clsPerson

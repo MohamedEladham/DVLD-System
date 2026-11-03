@@ -89,17 +89,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             _UpdateUserIDAndPersonIDLabels();
         }
 
-        private void comBox_FilterItems_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (comBox_FilterItems.Text == "None")
-                txt_SearchValue.Visible = false;
-            else
-                txt_SearchValue.Visible = true;
-
-            txt_SearchValue.Clear();
-            txt_SearchValue.Select();
-        }
-
+        
         private void txt_SearchValue_KeyPress(object sender, KeyPressEventArgs e)
         {
             string filterSelected = comBox_FilterItems.SelectedValue.ToString();
@@ -203,7 +193,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
 
 
         // >>
-        private void _SetupComboBoxUsersStatusItems()
+        private void _SetupComboBoxDisplayStatus()
         {
             List<clsComboBoxFilterItem> comboBoxFiltersItems = new List<clsComboBoxFilterItem>
             {
@@ -215,7 +205,6 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             comBox_DisplayStatus.DataSource = comboBoxFiltersItems;
             comBox_DisplayStatus.DisplayMember = "Display";
             comBox_DisplayStatus.ValueMember   = "Value";
-            comBox_DisplayStatus.Text = "Active Users";
         }
 
         private void _SetupComboBoxFilterItems()
@@ -232,14 +221,13 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             comBox_FilterItems.DataSource = comboBoxFiltersItems;
             comBox_FilterItems.DisplayMember = "Display";
             comBox_FilterItems.ValueMember = "Value";
-            comBox_FilterItems.Text = "None";
         }
 
         private Dictionary<string, Func<clsUserInfoGridViewDto, string, bool>> _filtersForActiveAndInActiveUsers;
         private Dictionary<string, Func<clsDeleteUserInfoGridViewDto, string, bool>> _filtersForDeletedUsers;
-        private void _SetupUserFilters()
+        private void _SetComboBoxes()
         {
-            _SetupComboBoxUsersStatusItems();
+            _SetupComboBoxDisplayStatus();
             _SetupComboBoxFilterItems();
             _filtersForActiveAndInActiveUsers = clsUserFilterService.GetActiveAndInActiveUserFilters();
             _filtersForDeletedUsers = clsUserFilterService.GetDeletedUserFilters();
@@ -365,7 +353,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
         // >>
         private void _LoadData()
         {
-            _SetupUserFilters();
+            _SetComboBoxes();
             _LoadActiveUsersToDataGridView();
                 
             btn_AddNewUser.Enabled = clsCurrentUser.HasPermission(enPermissions.AddUserAndRole);
@@ -446,7 +434,10 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
         // >>
         private void comBox_DisplayStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
-            comBox_FilterItems.Text = "None";
+            if (!(comBox_DisplayStatus.SelectedValue is string))
+                return;
+
+            comBox_FilterItems.SelectedValue = "None";
 
             string selectedValue = comBox_DisplayStatus.SelectedValue.ToString();
 
@@ -472,7 +463,19 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             }
         }
 
-        
+        private void comBox_FilterItems_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!(comBox_FilterItems.SelectedValue is string))
+                return;
+
+            txt_SearchValue.Visible = (comBox_FilterItems.SelectedValue.ToString() != "None");
+
+            txt_SearchValue.Clear();
+            txt_SearchValue.Select();
+        }
+
+
+
         // >>
         private void _OpenFormShowUserInfo(enPersonStatus personStatus)
         {

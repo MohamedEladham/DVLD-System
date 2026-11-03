@@ -167,6 +167,7 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             this.txt_SearchValue.Name = "txt_SearchValue";
             this.txt_SearchValue.Size = new System.Drawing.Size(259, 24);
             this.txt_SearchValue.TabIndex = 235;
+            this.txt_SearchValue.Visible = false;
             this.txt_SearchValue.TextChanged += new System.EventHandler(this.txt_SearchValue_TextChanged);
             this.txt_SearchValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_SearchValue_KeyPress);
             // 

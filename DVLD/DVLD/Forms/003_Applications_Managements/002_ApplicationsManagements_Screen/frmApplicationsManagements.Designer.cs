@@ -1,4 +1,6 @@
-﻿namespace DVLD_System_Solution.Forms._003_Manage_Applications
+﻿using DVLD_Shared.Events;
+
+namespace DVLD_System_Solution.Forms._003_Manage_Applications
 {
     partial class frmApplicationsManagements
     {
@@ -15,6 +17,7 @@
         {
             if (disposing && (components != null))
             {
+                clsApplicationEvents.ApplicationCreated -= _ApplicationCreated;
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -40,7 +43,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.lab_ApplicationIDToText = new System.Windows.Forms.Label();
             this.txt_SearchValue = new System.Windows.Forms.TextBox();
-            this.btn_Close = new System.Windows.Forms.Button();
+            this.btn_FirstTimeDrivingLicense = new System.Windows.Forms.Button();
             this.comBox_FilterItems = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -51,14 +54,14 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
+            this.btn_Close = new System.Windows.Forms.Button();
+            this.dataGridView_ShowApplicationsInfos = new System.Windows.Forms.DataGridView();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.dataGridView_ShowApplicationsInfos = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_ShowApplicationsInfos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_ShowApplicationsInfos)).BeginInit();
             this.SuspendLayout();
             // 
             // label3
@@ -125,19 +128,23 @@
             this.txt_SearchValue.Name = "txt_SearchValue";
             this.txt_SearchValue.Size = new System.Drawing.Size(259, 24);
             this.txt_SearchValue.TabIndex = 251;
+            this.txt_SearchValue.Visible = false;
             this.txt_SearchValue.TextChanged += new System.EventHandler(this.txt_SearchValue_TextChanged);
             // 
-            // btn_Close
+            // btn_FirstTimeDrivingLicense
             // 
-            this.btn_Close.Font = new System.Drawing.Font("Sitka Small", 12F, System.Drawing.FontStyle.Bold);
-            this.btn_Close.ForeColor = System.Drawing.Color.SteelBlue;
-            this.btn_Close.Location = new System.Drawing.Point(25, 145);
-            this.btn_Close.Name = "btn_Close";
-            this.btn_Close.Size = new System.Drawing.Size(236, 43);
-            this.btn_Close.TabIndex = 249;
-            this.btn_Close.Text = "Local Driving License";
-            this.btn_Close.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btn_Close.UseVisualStyleBackColor = false;
+            this.btn_FirstTimeDrivingLicense.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_FirstTimeDrivingLicense.Font = new System.Drawing.Font("Sitka Small", 12F, System.Drawing.FontStyle.Bold);
+            this.btn_FirstTimeDrivingLicense.ForeColor = System.Drawing.Color.SteelBlue;
+            this.btn_FirstTimeDrivingLicense.Location = new System.Drawing.Point(17, 150);
+            this.btn_FirstTimeDrivingLicense.Name = "btn_FirstTimeDrivingLicense";
+            this.btn_FirstTimeDrivingLicense.Size = new System.Drawing.Size(254, 43);
+            this.btn_FirstTimeDrivingLicense.TabIndex = 249;
+            this.btn_FirstTimeDrivingLicense.Text = "First-Time Driving License";
+            this.btn_FirstTimeDrivingLicense.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_FirstTimeDrivingLicense.UseVisualStyleBackColor = false;
+            this.btn_FirstTimeDrivingLicense.Click += new System.EventHandler(this.btn_FirstTimeDrivingLicense_Click);
             // 
             // comBox_FilterItems
             // 
@@ -171,33 +178,37 @@
             this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.btn_FirstTimeDrivingLicense);
             this.panel1.Controls.Add(this.btn_Close);
-            this.panel1.Controls.Add(this.button7);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(284, 811);
+            this.panel1.Size = new System.Drawing.Size(289, 811);
             this.panel1.TabIndex = 259;
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Calisto MT", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.SteelBlue;
             this.label1.Location = new System.Drawing.Point(3, 12);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(278, 109);
+            this.label1.Size = new System.Drawing.Size(285, 109);
             this.label1.TabIndex = 261;
             this.label1.Text = "Applications Management";
             this.label1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // button6
             // 
+            this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.button6.Font = new System.Drawing.Font("Sitka Small", 12F, System.Drawing.FontStyle.Bold);
             this.button6.ForeColor = System.Drawing.Color.SteelBlue;
-            this.button6.Location = new System.Drawing.Point(25, 487);
+            this.button6.Location = new System.Drawing.Point(17, 498);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(236, 43);
+            this.button6.Size = new System.Drawing.Size(254, 43);
             this.button6.TabIndex = 255;
             this.button6.Text = "International License";
             this.button6.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -205,11 +216,13 @@
             // 
             // button5
             // 
+            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.button5.Font = new System.Drawing.Font("Sitka Small", 12F, System.Drawing.FontStyle.Bold);
             this.button5.ForeColor = System.Drawing.Color.SteelBlue;
-            this.button5.Location = new System.Drawing.Point(25, 430);
+            this.button5.Location = new System.Drawing.Point(17, 441);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(236, 43);
+            this.button5.Size = new System.Drawing.Size(254, 43);
             this.button5.TabIndex = 254;
             this.button5.Text = "Retake Test";
             this.button5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -217,11 +230,13 @@
             // 
             // button4
             // 
+            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.button4.Font = new System.Drawing.Font("Sitka Small", 12F, System.Drawing.FontStyle.Bold);
             this.button4.ForeColor = System.Drawing.Color.SteelBlue;
-            this.button4.Location = new System.Drawing.Point(25, 373);
+            this.button4.Location = new System.Drawing.Point(17, 384);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(236, 43);
+            this.button4.Size = new System.Drawing.Size(254, 43);
             this.button4.TabIndex = 253;
             this.button4.Text = "Release Detained";
             this.button4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -229,11 +244,13 @@
             // 
             // button3
             // 
+            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.button3.Font = new System.Drawing.Font("Sitka Small", 12F, System.Drawing.FontStyle.Bold);
             this.button3.ForeColor = System.Drawing.Color.SteelBlue;
-            this.button3.Location = new System.Drawing.Point(25, 316);
+            this.button3.Location = new System.Drawing.Point(17, 327);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(236, 43);
+            this.button3.Size = new System.Drawing.Size(254, 43);
             this.button3.TabIndex = 252;
             this.button3.Text = "Damaged Replacement";
             this.button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -241,11 +258,13 @@
             // 
             // button2
             // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.button2.Font = new System.Drawing.Font("Sitka Small", 12F, System.Drawing.FontStyle.Bold);
             this.button2.ForeColor = System.Drawing.Color.SteelBlue;
-            this.button2.Location = new System.Drawing.Point(25, 259);
+            this.button2.Location = new System.Drawing.Point(17, 270);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(236, 43);
+            this.button2.Size = new System.Drawing.Size(254, 43);
             this.button2.TabIndex = 251;
             this.button2.Text = "Lost Replacement";
             this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -253,52 +272,31 @@
             // 
             // button1
             // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.Font = new System.Drawing.Font("Sitka Small", 12F, System.Drawing.FontStyle.Bold);
             this.button1.ForeColor = System.Drawing.Color.SteelBlue;
-            this.button1.Location = new System.Drawing.Point(25, 202);
+            this.button1.Location = new System.Drawing.Point(17, 213);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(236, 43);
+            this.button1.Size = new System.Drawing.Size(254, 43);
             this.button1.TabIndex = 250;
             this.button1.Text = "Renew License";
             this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button1.UseVisualStyleBackColor = false;
             // 
-            // button7
+            // btn_Close
             // 
-            this.button7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.btn_Close.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button7.Font = new System.Drawing.Font("Sitka Small", 16F, System.Drawing.FontStyle.Bold);
-            this.button7.ForeColor = System.Drawing.Color.SteelBlue;
-            this.button7.Location = new System.Drawing.Point(36, 756);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(200, 43);
-            this.button7.TabIndex = 256;
-            this.button7.Text = "Close";
-            this.button7.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button7.UseVisualStyleBackColor = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox2.Image = global::DVLD_System_Solution.Properties.Resources.Manage_Application_512;
-            this.pictureBox2.Location = new System.Drawing.Point(696, 12);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(189, 154);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 245;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.Image = global::DVLD_System_Solution.Properties.Resources.DVLD_Logo2;
-            this.pictureBox1.Location = new System.Drawing.Point(1246, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(119, 109);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 243;
-            this.pictureBox1.TabStop = false;
+            this.btn_Close.Font = new System.Drawing.Font("Sitka Small", 16F, System.Drawing.FontStyle.Bold);
+            this.btn_Close.ForeColor = System.Drawing.Color.SteelBlue;
+            this.btn_Close.Location = new System.Drawing.Point(36, 756);
+            this.btn_Close.Name = "btn_Close";
+            this.btn_Close.Size = new System.Drawing.Size(205, 43);
+            this.btn_Close.TabIndex = 256;
+            this.btn_Close.Text = "Close";
+            this.btn_Close.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_Close.UseVisualStyleBackColor = false;
             // 
             // dataGridView_ShowApplicationsInfos
             // 
@@ -355,6 +353,29 @@
             this.dataGridView_ShowApplicationsInfos.TabIndex = 260;
             this.dataGridView_ShowApplicationsInfos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_ShowApplicationsInfos_CellClick);
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox2.Image = global::DVLD_System_Solution.Properties.Resources.Manage_Application_512;
+            this.pictureBox2.Location = new System.Drawing.Point(696, 12);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(189, 154);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 245;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.Image = global::DVLD_System_Solution.Properties.Resources.DVLD_Logo2;
+            this.pictureBox1.Location = new System.Drawing.Point(1246, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(119, 109);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 243;
+            this.pictureBox1.TabStop = false;
+            // 
             // frmApplicationsManagements
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -380,9 +401,9 @@
             this.Text = "Applications Managements";
             this.Load += new System.EventHandler(this.frmManageApplications_Load);
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_ShowApplicationsInfos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_ShowApplicationsInfos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -396,7 +417,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lab_ApplicationIDToText;
         private System.Windows.Forms.TextBox txt_SearchValue;
-        private System.Windows.Forms.Button btn_Close;
+        private System.Windows.Forms.Button btn_FirstTimeDrivingLicense;
         private System.Windows.Forms.ComboBox comBox_FilterItems;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox pictureBox2;
@@ -408,7 +429,7 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button btn_Close;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dataGridView_ShowApplicationsInfos;
     }

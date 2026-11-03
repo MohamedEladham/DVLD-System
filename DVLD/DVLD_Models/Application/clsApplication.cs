@@ -13,6 +13,6 @@ namespace DVLD_Models.Application
         public int ServiceID { set; get; }
         public int ApplicationStatusID { set; get; }
         public DateTime ApplicationDate { set; get; }
-        public decimal ApplicationFeesPaid { set; get; } 
+        public decimal ApplicationPaidFees { set; get; } 
     }
 }

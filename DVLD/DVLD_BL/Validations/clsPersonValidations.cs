@@ -203,6 +203,18 @@ namespace DVLD_BL.Validations
 
         // >>
 
+        public static bool IsPersonOldEnough(DateTime dateOfBirth, int minimumAllowedAge)
+        {
+            DateTime today = DateTime.Today;
+
+            int age = today.Year - dateOfBirth.Year;
+
+            if (dateOfBirth.Date > today.AddYears(-age))
+                age--;
+
+            return age >= minimumAllowedAge;
+        }
+
         public static clsValidationResult ValidateAge(DateTime dateOfBirth, int minAge, int maxAge)
         {
             if (dateOfBirth > clsValidationHelper.GetToDayDate())

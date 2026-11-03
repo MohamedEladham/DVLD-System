@@ -94,6 +94,7 @@ namespace DVLD_System_Solution.Forms._005_Manage_Roles_Permissions._003_Permissi
             this.txt_SearchValue.Name = "txt_SearchValue";
             this.txt_SearchValue.Size = new System.Drawing.Size(332, 24);
             this.txt_SearchValue.TabIndex = 255;
+            this.txt_SearchValue.Visible = false;
             this.txt_SearchValue.TextChanged += new System.EventHandler(this.txt_SearchValue_TextChanged);
             this.txt_SearchValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_SearchValue_KeyPress);
             // 
@@ -195,7 +196,7 @@ namespace DVLD_System_Solution.Forms._005_Manage_Roles_Permissions._003_Permissi
             this.toolStripMenuItem_UpdatePermission,
             this.toolStripMenuItem_DisablingPermission});
             this.contextMenuStrip_ActivePermissions.Name = "contextMenuStrip1";
-            this.contextMenuStrip_ActivePermissions.Size = new System.Drawing.Size(242, 184);
+            this.contextMenuStrip_ActivePermissions.Size = new System.Drawing.Size(242, 162);
             // 
             // toolStripMenuItem_ShowActivePermissionDetails
             // 

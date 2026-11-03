@@ -1,18 +1,49 @@
-﻿using DVLD_Infrastructure;
-using DVLD_Models.Application;
-using DVLD_Models.User;
-using DVLD_Shared.Global_Classes;
-using System;
-using System.Collections.Generic;
+﻿using System;
+using System.Data;
+using DVLD_Infrastructure;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using DVLD_Models.Application;
+using System.Collections.Generic;
+using static DVLD_Shared.Global_Enums.clsEnumHelpers;
 
 namespace DVLD_DAL
 {
     public class clsApplicationDAL
     {
+        public static bool HasNewApplicationForPersonAndService(int personID, int serviceID)
+        {
+            bool exists = false;
+
+            using (SqlConnection connection = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
+            {
+                string query = @"
+                                SELECT CASE
+                                    WHEN EXISTS
+                                    (
+                                        SELECT 1
+                                        FROM Applications
+                                        WHERE PersonID = @PersonID
+                                            AND ServiceID = @ServiceID
+                                            AND ApplicationStatusID = @ApplicationStatusID
+                                    )
+                                    THEN 1
+                                    ELSE 0
+                                END;";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@PersonID", SqlDbType.Int).Value = personID;
+                    command.Parameters.AddWithValue("@ServiceID", SqlDbType.Int).Value = serviceID;
+                    command.Parameters.AddWithValue("@ApplicationStatusID", SqlDbType.Int).Value = (int)enApplicationStatuses.New;
+
+                    connection.Open();
+
+                    exists = Convert.ToBoolean(command.ExecuteScalar());
+                }
+            }
+
+            return exists;
+        }
 
         private static clsApplicationGridViewDto _MapReaderToApplicationGridViewDto(SqlDataReader reader)
         {
@@ -111,6 +142,124 @@ namespace DVLD_DAL
             return applicationsList;
         }
 
+        public static bool AddNewFirstTimeDrivingLicenseApplication(int personID, decimal applicationPaidFees, int licenseClassID, out int newApplicationID)
+        {
+            bool isSuccess = false;
 
+            newApplicationID = -1;
+
+            if (personID <= 0 || licenseClassID <= 0)
+                return false;
+
+            using (SqlConnection connection = new SqlConnection(clsConnectionsStrings.ConnectionStringTODB_DVLD2))
+            {
+                connection.Open();
+
+                using (SqlTransaction transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        string insertApplicationQuery = @"INSERT INTO
+                                                                Applications
+                                                                    (
+                                                                        [PersonID],
+                                                                        [ServiceID],
+                                                                        [ApplicationStatusID],
+                                                                        [ApplicationDate],
+                                                                        [ApplicationPaidFees]
+                                                                    )
+                                                                VALUES
+                                                                    (
+                                                                        @PersonID,
+                                                                        @ServiceID,
+                                                                        @ApplicationStatusID,
+                                                                        GETDATE(),
+                                                                        @ApplicationPaidFees
+                                                                    );
+
+                                                                SELECT CAST(SCOPE_IDENTITY() AS INT);";
+
+                        using (SqlCommand insertApplicationCommand = new SqlCommand(insertApplicationQuery, connection, transaction))
+                        {
+                            insertApplicationCommand.Parameters.Add("@PersonID", SqlDbType.Int).Value = personID;
+
+                            insertApplicationCommand.Parameters.Add("@ServiceID", SqlDbType.Int).Value = (int)enServices.FirstTimeLicenseIssuance;
+
+                            insertApplicationCommand.Parameters.Add("@ApplicationStatusID", SqlDbType.Int).Value = (int)enApplicationStatuses.New;
+
+                            var paidFeesParameter = insertApplicationCommand.Parameters.Add("@ApplicationPaidFees", SqlDbType.Decimal);
+
+                            paidFeesParameter.Precision = 10;
+                            paidFeesParameter.Scale = 2;
+                            
+                            paidFeesParameter.Value = applicationPaidFees;
+
+                            var result = insertApplicationCommand.ExecuteScalar();
+
+                            if (result == null || result == DBNull.Value)
+                            {
+                                transaction.Rollback();
+                                return false;
+                            }
+
+                            newApplicationID = Convert.ToInt32(result);
+
+                            if (newApplicationID <= 0)
+                            {
+                                newApplicationID = -1;
+                                transaction.Rollback();
+                                return false;
+                            }
+                        }
+
+                        string insertFirstTimeLicenseDetailsQuery = @"INSERT INTO
+                                                                                FirstTimeLicenseApplicationDetails
+                                                                                    (
+                                                                                        [ApplicationID],
+                                                                                        [LicenseClassID]
+                                                                                    )
+                                                                                VALUES
+                                                                                    (
+                                                                                        @ApplicationID,
+                                                                                        @LicenseClassID
+                                                                                    );";
+
+                        using (SqlCommand insertFirstTimeLicenseDetailsCommand = new SqlCommand(insertFirstTimeLicenseDetailsQuery, connection, transaction))
+                        {
+                            insertFirstTimeLicenseDetailsCommand.Parameters.Add("@ApplicationID", System.Data.SqlDbType.Int).Value = newApplicationID;
+
+                            insertFirstTimeLicenseDetailsCommand.Parameters.Add("@LicenseClassID", System.Data.SqlDbType.Int).Value = licenseClassID;
+
+                            isSuccess = insertFirstTimeLicenseDetailsCommand.ExecuteNonQuery() == 1;
+                        }
+
+                        if (!isSuccess)
+                        {
+                            transaction.Rollback();
+                            newApplicationID = -1;
+                            return false;
+                        }
+
+                        transaction.Commit();
+
+                        return true;
+                    }
+                    catch
+                    {
+                        try
+                        {
+                            transaction.Rollback();
+                        }
+                        catch
+                        {
+                            // Preserve the original exception.
+                        }
+
+                        newApplicationID = -1;
+                        throw;
+                    }
+                }
+            }
+        }
     }
 }

@@ -163,7 +163,7 @@ namespace Main_Screen.Froms.Persons_Screen
 
 
         // >>
-        private void _SetupComboBoxPersonsStatusItems()
+        private void _SetupComboBoxDisplayStatus()
         {
             List<clsComboBoxFilterItem> comBPersonsStatusFilterItems = new List<clsComboBoxFilterItem>
             {
@@ -174,7 +174,6 @@ namespace Main_Screen.Froms.Persons_Screen
             comBox_DisplayStatus.DataSource = comBPersonsStatusFilterItems;
             comBox_DisplayStatus.DisplayMember = "Display";
             comBox_DisplayStatus.ValueMember = "Value";
-            comBox_DisplayStatus.Text = "Active Persons";
         }
 
         private void _SetupComboBoxFilterItems()
@@ -196,14 +195,14 @@ namespace Main_Screen.Froms.Persons_Screen
             comBox_FilterItems.DataSource = comboBoxFiltersItems;
             comBox_FilterItems.DisplayMember = "Display";
             comBox_FilterItems.ValueMember = "Value";
-            comBox_FilterItems.Text = "None";
         }
 
 
         private Dictionary<string, Func<clsActivePersonsInfoGridViewDto, string, bool>> _filtersForActivePersons;
         private Dictionary<string, Func<clsDeletedPersonInfoGridViewDto, string, bool>> _filtersForDeletedPersons;
-        private void _SetupPersonFilters()
+        private void _SetComboBoxes() 
         {
+            _SetupComboBoxDisplayStatus();
             _SetupComboBoxFilterItems();
             _filtersForActivePersons = clsPersonFilterService.GetPersonFilters();
             _filtersForDeletedPersons = clsPersonFilterService.GetDeletedPersonFilters();
@@ -283,8 +282,7 @@ namespace Main_Screen.Froms.Persons_Screen
 
         private void _LoadData()
         {
-            _SetupComboBoxPersonsStatusItems();
-            _SetupPersonFilters();
+            _SetComboBoxes();
             _LoadAllCountriesToDictionary();
             _LoadActivePersonInfoToDataGridView();
             btn_AddNewPerson.Enabled = clsCurrentUser.HasPermission(enPermissions.AddPerson);
@@ -328,8 +326,11 @@ namespace Main_Screen.Froms.Persons_Screen
             _BindData(_deletedPersonsGridViewDto);
         }
 
-        private void comBox_PersonStatus_SelectedIndexChanged(object sender, EventArgs e)
+        private void comBox_DisplayStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (!(comBox_DisplayStatus.SelectedValue is string))
+                return;
+
             comBox_FilterItems.SelectedValue = "None";
 
             string selectedValue = comBox_DisplayStatus.SelectedValue.ToString();
@@ -352,8 +353,11 @@ namespace Main_Screen.Froms.Persons_Screen
 
         private void comBox_FilterItems_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comBox_FilterItems.Text == "None") txt_SearchValue.Visible = false;
-            else txt_SearchValue.Visible = true;
+            if (!(comBox_FilterItems.SelectedValue is string))
+                return;
+
+            txt_SearchValue.Visible = (comBox_FilterItems.SelectedValue.ToString() != "None");
+
             txt_SearchValue.Clear();
             txt_SearchValue.Select();
         }

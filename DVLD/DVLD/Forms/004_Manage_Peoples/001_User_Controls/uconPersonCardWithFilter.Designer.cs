@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btn_AddNewPerson = new System.Windows.Forms.Button();
             this.txt_SearchValue = new System.Windows.Forms.TextBox();
             this.btn_GetPersonBy = new System.Windows.Forms.Button();
             this.comBox_FilterItems = new System.Windows.Forms.ComboBox();
@@ -42,6 +43,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btn_AddNewPerson);
             this.groupBox1.Controls.Add(this.txt_SearchValue);
             this.groupBox1.Controls.Add(this.btn_GetPersonBy);
             this.groupBox1.Controls.Add(this.comBox_FilterItems);
@@ -55,6 +57,20 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filter";
+            // 
+            // btn_AddNewPerson
+            // 
+            this.btn_AddNewPerson.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btn_AddNewPerson.FlatAppearance.BorderSize = 0;
+            this.btn_AddNewPerson.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
+            this.btn_AddNewPerson.Image = global::DVLD_System_Solution.Properties.Resources.Add_Person_32;
+            this.btn_AddNewPerson.Location = new System.Drawing.Point(591, 30);
+            this.btn_AddNewPerson.Name = "btn_AddNewPerson";
+            this.btn_AddNewPerson.Size = new System.Drawing.Size(46, 44);
+            this.btn_AddNewPerson.TabIndex = 240;
+            this.btn_AddNewPerson.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_AddNewPerson.UseVisualStyleBackColor = false;
+            this.btn_AddNewPerson.Click += new System.EventHandler(this.btn_AddNewPerson_Click);
             // 
             // txt_SearchValue
             // 
@@ -71,7 +87,7 @@
             // btn_GetPersonBy
             // 
             this.btn_GetPersonBy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btn_GetPersonBy.BackColor = System.Drawing.Color.Transparent;
+            this.btn_GetPersonBy.BackColor = System.Drawing.SystemColors.Control;
             this.btn_GetPersonBy.FlatAppearance.BorderSize = 0;
             this.btn_GetPersonBy.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.btn_GetPersonBy.Image = global::DVLD_System_Solution.Properties.Resources.Search_Person;
@@ -145,5 +161,6 @@
         private System.Windows.Forms.ComboBox comBox_FilterItems;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.Button btn_AddNewPerson;
     }
 }

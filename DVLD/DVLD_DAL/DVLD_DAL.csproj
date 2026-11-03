@@ -53,10 +53,14 @@
   <ItemGroup>
     <Compile Include="clsApplicationDAL.cs" />
     <Compile Include="clsCountryDAL.cs" />
+    <Compile Include="clsFirstTimeDrivingLicenseApplicationDAL.cs" />
+    <Compile Include="clsLicenseClassDAL.cs" />
+    <Compile Include="clsLicenseDAL.cs" />
     <Compile Include="clsPermissionDAL.cs" />
     <Compile Include="clsPersonDAL.cs" />
     <Compile Include="clsRoleDAL.cs" />
     <Compile Include="clsRolePermissionsDAL.cs" />
+    <Compile Include="clsServiceDAL.cs" />
     <Compile Include="clsUserDAL.cs" />
     <Compile Include="clsUserRolesDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

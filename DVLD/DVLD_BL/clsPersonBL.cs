@@ -18,6 +18,91 @@ namespace DVLD_BL
 {
     public class clsPersonBL
     {
+        public static (clsOperationResult, DateTime?) GetPersonDateOfBirth(int personID) 
+        {
+            if (personID <= 0)
+                return (new clsOperationResult
+                {
+                    Status = enOperationStatus.Failed,
+                    Message = clsPersonValidationMessages.PersonIDMustBeGreaterThanZeroMessage
+                }, null);
+
+            try
+            {
+                DateTime? personDateOfBirth = clsPersonDAL.GetPersonDateOfBirth(personID);
+
+                if (personDateOfBirth != null)
+                    return (new clsOperationResult { Status = enOperationStatus.Success }, personDateOfBirth);
+                else
+                    return (new clsOperationResult
+                    {
+                        Status = enOperationStatus.Failed,
+                        Message = clsPersonValidationMessages.PersonDateOfBirthNotFoundMessage
+                    }, null);
+            }
+            catch (Exception)
+            {
+                return (new clsOperationResult
+                {
+                    Status = enOperationStatus.Exception,
+                    Message = clsGeneralValidationMessages.DatabaseOperationExceptionMessage
+                }, null);
+            }
+        }
+
+        private static clsPersonBasicInfo _MapOriginalToPersonBasicInfo(clsPerson originalPersonInfo) 
+        {
+            return new clsPersonBasicInfo
+            {
+                PersonID = originalPersonInfo.PersonID,
+                PersonName = originalPersonInfo.FirstName + " " +
+                originalPersonInfo.SecondName + " " +
+                originalPersonInfo.ThirdName + " " +
+                originalPersonInfo.LastName,
+                Age = (short)_CalculateAge(originalPersonInfo.DateOfBirth)
+            };
+        }
+
+        public static (clsOperationResult, clsPersonBasicInfo) GetPersonBasicInfoByID(int personID)
+        {
+            if (!clsCurrentUser.HasPermission(enPermissions.ViewPersons))
+                return (new clsOperationResult
+                {
+                    Status = enOperationStatus.Failed,
+                    Message = clsUserValidationMessages.PermissionDeniedMessage
+                }, null);
+
+
+            if (personID <= 0)
+                return (new clsOperationResult
+                {
+                    Status = enOperationStatus.Failed,
+                    Message = clsPersonValidationMessages.InvalidPersonIDMessage
+                }, null);
+
+            try
+            {
+                clsPerson originalPersonInfo = clsPersonDAL.GetPersonBasicInfoByID(personID);
+
+                if (originalPersonInfo != null)
+                    return (new clsOperationResult { Status = enOperationStatus.Success }, _MapOriginalToPersonBasicInfo(originalPersonInfo));
+                else
+                    return (new clsOperationResult
+                    {
+                        Status = enOperationStatus.Failed,
+                        Message = clsPersonValidationMessages.PersonNotFoundMessage
+                    }, null);
+            }
+            catch (Exception)
+            {
+                return (new clsOperationResult
+                {
+                    Status = enOperationStatus.Exception,
+                    Message = clsGeneralValidationMessages.DatabaseOperationExceptionMessage
+                }, null);
+            }
+        }
+
         public static (clsOperationResult, clsPerson) GetPersonByID(int personID)
         {
             if (!clsCurrentUser.HasPermission(enPermissions.ViewPersons))

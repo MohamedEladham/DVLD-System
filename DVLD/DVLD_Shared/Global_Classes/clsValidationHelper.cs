@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DVLD_Shared.Validation_Messages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,8 +25,18 @@ namespace DVLD_Shared.Global_Classes
         {
             return !string.IsNullOrEmpty(source) && source.IndexOf(value, StringComparison.OrdinalIgnoreCase) >= 0;
         }
-     
+
         // >>
+
+        public static bool TryParseDecimal(string stringValue, out decimal decimalValue)
+        {
+            decimalValue = 0;
+
+            if (string.IsNullOrWhiteSpace(stringValue))
+                return false;
+
+            return decimal.TryParse(stringValue, out decimalValue);
+        }
 
         public static DateTime? GetDeletedDate(bool status)
         {
@@ -39,12 +50,7 @@ namespace DVLD_Shared.Global_Classes
         {
             return DateTime.Today;
         }
-
-        public static bool IsInteger(string value)
-        {
-            return true;
-        }
-
+       
         public static bool IsAdult(DateTime dateOfBirth)
         {
             const int minimumAge = 18;

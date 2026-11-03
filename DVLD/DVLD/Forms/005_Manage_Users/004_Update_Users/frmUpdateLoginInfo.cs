@@ -111,8 +111,14 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
         private void _SetErrorProvider(string propertyName, string message)
         {
             Control control = _GetControlByPropertyName(propertyName);
-            errorProvider1.SetError(control, message);
-            control.Select();
+
+            if (control != null)
+            {
+                errorProvider1.SetError(control, message);
+                if (control is TextBox) control.Select();
+            }
+            else
+                MessageBox.Show(message, "Operation Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         private bool _UpdateUserNameAndStatusInfo(clsUser user)

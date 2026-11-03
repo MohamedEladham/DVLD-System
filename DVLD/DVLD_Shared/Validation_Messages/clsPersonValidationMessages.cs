@@ -8,6 +8,7 @@ namespace DVLD_Shared.Validation_Messages
 
         public const string PersonIDMustBeGreaterThanZeroMessage = "Invalid Person ID. Person ID must be greater than zero.";
         public const string PersonNotFoundMessage = "No person was found with the specified ID.";
+        public const string PersonDateOfBirthNotFoundMessage = "No person date of birth was found with the specified ID.";
         public const string PersonNotFoundByNationalNOMessage = "No person was found with the specified National No.";
 
         public static string PersonIDRequiredMessage = "Person ID is required."; 
@@ -72,6 +73,7 @@ namespace DVLD_Shared.Validation_Messages
         public static string DateOfBirthInvalidMessage = "Date of birth cannot be in the future.";
         public static string PersonUnder18Message = "Person must be at least 18 years old.";
         public const  string AgeMustBeBetween18And50YearsMessage = "The person's age must be between 18 and 50 years.";
+        public const string  PersonAgeNotAllowedMessage = "The person's age does not meet the minimum age requirement for the selected license class.";
 
 
         // Phone Number Validation Messages

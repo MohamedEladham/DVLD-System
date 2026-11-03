@@ -6,6 +6,8 @@ using System.Windows.Forms;
 using DVLD_Models.User;
 using DVLD_Shared.Global_Classes;
 using DVLD_Shared.Validation_Messages;
+using Main_Screen.Forms.Persons;
+using static DVLD_Shared.Global_Enums.clsEnumHelpers;
 
 namespace DVLD_System_Solution.Forms._003_Manage_People.Controls
 {
@@ -38,7 +40,21 @@ namespace DVLD_System_Solution.Forms._003_Manage_People.Controls
             txt_SearchValue.Select();
         }
 
+        
+        // >>
+        private void btn_AddNewPerson_Click(object sender, EventArgs e)
+        {
+            if (!clsCurrentUser.HasPermission(enPermissions.AddPerson))
+            {
+                MessageBox.Show(clsUserValidationMessages.PermissionDeniedMessage, "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
+            frmAddUpdatePersons frm = new frmAddUpdatePersons();
+            frm.ShowDialog();
+        }
+
+        
         // >>
         private void _SetupComboBoxFilterItems()
         {
