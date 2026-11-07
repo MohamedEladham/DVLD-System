@@ -14,9 +14,5 @@ namespace DVLD_Shared.Events
         {
             ApplicationCreated?.Invoke(applicationID);
         }
-
-
-
-
     }
 }

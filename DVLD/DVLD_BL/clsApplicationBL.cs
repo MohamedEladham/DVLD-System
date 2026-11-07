@@ -128,7 +128,6 @@ namespace DVLD_BL
                         Message = clsApplicationValidationMessages.ApplicationSavedSuccessfully,
                         PropertyName = null
                     };
-
                
                 return new clsOperationResult
                 {
