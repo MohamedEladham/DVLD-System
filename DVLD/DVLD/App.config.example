@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <configSections>
+        <sectionGroup name="userSettings" type="System.Configuration.UserSettingsGroup, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" >
+            <section name="DVLD_System_Solution.Properties.Settings" type="System.Configuration.ClientSettingsSection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" allowExeDefinition="MachineToLocalUser" requirePermission="false" />
+        </sectionGroup>
+    </configSections>
+
+    <startup> 
+        <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.8" />
+    </startup>
+
+    <connectionStrings>
+        <!-- Template Connection String: Replace these placeholder values with your local SQL Server details -->
+        <add name="DB_DVLD2" 
+             connectionString="Server=YourServerName;Database=YourDatabaseName;User Id=YOUR_USER;Password=YOUR_PASSWORD;" 
+             providerName="System.Data.SqlClient" />
+    </connectionStrings>
+
+    <userSettings>
+        <DVLD_System_Solution.Properties.Settings>
+            <setting name="RememberUserName" serializeAs="String">
+                <value>False</value>
+            </setting>
+            <setting name="UserName" serializeAs="String">
+                <value />
+            </setting>
+        </DVLD_System_Solution.Properties.Settings>
+    </userSettings>
+</configuration>
