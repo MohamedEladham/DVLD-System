@@ -22,4 +22,8 @@ packages/
 # Logs
 *.log
 
+# Ignore Application Configuration files to protect credentials
+App.config
+*.config
+
 *~
