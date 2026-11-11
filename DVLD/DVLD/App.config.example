@@ -2,22 +2,23 @@
 
 <configuration>
     <configSections>
-        <sectionGroup name="userSettings" type="System.Configuration.UserSettingsGroup, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" >
+        <sectionGroup name="userSettings" type="System.Configuration.UserSettingsGroup, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
             <section name="DVLD_System_Solution.Properties.Settings" type="System.Configuration.ClientSettingsSection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" allowExeDefinition="MachineToLocalUser" requirePermission="false" />
         </sectionGroup>
     </configSections>
-    
+
     <connectionStrings>
-        <!-- Template Connection String: Replace these placeholder values with your local SQL Server details -->
-        <add name="DB_DVLD2" 
-             connectionString="Server=YourServerName;Database=YourDatabaseName;User Id=YOUR_USER;Password=YOUR_PASSWORD;" 
+        <!-- SQL Server Authentication -->
+        <!-- Replace the placeholders with your SQL Server connection details. -->
+        <add name="DB_DVLD2"
+             connectionString="Server=YOUR_SERVER_NAME;Database=DVLD2;User Id=YOUR_SQL_USERNAME;Password=YOUR_SQL_PASSWORD;"
              providerName="System.Data.SqlClient" />
     </connectionStrings>
 
-    <startup> 
+    <startup>
         <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.8" />
     </startup>
-    
+
     <userSettings>
         <DVLD_System_Solution.Properties.Settings>
             <setting name="RememberUserName" serializeAs="String">
@@ -29,3 +30,4 @@
         </DVLD_System_Solution.Properties.Settings>
     </userSettings>
 </configuration>
+```
