@@ -31,16 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DVLD_DAL">
-      <HintPath>..\DVLD_DAL\bin\Debug\DVLD_DAL.dll</HintPath>
-    </Reference>
-    <Reference Include="DVLD_Models">
-      <HintPath>..\DVLD_Models\bin\Debug\DVLD_Models.dll</HintPath>
-    </Reference>
-    <Reference Include="DVLD_Shared, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\DVLD_Shared\bin\Debug\DVLD_Shared.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -76,6 +66,19 @@
     <Compile Include="Validations\clsUserValidations.cs" />
     <Compile Include="Validations\clsValidationResult.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\DVLD_DAL\DVLD_DAL.csproj">
+      <Project>{0dba4a13-5d74-42fc-9bb2-87b609f9cc14}</Project>
+      <Name>DVLD_DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DVLD_Models\DVLD_Models.csproj">
+      <Project>{744c8ddd-af3b-44b8-a87a-3ac9975839f9}</Project>
+      <Name>DVLD_Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DVLD_Shared\DVLD_Shared.csproj">
+      <Project>{73d80a84-8162-4ebf-98ca-efe269cdc2d7}</Project>
+      <Name>DVLD_Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

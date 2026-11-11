@@ -33,15 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DVLD_BL">
-      <HintPath>..\DVLD_BL\bin\Debug\DVLD_BL.dll</HintPath>
-    </Reference>
-    <Reference Include="DVLD_Models">
-      <HintPath>..\DVLD_Models\bin\Debug\DVLD_Models.dll</HintPath>
-    </Reference>
-    <Reference Include="DVLD_Shared">
-      <HintPath>..\DVLD_Shared\bin\Debug\DVLD_Shared.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -533,6 +524,19 @@
   <ItemGroup>
     <None Include="Resources\Manage_Application_512.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\DVLD_BL\DVLD_BL.csproj">
+      <Project>{078e13ad-39be-477c-bd2e-305e96bc12a7}</Project>
+      <Name>DVLD_BL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DVLD_Models\DVLD_Models.csproj">
+      <Project>{744c8ddd-af3b-44b8-a87a-3ac9975839f9}</Project>
+      <Name>DVLD_Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DVLD_Shared\DVLD_Shared.csproj">
+      <Project>{73d80a84-8162-4ebf-98ca-efe269cdc2d7}</Project>
+      <Name>DVLD_Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

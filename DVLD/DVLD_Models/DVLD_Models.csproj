@@ -31,9 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DVLD_Shared">
-      <HintPath>..\DVLD_Shared\bin\Debug\DVLD_Shared.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -64,6 +61,12 @@
     <Compile Include="User\clsDeleteUserInfoGridViewDto.cs" />
     <Compile Include="User\clsUser.cs" />
     <Compile Include="User\clsUserInfoGridViewDto.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DVLD_Shared\DVLD_Shared.csproj">
+      <Project>{73d80a84-8162-4ebf-98ca-efe269cdc2d7}</Project>
+      <Name>DVLD_Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
