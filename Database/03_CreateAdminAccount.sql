@@ -2,7 +2,7 @@
     DVLD System - Initial Admin Account Setup
 
     Run AFTER:
-      01_CreateSchema.sql
+      01_Create_DB_DVLD2_Schema.sql
       02_SeedData.sql
 
     Instructions:
@@ -24,7 +24,7 @@ GO
 
 -- Customize these values
 DECLARE @AdminUserName VARCHAR(250) = 'Admin';
-DECLARE @AdminPassword NVARCHAR(128) = N'ChangeThisPassword123';
+DECLARE @AdminPassword NVARCHAR(128) = N'';
 
 DECLARE @PersonID INT;
 DECLARE @UserID INT;
