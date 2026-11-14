@@ -24,6 +24,9 @@ GO
 
 -- Customize these values
 DECLARE @AdminUserName VARCHAR(250) = 'Admin';
+
+-- Enter Your Password
+-- Note: Password must contain at least 3 characters.
 DECLARE @AdminPassword NVARCHAR(128) = N'';
 
 DECLARE @PersonID INT;
@@ -40,9 +43,9 @@ BEGIN TRY
     IF LEN(@AdminUserName) = 0
         THROW 50001, 'Username cannot be empty.', 1;
 
-    -- Validate password length
-    IF LEN(@AdminPassword) < 8
-        THROW 50002, 'Password must contain at least 8 characters.', 1;
+	-- Validate password length
+    IF LEN(@AdminPassword) < 3
+        THROW 50002, 'Password must contain at least 3 characters.', 1;
 
     -- Ensure password contains ASCII characters only
     WHILE @Index <= DATALENGTH(@AdminPassword) / 2
