@@ -71,19 +71,9 @@ namespace DVLD_System_Solution.Forms._003_Manage_People.Controls
 
         private void _SetDefaultPersonImage(char gender)
         {
-            string imagePath = clsImageHelper.GetOrCreateDefaultPersonImageFolderPath();
-
-            if (gender == 'M')
-                imagePath = Path.Combine(imagePath, "Male.png");
-            else
-                imagePath = Path.Combine(imagePath, "Female.png");
-
-            Image image = clsImageHelper.LoadImageSafe(imagePath);
-
-            if (image != null)
-            {
-                picB_PersonImage.Image = image;
-            }
+            picB_PersonImage.Image = gender == 'M' ?
+                DVLD_System_Solution.Properties.Resources.Male_512 :
+                DVLD_System_Solution.Properties.Resources.Female_512;
         }
 
         private void _SetPersonImage(string imageName)

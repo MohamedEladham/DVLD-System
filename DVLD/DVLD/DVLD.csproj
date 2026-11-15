@@ -516,10 +516,10 @@
     <None Include="Resources\Permissions1_321.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\TickBox2_32.png" />
+    <None Include="Resources\TickBox1_32.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\TickBox1_32.png" />
+    <None Include="Resources\TickBox2_32.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Manage_Application_512.png" />
@@ -537,6 +537,12 @@
       <Project>{73d80a84-8162-4ebf-98ca-efe269cdc2d7}</Project>
       <Name>DVLD_Shared</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Show_Passowrd_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Female_512.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

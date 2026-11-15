@@ -182,19 +182,9 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
 
         private void _SetDefaultShowPasswordImage(bool status)
         {
-            string imagePath = clsImageHelper.GetOrCreateResourcesImageFolderPath();
-
-            if (status)
-                imagePath = Path.Combine(imagePath, "Show_Passowrd_32.png");
-            else
-                imagePath = Path.Combine(imagePath, "Hide_Passowrd_32.png");
-
-            Image image = clsImageHelper.LoadImageSafe(imagePath);
-
-            if (image != null)
-            {
-                picB_ShowHidePassword.Image = image;
-            }
+            picB_ShowHidePassword.Image = status ?
+                global::DVLD_System_Solution.Properties.Resources.Show_Passowrd_32 :
+                global::DVLD_System_Solution.Properties.Resources.Hide_Passowrd_32;
         }
 
         private void picB_ShowHidePassword_Click(object sender, EventArgs e)

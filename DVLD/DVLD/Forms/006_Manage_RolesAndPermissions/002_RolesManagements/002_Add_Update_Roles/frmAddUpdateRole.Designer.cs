@@ -206,7 +206,7 @@
             // 
             // picB_CheckedNotCheckedPermissions
             // 
-            this.picB_CheckedNotCheckedPermissions.Image = global::DVLD_System_Solution.Properties.Resources.TickBox1_32;
+            this.picB_CheckedNotCheckedPermissions.Image = global::DVLD_System_Solution.Properties.Resources.TickBox2_32;
             this.picB_CheckedNotCheckedPermissions.Location = new System.Drawing.Point(620, 329);
             this.picB_CheckedNotCheckedPermissions.Name = "picB_CheckedNotCheckedPermissions";
             this.picB_CheckedNotCheckedPermissions.Size = new System.Drawing.Size(32, 32);

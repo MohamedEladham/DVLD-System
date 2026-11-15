@@ -60,27 +60,7 @@ namespace DVLD_Shared.Global_Classes
 
         public static string GetOrCreatePersonsImagesFolderPath()
         {
-            string folderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", "PersonsImages");
-
-            if (!Directory.Exists(folderPath))
-                Directory.CreateDirectory(folderPath);
-
-            return folderPath;
-        }
-
-        public static string GetOrCreateDefaultPersonImageFolderPath()
-        {
-            string folderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", "GenderImages");
-
-            if (!Directory.Exists(folderPath))
-                Directory.CreateDirectory(folderPath);
-
-            return folderPath;
-        }
-
-        public static string GetOrCreateResourcesImageFolderPath()
-        {
-            string folderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", "Resources");
+            string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"DVLD","Images", "PersonsImages");
 
             if (!Directory.Exists(folderPath))
                 Directory.CreateDirectory(folderPath);

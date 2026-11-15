@@ -26,7 +26,6 @@ namespace DVLD_System_Solution.Forms._003_Applications_Managements._002_FirstTim
         private int _personID = -1;
         private int _licenseClassID = -1;
         private short _minimunAgeForLicenseClass = -1; 
-        private decimal _applicationPaidFees = -1;  
 
         public frmFirstTimeDrivingLicenesApplication(int personID)
         {
@@ -38,15 +37,15 @@ namespace DVLD_System_Solution.Forms._003_Applications_Managements._002_FirstTim
         // >>
         private void txt_ApplicationPaidFees_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //// Allow control keys (Backspace, Delete, etc.)
-            //if (char.IsControl(e.KeyChar))
-            //    return;
+            // Allow control keys (Backspace, Delete, etc.)
+            if (char.IsControl(e.KeyChar))
+                return;
 
-            //// Allow digits
-            //if (char.IsDigit(e.KeyChar))
-            //    return;
+            // Allow digits
+            if (char.IsDigit(e.KeyChar))
+                return;
 
-            //e.Handled = true;
+            e.Handled = true;
         }
 
         private void txt_ApplicationPaidFees_MouseClick(object sender, MouseEventArgs e)
@@ -90,8 +89,6 @@ namespace DVLD_System_Solution.Forms._003_Applications_Managements._002_FirstTim
 
         private List<clsLicenseClass> _licenseClasses = null;
        
-        private bool _isLoadingLicenseClasses = false;
-
         private void _LoadLicenseClassesToComboBox()
         {
             _licenseClasses = GetAllActiveLicenseClassesBasicInfo();

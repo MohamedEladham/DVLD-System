@@ -38,19 +38,9 @@ namespace DVLD_System_Solution.Forms._005_Manage_Roles._002_AddRoles
 
         private void _SetDefaultCheckedOrNotCheckedPermissionsImage(bool status)
         {
-            string imagePath = clsImageHelper.GetOrCreateResourcesImageFolderPath();
-
-            if (status)
-                imagePath = Path.Combine(imagePath, "CheckedListBox_32.png");
-            else
-                imagePath = Path.Combine(imagePath, "NotCheckedListBox_32.png");
-
-            Image image = clsImageHelper.LoadImageSafe(imagePath);
-
-            if (image != null)
-            {
-                picB_CheckedNotCheckedPermissions.Image = image;
-            }
+            picB_CheckedNotCheckedPermissions.Image = status ?
+               global::DVLD_System_Solution.Properties.Resources.TickBox1_32 :
+               global::DVLD_System_Solution.Properties.Resources.TickBox2_32;
         }
 
         private void _CheckedOrNotCheckedAllRolePermissions(bool mode)

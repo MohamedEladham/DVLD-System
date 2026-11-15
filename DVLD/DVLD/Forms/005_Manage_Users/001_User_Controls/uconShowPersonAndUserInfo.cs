@@ -70,19 +70,9 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users.Controls
 
         private void _SetDefaultActiveUserImage(bool status)
         {
-            string imagePath = clsImageHelper.GetOrCreateResourcesImageFolderPath();
-
-            if (status)
-                imagePath = Path.Combine(imagePath, "Active_User_32.png");
-            else
-                imagePath = Path.Combine(imagePath, "Not_Active_User_32.png");
-
-            Image image = clsImageHelper.LoadImageSafe(imagePath);
-
-            if (image != null)
-            {
-                picB_ActiveStatus.Image = image;
-            }
+            picB_ActiveStatus.Image = status ?
+                global::DVLD_System_Solution.Properties.Resources.Active_User_32 :
+                global::DVLD_System_Solution.Properties.Resources.Block_User_32;
         }
 
         private void _ResetLabelIsActive(bool status)

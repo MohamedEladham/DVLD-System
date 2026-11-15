@@ -27,9 +27,6 @@ namespace DVLD_System_Solution.Forms._003_Manage_Applications
 {
     public partial class frmApplicationsManagements : Form
     {
-        enApplicationStatuses _applicationStatuses = enApplicationStatuses.New; 
-
-
         public frmApplicationsManagements()
         {
             InitializeComponent();

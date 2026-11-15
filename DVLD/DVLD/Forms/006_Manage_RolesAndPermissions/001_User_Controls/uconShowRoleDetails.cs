@@ -10,8 +10,6 @@ namespace DVLD_System_Solution.Forms._005_Manage_Roles_Permissions._001_User_Con
 {
     public partial class uconShowRoleDetails : UserControl
     {
-        private int _roleID = -1;
-
         public uconShowRoleDetails()
         {
             InitializeComponent();

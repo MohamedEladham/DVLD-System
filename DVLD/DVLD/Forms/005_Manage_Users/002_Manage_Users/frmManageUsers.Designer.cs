@@ -35,10 +35,10 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmManageUsers));
             this.label3 = new System.Windows.Forms.Label();
             this.comBox_DisplayStatus = new System.Windows.Forms.ComboBox();
@@ -211,8 +211,8 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             this.dataGridView_ShowUsersInfos.AllowUserToAddRows = false;
             this.dataGridView_ShowUsersInfos.AllowUserToDeleteRows = false;
             this.dataGridView_ShowUsersInfos.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.dataGridView_ShowUsersInfos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.dataGridView_ShowUsersInfos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridView_ShowUsersInfos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -221,38 +221,38 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             this.dataGridView_ShowUsersInfos.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView_ShowUsersInfos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
             this.dataGridView_ShowUsersInfos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 10F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView_ShowUsersInfos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Tahoma", 10F);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_ShowUsersInfos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridView_ShowUsersInfos.ColumnHeadersHeight = 30;
             this.dataGridView_ShowUsersInfos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridView_ShowUsersInfos.ContextMenuStrip = this.contextMenuStrip_ActiveUsers;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Tahoma", 12F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView_ShowUsersInfos.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Tahoma", 12F);
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView_ShowUsersInfos.DefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridView_ShowUsersInfos.EnableHeadersVisualStyles = false;
             this.dataGridView_ShowUsersInfos.GridColor = System.Drawing.Color.DimGray;
             this.dataGridView_ShowUsersInfos.Location = new System.Drawing.Point(12, 341);
             this.dataGridView_ShowUsersInfos.Name = "dataGridView_ShowUsersInfos";
             this.dataGridView_ShowUsersInfos.ReadOnly = true;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Tahoma", 8F);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView_ShowUsersInfos.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Tahoma", 8F);
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_ShowUsersInfos.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridView_ShowUsersInfos.RowHeadersWidth = 35;
             this.dataGridView_ShowUsersInfos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridView_ShowUsersInfos.Size = new System.Drawing.Size(1136, 376);
@@ -386,21 +386,21 @@ namespace DVLD_System_Solution.Forms._004_Manage_Users
             this.toolStripMenuItem_ShowDeletedUserDetails,
             this.toolStripSeparator4});
             this.contextMenuStrip_DeletedUsers.Name = "contextMenuStrip1";
-            this.contextMenuStrip_DeletedUsers.Size = new System.Drawing.Size(173, 48);
+            this.contextMenuStrip_DeletedUsers.Size = new System.Drawing.Size(197, 70);
             // 
             // toolStripMenuItem_ShowDeletedUserDetails
             // 
             this.toolStripMenuItem_ShowDeletedUserDetails.Image = global::DVLD_System_Solution.Properties.Resources.Person_Details_32;
             this.toolStripMenuItem_ShowDeletedUserDetails.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripMenuItem_ShowDeletedUserDetails.Name = "toolStripMenuItem_ShowDeletedUserDetails";
-            this.toolStripMenuItem_ShowDeletedUserDetails.Size = new System.Drawing.Size(172, 38);
+            this.toolStripMenuItem_ShowDeletedUserDetails.Size = new System.Drawing.Size(196, 38);
             this.toolStripMenuItem_ShowDeletedUserDetails.Text = "Show Details";
             this.toolStripMenuItem_ShowDeletedUserDetails.Click += new System.EventHandler(this.toolStripMenuItem_ShowDeletedUserDetails_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(169, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(153, 6);
             // 
             // btn_AddNewUser
             // 

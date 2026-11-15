@@ -3,15 +3,13 @@ using DVLD_BL;
 using System.IO;
 using DVLD_Models;
 using System.Drawing;
-using DVLD_BL.Validations;
+using DVLD_Models.User;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using DVLD_Shared.Global_Classes;
 using DVLD_Shared.Operations_Result;
-using static DVLD_Shared.Operations_Result.clsOperationResult;
 using static DVLD_Shared.Global_Enums.clsEnumHelpers;
-using DVLD_Models.User;
-using DVLD_Models.Role;
+using static DVLD_Shared.Operations_Result.clsOperationResult;
 
 namespace Main_Screen.Forms.Persons
 {
@@ -141,20 +139,11 @@ namespace Main_Screen.Forms.Persons
         // Set Default Person Image
         private void _SetDefaultPersonImage()
         {
-            string imagePath = clsImageHelper.GetOrCreateDefaultPersonImageFolderPath();
+            picB_PersonImage.Image = rdoB_Male.Checked ?
+                global::DVLD_System_Solution.Properties.Resources.Male_512 :
+                global::DVLD_System_Solution.Properties.Resources.Female_512;
 
-            if (rdoB_Male.Checked)
-                imagePath = Path.Combine(imagePath, "Male.png");
-            else if (rdoB_Female.Checked)
-                imagePath = Path.Combine(imagePath, "Female.png");
-
-            Image image = clsImageHelper.LoadImageSafe(imagePath);
-
-            if (image != null)
-            {
-                picB_PersonImage.Image = image;
-                linkL_RemoveImage.Visible = false;
-            }
+            linkL_RemoveImage.Visible = false;
         }
 
         private void _SetPersonImage()
