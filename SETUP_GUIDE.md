@@ -49,6 +49,20 @@ After opening the solution:
 3. Select **Build → Rebuild Solution**.
 4. Check the Build output and Error List.
 
+**Important – Before Building the Solution:**
+
+The repository does not include the actual `App.config` file because it may contain sensitive database credentials.
+
+Before rebuilding the solution, you must:
+
+1. Navigate to the `DVLD/DVLD` directory.
+2. Create a copy of `App.config.example` in the same directory.
+3. Rename the copied file to `App.config`.
+
+The generated `App.config` file can initially retain the placeholder connection string values. You can configure your actual SQL Server connection details later, as explained in Section 5.
+
+Do not rename or remove the original `App.config.example` file, and do not commit the generated `App.config` file to the repository.
+
 The solution should build successfully before proceeding to run the application.
 
 ## 4. Create and Initialize the Database
@@ -91,12 +105,12 @@ The application uses a connection string named `DB_DVLD2` to connect to the data
 Follow these steps:
 
 1. Navigate to the `DVLD/DVLD` directory.
-2. Locate `App.config.example`.
-3. Create a copy in the same directory.
-4. Rename the copied file to `App.config`.
-5. Open `App.config` and update the connection string named `DB_DVLD2`.
+2. Locate the `App.config.example` file.
+3. Create a copy of `App.config.example` in the same directory.
+4. Rename the copied file to `App.config`. Keep the original `App.config.example` unchanged.
+5. Open `App.config` and replace the connection string placeholders with your own SQL Server connection details.
 
-Replace the following placeholders with your own SQL Server connection details:
+**Important:** The generated `App.config` file is local to your development environment and must not be committed to the repository. Only `App.config.example` is tracked by Git.
 
 - `YOUR_SERVER_NAME`
 - `YOUR_SQL_USERNAME`
