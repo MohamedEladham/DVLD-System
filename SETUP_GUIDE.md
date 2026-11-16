@@ -93,7 +93,7 @@ Execute the scripts in the following order using SQL Server Management Studio (S
 
 **Important:**
 
-- The initial administrator password must be at least 8 characters long and contain printable ASCII characters.
+- The initial administrator password must be at least 3 characters long and contain printable ASCII characters.
 - Execute each script only after the previous script has completed successfully.
 - Make sure all scripts are executed against the intended SQL Server instance.
 - Do not use real or sensitive credentials in publicly shared files.

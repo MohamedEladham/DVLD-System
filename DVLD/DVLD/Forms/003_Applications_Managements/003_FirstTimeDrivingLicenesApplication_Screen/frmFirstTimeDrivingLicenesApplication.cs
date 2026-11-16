@@ -45,6 +45,10 @@ namespace DVLD_System_Solution.Forms._003_Applications_Managements._002_FirstTim
             if (char.IsDigit(e.KeyChar))
                 return;
 
+            // Allow only one decimal point
+            if (e.KeyChar == '.' && !((TextBox)sender).Text.Contains("."))
+                return;
+
             e.Handled = true;
         }
 
