@@ -2,7 +2,7 @@
 
 A Driving & Vehicle License Department (DVLD) Management System built with **C#**, **Windows Forms**, **SQL Server**, and **3-Tier Architecture**.
 
-> **Project Status:** Under Development
+**Project Status:** Under Development
 
 ## Overview
 
